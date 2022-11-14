@@ -1,0 +1,35 @@
+$title-background-color: linear-gradient(to bottom left, #6cf5c6, #822F8A);
+$std-color: #200220;
+$light-color: #fff;
+
+h1 {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 1.5rem;
+  font-weight: bolder;
+  text-transform: uppercase;
+  background: $title-background-color;
+  color: $std-color;
+  margin-bottom: 1rem;
+  padding: .5rem;
+  filter: drop-shadow(4px 4px #e5ff00) drop-shadow(4px 4px #0492bd);
+}
+
+ul {
+  list-style-type: none;
+  li {
+    font-family: Arial, Helvetica, sans-serif;
+    color: $std-color;
+    border-radius: 3px;
+    border: 1px solid $std-color;
+    padding: .2rem;
+    transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
+    &:not(:last-child) {
+      margin-bottom: .2rem;
+    }
+    &:hover {
+      background-color: $std-color;
+      color: $light-color;
+      cursor: pointer;
+    }
+  }
+}
