@@ -8,28 +8,50 @@ h1 {
   font-weight: bolder;
   text-transform: uppercase;
   background: $title-background-color;
-  color: $std-color;
+  color: $light-color;
   margin-bottom: 1rem;
-  padding: .5rem;
-  filter: drop-shadow(4px 4px #e5ff00) drop-shadow(4px 4px #0492bd);
+  padding: 1.4rem .7rem;
+  border-radius: 3px;
+  border: 1px solid $std-color;
+
+  animation: rotate_hue 1s linear 1s infinite alternate;
 }
 
 ul {
   list-style-type: none;
   li {
     font-family: Arial, Helvetica, sans-serif;
-    color: $std-color;
+    background: $title-background-color;
+    color: $light-color;
     border-radius: 3px;
     border: 1px solid $std-color;
-    padding: .2rem;
+    padding: .3rem .5rem;
     transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
     &:not(:last-child) {
       margin-bottom: .2rem;
     }
     &:hover {
-      background-color: $std-color;
+      background: $std-color;
       color: $light-color;
       cursor: pointer;
     }
   }
 }
+
+button {
+  text-transform: uppercase;
+  border-radius: 3px;
+  border: 1px solid $std-color;
+  padding: .5rem 1rem;
+  filter: drop-shadow(2px 2px #ff009d) drop-shadow(2px 2px #e5ff00) drop-shadow(2px 2px #0492bd);
+}
+
+@keyframes rotate_hue {
+  0% {
+    filter: hue-rotate(360deg);
+  }
+
+  100% {
+    filter: hue-rotate(-360deg);
+  }
+ }

@@ -1,0 +1,30 @@
+<table>
+  <thead>
+    <tr>
+      <th>
+        #
+      </th>
+      <th>
+        Firstname
+      </th>
+      <th>
+        Lastname
+      </th>
+      <th>
+        Birthdate
+      </th>
+      <th>
+        &nbsp;
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let stagiaire of stagiaires">
+      <td>{{ stagiaire.getId() }}</td>
+      <td>{{ stagiaire.getFirstName() }}</td>
+      <td>{{ stagiaire.getLastName() }}</td>
+      <td>{{ stagiaire.getBirthDate() }}</td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Stagiaire } from './core/models/stagiaire';
+import { StagiaireService } from './core/service/stagiaire.service';
 
 @Component({
   selector: 'app-root',
@@ -8,13 +10,11 @@ import { Component } from '@angular/core';
 export class AppComponent {
   public title = 'I <3 Angular';
 
-  public stagiaires: Array<string> = [
-    'JL',
-    'Martine',
-    'Fanny',
-    'Charles',
-    'Jerem',
-  ]
+  public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
+
+  public constructor(
+    private stagiairesService: StagiaireService
+  ) {}
 
   public toggleTitle(): void {
     if (this.title === 'I <3 Angular') {
@@ -25,6 +25,7 @@ export class AppComponent {
   }
 
   public addStagiaire(): void {
-    this.stagiaires.push('Dummy stagiaire');
+    console.log('POUET');
+
   }
 }

@@ -5,10 +5,11 @@
 
   <ul>
     <li *ngFor="let stagiaire of stagiaires"><!-- directive de structure -->
-      {{ stagiaire }}
+      {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
     </li>
   </ul>
   <button type="button" (click)="addStagiaire()">
     Ajouter un stagiaire
   </button>
 
+  <app-stagiaire-table></app-stagiaire-table>
