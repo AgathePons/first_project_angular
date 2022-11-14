@@ -22,9 +22,17 @@
     <tr *ngFor="let stagiaire of stagiaires">
       <td>{{ stagiaire.getId() }}</td>
       <td>{{ stagiaire.getFirstName() }}</td>
-      <td>{{ stagiaire.getLastName() }}</td>
-      <td>{{ stagiaire.getBirthDate() }}</td>
-      <td>&nbsp;</td>
+      <td>{{ stagiaire.getLastName() | uppercase }}</td>
+      <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
+      <td>
+        <button type="button" (click)="onRemove(stagiaire)">X</button>
+      </td>
     </tr>
   </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="4">Nb. items</td>
+      <td>{{ stagiaires.length }}</td>
+    </tr>
+  </tfoot>
 </table>

@@ -20,4 +20,9 @@ export class StagiaireTableComponent implements OnInit {
     this.stagiaires = this.StagiaireService.getStagiaires();
   }
 
+  public onRemove(stagiaire: Stagiaire): void {
+    console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
+    this.StagiaireService.deleteStagiaire(stagiaire);
+  }
+
 }

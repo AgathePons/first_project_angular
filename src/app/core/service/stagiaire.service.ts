@@ -16,6 +16,10 @@ export class StagiaireService {
     return this.stagiaires;
   }
 
+  public deleteStagiaire(stagiaire: Stagiaire): void {
+    console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
+  }
+
   private feedIt(): void {
     let stagiaire: Stagiaire = new Stagiaire();
     stagiaire.setId(1);
@@ -51,6 +55,15 @@ export class StagiaireService {
     stagiaire.setEmail('luckyluck@mail.fr');
     stagiaire.setPhoneNumber('+(33)6 97 56 23 98');
     stagiaire.setBirthDate(new Date(1997, 10, 15));
+    this.stagiaires.push(stagiaire);
+
+    stagiaire = new Stagiaire();
+    stagiaire.setId(5);
+    stagiaire.setFirstName('Youpi');
+    stagiaire.setLastName('Tralala');
+    stagiaire.setEmail('youpitralala@mail.fr');
+    stagiaire.setPhoneNumber('+(33)6 12 23 34 45');
+    stagiaire.setBirthDate(new Date(1996, 8, 15));
     this.stagiaires.push(stagiaire);
   }
 }
