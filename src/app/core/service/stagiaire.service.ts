@@ -18,6 +18,10 @@ export class StagiaireService {
 
   public deleteStagiaire(stagiaire: Stagiaire): void {
     console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
+    const stagiaireIndex: number = this.stagiaires.findIndex(
+      (obj: Stagiaire) => obj.getId() === stagiaire.getId()
+    );
+    this.stagiaires.splice(stagiaireIndex, 1);
   }
 
   private feedIt(): void {
