@@ -19,20 +19,23 @@
     </tr>
   </thead>
   <tbody>
-    <tr *ngFor="let stagiaire of stagiaires">
-      <td>{{ stagiaire.getId() }}</td>
-      <td>{{ stagiaire.getFirstName() }}</td>
-      <td>{{ stagiaire.getLastName() | uppercase }}</td>
-      <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
-      <td>
-        <button type="button" (click)="onRemove(stagiaire)">X</button>
-      </td>
-    </tr>
+    <ng-container *ngFor="let stagiaire of stagiaires">
+      <tr *ngIf="(stopDate !== null) ? stagiaire.getBirthDate() > stopDate : true">
+      <!-- <tr> -->
+        <td>{{ stagiaire.getId() }}</td>
+        <td>{{ stagiaire.getFirstName() }}</td>
+        <td>{{ stagiaire.getLastName() | uppercase }}</td>
+        <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>
+          <button type="button" (click)="onRemove(stagiaire)">X</button>
+        </td>
+      </tr>
+    </ng-container>
   </tbody>
   <tfoot>
     <tr>
       <td colspan="4">Nb. items</td>
-      <td>{{ stagiaires.length }}</td>
+      <td>{{ getVisibleStagiaireNumber() }}</td>
     </tr>
   </tfoot>
 </table>

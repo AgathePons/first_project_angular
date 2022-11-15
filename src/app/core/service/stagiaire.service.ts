@@ -16,6 +16,23 @@ export class StagiaireService {
     return this.stagiaires;
   }
 
+  public getFilteredStagiaires(date: Date): Array<Stagiaire> {
+    return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() > date);
+  }
+
+  public filterByDate(date: Date): Array<Stagiaire> {
+    console.log(`filter by date`);
+    const filteredStagiaires: Array<Stagiaire> = this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() > date);
+    return filteredStagiaires;
+  }
+
+  public getStagiairesNumber(date: Date | null): number {
+    if (date === null) {
+      return this.stagiaires.length;
+    }
+    return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() > date).length;
+  }
+
   public deleteStagiaire(stagiaire: Stagiaire): void {
     console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
     const stagiaireIndex: number = this.stagiaires.findIndex(
@@ -67,7 +84,7 @@ export class StagiaireService {
     stagiaire.setLastName('Tralala');
     stagiaire.setEmail('youpitralala@mail.fr');
     stagiaire.setPhoneNumber('+(33)6 12 23 34 45');
-    stagiaire.setBirthDate(new Date(1996, 8, 15));
+    stagiaire.setBirthDate(new Date(1945, 8, 15));
     this.stagiaires.push(stagiaire);
   }
 }

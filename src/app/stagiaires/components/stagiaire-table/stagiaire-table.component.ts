@@ -10,6 +10,9 @@ import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = [];
+  // public filteredStagiaires: Array<Stagiaire> = [];
+  public stopDate: Date | null = new Date(1950, 11, 31);
+
   public constructor(
     private StagiaireService: StagiaireService
   ) { }
@@ -18,8 +21,12 @@ export class StagiaireTableComponent implements OnInit {
     console.log('stagiaire-table >> ngOnInit()');
 
     this.stagiaires = this.StagiaireService.getStagiaires();
+    // this.filteredStagiaires = this.StagiaireService.getFilteredStagiaires(this.stopDate);
   }
 
+  public getVisibleStagiaireNumber(): number {
+    return this.StagiaireService.getStagiairesNumber(this.stopDate);
+  }
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
     this.StagiaireService.deleteStagiaire(stagiaire);
