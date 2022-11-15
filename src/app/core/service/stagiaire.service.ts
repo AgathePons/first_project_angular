@@ -29,8 +29,11 @@ export class StagiaireService {
   public getStagiairesNumber(date: Date | null): number {
     if (date === null) {
       return this.stagiaires.length;
+    } else if (date.getDate() === 31) {
+      return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() > date).length;
+    } else {
+      return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() < date).length;
     }
-    return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() > date).length;
   }
 
   public deleteStagiaire(stagiaire: Stagiaire): void {
