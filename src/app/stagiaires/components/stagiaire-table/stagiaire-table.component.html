@@ -1,3 +1,4 @@
+<app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
 <table>
   <thead>
     <tr>
@@ -20,8 +21,7 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let stagiaire of stagiaires">
-      <tr *ngIf="(stopDate !== null) ? stagiaire.getBirthDate() > stopDate : true">
-      <!-- <tr> -->
+        <tr *ngIf="(stopDate === null) ? true : stopDate.getDate() === 31 ? stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
         <td>{{ stagiaire.getId() }}</td>
         <td>{{ stagiaire.getFirstName() }}</td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>

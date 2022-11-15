@@ -11,7 +11,7 @@ export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = [];
   // public filteredStagiaires: Array<Stagiaire> = [];
-  public stopDate: Date | null = new Date(1950, 11, 31);
+  public stopDate: Date | null = null;
 
   public constructor(
     private StagiaireService: StagiaireService
@@ -32,4 +32,8 @@ export class StagiaireTableComponent implements OnInit {
     this.StagiaireService.deleteStagiaire(stagiaire);
   }
 
+  public filterChanged(event: Date | null): void {
+    console.log(`Tut tut, change filter to ${event}`);
+    this.stopDate = event;
+  }
 }
