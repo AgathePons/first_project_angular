@@ -24,7 +24,7 @@
         <tr *ngIf="(stopDate === null) ? true : stopDate.getDate() === 31 ? stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
-          <span class="name-puce">{{ stagiaire | initials }}</span>
+          <span class="name-puce">{{ stagiaire | initials : { firstNameFirst: false, full: true } }}</span>
           {{ stagiaire.getFirstName() }}
         </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>

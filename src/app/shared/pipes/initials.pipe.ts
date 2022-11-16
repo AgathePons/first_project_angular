@@ -1,16 +1,18 @@
 import { Pipe, PipeTransform } from '@angular/core';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
+import { VariantType } from './variant-type';
 
 @Pipe({
   name: 'initials'
 })
 export class InitialsPipe implements PipeTransform {
 
-  private variant: any;
+  private variant: VariantType | undefined = undefined;
 
-  transform(value: unknown, ...args: unknown[]): unknown {
+  transform(value: unknown, ...args: any[]): string {
 
     if (value instanceof Stagiaire) {
+
       this.variant = args[0];
       return this.getInitials(value, args).toUpperCase();
     } else {
@@ -36,7 +38,7 @@ export class InitialsPipe implements PipeTransform {
   private getInitialsFirstName(stagiaire: Stagiaire): string {
     if (this.variant && this.variant.full) {
       const dashPosition: number = stagiaire.getFirstName().indexOf('-');
-      if (dashPosition !== 1) {
+      if (dashPosition !== -1) {
         return stagiaire.getFirstName().charAt(0) + stagiaire.getFirstName().charAt(dashPosition + 1);
       }
     }
