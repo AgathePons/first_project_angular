@@ -23,7 +23,10 @@
     <ng-container *ngFor="let stagiaire of stagiaires">
         <tr *ngIf="(stopDate === null) ? true : stopDate.getDate() === 31 ? stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
         <td class="center-cell">{{ stagiaire.getId() }}</td>
-        <td>{{ stagiaire.getFirstName() }}</td>
+        <td>
+          {{ stagiaire | initials }}
+          {{ stagiaire.getFirstName() }}
+        </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
         <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
