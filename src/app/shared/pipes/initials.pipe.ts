@@ -6,9 +6,12 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 })
 export class InitialsPipe implements PipeTransform {
 
+  private variant: any;
+
   transform(value: unknown, ...args: unknown[]): unknown {
 
     if (value instanceof Stagiaire) {
+      this.variant = args[0];
       return this.getInitials(value, args).toUpperCase();
     } else {
       throw new Error('value is not a Stagiaire object');
@@ -16,18 +19,27 @@ export class InitialsPipe implements PipeTransform {
   }
 
   private getInitials(stagiaire: Stagiaire, variation: unknown[]): string {
-    const variant: any = variation[0];
-    if (variant !== undefined && variant.firstNameFirst === false) {
+    if (this.variant !== undefined && this.variant.firstNameFirst === false) {
       return this.lastNameFirst(stagiaire);
     }
     return this.firstNameFirst(stagiaire);
   }
 
   private firstNameFirst(stagiaire: Stagiaire): string {
-    return stagiaire.getFirstName().charAt(0) + stagiaire.getLastName().charAt(0);
+    return this.getInitialsFirstName(stagiaire) + stagiaire.getLastName().charAt(0);
   }
 
   private lastNameFirst(stagiaire: Stagiaire): string {
-    return stagiaire.getLastName().charAt(0) + stagiaire.getFirstName().charAt(0);
+    return stagiaire.getLastName().charAt(0) + this.getInitialsFirstName(stagiaire);
+  }
+
+  private getInitialsFirstName(stagiaire: Stagiaire): string {
+    if (this.variant && this.variant.full) {
+      const dashPosition: number = stagiaire.getFirstName().indexOf('-');
+      if (dashPosition !== 1) {
+        return stagiaire.getFirstName().charAt(0) + stagiaire.getFirstName().charAt(dashPosition + 1);
+      }
+    }
+    return stagiaire.getFirstName().charAt(0);
   }
 }

@@ -9,6 +9,7 @@ import { StagiaireService } from './core/service/stagiaire.service';
 })
 export class AppComponent {
   public title = 'I <3 Angular';
+  public isOverlayVisible = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
 
@@ -24,8 +25,10 @@ export class AppComponent {
     }
   }
 
-  public addStagiaire(): void {
+  public makePouet(): void {
     console.log('POUET');
-
+    if (!this.isOverlayVisible) {
+      this.isOverlayVisible = true;
+    }
   }
 }

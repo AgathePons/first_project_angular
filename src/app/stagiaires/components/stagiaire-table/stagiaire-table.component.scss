@@ -31,10 +31,20 @@ table {
   tbody {
     tr {
       &:nth-child(odd) {
-        background-color: lighten($std-color, 90);
+        background-color: lighten($std-color, 85);
       }
       td {
-
+        .name-puce {
+          display: inline-block;
+          margin-right: .5rem;
+          width: 40px;
+          height: 40px;
+          border-radius: 50%;
+          background: $std-color;
+          color: $light-color;
+          text-align: center;
+          line-height: 40px;
+        }
         button {
           width: 2rem;
           height: 2rem;

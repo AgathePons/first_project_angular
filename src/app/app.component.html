@@ -1,4 +1,7 @@
 
+  <div [ngClass]="{'overlay': true, 'visible': isOverlayVisible}">
+    <h1>Pouet</h1>
+  </div>
   <h1 (click)="toggleTitle()">
     {{ title }}
   </h1>
@@ -8,8 +11,8 @@
       {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
     </li>
   </ul>
-  <button type="button" (click)="addStagiaire()">
-    Ajouter un stagiaire
+  <button type="button" (click)="makePouet()">
+    Bouton qui fait POUET
   </button>
 
   <app-stagiaire-table></app-stagiaire-table>

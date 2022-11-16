@@ -56,7 +56,7 @@ export class StagiaireService {
 
     stagiaire = new Stagiaire();
     stagiaire.setId(2);
-    stagiaire.setFirstName('Léo');
+    stagiaire.setFirstName('Pierre-Nicolas');
     stagiaire.setLastName('Godiaud');
     stagiaire.setEmail('legodiaud@mail.fr');
     stagiaire.setPhoneNumber('+(33)7 77 77 77 77');
