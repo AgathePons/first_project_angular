@@ -21,7 +21,12 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let stagiaire of stagiaires">
-        <tr *ngIf="(stopDate === null) ? true : stopDate.getDate() === 31 ? stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
+        <tr
+          *ngIf="(stopDate === null) ?
+            true : stopDate.getDate() === 31 ?
+              stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate"
+          (click)="onClick(stagiaire)"
+        >
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
           <span class="name-puce">{{ stagiaire | initials : { firstNameFirst: false, full: true } }}</span>
@@ -42,3 +47,8 @@
     </tr>
   </tfoot>
 </table>
+<app-stagiaire-detail
+  [hidden]="isDetailHidden"
+  [stagiaire]="selectedStagiaire!"
+  (onCloseEvent)="onDetailClose($event)"
+></app-stagiaire-detail>
