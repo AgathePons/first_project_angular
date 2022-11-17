@@ -10,8 +10,9 @@ import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = [];
-  // public filteredStagiaires: Array<Stagiaire> = [];
   public stopDate: Date | null = null;
+  public isDetailHidden: boolean = true;
+  public selectedStagiaire: Stagiaire | null = null;
 
   public constructor(
     private StagiaireService: StagiaireService
@@ -35,5 +36,16 @@ export class StagiaireTableComponent implements OnInit {
   public filterChanged(event: Date | null): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.stopDate = event;
+  }
+
+  public onClick(stagiaire: Stagiaire): void {
+    if (this.isDetailHidden) {
+      this.isDetailHidden = false;
+      this.selectedStagiaire = stagiaire;
+    }
+  }
+
+  public onDetailClose(event: boolean): void {
+    this.isDetailHidden = event;
   }
 }
