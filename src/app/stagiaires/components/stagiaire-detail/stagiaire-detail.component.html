@@ -1,7 +1,12 @@
 <ng-container *ngIf="stagiaire">
   <div class="overlay">
     <div class="card">
-      <h2>{{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}</h2>
+      <h2>
+        <span class="name-puce">
+          {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
+        </span>
+        {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
+      </h2>
       <div class="info-bloc">
         <span class="info-bloc__key">Firstname:</span>
         <span class="info-bloc__value">{{ stagiaire.getFirstName() }}</span>
