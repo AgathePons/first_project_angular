@@ -6,13 +6,29 @@
     {{ title }}
   </h1>
 
+
+  <button class="pouet-btn" type="button" (click)="makePouet()">
+    Bouton qui fait POUET
+  </button>
+
+  <div>
+    <input
+      [type]="inputType"
+      placeholder="Your password">
+    <button
+      class="password-btn"
+      type="button"
+      (click)="onShowPassword()"
+      [disabled]="this.inputType === 'text'"
+    >
+      👾💚💫
+    </button>
+  </div>
+
+  <app-stagiaire-table></app-stagiaire-table>
+
   <ul>
     <li *ngFor="let stagiaire of stagiaires"><!-- directive de structure -->
       {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
     </li>
   </ul>
-  <button type="button" (click)="makePouet()">
-    Bouton qui fait POUET
-  </button>
-
-  <app-stagiaire-table></app-stagiaire-table>

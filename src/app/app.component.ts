@@ -13,6 +13,8 @@ export class AppComponent {
 
   public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
 
+  public inputType: string = 'password';
+
   public constructor(
     private stagiairesService: StagiaireService
   ) {}
@@ -29,6 +31,20 @@ export class AppComponent {
     console.log('POUET');
     if (!this.isOverlayVisible) {
       this.isOverlayVisible = true;
+    }
+  }
+
+  public onShowPassword(): void {
+    if (this.inputType === 'password') {
+      this.inputType ='text';
+      setTimeout(
+        () => {
+          this.inputType = 'password';
+        },
+        800
+      );
+    } else {
+      this.inputType = 'password';
     }
   }
 }
