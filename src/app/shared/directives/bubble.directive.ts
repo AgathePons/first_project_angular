@@ -13,6 +13,7 @@ export class BubbleDirective implements OnInit {
     textAlign: 'center',
     fontWeight: 'bold',
     fontSize: '.9rem',
+    backgroundColor: '#200220',
   };
   /**
    * Object that merge default and config
@@ -28,6 +29,11 @@ export class BubbleDirective implements OnInit {
         this._config[property] = this._defaultConfig[property];
       }
     }
+    for (const property in inputConfig) {
+      if (!this._defaultConfig.hasOwnProperty(property)) {
+        this._config[property] = inputConfig[property];
+      }
+    }
   };
   constructor(
     private elementRef: ElementRef,
@@ -39,11 +45,11 @@ export class BubbleDirective implements OnInit {
     console.log(`appBubble is here bitches!!`);
     let nativeElement: HTMLElement = this.elementRef.nativeElement;
 
-    // this.renderer.setStyle(nativeElement, 'fontWeight', 'bold');
+    // this.renderer.setStyle(nativeElement, 'fontWeight', 'bold'); good practice
     // nativeElement.style.fontWeight = 'bold'; bad practice
 
-    for (const property in this.config) {
-      this.renderer.setStyle(nativeElement, property, this.config[property]);
+    for (const property in this._config) {
+      this.renderer.setStyle(nativeElement, property, this._config[property]);
     }
   }
 }

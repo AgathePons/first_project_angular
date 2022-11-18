@@ -15,6 +15,7 @@ export class StagiaireTableComponent implements OnInit {
   public selectedStagiaire: Stagiaire | null = null;
   public bubbleConfig: any = {
     fontWeight: 'normal',
+    backgroundColor: 'red',
   };
 
   public constructor(
