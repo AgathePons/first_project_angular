@@ -13,6 +13,9 @@ export class StagiaireTableComponent implements OnInit {
   public stopDate: Date | null = null;
   public isDetailHidden: boolean = true;
   public selectedStagiaire: Stagiaire | null = null;
+  public bubbleConfig: any = {
+    fontWeight: 'normal',
+  };
 
   public constructor(
     private StagiaireService: StagiaireService

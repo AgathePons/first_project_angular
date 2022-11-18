@@ -29,7 +29,16 @@
         >
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
-          <span class="name-puce">{{ stagiaire | initials : { firstNameFirst: false, full: true } }}</span>
+          <!-- ElementRef -->
+          <span class="name-puce" appBubble [config]="bubbleConfig">
+            {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
+          </span>
+          <!-- /ElementRef -->
+          <!-- nativeElement -->
+          <!--<span class="name-puce" appBubble>
+            AP
+          </span>-->
+          <!-- nativeElement -->
           {{ stagiaire.getFirstName() }}
         </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>

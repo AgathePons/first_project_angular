@@ -2,7 +2,7 @@
   <div class="overlay">
     <div class="card">
       <h2>
-        <span class="name-puce">
+        <span class="name-puce" appBubble [config]="bubbleConfig">
           {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
         </span>
         {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}

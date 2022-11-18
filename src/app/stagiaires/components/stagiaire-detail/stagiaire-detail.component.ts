@@ -11,6 +11,11 @@ export class StagiaireDetailComponent implements OnInit {
   @Input() public stagiaire!: Stagiaire;
   @Output() public onCloseEvent: EventEmitter<boolean> = new EventEmitter<boolean>();
 
+  public bubbleConfig: any = {
+    fontWeight: 'bold',
+    backgroundColor: '#0046FF',
+  };
+
   constructor() { }
 
   ngOnInit(): void {
