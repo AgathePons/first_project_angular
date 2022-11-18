@@ -41,6 +41,11 @@ export class BubbleDirective implements OnInit {
     }
   };
 
+  private _parentCall: any;
+  @Input() set onBubbleClick(calledFunction: any) {
+    this._parentCall = calledFunction;
+  }
+
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2) {

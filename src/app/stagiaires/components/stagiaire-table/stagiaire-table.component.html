@@ -25,12 +25,17 @@
           *ngIf="(stopDate === null) ?
             true : stopDate.getDate() === 31 ?
               stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate"
-          (click)="onClick(stagiaire)"
+
         >
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
           <!-- ElementRef -->
-          <span class="name-puce" appBubble [config]="bubbleConfig">
+          <span
+            class="name-puce"
+            appBubble
+            [config]="bubbleConfig"
+            (click)="onClick(stagiaire)"
+          ><!-- (click)="onClick(stagiaire)" -->
             {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
           </span>
           <!-- /ElementRef -->
@@ -38,7 +43,7 @@
           <!--<span class="name-puce" appBubble>
             AP
           </span>-->
-          <!-- nativeElement -->
+          <!-- /nativeElement -->
           {{ stagiaire.getFirstName() }}
         </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>

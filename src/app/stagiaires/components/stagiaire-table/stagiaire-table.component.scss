@@ -35,15 +35,18 @@ table {
       }
       td {
         .name-puce {
-          display: inline-block;
           margin-right: .5rem;
-          /* width: 40px;
+          /* display: inline-block;
+          width: 40px;
           height: 40px;
           border-radius: 50%;
           background: $std-color;
           color: $light-color;
           text-align: center;
           line-height: 40px; */
+          &:hover {
+            cursor: pointer;
+          }
         }
         button {
           width: 2rem;

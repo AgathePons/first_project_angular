@@ -23,9 +23,10 @@ $light-color: rgb(255, 255, 255);
   animation: popin-from-top .5s cubic-bezier(0.17, 0.84, 0.44, 1) forwards;
 
   .name-puce {
-    display: inline-block;
+
     margin-right: .5rem;
-    /* width: 40px;
+    /* display: inline-block;
+    width: 40px;
     height: 40px;
     border-radius: 50%;
     background: $std-color;
@@ -34,6 +35,9 @@ $light-color: rgb(255, 255, 255);
     line-height: 40px;
     font-weight: normal;
     font-size: 1rem; */
+    &:hover {
+      cursor: pointer;
+    }
   }
   .info-bloc {
 
