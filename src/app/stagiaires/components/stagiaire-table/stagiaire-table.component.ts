@@ -20,13 +20,16 @@ export class StagiaireTableComponent implements OnInit {
   };
 
   public constructor(
-    private StagiaireService: StagiaireService,
+    private stagiaireService: StagiaireService,
     private handleDetailService: HandleDetailService,
   ) { }
 
   ngOnInit(): void {
     console.log('stagiaire-table >> ngOnInit()');
-    this.stagiaires = this.StagiaireService.getStagiaires();
+    // this.stagiaires = this.StagiaireService.getStagiaires();
+    this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
+      this.stagiaires = stagiaires;
+    })
     this.handleDetailService.isDetailHidden.subscribe((isDetailHidden: boolean) => {
       console.log(isDetailHidden ? 'hidden hihihi' : 'visible hihihi');
       this.isDetailHidden = isDetailHidden;
@@ -34,11 +37,11 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public getVisibleStagiaireNumber(): number {
-    return this.StagiaireService.getStagiairesNumber(this.stopDate);
+    return this.stagiaireService.getStagiairesNumber(this.stopDate);
   }
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
-    this.StagiaireService.deleteStagiaire(stagiaire);
+    this.stagiaireService.deleteStagiaire(stagiaire);
   }
 
   public filterChanged(event: Date | null): void {
