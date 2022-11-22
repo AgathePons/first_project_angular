@@ -49,11 +49,9 @@ export class BubbleDirective implements OnInit {
   constructor(
     private elementRef: ElementRef,
     private renderer: Renderer2) {
-    console.log(`constrictor bip bip boup`);
   }
 
   ngOnInit(): void {
-    console.log(`appBubble is here bitches!!`);
     let nativeElement: HTMLElement = this.elementRef.nativeElement;
 
     // this.renderer.setStyle(nativeElement, 'fontWeight', 'bold'); good practice
@@ -65,7 +63,6 @@ export class BubbleDirective implements OnInit {
   }
 
   @HostListener('click') onClick() {
-    console.log('clic clic clic');
     const nativeElement: HTMLElement = this.elementRef.nativeElement;
     this.renderer.addClass(nativeElement, 'awesome-rotate');
     setTimeout(
