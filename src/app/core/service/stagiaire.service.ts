@@ -14,12 +14,12 @@ export class StagiaireService {
   constructor(
     private httpClient: HttpClient
   ) {
-    this.feedIt();
+    // this.feedIt();
   }
 
   public findAll(): Observable<Stagiaire[]> {
     return this.httpClient.get<any>(
-      'http://localhost:3000/stagiaires'
+      'http://localhost:8080/api/trainee'
     )
     .pipe(
       take(1),
@@ -35,7 +35,7 @@ export class StagiaireService {
           return stagiaire;
         })
       })
-    )
+    );
   }
 
   public getStagiaires(): Array<Stagiaire> {

@@ -17,7 +17,7 @@
       </div>
       <div class="info-bloc">
         <span class="info-bloc__key">Birthdate:</span>
-        <span class="info-bloc__value">{{ stagiaire.getBirthDate() }}</span>
+        <span class="info-bloc__value">{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</span>
       </div>
       <div class="info-bloc">
         <span class="info-bloc__key">Email:</span>
