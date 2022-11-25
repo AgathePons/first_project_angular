@@ -1,5 +1,6 @@
 {
-  "trainee": [{
+  "trainee": [
+    {
       "id": 1,
       "lastName": "Aubert",
       "firstName": "Jean-Luc",
@@ -46,6 +47,14 @@
       "email": "luckyluck@mail.fr",
       "phoneNumber": "06 97 56 23 98",
       "birthDate": "1945-09-15T00:00:00.000Z"
+    },
+    {
+      "lastName": "Doe",
+      "firstName": "John",
+      "email": "test@mail.com",
+      "phoneNumber": "+33627929116000",
+      "birthDate": "2020-07-01",
+      "id": 7
     }
   ]
 }
