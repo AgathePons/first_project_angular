@@ -3,6 +3,7 @@ import { Stagiaire } from '../models/stagiaire';
 import { Observable } from 'rxjs';
 import { map, take } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class StagiaireService {
 
   private stagiaires: Array<Stagiaire> = [];
+  private controllerBaseUrl: string = `${environment.apiBaseUrl}/trainee`;
 
   constructor(
     private httpClient: HttpClient
@@ -19,7 +21,7 @@ export class StagiaireService {
 
   public findAll(): Observable<Stagiaire[]> {
     return this.httpClient.get<any>(
-      'http://localhost:8080/api/trainee'
+      this.controllerBaseUrl
     )
     .pipe(
       take(1),
@@ -66,7 +68,7 @@ export class StagiaireService {
     console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
     // call backend
     this.httpClient.delete(
-      `http://localhost:8080/api/trainee/${stagiaire.getId()}`
+      `${this.controllerBaseUrl}/${stagiaire.getId()}`
       )
       .subscribe((res: any) => console.log('pouet deleteStagiaire()')
       );

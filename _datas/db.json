@@ -1,5 +1,5 @@
 {
-  "stagiaires": [{
+  "trainee": [{
       "id": 1,
       "lastName": "Aubert",
       "firstName": "Jean-Luc",
@@ -17,7 +17,7 @@
     },
     {
       "id": 3,
-      "lastName": "AgatPonshe",
+      "lastName": "Pons",
       "firstName": "Agathe",
       "email": "mail-mail@mail.mail",
       "phoneNumber": "06 66 66 66 66",
