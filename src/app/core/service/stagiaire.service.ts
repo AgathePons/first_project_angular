@@ -64,6 +64,15 @@ export class StagiaireService {
     }
   }
 
+  public addStagiaire(stagiaire: Stagiaire): void {
+    console.log(`stagiaire service ding dong `, stagiaire);
+    this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
+      .subscribe((res) => {
+        console.log('Response:', res);
+        // TODO add res in stagiaire instance and push it into stagiaire list
+      });
+  }
+
   public deleteStagiaire(stagiaire: Stagiaire): void {
     console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
     // call backend

@@ -3,7 +3,7 @@ export class Stagiaire {
   private lastName: string = '';
   private firstName: string = '';
   private email: string = '';
-  private phoneNumber: string = '';
+  private phoneNumber!: string;
   private birthDate!: Date;
 
   public getId(): number {

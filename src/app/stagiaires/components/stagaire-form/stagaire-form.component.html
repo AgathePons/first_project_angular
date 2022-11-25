@@ -3,7 +3,12 @@
     <label for="firstName">
       Firstname:
     </label>
-    <input id="firstName" type="text" formControlName="firstName">
+    <input
+      id="firstName"
+      type="text"
+      formControlName="firstName"
+      [ngClass]="{'valid': true}"
+    >
   </div>
   <div class="input-group">
     <label for="lastName">
