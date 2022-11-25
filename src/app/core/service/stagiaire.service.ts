@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Stagiaire } from '../models/stagiaire';
-import { Observable } from 'rxjs';
-import { map, take } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { Observable, throwError } from 'rxjs';
+import { catchError, map, take } from 'rxjs/operators';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -64,12 +64,28 @@ export class StagiaireService {
     }
   }
 
-  public addStagiaire(stagiaire: Stagiaire): void {
+  /* public addStagiaire(stagiaire: Stagiaire): void {
     console.log(`stagiaire service ding dong `, stagiaire);
     this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
       .subscribe((res) => {
         console.log('Response:', res);
         // TODO add res in stagiaire instance and push it into stagiaire list
+      });
+  } */
+
+  public addStagiaire(stagiaire: Stagiaire): void {
+    console.log(`stagiaire service ding dong `, stagiaire);
+    this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
+      .pipe(
+        // TODO take + map to adapt response in JSON into stagiaire object
+        catchError((error: HttpErrorResponse) => {
+          console.log('stagiaire not created:', error);
+          return throwError(() => new Error('Not created'));
+        })
+      )
+      .subscribe(res => {
+        console.log('Res:', res);
+
       });
   }
 
