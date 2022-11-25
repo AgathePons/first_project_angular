@@ -34,11 +34,6 @@ export class AppComponent {
     }
   }
 
-  public addStagiaire(): void {
-    console.log('add stagiaire btn');
-
-  }
-
   public onShowPassword(): void {
     if (this.inputType === 'password') {
       this.inputType ='text';

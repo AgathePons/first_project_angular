@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-stagaire-form',
@@ -9,22 +9,21 @@ import { FormControl, FormGroup } from '@angular/forms';
 export class StagaireFormComponent implements OnInit {
 
   stagiaireForm: FormGroup = new FormGroup({
-  firstName: new FormControl(''),
-  lastName: new FormControl(''),
-  email: new FormControl(''),
-  phoneNumber: new FormControl(''),
-  birthDate: new FormControl(''),
+  firstName: new FormControl('', Validators.required),
+  lastName: new FormControl('', Validators.required ),
+  email: new FormControl('', [Validators.email , Validators.required]),
+  phoneNumber: new FormControl('', Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")),
+  birthDate: new FormControl(null),
   });
-
-  /* firstName: FormControl = new FormControl('');
-  lastName: FormControl = new FormControl('');
-  email: FormControl = new FormControl('');
-  phoneNumber: FormControl = new FormControl('');
-  birthDate: FormControl = new FormControl(''); */
 
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  public onSubmit(): void {
+    console.log('pif paf pouf', this.stagiaireForm.value);
+
   }
 
 }

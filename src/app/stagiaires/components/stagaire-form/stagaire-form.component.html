@@ -1,4 +1,4 @@
-<form [formGroup]="stagiaireForm">
+<form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': stagiaireForm.valid}">
   <div class="input-group">
     <label for="firstName">
       Firstname:
@@ -29,7 +29,7 @@
     </label>
     <input id="birthDate" type="date" formControlName="birthDate">
   </div>
-  <button class="add-btn" type="button">
+  <button [disabled]="!stagiaireForm.valid" class="add-btn">
     Add 💚
   </button>
 </form>
