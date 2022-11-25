@@ -1,0 +1,35 @@
+<form [formGroup]="stagiaireForm">
+  <div class="input-group">
+    <label for="firstName">
+      Firstname:
+    </label>
+    <input id="firstName" type="text" formControlName="firstName">
+  </div>
+  <div class="input-group">
+    <label for="lastName">
+      Lastname:
+    </label>
+    <input id="lastName" type="text" formControlName="lastName">
+  </div>
+  <div class="input-group">
+    <label for="email">
+      Email:
+    </label>
+    <input id="email" type="email" formControlName="email">
+  </div>
+  <div class="input-group">
+    <label for="phoneNumber">
+      Phone number:
+    </label>
+    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+  </div>
+  <div class="input-group">
+    <label for="birthDate">
+      Birthdate:
+    </label>
+    <input id="birthDate" type="date" formControlName="birthDate">
+  </div>
+  <button class="add-btn" type="button">
+    Add 💚
+  </button>
+</form>

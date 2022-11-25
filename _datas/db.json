@@ -17,14 +17,6 @@
       "birthDate": "1945-06-16T00:00:00.000Z"
     },
     {
-      "id": 3,
-      "lastName": "Pons",
-      "firstName": "Agathe",
-      "email": "mail-mail@mail.mail",
-      "phoneNumber": "06 66 66 66 66",
-      "birthDate": "2000-02-22T00:00:00.000Z"
-    },
-    {
       "id": 4,
       "lastName": "Godiaud",
       "firstName": "Pierre-Nicolas",
@@ -55,14 +47,6 @@
       "phoneNumber": "+33627929116000",
       "birthDate": "2020-07-01",
       "id": 7
-    },
-    {
-      "lastName": "BLOUUUUUUUUUUUUUUU",
-      "firstName": "John",
-      "email": "test@mail.com",
-      "phoneNumber": "+33627929116000",
-      "birthDate": "2020-07-01",
-      "id": 8
     },
     {
       "lastName": "Bisou",
