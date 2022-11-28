@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
+import { StagiaireDto } from '../../dto/stagiaire-dto';
 import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
@@ -24,17 +25,9 @@ export class StagaireFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    // TODO: use EventEmitter with form value
-    console.log('pif paf pouf', this.stagiaireForm.value);
-    const stagiaire: Stagiaire = new Stagiaire();
-    stagiaire.setFirstName(this.stagiaireForm.value.firstName);
-    stagiaire.setLastName(this.stagiaireForm.value.lastName);
-    stagiaire.setEmail(this.stagiaireForm.value.email);
-    stagiaire.setPhoneNumber(this.stagiaireForm.value.phoneNumber);
-    if (this.stagiaireForm.value.birthDate !== null) {
-      stagiaire.setBirthDate(new Date(this.stagiaireForm.value.birthDate));
-    }
-    this.stagiairesService.addStagiaire(stagiaire);
+    console.log('delegate add stagiaire:', this.stagiaireForm.value);
+    const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
+    this.stagiairesService.addStagiaire(dto);
   }
 
 }

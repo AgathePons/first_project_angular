@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -73,9 +74,9 @@ export class StagiaireService {
       });
   } */
 
-  public addStagiaire(stagiaire: any): void {
+  public addStagiaire(stagiaire: StagiaireDto): void {
     console.log(`stagiaire service ding dong `, stagiaire);
-    this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
+    this.httpClient.post<StagiaireDto>(`${this.controllerBaseUrl}`, stagiaire)
       .pipe(
         // TODO take + map to adapt response in JSON into stagiaire object
         catchError((error: HttpErrorResponse) => {
