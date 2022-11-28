@@ -9,23 +9,40 @@
         [ngClass]="{'valid': true}"
         placeholder="Firstname"
       >
+      <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
+        Le prénom du stagiaire est obligatoire
+      </mat-error>
     </mat-form-field>
 
   </div>
   <div class="">
     <mat-form-field>
       <input matInput placeholder="Lastname" id="lastName" type="text" formControlName="lastName">
+      <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
+        Le nom du stagiaire est obligatoire
+      </mat-error>
     </mat-form-field>
 
   </div>
   <div class="">
     <mat-form-field>
       <input matInput placeholder="Email" id="email" type="email" formControlName="email">
+      <mat-error *ngIf="c['email'].errors && c['email'].touched">
+        <span *ngIf="c['email'].hasError('required')">
+          L'email du stagiaire est obligatoire
+        </span>
+        <span *ngIf="c['email'].hasError('email')">
+          L'email saisi n'est pas valide
+        </span>
+      </mat-error>
     </mat-form-field>
   </div>
   <div class="">
     <mat-form-field>
       <input matInput placeholder="Phone number" id="phoneNumber" type="text" formControlName="phoneNumber">
+      <mat-error *ngIf="c['phoneNumber'].errors && c['phoneNumber'].touched">
+        Le numéro saisi n'est pas valide
+      </mat-error>
     </mat-form-field>
   </div>
   <div class="">

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
@@ -22,6 +22,16 @@ export class StagaireFormComponent implements OnInit {
 
   ngOnInit(): void {
     this.stagiaireForm = this.formBuilderService.build().getForm();
+  }
+
+  // method helper
+  /**
+   * returns a list of form controls
+   * @usage in template: c['lastName']
+   * instead of stagiaireForm
+   */
+  public get c(): {[key: string]: AbstractControl} {
+    return this.stagiaireForm.controls;
   }
 
   public onSubmit(): void {
