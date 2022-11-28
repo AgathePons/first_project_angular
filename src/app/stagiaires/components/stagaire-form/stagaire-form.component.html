@@ -1,40 +1,39 @@
 <form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': stagiaireForm.valid}">
-  <div class="input-group">
-    <label for="firstName">
-      Firstname:
-    </label>
-    <input
-      id="firstName"
-      type="text"
-      formControlName="firstName"
-      [ngClass]="{'valid': true}"
-    >
+  <div class="">
+    <mat-form-field>
+      <input
+        matInput
+        id="firstName"
+        type="text"
+        formControlName="firstName"
+        [ngClass]="{'valid': true}"
+        placeholder="Firstname"
+      >
+    </mat-form-field>
+
   </div>
-  <div class="input-group">
-    <label for="lastName">
-      Lastname:
-    </label>
-    <input id="lastName" type="text" formControlName="lastName">
+  <div class="">
+    <mat-form-field>
+      <input matInput placeholder="Lastname" id="lastName" type="text" formControlName="lastName">
+    </mat-form-field>
+
   </div>
-  <div class="input-group">
-    <label for="email">
-      Email:
-    </label>
-    <input id="email" type="email" formControlName="email">
+  <div class="">
+    <mat-form-field>
+      <input matInput placeholder="Email" id="email" type="email" formControlName="email">
+    </mat-form-field>
   </div>
-  <div class="input-group">
-    <label for="phoneNumber">
-      Phone number:
-    </label>
-    <input id="phoneNumber" type="text" formControlName="phoneNumber">
+  <div class="">
+    <mat-form-field>
+      <input matInput placeholder="Phone number" id="phoneNumber" type="text" formControlName="phoneNumber">
+    </mat-form-field>
   </div>
-  <div class="input-group">
-    <label for="birthDate">
-      Birthdate:
-    </label>
-    <input id="birthDate" type="date" formControlName="birthDate">
+  <div class="">
+    <mat-form-field appearance="fill">
+      <input matInput id="birthDate" type="date" formControlName="birthDate">
+    </mat-form-field>
   </div>
-  <button [disabled]="!stagiaireForm.valid" class="add-btn">
+  <button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid" class="add-btn">
     Add 💚
   </button>
 </form>
