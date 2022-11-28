@@ -12,6 +12,8 @@ import { BubbleDirective } from './shared/directives/bubble.directive';
 
 import { HttpClientModule } from '@angular/common/http';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { SharedModule } from './shared/shared.module';
 
 @NgModule({
   declarations: [
@@ -26,8 +28,8 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule,
-    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    SharedModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

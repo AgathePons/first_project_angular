@@ -9,8 +9,8 @@ h1 {
   text-transform: uppercase;
   background: $title-background-color;
   color: $light-color;
-  margin-bottom: 1rem;
-  padding: 1.4rem .7rem;
+  margin: 0 0 1rem 0;
+  padding: 1rem .7rem;
   border-radius: 3px;
   border: 1px solid $std-color;
   animation: rotate_hue 1s linear 1s infinite alternate;
@@ -45,7 +45,7 @@ ul {
   text-transform: uppercase;
   border-radius: 3px;
   border: 1px solid $std-color;
-  margin-bottom: 2rem;
+  margin-bottom: 1rem;
   padding: .5rem 1rem;
   background-image: linear-gradient(90deg, rgb(255, 0, 255), rgb(255, 115, 0));
   filter: drop-shadow(0px 0px $light-color) drop-shadow(0px 0px $std-color) drop-shadow(0px 0px rgb(229, 255, 0)) drop-shadow(0px 0px rgb(243, 130, 0));
