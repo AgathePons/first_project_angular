@@ -41,13 +41,19 @@
     <mat-form-field>
       <input matInput placeholder="Phone number" id="phoneNumber" type="text" formControlName="phoneNumber">
       <mat-error *ngIf="c['phoneNumber'].errors && c['phoneNumber'].touched">
-        Le numéro saisi n'est pas valide
+        <span *ngIf="c['email'].hasError('pattern')">
+          Le numéro saisi n'est pas valide
+        </span>
       </mat-error>
     </mat-form-field>
   </div>
   <div class="">
     <mat-form-field appearance="fill">
-      <input matInput id="birthDate" type="date" formControlName="birthDate">
+      <mat-label>Birthdate</mat-label>
+      <input matInput [matDatepicker]="dp" id="birthDate" type="date" formControlName="birthDate">
+      <mat-hint>JJ-MM-YYYY</mat-hint>
+            <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+            <mat-datepicker #dp></mat-datepicker>
     </mat-form-field>
   </div>
   <button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid" class="add-btn">
