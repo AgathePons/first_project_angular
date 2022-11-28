@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
+import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
   selector: 'app-stagaire-form',
@@ -10,21 +11,16 @@ import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 })
 export class StagaireFormComponent implements OnInit {
 
-  stagiaire: Stagiaire = new Stagiaire();
-
-  stagiaireForm: FormGroup = new FormGroup({
-  firstName: new FormControl('', Validators.required),
-  lastName: new FormControl('', Validators.required ),
-  email: new FormControl('', [Validators.email , Validators.required]),
-  phoneNumber: new FormControl(null, Validators.pattern("^[\+]?[(]?[0-9]{3}[)]?[-\s\.]?[0-9]{3}[-\s\.]?[0-9]{4,6}$")),
-  birthDate: new FormControl(null),
-  });
+  //stagiaire: Stagiaire = new Stagiaire();
+  stagiaireForm!: FormGroup;
 
   constructor(
     private stagiairesService: StagiaireService,
+    private formBuilderService: FormBuilderService,
   ) { }
 
   ngOnInit(): void {
+    this.stagiaireForm = this.formBuilderService.build().getForm();
   }
 
   public onSubmit(): void {
