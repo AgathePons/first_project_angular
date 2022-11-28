@@ -73,7 +73,7 @@ export class StagiaireService {
       });
   } */
 
-  public addStagiaire(stagiaire: Stagiaire): void {
+  public addStagiaire(stagiaire: any): void {
     console.log(`stagiaire service ding dong `, stagiaire);
     this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
       .pipe(
