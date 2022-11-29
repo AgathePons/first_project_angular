@@ -69,7 +69,7 @@ export class BubbleDirective implements OnInit {
       () => {
         this.renderer.removeClass(nativeElement, 'awesome-rotate')
       },
-      3000
+      5000
     );
   }
 }

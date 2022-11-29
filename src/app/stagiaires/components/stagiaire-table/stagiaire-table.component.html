@@ -49,7 +49,7 @@
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
         <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
-          <button type="button" (click)="onRemove(stagiaire)">X</button>
+          <button type="button" (click)="onDelete(stagiaire)">X</button>
         </td>
       </tr>
     </ng-container>

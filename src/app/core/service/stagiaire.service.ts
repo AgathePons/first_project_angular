@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Stagiaire } from '../models/stagiaire';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
 import { StagiaireDto } from 'src/app/stagiaires/dto/stagiaire-dto';
 
@@ -58,6 +58,14 @@ export class StagiaireService {
           return stagiaire;
       })
     );
+  }
+
+  public removeOne(stagiaire: Stagiaire): Observable<HttpResponse<any>> {
+    console.log(`Service: remove id: ${stagiaire.getId()}`);
+    return this.httpClient.delete<any>(
+      `${this.controllerBaseUrl}/${stagiaire.getId()}`,
+      { observe: 'response' }
+      );
   }
 
   public getStagiaires(): Array<Stagiaire> {

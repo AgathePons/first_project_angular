@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -41,9 +42,26 @@ export class StagiaireTableComponent implements OnInit {
   public getVisibleStagiaireNumber(): number {
     return this.stagiaireService.getStagiairesNumber(this.stopDate);
   }
+
+  public onDelete(stagiaire: Stagiaire): void {
+    console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
+    this.stagiaireService.removeOne(stagiaire).subscribe({
+      next: (_response: HttpResponse<any>) => {
+        this.stagiaires.splice(
+          this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+          1
+        )
+        // Here goes the snackbar
+      },
+      error: (error: any) => {
+        // Something went wrong, deal with it
+      }
+    });
+  }
+
   public onRemove(stagiaire: Stagiaire): void {
     console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
-    this.stagiaireService.deleteStagiaire(stagiaire);
+
   }
 
   public filterChanged(event: Date | null): void {
