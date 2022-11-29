@@ -41,6 +41,25 @@ export class StagiaireService {
     );
   }
 
+  public findOne(id: number): Observable<Stagiaire> {
+    return this.httpClient.get<any>(
+      `${this.controllerBaseUrl}/${id}`
+    )
+    .pipe(
+      take(1),
+      map((inputStagiaire: any) => {
+        const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire;
+      })
+    );
+  }
+
   public getStagiaires(): Array<Stagiaire> {
     return this.stagiaires;
   }
