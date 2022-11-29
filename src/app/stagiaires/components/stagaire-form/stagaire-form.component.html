@@ -52,8 +52,8 @@
       <mat-label>Birthdate</mat-label>
       <input matInput [matDatepicker]="dp" id="birthDate" type="date" formControlName="birthDate">
       <mat-hint>JJ-MM-YYYY</mat-hint>
-            <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
-            <mat-datepicker #dp></mat-datepicker>
+        <mat-datepicker-toggle matIconSuffix [for]="dp"></mat-datepicker-toggle>
+        <mat-datepicker #dp></mat-datepicker>
     </mat-form-field>
   </div>
   <button mat-raised-button color="primary" [disabled]="!stagiaireForm.valid" class="add-btn">

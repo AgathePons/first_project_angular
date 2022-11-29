@@ -10,11 +10,11 @@
   <button class="pouet-btn" type="button" (click)="makePouet()">
     Bouton qui fait POUET
   </button>
-  <app-stagaire-form></app-stagaire-form>
 
-  <app-stagiaire-table></app-stagiaire-table>
+  <!-- router outlet -->
+  <router-outlet></router-outlet>
 
-  <div>
+  <!-- <div>
     <input
       [type]="inputType"
       placeholder="Your password">
@@ -26,10 +26,4 @@
     >
       👾💚💫
     </button>
-  </div>
-
-  <ul>
-    <li *ngFor="let stagiaire of stagiaires"><!-- directive de structure -->
-      {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
-    </li>
-  </ul>
+  </div> -->
