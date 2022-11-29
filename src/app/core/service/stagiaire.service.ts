@@ -60,9 +60,9 @@ export class StagiaireService {
     );
   }
 
-  public addStagiaire(stagiaire: StagiaireDto): void {
+  public addStagiaire(stagiaire: StagiaireDto): Observable<Stagiaire> {
     console.log(`stagiaire service ding dong `, stagiaire);
-    this.httpClient.post<StagiaireDto>(`${this.controllerBaseUrl}`, stagiaire)
+    /* this.httpClient.post<StagiaireDto>(`${this.controllerBaseUrl}`, stagiaire)
       .pipe(
         // TODO take + map to adapt response in JSON into stagiaire object
         catchError((error: HttpErrorResponse) => {
@@ -73,7 +73,25 @@ export class StagiaireService {
       .subscribe(res => {
         console.log('Res:', res);
         return res;
-      });
+      }); */
+    // Transform any to Stagiaire
+    return this.httpClient.post<StagiaireDto>(
+      this.controllerBaseUrl,
+      stagiaire
+    )
+    .pipe(
+      take(1),
+      map((stagiaireDto: StagiaireDto) => {
+        const stagiaire: Stagiaire = new Stagiaire();
+        stagiaire.setId(stagiaireDto.id!);
+        stagiaire.setLastName(stagiaireDto.lastName);
+        stagiaire.setFirstName(stagiaireDto.firstName);
+        stagiaire.setBirthDate(new Date(stagiaireDto.birthDate));
+        stagiaire.setPhoneNumber(stagiaireDto.phoneNumber);
+        stagiaire.setEmail(stagiaireDto.email);
+        return stagiaire;
+      })
+      );
   }
 
   public removeOne(stagiaire: Stagiaire): Observable<HttpResponse<any>> {
