@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
@@ -22,6 +23,7 @@ export class StagiaireTableComponent implements OnInit {
   public constructor(
     private stagiaireService: StagiaireService,
     private handleDetailService: HandleDetailService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -50,8 +52,9 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public onClick(stagiaire: Stagiaire): void {
-    this.handleDetailService.setIsDetailHidden(false);
-    this.selectedStagiaire = stagiaire;
+    this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
+    /* this.handleDetailService.setIsDetailHidden(false);
+    this.selectedStagiaire = stagiaire; */
   }
 
   public onDetailClose(event: boolean): void {

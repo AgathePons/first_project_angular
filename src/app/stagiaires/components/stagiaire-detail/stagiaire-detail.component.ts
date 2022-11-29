@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { ActivatedRoute, Params } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
 
@@ -19,9 +20,17 @@ export class StagiaireDetailComponent implements OnInit {
 
   constructor(
     private handleDetailService: HandleDetailService,
+    private route: ActivatedRoute,
   ) { }
 
   ngOnInit(): void {
+    this.route.params
+    .subscribe((routeParams: Params) => {
+      console.log((`route params: ${JSON.stringify(routeParams)}`));
+      const stagiaireId: number = routeParams['id'];
+      console.log('id:', stagiaireId);
+
+    });
   }
 
   public onClick(): void {
