@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
+import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 
 @NgModule({
@@ -16,6 +18,14 @@ export class AppRoutingModule {
     {
       path: 'home',
       component: StagiaireTableComponent,
+    },
+    {
+      path: 'stagiaire/add',
+      component: StagaireFormComponent,
+    },
+    {
+      path: 'stagiaire/:id', // parametrized route
+      component: StagiaireDetailComponent,
     },
     // must be the last route of the list
     {

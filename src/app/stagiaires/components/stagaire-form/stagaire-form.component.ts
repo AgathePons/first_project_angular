@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
@@ -18,6 +19,7 @@ export class StagaireFormComponent implements OnInit {
   constructor(
     private stagiairesService: StagiaireService,
     private formBuilderService: FormBuilderService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -38,6 +40,10 @@ export class StagaireFormComponent implements OnInit {
     console.log('delegate add stagiaire:', this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
     this.stagiairesService.addStagiaire(dto);
+  }
+
+  public goHome(): void {
+    this.router.navigate(['/', 'home']);
   }
 
 }
