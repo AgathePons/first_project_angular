@@ -60,6 +60,22 @@ export class StagiaireService {
     );
   }
 
+  public addStagiaire(stagiaire: StagiaireDto): void {
+    console.log(`stagiaire service ding dong `, stagiaire);
+    this.httpClient.post<StagiaireDto>(`${this.controllerBaseUrl}`, stagiaire)
+      .pipe(
+        // TODO take + map to adapt response in JSON into stagiaire object
+        catchError((error: HttpErrorResponse) => {
+          console.log('stagiaire not created:', error);
+          return throwError(() => new Error('Not created'));
+        })
+      )
+      .subscribe(res => {
+        console.log('Res:', res);
+        return res;
+      });
+  }
+
   public removeOne(stagiaire: Stagiaire): Observable<HttpResponse<any>> {
     console.log(`Service: remove id: ${stagiaire.getId()}`);
     return this.httpClient.delete<any>(
@@ -91,45 +107,4 @@ export class StagiaireService {
       return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() < date).length;
     }
   }
-
-  /* public addStagiaire(stagiaire: Stagiaire): void {
-    console.log(`stagiaire service ding dong `, stagiaire);
-    this.httpClient.post(`${this.controllerBaseUrl}`, stagiaire)
-      .subscribe((res) => {
-        console.log('Response:', res);
-        // TODO add res in stagiaire instance and push it into stagiaire list
-      });
-  } */
-
-  public addStagiaire(stagiaire: StagiaireDto): void {
-    console.log(`stagiaire service ding dong `, stagiaire);
-    this.httpClient.post<StagiaireDto>(`${this.controllerBaseUrl}`, stagiaire)
-      .pipe(
-        // TODO take + map to adapt response in JSON into stagiaire object
-        catchError((error: HttpErrorResponse) => {
-          console.log('stagiaire not created:', error);
-          return throwError(() => new Error('Not created'));
-        })
-      )
-      .subscribe(res => {
-        console.log('Res:', res);
-
-      });
-  }
-
-  public deleteStagiaire(stagiaire: Stagiaire): void {
-    console.log(`Kikooo ici le service, on voudrait delete ${stagiaire.getFirstName()}, merci bisouuu`);
-    // call backend
-    this.httpClient.delete(
-      `${this.controllerBaseUrl}/${stagiaire.getId()}`
-      )
-      .subscribe((res: any) => console.log('pouet deleteStagiaire()')
-      );
-    // update local
-    const stagiaireIndex: number = this.stagiaires.findIndex(
-      (obj: Stagiaire) => obj.getId() === stagiaire.getId()
-    );
-    this.stagiaires.splice(stagiaireIndex, 1);
-  }
-
 }

@@ -59,11 +59,6 @@ export class StagiaireTableComponent implements OnInit {
     });
   }
 
-  public onRemove(stagiaire: Stagiaire): void {
-    console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
-
-  }
-
   public filterChanged(event: Date | null): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.stopDate = event;

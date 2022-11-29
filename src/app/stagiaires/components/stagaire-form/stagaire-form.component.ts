@@ -40,6 +40,9 @@ export class StagaireFormComponent implements OnInit {
     console.log('delegate add stagiaire:', this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
     this.stagiairesService.addStagiaire(dto);
+    console.log('new stagiaire created:');
+
+    this.router.navigate(['/', 'home'])
   }
 
   public goHome(): void {

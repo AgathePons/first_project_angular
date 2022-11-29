@@ -65,11 +65,11 @@ export class BubbleDirective implements OnInit {
   @HostListener('click') onClick() {
     const nativeElement: HTMLElement = this.elementRef.nativeElement;
     this.renderer.addClass(nativeElement, 'awesome-rotate');
-    setTimeout(
+    /* setTimeout(
       () => {
         this.renderer.removeClass(nativeElement, 'awesome-rotate')
       },
       5000
-    );
+    ); */
   }
 }
