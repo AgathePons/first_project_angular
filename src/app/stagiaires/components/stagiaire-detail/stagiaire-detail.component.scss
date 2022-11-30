@@ -25,16 +25,6 @@ $light-color: rgb(255, 255, 255);
   .name-puce {
 
     margin-right: .5rem;
-    /* display: inline-block;
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    background: $std-color;
-    color: $light-color;
-    text-align: center;
-    line-height: 40px;
-    font-weight: normal;
-    font-size: 1rem; */
     &:hover {
       cursor: pointer;
     }

@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
+import { StagiaireDto } from '../../dto/stagiaire-dto';
+
 import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
@@ -17,24 +20,38 @@ export class StagaireFormComponent implements OnInit {
   constructor(
     private stagiairesService: StagiaireService,
     private formBuilderService: FormBuilderService,
+
+    private router: Router,
+
   ) { }
 
   ngOnInit(): void {
     this.stagiaireForm = this.formBuilderService.build().getForm();
+
+  }
+
+  // method helper
+  /**
+   * returns a list of form controls
+   * @usage in template: c['lastName']
+   * instead of stagiaireForm
+   */
+  public get c(): {[key: string]: AbstractControl} {
+    return this.stagiaireForm.controls;
+
   }
 
   public onSubmit(): void {
-    // TODO: use EventEmitter with form value
-    console.log('pif paf pouf', this.stagiaireForm.value);
-    const stagiaire: Stagiaire = new Stagiaire();
-    stagiaire.setFirstName(this.stagiaireForm.value.firstName);
-    stagiaire.setLastName(this.stagiaireForm.value.lastName);
-    stagiaire.setEmail(this.stagiaireForm.value.email);
-    stagiaire.setPhoneNumber(this.stagiaireForm.value.phoneNumber);
-    if (this.stagiaireForm.value.birthDate !== null) {
-      stagiaire.setBirthDate(new Date(this.stagiaireForm.value.birthDate));
-    }
-    this.stagiairesService.addStagiaire(stagiaire);
+    console.log('delegate add stagiaire:', this.stagiaireForm.value);
+    const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
+    this.stagiairesService.addStagiaire(dto)
+      .subscribe(() => {
+        this.goHome();
+      })
+  }
+
+  public goHome(): void {
+    this.router.navigate(['/', 'home']);
   }
 
 }

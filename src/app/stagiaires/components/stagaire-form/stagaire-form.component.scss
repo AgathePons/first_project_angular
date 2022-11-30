@@ -15,27 +15,17 @@ form {
   &.valid {
     border: 2px solid $success-color;
   }
-  .input-group {
+
+  .btn-list {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 1rem;
-    &:not(:last-child) {
-      margin-bottom: 1rem;
-    }
-    label {
-      min-width: 150px;
-      background-color: lighten($std-color, 10);
-      color: $light-color;
-      border-radius: 3px;
-      padding: .5rem;
-    }
-    input {
+    .add-btn {
       flex-grow: 1;
-      padding: .5rem;
     }
   }
-  .add-btn {
+  .btn {
     padding: .5rem;
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
   }
 }

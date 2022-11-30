@@ -1,4 +1,6 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { HandleDetailService } from 'src/app/shared/directives/handle-detail.service';
@@ -22,6 +24,7 @@ export class StagiaireTableComponent implements OnInit {
   public constructor(
     private stagiaireService: StagiaireService,
     private handleDetailService: HandleDetailService,
+    private router: Router,
   ) { }
 
   ngOnInit(): void {
@@ -39,9 +42,21 @@ export class StagiaireTableComponent implements OnInit {
   public getVisibleStagiaireNumber(): number {
     return this.stagiaireService.getStagiairesNumber(this.stopDate);
   }
-  public onRemove(stagiaire: Stagiaire): void {
+
+  public onDelete(stagiaire: Stagiaire): void {
     console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
-    this.stagiaireService.deleteStagiaire(stagiaire);
+    this.stagiaireService.removeOne(stagiaire).subscribe({
+      next: (_response: HttpResponse<any>) => {
+        this.stagiaires.splice(
+          this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+          1
+        )
+        // Here goes the snackbar
+      },
+      error: (error: any) => {
+        // Something went wrong, deal with it
+      }
+    });
   }
 
   public filterChanged(event: Date | null): void {
@@ -50,8 +65,9 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public onClick(stagiaire: Stagiaire): void {
-    this.handleDetailService.setIsDetailHidden(false);
-    this.selectedStagiaire = stagiaire;
+    this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
+    /* this.handleDetailService.setIsDetailHidden(false);
+    this.selectedStagiaire = stagiaire; */
   }
 
   public onDetailClose(event: boolean): void {
