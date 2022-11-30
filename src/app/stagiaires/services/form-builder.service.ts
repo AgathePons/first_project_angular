@@ -1,6 +1,8 @@
+
 import { Inject, Injectable } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
+
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 
 @Injectable({
@@ -12,6 +14,7 @@ export class FormBuilderService {
   private stagiaire: Stagiaire = new Stagiaire();
 
   constructor(
+
     private formBuilder: FormBuilder,
     private adapter: DateAdapter<any>,
     @Inject(MAT_DATE_LOCALE) private locale: string
@@ -19,6 +22,7 @@ export class FormBuilderService {
     this.locale = 'fr';
     this.adapter.setLocale(this.locale);
   }
+
 
   public getForm(): FormGroup {
     return this.form;

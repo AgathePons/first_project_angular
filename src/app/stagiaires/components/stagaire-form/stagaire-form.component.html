@@ -1,4 +1,5 @@
 <form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': stagiaireForm.valid}">
+
     <mat-form-field>
       <input
         matInput
@@ -8,6 +9,7 @@
         [ngClass]="{'valid': true}"
         placeholder="Firstname"
       >
+
       <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
         Le prénom du stagiaire est obligatoire
       </mat-error>

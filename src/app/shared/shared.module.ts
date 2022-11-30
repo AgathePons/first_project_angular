@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { MaterialUiModule } from '../material-ui/material-ui.module';
 import { HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
+
 import {
   MatMomentDateModule,
   MomentDateAdapter,
@@ -20,6 +21,7 @@ import 'moment/locale/fr';
 
 
 
+
 @NgModule({
   declarations: [],
   imports: [
@@ -29,6 +31,7 @@ import 'moment/locale/fr';
     MaterialUiModule,
     HttpClientModule,
     ReactiveFormsModule,
+
     MatMomentDateModule,
   ],
   providers: [
@@ -48,5 +51,6 @@ import 'moment/locale/fr';
       useValue: MAT_MOMENT_DATE_FORMATS
     }
   ]
+
 })
 export class SharedModule { }

@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
+
 import { FormBuilderService } from '../../services/form-builder.service';
 
 @Component({
@@ -19,11 +20,14 @@ export class StagaireFormComponent implements OnInit {
   constructor(
     private stagiairesService: StagiaireService,
     private formBuilderService: FormBuilderService,
+
     private router: Router,
+
   ) { }
 
   ngOnInit(): void {
     this.stagiaireForm = this.formBuilderService.build().getForm();
+
   }
 
   // method helper
@@ -34,6 +38,7 @@ export class StagaireFormComponent implements OnInit {
    */
   public get c(): {[key: string]: AbstractControl} {
     return this.stagiaireForm.controls;
+
   }
 
   public onSubmit(): void {

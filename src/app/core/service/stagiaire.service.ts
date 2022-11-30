@@ -125,4 +125,5 @@ export class StagiaireService {
       return this.stagiaires.filter(stagiaire => stagiaire.getBirthDate() < date).length;
     }
   }
+
 }
