@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
+import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -22,6 +23,7 @@ export class AppRoutingModule {
     {
       path: 'stagiaire/add',
       component: StagaireFormComponent,
+      resolve: { form: StagiaireResolver },
     },
     {
       path: 'stagiaire/:id', // parametrized route
@@ -30,6 +32,7 @@ export class AppRoutingModule {
     {
       path: 'stagiaire/update/:id',
       component: StagaireFormComponent,
+      resolve: { form: StagiaireResolver },
     },
     // must be the last route of the list
     {

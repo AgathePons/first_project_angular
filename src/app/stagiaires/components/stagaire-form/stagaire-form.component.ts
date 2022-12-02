@@ -15,7 +15,6 @@ import { FormBuilderService } from '../../services/form-builder.service';
 })
 export class StagaireFormComponent implements OnInit {
 
-  //stagiaire: Stagiaire = new Stagiaire();
   public stagiaireForm!: FormGroup;
   public addMode: boolean = true;
 
@@ -23,31 +22,21 @@ export class StagaireFormComponent implements OnInit {
     private stagiairesService: StagiaireService,
     private formBuilderService: FormBuilderService,
     private router: Router,
-    private activatedRoute: ActivatedRoute,
+    private route: ActivatedRoute,
 
   ) { }
 
   ngOnInit(): void {
+    const data: any = this.route.snapshot.data;
+    console.log(data);
 
-    // console.log(this.router.url);
-    // console.log(this.activatedRoute.url);
-    this.activatedRoute.url.subscribe((url: UrlSegment[]) => {
-      //console.log(url);
-      if (url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length
-      ) {
-        console.log('mode update');
-        this.addMode = false;
-        this.stagiairesService.findOne(+url[url.length - 1].path) // put a '+' before to parseInt
-          .subscribe((stagiaire: Stagiaire) => {
-            console.log(`stagiaire: ${stagiaire.getFirstName()} ${stagiaire.getLastName()} (${stagiaire.getId()})`);
-            this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
-          })
+    this.stagiaireForm = data.form;
 
-      } else {
-        console.log('mode ajout');
-        this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();
-      }
-    });
+    if (this.stagiaireForm.value.id !== 0) {
+      this.addMode =  false;
+    } else {
+      this.addMode = true;
+    }
   }
 
   // method helper
