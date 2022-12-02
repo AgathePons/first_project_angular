@@ -1,3 +1,6 @@
+
+<ng-container *ngIf="stagiaireForm">
+
 <form [formGroup]="stagiaireForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': stagiaireForm.valid}">
 
     <mat-form-field>
@@ -57,10 +60,12 @@
         [disabled]="!stagiaireForm.valid"
         class="btn add-btn"
       >
-        Add 💚
+        {{ addMode ? 'Add 💚' : 'Update 💚'}}
       </button>
       <button type="button" mat-raised-button color="warn" (click)="goHome()" class="btn">
         Cancel 💀
       </button>
     </div>
 </form>
+
+</ng-container>

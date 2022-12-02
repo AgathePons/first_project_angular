@@ -94,6 +94,26 @@ export class StagiaireService {
       );
   }
 
+  public updateStagiaire(stagiaire: StagiaireDto): Observable<Stagiaire> {
+    return this.httpClient.put<any>(
+      this.controllerBaseUrl,
+      stagiaire
+      )
+      .pipe(
+        take(1),
+        map((anyStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(anyStagiaire.id!);
+          stagiaire.setLastName(anyStagiaire.lastName);
+          stagiaire.setFirstName(anyStagiaire.firstName);
+          stagiaire.setBirthDate(new Date(anyStagiaire.birthDate));
+          stagiaire.setPhoneNumber(anyStagiaire.phoneNumber);
+          stagiaire.setEmail(anyStagiaire.email);
+          return stagiaire;
+        })
+      );
+  }
+
   public removeOne(stagiaire: Stagiaire): Observable<HttpResponse<any>> {
     console.log(`Service: remove id: ${stagiaire.getId()}`);
     return this.httpClient.delete<any>(

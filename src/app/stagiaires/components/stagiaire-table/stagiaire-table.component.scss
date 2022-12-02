@@ -36,14 +36,6 @@ table {
       td {
         .name-puce {
           margin-right: .5rem;
-          /* display: inline-block;
-          width: 40px;
-          height: 40px;
-          border-radius: 50%;
-          background: $std-color;
-          color: $light-color;
-          text-align: center;
-          line-height: 40px; */
           &:hover {
             cursor: pointer;
           }
@@ -60,6 +52,9 @@ table {
             background-color: lighten($std-color, $amount: 20);
             color: $light-color;
             cursor: pointer;
+          }
+          &:not(:last-child) {
+            margin-right: 1rem;
           }
         }
       }
