@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
+import { Observable, Subscription } from 'rxjs';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
@@ -27,11 +28,11 @@ export class StagaireFormComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.stagiaireForm = this.formBuilderService.build().getForm();
+
     // console.log(this.router.url);
     // console.log(this.activatedRoute.url);
     this.activatedRoute.url.subscribe((url: UrlSegment[]) => {
-      console.log(url);
+      //console.log(url);
       if (url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length
       ) {
         console.log('mode update');
@@ -39,11 +40,12 @@ export class StagaireFormComponent implements OnInit {
         this.stagiairesService.findOne(+url[url.length - 1].path) // put a '+' before to parseInt
           .subscribe((stagiaire: Stagiaire) => {
             console.log(`stagiaire: ${stagiaire.getFirstName()} ${stagiaire.getLastName()} (${stagiaire.getId()})`);
-
+            this.stagiaireForm = this.formBuilderService.build(stagiaire).getForm();
           })
 
       } else {
         console.log('mode ajout');
+        this.stagiaireForm = this.formBuilderService.build(new Stagiaire()).getForm();
       }
     });
   }
@@ -60,16 +62,21 @@ export class StagaireFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
-    console.log('delegate add stagiaire:', this.stagiaireForm.value);
+    console.log('delegate add/update stagiaire:', this.stagiaireForm.value);
     const dto: StagiaireDto = new StagiaireDto(this.stagiaireForm.value);
-    this.stagiairesService.addStagiaire(dto)
-      .subscribe(() => {
-        this.goHome();
-      })
+
+    let subscription: Observable<any>;
+
+    if (this.addMode) {
+      subscription = this.stagiairesService.addStagiaire(dto);
+    } else {
+      console.log('add update method in service');
+      subscription = this.stagiairesService.updateStagiaire(dto);
+    }
+    subscription.subscribe(() => this.goHome());
   }
 
   public goHome(): void {
     this.router.navigate(['/', 'home']);
   }
-
 }

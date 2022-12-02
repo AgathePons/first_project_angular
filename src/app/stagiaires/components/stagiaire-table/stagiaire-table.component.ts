@@ -28,13 +28,10 @@ export class StagiaireTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    console.log('stagiaire-table >> ngOnInit()');
-    // this.stagiaires = this.StagiaireService.getStagiaires();
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       this.stagiaires = stagiaires;
     })
     this.handleDetailService.isDetailHidden.subscribe((isDetailHidden: boolean) => {
-      console.log(isDetailHidden ? 'hidden hihihi' : 'visible hihihi');
       this.isDetailHidden = isDetailHidden;
     });
   }
