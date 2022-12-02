@@ -43,6 +43,11 @@ export class StagiaireTableComponent implements OnInit {
     return this.stagiaireService.getStagiairesNumber(this.stopDate);
   }
 
+  public onEdit(stagiaire: Stagiaire): void {
+    console.log('tut EDIIIIIIT');
+
+  }
+
   public onDelete(stagiaire: Stagiaire): void {
     console.log(`Ici le component : Supprime ${stagiaire.getFirstName()} plizz`);
     this.stagiaireService.removeOne(stagiaire).subscribe({
