@@ -27,6 +27,10 @@ export class AppRoutingModule {
       path: 'stagiaire/:id', // parametrized route
       component: StagiaireDetailComponent,
     },
+    {
+      path: 'stagiaire/update/:id',
+      component: StagaireFormComponent,
+    },
     // must be the last route of the list
     {
       path: '**', // wild card

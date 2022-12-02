@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router, UrlSegment } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
@@ -15,19 +15,31 @@ import { FormBuilderService } from '../../services/form-builder.service';
 export class StagaireFormComponent implements OnInit {
 
   //stagiaire: Stagiaire = new Stagiaire();
-  stagiaireForm!: FormGroup;
+  public stagiaireForm!: FormGroup;
+  public addMode: boolean = true;
 
   constructor(
     private stagiairesService: StagiaireService,
     private formBuilderService: FormBuilderService,
-
     private router: Router,
+    private activatedRoute: ActivatedRoute,
 
   ) { }
 
   ngOnInit(): void {
     this.stagiaireForm = this.formBuilderService.build().getForm();
-
+    // console.log(this.router.url);
+    // console.log(this.activatedRoute.url);
+    this.activatedRoute.url.subscribe((url: UrlSegment[]) => {
+      console.log(url);
+      if (url.filter((urlSegment: UrlSegment) => urlSegment.path === 'update').length
+      ) {
+        console.log('mode update');
+        this.addMode = false;
+      } else {
+        console.log('mode ajout');
+      }
+    });
   }
 
   // method helper

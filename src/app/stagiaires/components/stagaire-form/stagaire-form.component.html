@@ -57,7 +57,7 @@
         [disabled]="!stagiaireForm.valid"
         class="btn add-btn"
       >
-        Add 💚
+        {{ addMode ? 'Add 💚' : 'Update 💚'}}
       </button>
       <button type="button" mat-raised-button color="warn" (click)="goHome()" class="btn">
         Cancel 💀

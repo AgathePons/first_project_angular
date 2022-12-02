@@ -44,8 +44,8 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public onEdit(stagiaire: Stagiaire): void {
-    console.log('tut EDIIIIIIT');
-
+    console.log('Ding dong update :', stagiaire.getFirstName(), stagiaire.getLastName());
+    this.router.navigate(['/', 'stagiaire', 'update', stagiaire.getId()]);
   }
 
   public onDelete(stagiaire: Stagiaire): void {
