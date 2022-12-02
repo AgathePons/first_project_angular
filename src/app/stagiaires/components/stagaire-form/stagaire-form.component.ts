@@ -36,6 +36,12 @@ export class StagaireFormComponent implements OnInit {
       ) {
         console.log('mode update');
         this.addMode = false;
+        this.stagiairesService.findOne(+url[url.length - 1].path) // put a '+' before to parseInt
+          .subscribe((stagiaire: Stagiaire) => {
+            console.log(`stagiaire: ${stagiaire.getFirstName()} ${stagiaire.getLastName()} (${stagiaire.getId()})`);
+
+          })
+
       } else {
         console.log('mode ajout');
       }
