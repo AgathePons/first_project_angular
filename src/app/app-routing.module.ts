@@ -18,8 +18,11 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: StagiaireTableComponent,
+      component: StagiaireTableComponent, 
+      
     },
+
+    
     {
       path: 'stagiaire/add',
       component: StagaireFormComponent,

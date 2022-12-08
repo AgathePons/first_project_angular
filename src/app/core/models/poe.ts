@@ -8,6 +8,14 @@ export class Poe {
   private type: string = '';
   private trainees: Array<Stagiaire> = [];
 
+  public constructor(id: number,title: string,bd: Date,ed: Date,type: string) {
+    this.id = id;
+    this.beginDate = bd;
+    this.endDate = ed;
+    this.type = type;
+    this.title = title
+ }
+
   public getId(): number {
     return this.id;
   }

@@ -1,0 +1,43 @@
+<table>
+    <thead>
+      <tr>
+     
+        <th>
+          Title
+        </th>
+        <th>
+          beginDate
+        </th>
+        <th>
+          endDate
+        </th>
+        <th>
+            type
+        </th>
+        <th>
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let poe of poes">
+          <tr>
+        
+          <td> {{ poe.getTitle() }} </td>
+          <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+          <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
+          <td>{{ poe.getType() }} </td>
+          <td class="center-cell">
+            <button type="button" >✏</button>
+            <button type="button" >❌</button>
+          </td>
+        </tr>
+      </ng-container>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="5" class="right-cell">fin</td>
+        
+      </tr>
+    </tfoot>
+  </table>

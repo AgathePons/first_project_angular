@@ -14,6 +14,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
+import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { SharedModule } from './shared/shared.module';
     StagiaireDetailComponent,
     BubbleDirective,
     StagaireFormComponent,
+    PoeTableComponent,
   ],
   imports: [
     BrowserModule,
