@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
+import { PoeDto } from 'src/app/poe/dto/poe-dto';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
 
@@ -35,5 +36,28 @@ export class PoeService {
         })
       })
     );
+  }
+
+  //TODO findOne
+
+  public addPoe(poe: PoeDto): Observable<Poe> {
+    console.log(`poe service addPoe`);
+
+    return this.httpClient.post<PoeDto>(
+      this.controllerBaseUrl, poe
+    )
+    .pipe(
+      take(1),
+      map((poeDto: PoeDto) => {
+        const poe: Poe = new Poe();
+        poe.setId(poeDto.id!);
+          poe.setTitle(poeDto.title);
+          poe.setBeginDate(poeDto.beginDate);
+          poe.setEndDate(poeDto.endDate);
+          poe.setType(poeDto.type);
+          poe.setTrainees(poeDto.trainees);
+        return poe;
+      })
+    )
   }
 }
