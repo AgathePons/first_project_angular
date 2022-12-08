@@ -9,7 +9,7 @@ import {
 import { map, Observable, of, take } from 'rxjs';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
-import { FormBuilderService } from '../services/form-builder.service';
+import { FormBuilderService } from '../../shared/form-builder.service';
 
 @Injectable({
   providedIn: 'root'
