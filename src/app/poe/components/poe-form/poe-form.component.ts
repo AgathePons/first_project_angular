@@ -29,7 +29,7 @@ export class PoeFormComponent implements OnInit {
 
     this.poeForm = data.form;
 
-    if (this.poeForm.value.id !== undefined) {
+    if (this.poeForm.value.id !== undefined && this.poeForm.value.id !== 0) {
       console.log('form component on init update',this.poeForm.value.id );
 
       this.addMode =  false;

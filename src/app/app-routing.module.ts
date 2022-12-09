@@ -44,6 +44,11 @@ export class AppRoutingModule {
       component: PoeFormComponent,
       resolve: { form: PoeResolver },
     },
+    {
+      path: 'poe/update/:id',
+      component: PoeFormComponent,
+      resolve: { form: PoeResolver},
+    },
     // must be the last route of the list
     {
       path: '**', // wild card

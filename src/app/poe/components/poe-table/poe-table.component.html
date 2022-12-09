@@ -30,11 +30,11 @@
           <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
           <td>{{ poe.getType() }} </td>
           <td class="center-cell">
-            <button type="button" >✏</button>
+            <button type="button" (click)="onEdit(poe)">✏</button>
             <button type="button" (click)="onDelete(poe)" >❌</button>
           </td>
         </tr>
-      </ng-container> 
+      </ng-container>
     </tbody>
     <tfoot>
       <tr>
