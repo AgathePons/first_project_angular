@@ -37,6 +37,9 @@ export class AppRoutingModule {
       component: StagaireFormComponent,
       resolve: { form: StagiaireResolver },
     },
+    /* {
+      path: 'poe/add',
+    }, */
     // must be the last route of the list
     {
       path: '**', // wild card

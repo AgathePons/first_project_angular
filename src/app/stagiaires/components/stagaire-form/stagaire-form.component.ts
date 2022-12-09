@@ -6,7 +6,7 @@ import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
 
-import { FormBuilderService } from '../../services/form-builder.service';
+import { FormBuilderService } from '../../../shared/form-builder.service';
 
 @Component({
   selector: 'app-stagaire-form',

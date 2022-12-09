@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { Stagiaire } from 'src/app/core/models/stagiaire';
+import { Poe } from '../core/models/poe';
 
 @Injectable({
   providedIn: 'root'
@@ -12,6 +13,7 @@ export class FormBuilderService {
 
   private form!: FormGroup;
   private stagiaire: Stagiaire = new Stagiaire();
+  private poe: Poe = new Poe();
   private updateMode: boolean = false;
 
   constructor(
@@ -62,6 +64,40 @@ export class FormBuilderService {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId())
       this.form.addControl('id', idControl);
     }
+    return this;
+  }
+
+  public buildPoe(poe: Poe): FormBuilderService {
+    this.poe = poe;
+    if (poe.getId() !== 0) {
+      this.updateMode = true;
+    }
+
+    this.form = this.formBuilder.group({
+      title: [
+        this.poe.getTitle(),
+        [Validators.required]
+      ],
+      beginDate: [
+        this.poe.getBeginDate(),
+        [Validators.required]
+      ],
+      endDate: [
+        this.poe.getEndDate(),
+        [Validators.required]
+      ],
+      type: [
+        this.poe.getType(),
+        [Validators.required]
+      ]
+    });
+
+    // Add a control with id value so form.value = {id: 1, ...}
+    if(this.updateMode) {
+      const idControl: AbstractControl = new FormControl(this.poe.getId())
+      this.form.addControl('id', idControl);
+    }
+
     return this;
   }
 }
