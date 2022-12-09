@@ -1,3 +1,4 @@
+<app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
 <table>
     <thead>
       <tr>
@@ -21,7 +22,7 @@
     </thead>
     <tbody>
      <ng-container *ngFor="let poe of poes">
-          <tr>
+          <tr *ngIf="changeView(poe)">
 
           <td> {{ poe.getTitle() }} </td>
           <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
