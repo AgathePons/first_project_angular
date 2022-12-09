@@ -1,0 +1,54 @@
+<ng-container *ngIf="poeForm">
+  <form [formGroup]="poeForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': poeForm.valid}">
+
+    <mat-form-field>
+      <input
+        matInput
+        id="title"
+        type="text"
+        formControlName="title"
+        [ngClass]="{'valid': true}"
+        placeholder="Title"
+      >
+      <!-- TODO mat error-->
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Begin date</mat-label>
+      <input matInput id="beginDate" type="date" formControlName="beginDate">
+      <mat-hint>JJ-MM-YYYY</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>End date</mat-label>
+      <input matInput id="endDate" type="date" formControlName="endDate">
+      <mat-hint>JJ-MM-YYYY</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Type</mat-label>
+      <select matNativeControl required formControlName="type">
+        <option value="POEI">POEI</option>
+        <option value="POEC">POEC</option>
+      </select>
+    </mat-form-field>
+
+
+    <div class="btn-list">
+      <button
+        mat-raised-button
+        color="primary"
+        [disabled]="!poeForm.valid"
+        class="btn add-btn"
+      >
+        {{ addMode ? 'Add 💚' : 'Update 💚'}}
+      </button>
+      <button type="button" mat-raised-button color="warn" (click)="goHome()" class="btn">
+        Cancel 💀
+      </button>
+    </div>
+
+  </form>
+
+
+</ng-container>
