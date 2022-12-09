@@ -48,8 +48,7 @@ export class PoeFormComponent implements OnInit {
     if (this.addMode) {
       subscription = this.poeService.addPoe(dto);
     } else {
-      // TODO update method
-      subscription = this.poeService.addPoe(dto);
+      subscription = this.poeService.updatePoe(dto);
     }
     subscription.subscribe(() => this.goHome());
   }
