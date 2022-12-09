@@ -12,7 +12,10 @@ import { PoeService } from 'src/app/core/service/poe.service';
 })
 export class PoeTableComponent implements OnInit {
 
-   public poes: Array<Poe> = [];
+
+  public stopDate: Date | null = null;
+  public poes: Array<Poe> = []; 
+
 
   public constructor(
     private poeService: PoeService,
@@ -26,9 +29,21 @@ export class PoeTableComponent implements OnInit {
 
   }
 
+
+
+  public filterChanged(event: Date | null): void {
+    console.log(`Tut tut, change filter to ${event}`);
+    this.stopDate = event;
+    // console.log('La stopDate est : ', this.stopDate);
+    
+  }
+
+  
+
   public onEdit(poe: Poe): void {
     this.router.navigate(['/', 'poe', 'update', poe.getId()]);
   }
+
 
   public onDelete(poe: Poe): void {
     console.log(`Ici le component : Supprime ${poe.getTitle()} plizz`);
@@ -44,6 +59,25 @@ export class PoeTableComponent implements OnInit {
         // Something went wrong, deal with it
       }
     });
+  }
+
+  public changeView(poe: Poe): boolean {
+    if (this.stopDate === null) {
+      return true;
+    }
+
+    if (this.stopDate.getDate() === 31) {
+      // console.log('cest la stopDate ', this.stopDate);
+      // console.log('cest la date de fin de poe ', poe.getEndDate());
+      if (poe.getEndDate() > this.stopDate) {
+        console.log(`${poe.getEndDate()} est superieure à ${this.stopDate}`);
+        return true;
+      }
+      console.log(`${poe.getEndDate()} est inférieure à ${this.stopDate}`);
+        return false;
+    }
+    
+    return poe.getEndDate() <  this.stopDate;
   }
 
 }
