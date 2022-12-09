@@ -1,7 +1,7 @@
 <table>
     <thead>
       <tr>
-     
+
         <th>
           Title
         </th>
@@ -20,9 +20,9 @@
       </tr>
     </thead>
     <tbody>
-      <ng-container *ngFor="let poe of poes">
+     <!--  <ng-container *ngFor="let poe of poes">
           <tr>
-        
+
           <td> {{ poe.getTitle() }} </td>
           <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
           <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
@@ -32,12 +32,12 @@
             <button type="button" >❌</button>
           </td>
         </tr>
-      </ng-container>
+      </ng-container> -->
     </tbody>
     <tfoot>
       <tr>
         <td colspan="5" class="right-cell">fin</td>
-        
+
       </tr>
     </tfoot>
   </table>

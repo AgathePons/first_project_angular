@@ -9,14 +9,14 @@ import { Poe } from 'src/app/core/models/poe';
 })
 export class PoeTableComponent implements OnInit {
 
-  public poes: Array<Poe> = [
+  /* public poes: Array<Poe> = [
     new Poe (1, "java fullstack", new Date(), new Date(), "POEC")
-  ];
+  ]; */
 
   constructor() { }
 
   ngOnInit(): void {
-    
+
   }
 
 }
