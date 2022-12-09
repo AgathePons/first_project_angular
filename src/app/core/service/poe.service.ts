@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { PoeDto } from 'src/app/poe/dto/poe-dto';
@@ -59,5 +59,14 @@ export class PoeService {
         return poe;
       })
     )
+
+  }
+
+  public removeOne(poe: Poe): Observable<HttpResponse<any>> {
+    console.log(`Service: remove id: ${poe.getId()}`);
+    return this.httpClient.delete<any>(
+      `${this.controllerBaseUrl}/${poe.getId()}`,
+      { observe: 'response' }
+      );
   }
 }
