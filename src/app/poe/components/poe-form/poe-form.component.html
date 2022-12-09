@@ -14,15 +14,14 @@
     </mat-form-field>
 
     <mat-form-field appearance="fill">
-      <mat-label>Begin date</mat-label>
-      <input matInput id="beginDate" type="date" formControlName="beginDate">
-      <mat-hint>JJ-MM-YYYY</mat-hint>
-    </mat-form-field>
-
-    <mat-form-field appearance="fill">
-      <mat-label>End date</mat-label>
-      <input matInput id="endDate" type="date" formControlName="endDate">
-      <mat-hint>JJ-MM-YYYY</mat-hint>
+      <mat-label>Enter a begin date and an end date</mat-label>
+      <mat-date-range-input [rangePicker]="picker">
+        <input matStartDate placeholder="Start date" formControlName="beginDate">
+        <input matEndDate placeholder="End date" formControlName="endDate">
+      </mat-date-range-input>
+      <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+      <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-date-range-picker #picker></mat-date-range-picker>
     </mat-form-field>
 
     <mat-form-field appearance="fill">
@@ -32,7 +31,6 @@
         <option value="POEC">POEC</option>
       </select>
     </mat-form-field>
-
 
     <div class="btn-list">
       <button
