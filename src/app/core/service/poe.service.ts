@@ -38,7 +38,24 @@ export class PoeService {
     );
   }
 
-  //TODO findOne
+  public findOne(id: number): Observable<Poe> {
+    return this.httpClient.get<any>(
+      `${this.controllerBaseUrl}/${id}`
+    )
+    .pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(inputPoe.beginDate);
+        poe.setEndDate(inputPoe.endDate);
+        poe.setType(inputPoe.type);
+        poe.setTrainees(inputPoe.trainees);
+        return poe
+      })
+    );
+  }
 
   public addPoe(poe: PoeDto): Observable<Poe> {
     console.log(`poe service addPoe`);
@@ -51,15 +68,35 @@ export class PoeService {
       map((poeDto: PoeDto) => {
         const poe: Poe = new Poe();
         poe.setId(poeDto.id!);
-          poe.setTitle(poeDto.title);
-          poe.setBeginDate(poeDto.beginDate);
-          poe.setEndDate(poeDto.endDate);
-          poe.setType(poeDto.type);
-          poe.setTrainees(poeDto.trainees);
+        poe.setTitle(poeDto.title);
+        poe.setBeginDate(poeDto.beginDate);
+        poe.setEndDate(poeDto.endDate);
+        poe.setType(poeDto.type);
+        poe.setTrainees(poeDto.trainees);
         return poe;
       })
     )
 
+  }
+
+  public updatePoe(poe: PoeDto): Observable<Poe> {
+    return this.httpClient.put<any>(
+      this.controllerBaseUrl,
+      poe
+    )
+    .pipe(
+      take(1),
+      map((anyPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(anyPoe.id!);
+        poe.setTitle(anyPoe.title);
+        poe.setBeginDate(anyPoe.beginDate);
+        poe.setEndDate(anyPoe.endDate);
+        poe.setType(anyPoe.type);
+        poe.setTrainees(anyPoe.trainees);
+        return poe;
+      })
+    );
   }
 
   public removeOne(poe: Poe): Observable<HttpResponse<any>> {

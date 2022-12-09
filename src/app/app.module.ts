@@ -15,7 +15,11 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { SharedModule } from './shared/shared.module';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
+
 import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.component';
+
+import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
+
 
 @NgModule({
   declarations: [
@@ -27,7 +31,11 @@ import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.compo
     BubbleDirective,
     StagaireFormComponent,
     PoeTableComponent,
+
     PoeFilterComponent,
+
+    PoeFormComponent,
+
   ],
   imports: [
     BrowserModule,
