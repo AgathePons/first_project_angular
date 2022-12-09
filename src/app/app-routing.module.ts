@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -18,11 +19,11 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: StagiaireTableComponent, 
-      
+      component: StagiaireTableComponent,
+
     },
 
-    
+
     {
       path: 'stagiaire/add',
       component: StagaireFormComponent,
@@ -37,9 +38,10 @@ export class AppRoutingModule {
       component: StagaireFormComponent,
       resolve: { form: StagiaireResolver },
     },
-    /* {
+    {
       path: 'poe/add',
-    }, */
+      component: PoeFormComponent,
+    },
     // must be the last route of the list
     {
       path: '**', // wild card
