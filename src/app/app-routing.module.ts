@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
+import { PoeResolver } from './poe/resolvers/poe.resolver';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -41,6 +42,7 @@ export class AppRoutingModule {
     {
       path: 'poe/add',
       component: PoeFormComponent,
+      resolve: { form: PoeResolver },
     },
     // must be the last route of the list
     {

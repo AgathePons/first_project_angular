@@ -28,10 +28,14 @@ export class PoeResolver implements Resolve<FormGroup> {
     let poe: Poe;
     let form: FormGroup;
     if (id === 0) {
+      console.log('id = 0 : addMode');
+
       poe = new Poe();
       form = this.formBuilderService.buildPoe(poe).getForm();
       return of(form);
     } else {
+      console.log('id != 0 : updateMode');
+
       // TODO resolver for update
       poe = new Poe();
       form = this.formBuilderService.buildPoe(poe).getForm();
