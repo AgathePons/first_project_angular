@@ -16,6 +16,16 @@ form {
     border: 2px solid $success-color;
   }
 
+  .field-control {
+    margin-bottom: 1rem;
+  }
+
+  .field-control.toggle {
+    mat-label {
+      display: block;
+    }
+  }
+
   .btn-list {
     display: flex;
     .valid-btn {
