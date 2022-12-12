@@ -6,6 +6,7 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { LoginFormComponent } from './user/login/login-form/login-form.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -15,8 +16,12 @@ export class AppRoutingModule {
   public static routes: Routes = [
     {
       path: '',
-      redirectTo: 'home', // redirection to another path
+      redirectTo: 'login', // redirection to another path
       pathMatch: 'full', // check all the route (not just one section)
+    },
+    {
+      path: 'login',
+      component: LoginFormComponent,
     },
     {
       path: 'home',
