@@ -34,4 +34,9 @@ export class LoginFormComponent implements OnInit {
     });
   }
 
+  public onLogin(): void {
+    console.log('login btn');
+
+  }
+
 }
