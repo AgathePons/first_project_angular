@@ -8,7 +8,7 @@ import { UserService } from '../services/user.service';
 })
 export class NoUserGuard implements CanActivate {
 
-  constructor(
+  public constructor(
     private userService: UserService,
     private router: Router,
   ) { }
@@ -16,10 +16,15 @@ export class NoUserGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    if (this.userService.hasUser()) {
+
+      if (this.userService.hasUser().getValue()) {
+        console.log('has user in guard');
+        this.router.navigate(['/', 'home']);
+        return false;
+      }
+
+      console.log('has no user in guard');
       return true;
-    }
-    return false;
   }
 
 }

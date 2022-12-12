@@ -22,7 +22,9 @@ h1 {
 
 ul {
   list-style-type: none;
+  display: flex;
   li {
+    flex-grow: 1;
     font-family: Arial, Helvetica, sans-serif;
     background: $title-background-color;
     color: $light-color;
@@ -31,7 +33,7 @@ ul {
     padding: .3rem .5rem;
     transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
     &:not(:last-child) {
-      margin-bottom: .2rem;
+      margin-right: .2rem;
     }
     &:hover {
       background: $std-color;

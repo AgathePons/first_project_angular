@@ -6,6 +6,7 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
 
 @NgModule({
@@ -22,6 +23,9 @@ export class AppRoutingModule {
     {
       path: 'login',
       component: LoginFormComponent,
+      canActivate: [
+        NoUserGuard,
+      ]
     },
     {
       path: 'home',
