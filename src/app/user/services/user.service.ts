@@ -43,4 +43,8 @@ export class UserService {
     console.log('user service logout TUTTUT');
 
   };
+
+  public hasUser(): boolean {
+    return this._user !== null;
+  }
 }
