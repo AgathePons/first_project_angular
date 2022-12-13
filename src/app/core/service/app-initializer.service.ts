@@ -14,7 +14,6 @@ export class AppInitializerService {
     return new Promise<void>((resolve, reject) => {
         console.log("AppInitService.init() called");
         this._userService.hasUser();
-        // TODO before: this._userService.setUserStorage();
         resolve();
     });
   }

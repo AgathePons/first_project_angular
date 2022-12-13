@@ -35,21 +35,6 @@ export class UserService {
     private router: Router,
   ) { }
 
-  /* public setUserStorage(): void {
-    const userString = localStorage.getItem('auth');
-        if (userString !== null) {
-          const userJSON = JSON.parse(userString);
-          console.log('get user:', userJSON);
-          this._user = new User();
-          this._user.id = userJSON._id;
-          this._user.login = userJSON._login;
-          console.log(this._user);
-          this.hasUser$.next(true);
-        } else {
-          this.hasUser$.next(false);
-        }
-  } */
-
   public login(formData: any): Observable<boolean> {
     console.log('user service login POUET', formData);
     const userIndex: number = users.findIndex((user: UserDto) => user.login === formData.userLogin && user.password === formData.userPassword)

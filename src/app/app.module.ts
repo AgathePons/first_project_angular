@@ -20,14 +20,7 @@ import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.compo
 
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { UserModule } from './user/user.module';
-import { AppInitializerService } from './core/service/app-initializer.service';
 
-/* export function initializeApp1(appInitService: AppInitializerService) {
-  return (): Promise<any> => {
-    return appInitService.init();
-  }
-}
- */
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,11 +31,8 @@ import { AppInitializerService } from './core/service/app-initializer.service';
     BubbleDirective,
     StagaireFormComponent,
     PoeTableComponent,
-
     PoeFilterComponent,
-
     PoeFormComponent,
-
   ],
   imports: [
     BrowserModule,
@@ -51,15 +41,7 @@ import { AppInitializerService } from './core/service/app-initializer.service';
     SharedModule,
     UserModule,
   ],
-  providers: [
-    /* AppInitializerService,
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializeApp1,
-      deps: [AppInitializerService],
-      multi: true
-    } */
-  ],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
