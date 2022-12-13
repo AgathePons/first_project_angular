@@ -4,6 +4,7 @@ import { BehaviorSubject, Observable, of } from 'rxjs';
 import { IStorageStrategy } from 'src/app/core/strategies/storage/i-storage-strategy';
 import { LocalStrategy } from 'src/app/core/strategies/storage/local-strategy';
 import { SessionStrategy } from 'src/app/core/strategies/storage/session-strategy';
+import { environment } from 'src/environments/environment';
 import { UserDto } from '../dto/user-dto';
 import { User } from '../models/user';
 
@@ -34,7 +35,7 @@ export class UserService {
     private router: Router,
   ) { }
 
-  public setUserStorage(): void {
+  /* public setUserStorage(): void {
     const userString = localStorage.getItem('auth');
         if (userString !== null) {
           const userJSON = JSON.parse(userString);
@@ -47,7 +48,7 @@ export class UserService {
         } else {
           this.hasUser$.next(false);
         }
-  }
+  } */
 
   public login(formData: any): Observable<boolean> {
     console.log('user service login POUET', formData);
@@ -75,10 +76,33 @@ export class UserService {
     console.log('user service logout TUTTUT');
     this._user = null;
     this.router.navigate(['/', 'login']);
+    this._removeItem(new LocalStrategy());
+    this._removeItem(new SessionStrategy());
     this.hasUser$.next(false);
   };
 
   public hasUser(): BehaviorSubject<boolean> {
+    if (!this._user) {
+      this._readStorage(new LocalStrategy());
+      this._readStorage(new SessionStrategy());
+    }
     return this.hasUser$;
+  }
+
+  private _readStorage(storage: IStorageStrategy): void {
+    const storedItem: string | null = storage.getItem(`${environment.storageKeys.AUTH}`);
+    if (storedItem !== null) {
+      const storedUser = JSON.parse(storedItem);
+
+      this._user = new User();
+      this._user.id = storedUser._id;
+      this._user.login = storedUser._login;
+
+      this.hasUser$.next(true);
+    }
+  }
+
+  private _removeItem(storage: IStorageStrategy): void {
+    storage.removeItem(`${environment.storageKeys.AUTH}`);
   }
 }

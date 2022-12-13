@@ -22,12 +22,12 @@ import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { UserModule } from './user/user.module';
 import { AppInitializerService } from './core/service/app-initializer.service';
 
-export function initializeApp1(appInitService: AppInitializerService) {
+/* export function initializeApp1(appInitService: AppInitializerService) {
   return (): Promise<any> => {
-    return appInitService.Init();
+    return appInitService.init();
   }
 }
-
+ */
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,8 +52,13 @@ export function initializeApp1(appInitService: AppInitializerService) {
     UserModule,
   ],
   providers: [
-    AppInitializerService,
-    { provide: APP_INITIALIZER,useFactory: initializeApp1, deps: [AppInitializerService], multi: true}
+    /* AppInitializerService,
+    {
+      provide: APP_INITIALIZER,
+      useFactory: initializeApp1,
+      deps: [AppInitializerService],
+      multi: true
+    } */
   ],
   bootstrap: [AppComponent]
 })
