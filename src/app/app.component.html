@@ -5,6 +5,20 @@
   <h1 (click)="toggleTitle()">
     {{ title }}
   </h1>
+  <nav>
+    <ul>
+      <li>
+        <a [routerLink]="['/', 'home']">Home</a>
+      </li>
+      <li>
+        POE list
+      </li>
+      <li>
+        <a *ngIf="!hasUser" [routerLink]="['/', 'login']">Login</a>
+        <a *ngIf="hasUser" (click)="onLogout()">Logout</a>
+      </li>
+    </ul>
+  </nav>
 
   <!-- router outlet -->
   <router-outlet></router-outlet>

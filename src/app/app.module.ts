@@ -19,6 +19,7 @@ import { PoeTableComponent } from './poe/components/poe-table/poe-table.componen
 import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.component';
 
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
+import { UserModule } from './user/user.module';
 
 
 @NgModule({
@@ -42,6 +43,7 @@ import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    UserModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
