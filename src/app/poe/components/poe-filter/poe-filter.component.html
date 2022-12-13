@@ -1,0 +1,16 @@
+<div class="filters-bar">
+    <div class="btn-group">
+      <button type="button"[ngClass]="{'active': getButtonState('btnGT1y')}" (click)="changeButtonState('btnGT1y')">
+        &gt; 1 an
+      </button>
+      <button type="button" [ngClass]="{'active': getButtonState('btnGT6m')}" (click)="changeButtonState('btnGT6m')">
+        &gt; 6 mois
+      </button>
+      <button type="button" [ngClass]="{'active': getButtonState('btnGT1m')}" (click)="changeButtonState('btnGT1m')">
+        &gt; 1 mois
+      </button>
+      <button type="button" [ngClass]="{'active': getButtonState('btnAll')}" (click)="changeButtonState('btnAll')">
+        All
+      </button>
+    </div>
+  </div>
