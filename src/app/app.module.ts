@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { APP_INITIALIZER, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 
@@ -20,7 +20,13 @@ import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.compo
 
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { UserModule } from './user/user.module';
+import { AppInitializerService } from './core/service/app-initializer.service';
 
+export function initializeApp1(appInitService: AppInitializerService) {
+  return (): Promise<any> => {
+    return appInitService.Init();
+  }
+}
 
 @NgModule({
   declarations: [
@@ -45,7 +51,10 @@ import { UserModule } from './user/user.module';
     SharedModule,
     UserModule,
   ],
-  providers: [],
+  providers: [
+    AppInitializerService,
+    { provide: APP_INITIALIZER,useFactory: initializeApp1, deps: [AppInitializerService], multi: true}
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
