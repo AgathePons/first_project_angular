@@ -22,6 +22,7 @@ export class HasUserGuard implements CanActivate {
 
     // no user, go to /login
     this.router.navigate(['/', 'login']);
+    return false;
   }
 
 }
