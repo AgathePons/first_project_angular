@@ -9,7 +9,7 @@ import { UserService } from './user/services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title = 'I <3 Angular';
+  public title = 'Aelion suivi des stagiaire';
   public isOverlayVisible = false;
   public hasUser: boolean = false;
 
@@ -34,10 +34,10 @@ export class AppComponent {
   }
 
   public toggleTitle(): void {
-    if (this.title === 'I <3 Angular') {
-      this.title = 'Hello World';
+    if (this.title === 'Aelion suivi des stagiaire') {
+      this.title = 'I <3 Angular';
     } else {
-      this.title = 'I <3 Angular'
+      this.title = 'Aelion suivi des stagiaire'
     }
   }
 

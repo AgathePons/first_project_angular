@@ -1,4 +1,10 @@
-<a [routerLink]="['/', 'stagiaire', 'add']" class="pouet-btn">Ajouter</a>
+<a
+  mat-raised-button
+  color="accent"
+  [routerLink]="['/', 'stagiaire', 'add']"
+>
+  Ajouter Stagiaire
+</a>
 <app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
 <table>
   <thead>
@@ -6,17 +12,17 @@
       <th class="center-cell">
         #
       </th>
-      <th>
+      <th class="left-cell">
         Firstname
       </th>
-      <th>
+      <th class="left-cell">
         Lastname
       </th>
-      <th>
+      <th class="left-cell">
         Birthdate
       </th>
       <th>
-        &nbsp;
+        Actions
       </th>
     </tr>
   </thead>
@@ -50,8 +56,12 @@
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
         <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
-          <button type="button" (click)="onEdit(stagiaire)">✏</button>
-          <button type="button" (click)="onDelete(stagiaire)">❌</button>
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(stagiaire)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
+            <mat-icon>delete</mat-icon>
+          </button>
         </td>
       </tr>
     </ng-container>
@@ -63,7 +73,7 @@
     </tr>
   </tfoot>
 </table>
-<app-poe-table></app-poe-table>
+
 
 
 

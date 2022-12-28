@@ -1,32 +1,44 @@
 
-  <div [ngClass]="{'overlay': true, 'visible': isOverlayVisible}">
-    <h1>Pouet</h1>
-  </div>
-  <h1 (click)="toggleTitle()">
-    {{ title }}
-  </h1>
-  <nav>
-    <ul>
-      <li>
-        <a [routerLink]="['/', 'home']">Home</a>
-      </li>
-      <li>
-        POE list
-      </li>
-      <li>
-        <a *ngIf="!hasUser" [routerLink]="['/', 'login']">Login</a>
-        <a *ngIf="hasUser" (click)="onLogout()">Logout</a>
-      </li>
-    </ul>
-  </nav>
+
+
+  <mat-toolbar color="primary" class="nav">
+    <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+      <mat-icon>menu</mat-icon>
+    </button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item [routerLink]="['/', 'home']">
+        Liste des stagiaires
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'poes']">
+        Liste des POE
+      </button>
+    </mat-menu>
+    <span class="example-spacer"></span>
+    <span>
+      <h1 (click)="toggleTitle()">
+        {{ title }}
+      </h1>
+    </span>
+    <span class="example-spacer"></span>
+    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="!hasUser">
+      <mat-icon>account_circle</mat-icon>
+    </button>
+    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="hasUser">
+      <mat-icon>no_accounts</mat-icon>
+    </button>
+  </mat-toolbar>
 
   <!-- router outlet -->
   <router-outlet></router-outlet>
+
+  <!-- <div [ngClass]="{'overlay': true, 'visible': isOverlayVisible}">
+    <h1>Pouet</h1>
+  </div>
   <button class="pouet-btn" type="button" (click)="makePouet()">
     Bouton qui fait POUET
   </button>
 
-  <!-- <div>
+  <div>
     <input
       [type]="inputType"
       placeholder="Your password">

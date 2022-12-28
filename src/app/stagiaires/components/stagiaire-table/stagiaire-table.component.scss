@@ -1,4 +1,4 @@
-$std-color: rgb(32, 2, 32);
+$std-color: rgb(63, 81, 181);
 $light-color: rgb(255, 255, 255);
 
 table {
@@ -11,13 +11,16 @@ table {
   thead, tbody, tfoot {
     tr {
       td, th  {
-        border: 1px solid $std-color;
+        //border: 1px solid $std-color;
         padding: .5rem;
         &.center-cell {
           text-align: center;
         }
         &.right-cell {
           text-align: right;
+        }
+        &.left-cell {
+          text-align: left;
         }
       }
     }
@@ -31,7 +34,7 @@ table {
   tbody {
     tr {
       &:nth-child(odd) {
-        background-color: lighten($std-color, 85);
+        background-color: lighten($std-color, 45);
       }
       td {
         .name-puce {
@@ -41,12 +44,6 @@ table {
           }
         }
         button {
-          width: 2rem;
-          height: 2rem;
-          border-radius: 50%;
-          border: 1px solid $std-color;
-          background-color: $light-color;
-          color: $std-color;
           transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
           &:hover {
             background-color: lighten($std-color, $amount: 20);
