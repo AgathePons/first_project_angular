@@ -11,7 +11,7 @@ export class AppInitializerService {
   ) { }
 
   init() {
-    return new Promise<void>((resolve, reject) => {
+    return new Promise<any>((resolve: any) => {
         console.log("AppInitService.init() called");
         this._userService.hasUser();
         resolve();
