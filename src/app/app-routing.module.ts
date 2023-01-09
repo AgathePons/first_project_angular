@@ -10,6 +10,7 @@ import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
+import { SignupComponent } from './user/signup/signup/signup.component';
 
 @NgModule({
   imports: [RouterModule.forRoot(AppRoutingModule.routes)],
@@ -21,6 +22,13 @@ export class AppRoutingModule {
       path: '',
       redirectTo: 'login', // redirection to another path
       pathMatch: 'full', // check all the route (not just one section)
+    },
+    {
+      path: 'signup',
+      component: SignupComponent,
+      canActivate: [
+        NoUserGuard
+      ]
     },
     {
       path: 'login',

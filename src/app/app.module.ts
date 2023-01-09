@@ -18,6 +18,7 @@ import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.compo
 
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { UserModule } from './user/user.module';
+import { userInterceptor } from './core/interceptors/user-interceptor.interceptor';
 
 @NgModule({
   declarations: [
@@ -39,7 +40,9 @@ import { UserModule } from './user/user.module';
     SharedModule,
     UserModule,
   ],
-  providers: [],
+  providers: [
+    userInterceptor
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
