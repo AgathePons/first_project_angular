@@ -41,10 +41,17 @@
             <tr>
               <td class="center-cell">{{ stagiaire.getId() }}</td>
               <td>
+                <span
+            class="name-puce"
+            appBubble
+            (click)="onClick(stagiaire)"
+          ><!-- (click)="onClick(stagiaire)" -->
+            {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
+          </span>
                 {{ stagiaire.getFirstName() }}
               </td>
-              <td>{{ stagiaire.getLastName() }}</td>
-              <td>{{ stagiaire.getBirthDate() }}</td>
+              <td>{{ stagiaire.getLastName() | uppercase }}</td>
+              <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY'  }}</td>
               <td class="center-cell">
                 <button mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
                   <mat-icon>delete</mat-icon>

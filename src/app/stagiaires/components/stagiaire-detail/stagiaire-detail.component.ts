@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
@@ -24,6 +25,7 @@ export class StagiaireDetailComponent implements OnInit {
     private handleDetailService: HandleDetailService,
     private route: ActivatedRoute,
     private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -41,7 +43,8 @@ export class StagiaireDetailComponent implements OnInit {
 
   public onClick(): void {
     console.log('clic');
-    this.router.navigate(['/', 'home']);
+    // this.router.navigate(['/', 'home']);
+    this.location.back();
     this.onCloseEvent.emit(true);
   }
 }

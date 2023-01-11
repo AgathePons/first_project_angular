@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/service/poe.service';
+import { StagiaireService } from 'src/app/core/service/stagiaire.service';
+import { StagiaireTableComponent } from 'src/app/stagiaires/components/stagiaire-table/stagiaire-table.component';
 
 @Component({
   selector: 'app-poe-details',
@@ -13,7 +15,8 @@ export class PoeDetailsComponent implements OnInit {
 
   constructor(  
     private route: ActivatedRoute,
-    private poeService: PoeService
+    private poeService: PoeService,
+    private router: Router
     ) { }
 
   public poe: Poe = new Poe();
@@ -38,5 +41,9 @@ export class PoeDetailsComponent implements OnInit {
 public onDelete(stagiaire: Stagiaire) {
   console.log('lol');
   
+}
+
+public onClick(stagiaire: Stagiaire): void {
+  this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
 }
 }
