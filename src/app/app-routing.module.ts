@@ -53,7 +53,7 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'poe/:id',
+      path: 'poe/detail/:id',
       component: PoeDetailsComponent,
       canActivate: [
         HasUserGuard

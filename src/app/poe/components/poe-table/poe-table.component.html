@@ -39,7 +39,7 @@
           <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
           <td>{{ poe.getType() }} </td>
           <td class="center-cell">
-            <button mat-mini-fab color="accent" type="button" [routerLink]="['/','poe', poe.getId()]">
+            <button mat-mini-fab color="accent" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
               <mat-icon>visibility</mat-icon>
             </button>
             <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
