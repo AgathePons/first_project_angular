@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
@@ -13,7 +14,7 @@ import { StagiaireTableComponent } from 'src/app/stagiaires/components/stagiaire
 })
 export class PoeDetailsComponent implements OnInit {
 
-  constructor(  
+  constructor(
     private route: ActivatedRoute,
     private poeService: PoeService,
     private router: Router
@@ -32,7 +33,7 @@ export class PoeDetailsComponent implements OnInit {
         this.poe = poe;
         this.stagiaires = poe.getTrainees();
         console.log(this.stagiaires);
-        
+
       })
   })
 
@@ -40,10 +41,19 @@ export class PoeDetailsComponent implements OnInit {
 
 public onDelete(stagiaire: Stagiaire) {
   console.log('lol');
-  
+  this.poeService.removeOneStagiaire(this.poe.getId(), stagiaire.getId())
+  .subscribe(
+    (poe: Poe) => {
+      this.poe = poe;
+      this.stagiaires.splice(
+        this.stagiaires.findIndex((s: Stagiaire) => s.getId() === stagiaire.getId()),
+        1
+      );
+    }
+  );
 }
 
-public onClick(stagiaire: Stagiaire): void {
-  this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
-}
+  public onClick(stagiaire: Stagiaire): void {
+    this.router.navigate(['/', 'stagiaire', stagiaire.getId()]);
+  }
 }
