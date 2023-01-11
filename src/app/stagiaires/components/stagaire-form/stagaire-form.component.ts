@@ -33,7 +33,7 @@ export class StagaireFormComponent implements OnInit {
 
     this.stagiaireForm = data.form;
 
-    if (this.stagiaireForm.value.id !== 0) {
+    if (this.stagiaireForm.value.id !== undefined && this.stagiaireForm.value.id !== 0) {
       this.addMode =  false;
     } else {
       this.addMode = true;

@@ -119,6 +119,37 @@ export class PoeService {
       );
   }
 
+  public addManyStagaires(id: number,ids: Array<number>): Observable<Poe> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addTrainees`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(inputPoe.beginDate);
+        poe.setEndDate(inputPoe.endDate);
+        poe.setType(inputPoe.type);
+        const trainees: Array<Stagiaire> = inputPoe.trainees
+        .map((inputStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire
+        })
+        poe.setTrainees(trainees);
+        return poe
+      })
+    );
+  }
+
   public removeOneStagiaire(poeId: number, stagiaireId: number) {
     return this.httpClient.patch<any>(
       `${this.controllerBaseUrl}/${poeId}/remove/${stagiaireId}`,
@@ -147,6 +178,6 @@ export class PoeService {
         poe.setTrainees(trainees);
         return poe
       })
-    )
+    );
   }
 }

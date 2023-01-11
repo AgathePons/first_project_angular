@@ -12,6 +12,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import {MatCardModule} from '@angular/material/card';
 import {MatSelectModule} from '@angular/material/select';
+import {MatListModule} from '@angular/material/list';
 
 
 @NgModule({
@@ -35,5 +36,6 @@ export class MaterialUiModule {
     MatMenuModule,
     MatCardModule,
     MatSelectModule,
+    MatListModule,
   ]
 }

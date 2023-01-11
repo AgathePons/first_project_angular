@@ -21,6 +21,7 @@ import { UserModule } from './user/user.module';
 import { userInterceptor } from './core/interceptors/user-interceptor.interceptor';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { StagiairePoeFormComponent } from './stagiaires/components/stagiaire-poe-form/stagiaire-poe-form.component';
+import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { StagiairePoeFormComponent } from './stagiaires/components/stagiaire-poe
     PoeFilterComponent,
     PoeFormComponent,
     PoeDetailsComponent,
-    StagiairePoeFormComponent
+    StagiairePoeFormComponent,
+    PoeAddStagiaireComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
@@ -59,7 +60,29 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-
+    {
+      path: 'poe/add',
+      component: PoeFormComponent,
+      resolve: { form: PoeResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/update/:id',
+      component: PoeFormComponent,
+      resolve: { form: PoeResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/addStagiaires/:id',
+      component: PoeAddStagiaireComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     {
       path: 'stagiaire/add',
       component: StagaireFormComponent,
@@ -83,22 +106,7 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-    {
-      path: 'poe/add',
-      component: PoeFormComponent,
-      resolve: { form: PoeResolver },
-      canActivate: [
-        HasUserGuard
-      ]
-    },
-    {
-      path: 'poe/update/:id',
-      component: PoeFormComponent,
-      resolve: { form: PoeResolver},
-      canActivate: [
-        HasUserGuard
-      ]
-    },
+
     // must be the last route of the list
     {
       path: '**', // wild card

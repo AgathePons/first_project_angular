@@ -14,14 +14,14 @@ import { StagiaireTableComponent } from 'src/app/stagiaires/components/stagiaire
 })
 export class PoeDetailsComponent implements OnInit {
 
+  public poe: Poe = new Poe();
+  public stagiaires: Array<Stagiaire> = [];
+
   constructor(
     private route: ActivatedRoute,
     private poeService: PoeService,
-    private router: Router
+    private router: Router,
     ) { }
-
-  public poe: Poe = new Poe();
-  public stagiaires: Array<Stagiaire> = [];
 
   ngOnInit(): void {
     this.route.params
@@ -29,14 +29,12 @@ export class PoeDetailsComponent implements OnInit {
       console.log((`route params: ${JSON.stringify(routeParams)}`));
       const poeId: number = routeParams['id'];
       this.poeService.findOne(poeId)
-      .subscribe( (poe: Poe) => {
+      .subscribe((poe: Poe) => {
         this.poe = poe;
         this.stagiaires = poe.getTrainees();
         console.log(this.stagiaires);
-
-      })
-  })
-
+      });
+  });
 }
 
 public onDelete(stagiaire: Stagiaire) {

@@ -1,4 +1,13 @@
 <mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      {{poe.getType()}} : {{poe.getTitle()}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
     <div class="info-bloc">
         <span class="info-bloc__key">Title: </span>
         <span class="info-bloc__value">{{ poe.getTitle() }}</span>
@@ -15,7 +24,13 @@
         <span class="info-bloc__key">End Date: </span>
         <span class="info-bloc__value">{{ poe.getEndDate() }}</span>
       </div>
-
+      <a
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/', 'poe', 'addStagiaires', poe.getId()]"
+      >
+        Ajouter des stagiaires dans cette POE
+      </a>
       <table>
         <thead>
           <tr>
@@ -63,5 +78,5 @@
         <tfoot>
         </tfoot>
       </table>
-
+  </mat-card-content>
 </mat-card>
