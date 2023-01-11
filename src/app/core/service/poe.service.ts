@@ -4,6 +4,7 @@ import { map, Observable, take } from 'rxjs';
 import { PoeDto } from 'src/app/poe/dto/poe-dto';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
+import { Stagiaire } from '../models/stagiaire';
 
 @Injectable({
   providedIn: 'root'
@@ -51,7 +52,18 @@ export class PoeService {
         poe.setBeginDate(inputPoe.beginDate);
         poe.setEndDate(inputPoe.endDate);
         poe.setType(inputPoe.type);
-        poe.setTrainees(inputPoe.trainees);
+        const trainees: Array<Stagiaire> = inputPoe.trainees
+        .map((inputStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire
+        })
+        poe.setTrainees(trainees);
         return poe
       })
     );

@@ -19,6 +19,7 @@ import { PoeFilterComponent } from './poe/components/poe-filter/poe-filter.compo
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { UserModule } from './user/user.module';
 import { userInterceptor } from './core/interceptors/user-interceptor.interceptor';
+import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { userInterceptor } from './core/interceptors/user-interceptor.intercepto
     PoeTableComponent,
     PoeFilterComponent,
     PoeFormComponent,
+    PoeDetailsComponent
   ],
   imports: [
     BrowserModule,
