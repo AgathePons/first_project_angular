@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
 import { PoeResolver } from './poe/resolvers/poe.resolver';
@@ -47,6 +48,13 @@ export class AppRoutingModule {
     {
       path: 'poes',
       component: PoeTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/:id',
+      component: PoeDetailsComponent,
       canActivate: [
         HasUserGuard
       ]

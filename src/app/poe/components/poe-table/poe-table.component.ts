@@ -80,4 +80,9 @@ export class PoeTableComponent implements OnInit {
     return poe.getEndDate() <  this.stopDate;
   }
 
+  public onDetailsPoe (id: number) {
+    this.router.navigate(['/', 'poe', id]);
+
+  }
+
 }
