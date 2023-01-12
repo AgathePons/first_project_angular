@@ -32,7 +32,7 @@ export class UserService {
   private _user: User | null = null;
   private _storageStrategy!: IStorageStrategy;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-  
+
 
   constructor(
     private router: Router,
@@ -67,8 +67,17 @@ export class UserService {
 
         // Store the User object locally
         this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user));
+        if (response === false) {
+          
+          this.hasUser$.next(false);
+          console.log('hasuser = faux', this.hasUser$.getValue());
+        
+        } else {
 
-        this.hasUser$.next(true);
+          this.hasUser$.next(true);
+          console.log('hasuser = true', this.hasUser$.getValue());
+
+        }
         return response;
       })
     )
