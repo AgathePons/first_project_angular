@@ -2,6 +2,9 @@
 <mat-card>
   <mat-card-header>
     <mat-card-title>
+      <button mat-mini-fab color="primary" (click)="onBackButton()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
       {{poe.getType()}} : {{poe.getTitle()}}
     </mat-card-title>
     <mat-card-subtitle>
@@ -10,6 +13,7 @@
   </mat-card-header>
   <mat-card-content>
     <p>Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaires</p>
+    <p>Dans cette liste, il y a {{stagiaires.length}} stagiaires</p>
     <!-- <mat-list>
       <mat-list-item *ngFor="let stagiaire of poe.getTrainees()">
         {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}
@@ -21,7 +25,7 @@
         color="primary"
         class="btn add-btn"
         [disabled]="stagairesIdToAdd.length === 0"
-        (click)="onAddManyStagiaire()"
+        (click)="onAddManyStagiaires()"
       >
         Add {{stagairesIdToAdd.length}} Stagiaires 💚
       </button>

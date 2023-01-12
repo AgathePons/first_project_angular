@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Location } from '@angular/common';
 import { MatSelectionListChange } from '@angular/material/list';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { elementAt } from 'rxjs';
@@ -23,6 +24,7 @@ export class PoeAddStagiaireComponent implements OnInit {
     private poeService: PoeService,
     private stagiaireService: StagiaireService,
     private router: Router,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -51,9 +53,15 @@ export class PoeAddStagiaireComponent implements OnInit {
     console.log('>> ids to add:', this.stagairesIdToAdd);
   }
 
-  public onAddManyStagiaire(): void {
-    console.log('clic');
-    this.poeService.addManyStagaires(this.poe.getId(), this.stagairesIdToAdd).subscribe();
-    this.router.navigate(['/', 'poe', 'detail', this.poe.getId()]);
+  public onAddManyStagiaires(): void {
+    console.log('onAddManyStagiaires');
+    this.poeService.addManyStagaires(this.poe.getId(), this.stagairesIdToAdd).subscribe((poe: Poe) => {
+      this.poe = poe;
+      this.router.navigate(['/', 'poe', 'detail', this.poe.getId()]);
+    });
+  }
+
+  public onBackButton(): void {
+    this.location.back();
   }
 }
