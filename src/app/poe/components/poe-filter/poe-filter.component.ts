@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { PoeService } from 'src/app/core/service/poe.service';
 
 @Component({
   selector: 'app-poe-filter',
@@ -7,12 +8,14 @@ import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 })
 export class PoeFilterComponent implements OnInit {
 
- @Input() public filterDate: Date | null = null;
+  @Input() public filterDate: Date | null = null;
   @Output() public onChangeFilter: EventEmitter<Date | null> = new EventEmitter<Date | null>();
 
   private buttonMap: Map<string, boolean> = new Map<string, boolean>();
 
-  constructor() { }
+  constructor( 
+    private poeService: PoeService
+  ) { }
 
   ngOnInit(): void {
     this.buttonMap.set('btnAll', true);
@@ -37,7 +40,7 @@ export class PoeFilterComponent implements OnInit {
 
   public changeButtonState(button: string): void {
     this.buttonMap.forEach((_value: boolean, key: string) => {
-      if(key === button) {
+      if (key === button) {
         this.buttonMap.set(key, true);
       } else {
         this.buttonMap.set(key, false)
@@ -47,9 +50,14 @@ export class PoeFilterComponent implements OnInit {
     if (button === 'btnAll') {
       this.onChangeFilter.emit(null);
     } else if (button === 'btnGT1y') {
-      this.onChangeFilter.emit(new Date('2000-02-03T23:00:00.000+00:00'));
-    } else {
-      this.onChangeFilter.emit(new Date(2021, 0, 31));
+      this.onChangeFilter.emit(this.poeService.dateFilter(12));
+    }
+    else if (button === 'btnGT6m') {
+      this.onChangeFilter.emit(this.poeService.dateFilter(6));
+    }
+    else {
+      this.onChangeFilter.emit(this.poeService.dateFilter(1));
     }
   }
+
 }
