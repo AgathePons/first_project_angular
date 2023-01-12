@@ -1,0 +1,53 @@
+<ng-container *ngIf="surveyForm">
+
+  <form [formGroup]="surveyForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': surveyForm.valid}">
+
+      <mat-form-field>
+        <input
+          matInput
+          id="title"
+          type="text"
+          formControlName="title"
+          [ngClass]="{'valid': true}"
+          placeholder="Title"
+        >
+
+        <mat-error *ngIf="c['title'].errors && c['title'].touched">
+          Le titre du questionnaire est obligatoire
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Level</mat-label>
+        <mat-select matNativeControl required formControlName="level">
+          <mat-option value="ONE_MONTH">1 mois</mat-option>
+          <mat-option value="SIX_MONTHS">6 mois</mat-option>
+          <mat-option value="ONE_YEAR">1 an</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Type</mat-label>
+        <mat-select matNativeControl required formControlName="poeType">
+          <mat-option value="POEI">POEI</mat-option>
+          <mat-option value="POEC">POEC</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div class="btn-list">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!surveyForm.valid"
+          class="btn add-btn"
+        >
+          {{ addMode ? 'Add 💚' : 'Update 💚'}}
+        </button>
+        <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+          Cancel 💀
+        </button>
+      </div>
+  </form>
+
+  </ng-container>

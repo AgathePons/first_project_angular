@@ -17,6 +17,7 @@ export class StagaireFormComponent implements OnInit {
 
   public stagiaireForm!: FormGroup;
   public addMode: boolean = true;
+  public stagiaireTo!: Stagiaire;
 
   constructor(
     private stagiairesService: StagiaireService,
@@ -32,7 +33,7 @@ export class StagaireFormComponent implements OnInit {
 
     this.stagiaireForm = data.form;
 
-    if (this.stagiaireForm.value.id !== 0) {
+    if (this.stagiaireForm.value.id !== undefined && this.stagiaireForm.value.id !== 0) {
       this.addMode =  false;
     } else {
       this.addMode = true;
@@ -62,7 +63,11 @@ export class StagaireFormComponent implements OnInit {
       console.log('add update method in service');
       subscription = this.stagiairesService.updateStagiaire(dto);
     }
-    subscription.subscribe(() => this.goHome());
+    subscription.subscribe((stagiaire: Stagiaire) => {
+      //this.goHome()
+      console.log(stagiaire);
+      this.stagiaireTo = stagiaire;
+    });
   }
 
   public goHome(): void {

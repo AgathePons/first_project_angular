@@ -29,6 +29,7 @@ export class StagiaireResolver implements Resolve<FormGroup> {
     if (id === 0) {
       stagiaire = new Stagiaire();
       form = this.formBuilderService.build(stagiaire).getForm();
+
       return of(form);
     } else {
       return this.stagiaireService.findOne(id)

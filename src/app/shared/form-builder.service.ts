@@ -5,6 +5,7 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { Poe } from '../core/models/poe';
+import { Survey } from '../core/models/survey';
 
 @Injectable({
   providedIn: 'root'
@@ -14,6 +15,7 @@ export class FormBuilderService {
   private form!: FormGroup;
   private stagiaire: Stagiaire = new Stagiaire();
   private poe: Poe = new Poe();
+  private survey: Survey = new Survey();
   private updateMode: boolean = false;
 
   constructor(
@@ -25,7 +27,6 @@ export class FormBuilderService {
     this.locale = 'fr';
     this.adapter.setLocale(this.locale);
   }
-
 
   public getForm(): FormGroup {
     return this.form;
@@ -58,7 +59,6 @@ export class FormBuilderService {
         this.stagiaire.getBirthDate(),
       ]
     });
-
     // Add a control with id value so form.value = {id: 1, ...}
     if(this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.stagiaire.getId())
@@ -94,7 +94,34 @@ export class FormBuilderService {
 
     // Add a control with id value so form.value = {id: 1, ...}
     if(this.updateMode) {
-      const idControl: AbstractControl = new FormControl(this.poe.getId())
+      const idControl: AbstractControl = new FormControl(this.poe.getId());
+      this.form.addControl('id', idControl);
+    }
+
+    return this;
+  }
+
+  public buildSurvey(survey: Survey): FormBuilderService {
+    this.survey = survey;
+    if (survey.getId() !== 0) {
+      this.updateMode = true;
+    }
+    this.form = this.formBuilder.group({
+      title: [
+        this.survey.getTitle(),
+        [Validators.required]
+      ],
+      level: [
+        this.survey.getLevel(),
+        [Validators.required]
+      ],
+      poeType: [
+        this.survey.getPoeType()
+      ],
+    });
+
+    if(this.updateMode) {
+      const idControl: AbstractControl = new FormControl(this.poe.getId());
       this.form.addControl('id', idControl);
     }
 

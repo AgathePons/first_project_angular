@@ -103,6 +103,11 @@ export class PoeTableComponent implements OnInit {
     
   }
 
- 
+
+  public onDetailsPoe (id: number) {
+    this.router.navigate(['/', 'poe', id]);
+
+  }
+
 
 }
