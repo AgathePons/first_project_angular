@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Location } from '@angular/common';
 import { MatSelectionListChange } from '@angular/material/list';
 import { ActivatedRoute, Params, Router } from '@angular/router';
-import { elementAt } from 'rxjs';
 import { Poe } from 'src/app/core/models/poe';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { PoeService } from 'src/app/core/service/poe.service';
@@ -34,17 +33,18 @@ export class PoeAddStagiaireComponent implements OnInit {
       this.poeService.findOne(poeId)
       .subscribe((poe: Poe) => {
         this.poe = poe;
-      })
-    });
-    this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
-      // all stagiaires
-      const allStagiaires = stagiaires;
-      // filtered stagiaires
-      const filteredStagiaires = allStagiaires.filter((stagiaireToCheck: Stagiaire) => {
-        return !this.poe.getTrainees().find(elem => elem.getId() === stagiaireToCheck.getId());
+        this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
+          // all stagiaires
+          const allStagiaires = stagiaires;
+          // filtered stagiaires
+          const filteredStagiaires = allStagiaires.filter((stagiaireToCheck: Stagiaire) => {
+            return !this.poe.getTrainees().find(elem => elem.getId() === stagiaireToCheck.getId());
+          });
+          this.stagiaires = filteredStagiaires;
+        });
       });
-      this.stagiaires = filteredStagiaires;
-    })
+    });
+
   }
 
   public onListSelectionChange(obj: MatSelectionListChange): void {
