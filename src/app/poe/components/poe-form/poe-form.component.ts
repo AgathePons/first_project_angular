@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,6 +22,7 @@ export class PoeFormComponent implements OnInit {
     private formBuilderService: FormBuilderService,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -50,11 +52,11 @@ export class PoeFormComponent implements OnInit {
     } else {
       subscription = this.poeService.updatePoe(dto);
     }
-    subscription.subscribe(() => this.goHome());
+    subscription.subscribe(() => this.goBack());
   }
 
-  public goHome(): void {
-    this.router.navigate(['/', 'home']);
+  public goBack(): void {
+    this.location.back();
   }
 
 }
