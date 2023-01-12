@@ -22,6 +22,7 @@ import { userInterceptor } from './core/interceptors/user-interceptor.intercepto
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { StagiairePoeFormComponent } from './stagiaires/components/stagiaire-poe-form/stagiaire-poe-form.component';
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
+import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 
 @NgModule({
   declarations: [
@@ -37,7 +38,8 @@ import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe
     PoeFormComponent,
     PoeDetailsComponent,
     StagiairePoeFormComponent,
-    PoeAddStagiaireComponent
+    PoeAddStagiaireComponent,
+    SurveyTableComponent
   ],
   imports: [
     BrowserModule,

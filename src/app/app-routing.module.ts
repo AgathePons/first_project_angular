@@ -9,6 +9,7 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
@@ -106,7 +107,13 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-
+    {
+      path: 'surveys',
+      component: SurveyTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     // must be the last route of the list
     {
       path: '**', // wild card
