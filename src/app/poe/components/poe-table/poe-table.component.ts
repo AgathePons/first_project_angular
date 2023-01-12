@@ -13,8 +13,12 @@ import { PoeService } from 'src/app/core/service/poe.service';
 export class PoeTableComponent implements OnInit {
 
 
-  public stopDate: Date | null = null;
-  public poes: Array<Poe> = []; 
+  public stopDate: String | null = null;
+  public filterDate: Date = new Date();
+  public poes: Array<Poe> = [];
+  public poeOneMonth: Date = this.poeService.dateFilter(1);
+  public poeSixMonths: Date = this.poeService.dateFilter(6);
+  public poeOneYear: Date = this.poeService.dateFilter(12);
 
 
   public constructor(
@@ -31,14 +35,14 @@ export class PoeTableComponent implements OnInit {
 
 
 
-  public filterChanged(event: Date | null): void {
+  public filterChanged(event: String | null): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.stopDate = event;
     // console.log('La stopDate est : ', this.stopDate);
-    
+
   }
 
-  
+
 
   public onEdit(poe: Poe): void {
     this.router.navigate(['/', 'poe', 'update', poe.getId()]);
@@ -62,27 +66,48 @@ export class PoeTableComponent implements OnInit {
   }
 
   public changeView(poe: Poe): boolean {
+
+    // console.log('stopdate = ', this.stopDate );
+    // console.log('datefilter1 = ', this.poeService.dateFilter(1));
+    // console.log('datefilter6 = ', this.poeService.dateFilter(6));
+    // console.log('datefilter12 = ', this.poeService.dateFilter(12));
+    // console.log('result égalite filtre1', this.stopDate === 'oneMonth');
+
+
+    
+    
+
     if (this.stopDate === null) {
       return true;
+
     }
 
-    if (this.stopDate.getDate() === 31) {
-      // console.log('cest la stopDate ', this.stopDate);
-      // console.log('cest la date de fin de poe ', poe.getEndDate());
-      if (poe.getEndDate() > this.stopDate) {
-        console.log(`${poe.getEndDate()} est superieure à ${this.stopDate}`);
-        return true;
-      }
-      console.log(`${poe.getEndDate()} est inférieure à ${this.stopDate}`);
-        return false;
+    // if (this.stopDate === this.dateFilter(1)) {
+    else if (this.stopDate === 'oneMonth') {
+      console.log('filtre 1 mois');
+      
+    return poe.getEndDate() < this.poeOneMonth && poe.getEndDate() > this.poeSixMonths
+      // return false;
     }
+    else if (this.stopDate === 'sixMonths') {
+      console.log('filtre 6 mois');
+      return poe.getEndDate() < this.poeSixMonths && poe.getEndDate() > this.poeOneYear
     
-    return poe.getEndDate() <  this.stopDate;
+    }
+    else if (this.stopDate === 'oneYear') {
+    console.log('filtre 12 mois');
+    
+      return poe.getEndDate() < this.poeOneYear;
+    }
+    return false;
+    
   }
+
 
   public onDetailsPoe (id: number) {
     this.router.navigate(['/', 'poe', id]);
 
   }
+
 
 }

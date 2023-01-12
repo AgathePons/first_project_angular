@@ -29,8 +29,8 @@ export class PoeService {
           const poe: Poe = new Poe();
           poe.setId(inputPoe.id);
           poe.setTitle(inputPoe.title);
-          poe.setBeginDate(inputPoe.beginDate);
-          poe.setEndDate(inputPoe.endDate);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
           poe.setType(inputPoe.type);
           poe.setTrainees(inputPoe.trainees);
           return poe;
@@ -117,6 +117,15 @@ export class PoeService {
       `${this.controllerBaseUrl}/${poe.getId()}`,
       { observe: 'response' }
       );
+  }
+
+
+  public dateFilter(mois: number): Date {
+    var currentDate = new Date();
+    currentDate.setMonth(currentDate.getMonth() - mois);
+    console.log('c est la date du filtre : ', currentDate);
+    
+    return currentDate;
   }
 
   public addManyStagaires(id: number,ids: Array<number>): Observable<Poe> {
