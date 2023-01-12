@@ -9,7 +9,9 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
+import { SurveyResolver } from './survey/resolvers/survey.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
@@ -110,6 +112,14 @@ export class AppRoutingModule {
     {
       path: 'surveys',
       component: SurveyTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/add',
+      component: SurveyFormComponent,
+      resolve: { form: SurveyResolver },
       canActivate: [
         HasUserGuard
       ]

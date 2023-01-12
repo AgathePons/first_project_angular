@@ -83,7 +83,7 @@ export class SurveyService {
     );
   }
 
-  public updateSurvey(id: number, survey: Survey): Observable<Survey> {
+  public updateSurvey(id: number, survey: SurveyDto): Observable<Survey> {
     return this.httpClient.put<any>(
       `${this.controllerBaseUrl}/${id}`, survey
     )
