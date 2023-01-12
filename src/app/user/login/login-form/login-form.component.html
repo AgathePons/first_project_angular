@@ -21,7 +21,7 @@
     <mat-label>Stay connected</mat-label>
     <mat-slide-toggle formControlName="stayConnected"></mat-slide-toggle>
   </div>
-
+  
   <div class="btn-list">
     <button
       class="btn valid-btn"
@@ -40,4 +40,6 @@
     No account ? Create one
     </button>
   </div>
+	<div style="color : red" *ngIf='error'>{{error}}</div>
+
 </form>
