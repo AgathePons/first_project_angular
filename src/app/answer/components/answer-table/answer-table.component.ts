@@ -1,3 +1,4 @@
+import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Answer } from 'src/app/core/models/answer';
@@ -20,6 +21,22 @@ export class AnswerTableComponent implements OnInit {
   ngOnInit(): void {
     this.answerService.findAll().subscribe((answers: Answer[]) => {
       this.answers = answers;
+    })
+  }
+
+  public onDelete(answer: Answer): void {
+    this.answerService.removeOne(answer).subscribe({
+      next: (_response: HttpResponse<any>) => {
+        this.answers.splice(
+          this.answers.findIndex((s: Answer) => s.getId() === answer.getId()),
+          1
+        )
+
+      },
+      error: (error: any) => {
+        // Something went wrong, deal with it
+      }
+
     })
   }
 

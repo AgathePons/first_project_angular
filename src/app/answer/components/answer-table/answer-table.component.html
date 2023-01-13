@@ -21,13 +21,17 @@
         <tr>
         <td class="center-cell">{{ answer.getId() }}</td>
         <td> {{ answer.getText() }} </td>
+        <td class="center-cell">
+          <button mat-mini-fab color="warn" type="button" (click)="onDelete(answer)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </tr>
     </ng-container>
     </tbody>
     <tfoot>
       <tr>
-        <td colspan="2" class="right-cell"></td>
-  
+        <td colspan="3" class="right-cell"></td>
       </tr>
     </tfoot>
   </table>
