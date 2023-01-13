@@ -25,9 +25,13 @@
         <td class="center-cell">{{ answer.getId() }}</td>
         <td> {{ answer.getText() }} </td>
         <td class="center-cell">
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(answer)">
+            <mat-icon>edit</mat-icon>
+          </button>
           <button mat-mini-fab color="warn" type="button" (click)="onDelete(answer)" >
             <mat-icon>delete</mat-icon>
           </button>
+          
         </td>
       </tr>
     </ng-container>

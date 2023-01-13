@@ -24,6 +24,10 @@ export class AnswerTableComponent implements OnInit {
     })
   }
 
+  public onEdit(answer: Answer): void {
+    this.router.navigate(['/', 'answer', 'update', answer.getId()]);
+  }
+
   public onDelete(answer: Answer): void {
     this.answerService.removeOne(answer).subscribe({
       next: (_response: HttpResponse<any>) => {

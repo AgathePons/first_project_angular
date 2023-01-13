@@ -158,6 +158,14 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
+    {
+      path: 'answer/update/:id',
+      component: AnswerFormComponent,
+      resolve: { form: AnswerResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     // must be the last route of the list
     {
       path: '**', // wild card
