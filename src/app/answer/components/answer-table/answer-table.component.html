@@ -1,0 +1,44 @@
+<a
+  mat-raised-button
+  color="accent"
+  [routerLink]="['/', 'answer', 'add']">
+  Ajouter une réponse
+</a>
+
+<table>
+    <thead>
+      <tr>
+        <th class="center-cell">
+          #
+        </th>
+        <th class="left-cell">
+          Réponse
+        </th>
+        <th>
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let answer of answers">
+        <tr>
+        <td class="center-cell">{{ answer.getId() }}</td>
+        <td> {{ answer.getText() }} </td>
+        <td class="center-cell">
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(answer)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" type="button" (click)="onDelete(answer)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+          
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="3" class="right-cell"></td>
+      </tr>
+    </tfoot>
+  </table>

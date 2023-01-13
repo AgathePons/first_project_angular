@@ -25,6 +25,8 @@ import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
+import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
+import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +45,9 @@ import { SurveyDetailsComponent } from './survey/components/survey-details/surve
     PoeAddStagiaireComponent,
     SurveyTableComponent,
     SurveyFormComponent,
-    SurveyDetailsComponent
+    SurveyDetailsComponent,
+    AnswerTableComponent,
+    AnswerFormComponent
   ],
   imports: [
     BrowserModule,
