@@ -26,6 +26,7 @@ export class StagiaireTableComponent implements OnInit {
   public idOrder: boolean = false;
   searchFN = '';
   searchLN = '';
+  filter = false;
 
   public constructor(
     private stagiaireService: StagiaireService,
@@ -149,5 +150,16 @@ export class StagiaireTableComponent implements OnInit {
         val.getFirstName().toLowerCase().includes(value.toLowerCase())
       );
     }
+  }
+  changeBooleanState() {
+    console.log('changebutton call');
+    
+    if (this.filter) 
+    { this.filter = false}
+    else {
+      this.filter = true
+    }
+    
+
   }
 }

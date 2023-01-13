@@ -1,19 +1,23 @@
-<a
-  mat-raised-button
-  color="accent"
-  [routerLink]="['/', 'stagiaire', 'add']"
->
+<a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
   Ajouter Stagiaire
 </a>
-<div class="search">
-  <input class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Filter by first name"
-    [(ngModel)]="searchFN" (input)="searchByFirstName(searchFN)" />
-    <input class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Filter by last name"
-    [(ngModel)]="searchLN" (input)="searchByLastName(searchLN)" />
+<div>
+  <button  (click)="changeBooleanState( )">Filtres</button>
+  <div>
+    <div *ngIf="filter" class="search">
+      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="searchFN"
+        (input)="searchByFirstName(searchFN)" />
+      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="searchLN"
+        (input)="searchByLastName(searchLN)" />
+        <mat-form-field appearance="fill">
+          <mat-label>Année de naissance</mat-label>
+          <mat-select matNativeControl required formControlName="type" >
+            <mat-option value="POEI" *ngFor="let stagiaire of stagiaires">{{ stagiaire.getBirthDate().getFullYear() }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+    </div>
+  </div>
 </div>
-  
 <table>
   <thead>
     <tr>
@@ -22,11 +26,11 @@
       </th>
       <th class="left-cell" id="sort-button" *ngIf="idOrder" (click)="sortByIdDesc(stagiaires)">
         # &darr;
-        
+
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
         Firstname &uarr;
-        
+
       </th>
       <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
         Firstname &darr;
@@ -47,21 +51,14 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let stagiaire of stagiaires">
-        <tr
-          *ngIf="(stopDate === null) ?
+      <tr *ngIf="(stopDate === null) ?
             true : stopDate.getDate() === 31 ?
-              stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate"
-
-        >
+              stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
           <!-- ElementRef -->
-          <span
-            class="name-puce"
-            appBubble
-            [config]="bubbleConfig"
-            (click)="onClick(stagiaire)"
-          ><!-- (click)="onClick(stagiaire)" -->
+          <span class="name-puce" appBubble [config]="bubbleConfig"
+            (click)="onClick(stagiaire)"><!-- (click)="onClick(stagiaire)" -->
             {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
           </span>
           <!-- /ElementRef -->
@@ -92,8 +89,3 @@
     </tr>
   </tfoot>
 </table>
-
-
-
-
-
