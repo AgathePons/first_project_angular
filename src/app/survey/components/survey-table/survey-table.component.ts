@@ -24,6 +24,10 @@ export class SurveyTableComponent implements OnInit {
     })
   }
 
+  public onEdit(survey: Survey): void {
+    this.router.navigate(['/', 'survey', 'update', survey.getId()]);
+  }
+
   public onDelete(survey: Survey): void {
     this.surveyService.removeOne(survey).subscribe({
       next: (_response: HttpResponse<any>) => {

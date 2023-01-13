@@ -64,13 +64,12 @@ export class StagaireFormComponent implements OnInit {
       subscription = this.stagiairesService.updateStagiaire(dto);
     }
     subscription.subscribe((stagiaire: Stagiaire) => {
-      //this.goHome()
-      console.log(stagiaire);
       this.stagiaireTo = stagiaire;
+      this.goBack()
     });
   }
 
-  public goHome(): void {
+  public goBack(): void {
     this.router.navigate(['/', 'home']);
   }
 }

@@ -83,9 +83,9 @@ export class SurveyService {
     );
   }
 
-  public updateSurvey(id: number, survey: SurveyDto): Observable<Survey> {
+  public updateSurvey(survey: SurveyDto): Observable<Survey> {
     return this.httpClient.put<any>(
-      `${this.controllerBaseUrl}/${id}`, survey
+      `${this.controllerBaseUrl}/${survey.id}`, survey
     )
     .pipe(
       take(1),
