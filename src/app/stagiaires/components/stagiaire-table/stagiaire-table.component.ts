@@ -24,7 +24,8 @@ export class StagiaireTableComponent implements OnInit {
   public lastNameOrder: boolean = false;
   public firstNameOrder: boolean = false;
   public idOrder: boolean = false;
-  searchTerm = '';
+  searchFN = '';
+  searchLN = '';
 
   public constructor(
     private stagiaireService: StagiaireService,
@@ -38,7 +39,7 @@ export class StagiaireTableComponent implements OnInit {
       this.stagiaires = stagiaires;
       this.allStagiaires = this.stagiaires;
       console.log(this.stagiaires);
-      
+
     })
     this.handleDetailService.isDetailHidden.subscribe((isDetailHidden: boolean) => {
       this.isDetailHidden = isDetailHidden;
@@ -98,7 +99,7 @@ export class StagiaireTableComponent implements OnInit {
     this.firstNameOrder = false
     this.stagiaireService.sortByFirstNameDesc(stagiaire)
   }
-  
+
   public sortById(stagiaire: Stagiaire[]): void {
     this.idOrder = true
     this.stagiaireService.sortById(stagiaire)
@@ -107,10 +108,10 @@ export class StagiaireTableComponent implements OnInit {
     this.idOrder = false
     this.stagiaireService.sortByIdDesc(stagiaire)
   }
-  
+
   public sortByLastName(stagiaire: Stagiaire[]): void {
     console.log('call sortBylastName');
-    
+
     this.lastNameOrder = true
     this.stagiaireService.sortByLastName(stagiaire)
   }
@@ -122,8 +123,31 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   searchByLastName(value: string): void {
-    this.stagiaires = this.allStagiaires.filter((val) =>
-      val.getLastName().toLowerCase().includes(value.toLowerCase())
-    );
+    // this.searchFN = '';
+    if (this.searchFN !== '') {
+      this.stagiaires = this.allStagiaires.filter((val) =>
+        val.getLastName().toLowerCase().includes(value.toLowerCase())
+      ).filter((val) =>
+        val.getFirstName().toLowerCase().includes(this.searchFN.toLowerCase())
+      )
+    } else {
+      this.stagiaires = this.allStagiaires.filter((val) =>
+        val.getLastName().toLowerCase().includes(value.toLowerCase())
+      );
+    }
+  }
+
+  searchByFirstName(value: string): void {
+    if (this.searchLN !== '') {
+      this.stagiaires = this.allStagiaires.filter((val) =>
+        val.getFirstName().toLowerCase().includes(value.toLowerCase())
+      ).filter((val) =>
+        val.getLastName().toLowerCase().includes(this.searchLN.toLowerCase())
+      )
+    } else {
+      this.stagiaires = this.allStagiaires.filter((val) =>
+        val.getFirstName().toLowerCase().includes(value.toLowerCase())
+      );
+    }
   }
 }

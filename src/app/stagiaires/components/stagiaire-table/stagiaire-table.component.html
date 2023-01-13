@@ -6,11 +6,14 @@
   Ajouter Stagiaire
 </a>
 <div class="search">
-  <h3>Search country by last name : </h3>
   <input class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Filter by country name"
-    [(ngModel)]="searchTerm" (input)="searchByLastName(searchTerm)" />
+    placeholder="Filter by first name"
+    [(ngModel)]="searchFN" (input)="searchByFirstName(searchFN)" />
+    <input class="searchTerm" type="text" name="searchTerm" 
+    placeholder="Filter by last name"
+    [(ngModel)]="searchLN" (input)="searchByLastName(searchLN)" />
 </div>
+  
 <app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
 <table>
   <thead>
@@ -20,9 +23,11 @@
       </th>
       <th class="left-cell" id="sort-button" *ngIf="idOrder" (click)="sortByIdDesc(stagiaires)">
         # &darr;
+        
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
         Firstname &uarr;
+        
       </th>
       <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
         Firstname &darr;
