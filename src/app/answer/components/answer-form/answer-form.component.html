@@ -1,1 +1,37 @@
-<p>answer-form works!</p>
+<ng-container *ngIf="answerForm">
+
+<form [formGroup]="answerForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': answerForm.valid}">
+
+    <mat-form-field>
+        <input
+          matInput
+          id="text"
+          type="text"
+          formControlName="text"
+          [ngClass]="{'valid': true}"
+          placeholder="Réponse"
+        >
+
+        <mat-error *ngIf="c['title'].errors && c['title'].touched">
+          Une réponse est obligatoire.
+        </mat-error>
+      </mat-form-field>
+
+      <div class="btn-list">
+        <button
+          mat-raised-button
+          color="primary"
+          [disabled]="!answerForm.valid"
+          class="btn add-btn"
+        >
+          {{ addMode ? 'Add 💚' : 'Update 💚'}}
+        </button>
+        <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+          Cancel 💀
+        </button>
+      </div>
+  </form>
+
+  </ng-container>
+
+

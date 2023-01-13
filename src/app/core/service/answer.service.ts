@@ -64,9 +64,9 @@ export class AnswerService {
       );
     }
 
-    public updateAnswer(id: number, answer: AnswerDto): Observable<Answer> {
+    public updateAnswer(answer: AnswerDto): Observable<Answer> {
       return this.httpClient.put<any>(
-        `${this.controllerBaseUrl}/${id}`,
+        `${this.controllerBaseUrl}/${answer.id}`,
         answer
         )
         .pipe(
