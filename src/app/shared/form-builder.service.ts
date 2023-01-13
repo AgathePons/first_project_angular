@@ -121,7 +121,7 @@ export class FormBuilderService {
     });
 
     if(this.updateMode) {
-      const idControl: AbstractControl = new FormControl(this.poe.getId());
+      const idControl: AbstractControl = new FormControl(this.survey.getId());
       this.form.addControl('id', idControl);
     }
 

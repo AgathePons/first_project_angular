@@ -124,6 +124,14 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
+    {
+      path: 'survey/update/:id',
+      component: SurveyFormComponent,
+      resolve: { form: SurveyResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     // must be the last route of the list
     {
       path: '**', // wild card
