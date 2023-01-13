@@ -1,0 +1,56 @@
+<a
+  mat-raised-button
+  color="accent"
+  [routerLink]="['/', 'survey', 'add']"
+>
+  Ajouter un questionnaire
+</a>
+
+<table>
+  <thead>
+    <tr>
+      <th class="center-cell">
+        #
+      </th>
+      <th class="left-cell">
+        Title
+      </th>
+      <th class="left-cell">
+        Level
+      </th>
+      <th class="left-cell">
+        POE Type
+      </th>
+      <th>
+        &nbsp;
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+   <ng-container *ngFor="let survey of surveys">
+        <tr>
+        <td class="center-cell">{{ survey.getId() }}</td>
+        <td> {{ survey.getTitle() }} </td>
+        <td>{{ survey.getLevel() }}</td>
+        <td>{{ survey.getPoeType() }}</td>
+        <td class="center-cell">
+          <button mat-mini-fab color="primary" type="button" [routerLink]="['/','survey', 'detail', survey.getId()]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(survey)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" type="button" (click)="onDelete(survey)" >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="5" class="right-cell"></td>
+
+    </tr>
+  </tfoot>
+</table>

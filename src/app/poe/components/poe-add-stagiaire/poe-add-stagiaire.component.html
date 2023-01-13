@@ -1,0 +1,33 @@
+
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-mini-fab color="primary" (click)="onBackButton()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      {{poe.getType()}} : {{poe.getTitle()}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <p>Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaires</p>
+    <p>Dans cette liste, il y a {{stagiaires.length}} stagiaires</p>
+
+    <button
+        mat-raised-button
+        color="primary"
+        class="btn add-btn"
+        [disabled]="stagairesIdToAdd.length === 0"
+        (click)="onAddManyStagiaires()"
+      >
+        Add {{stagairesIdToAdd.length}} Stagiaires 💚
+      </button>
+    <mat-selection-list #stagairesSelected (selectionChange)="onListSelectionChange($event)">
+      <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()">
+        {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}
+      </mat-list-option>
+    </mat-selection-list>
+  </mat-card-content>
+</mat-card>

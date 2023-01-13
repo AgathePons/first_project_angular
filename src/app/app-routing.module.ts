@@ -1,5 +1,10 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
+import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
+import { AnswerResolver } from './answer/resolver/answer.resolver';
+import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
+import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
 import { PoeResolver } from './poe/resolvers/poe.resolver';
@@ -7,6 +12,10 @@ import { StagaireFormComponent } from './stagiaires/components/stagaire-form/sta
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
+import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
+import { SurveyResolver } from './survey/resolvers/survey.resolver';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
@@ -51,7 +60,36 @@ export class AppRoutingModule {
         HasUserGuard
       ]
     },
-
+    {
+      path: 'poe/detail/:id',
+      component: PoeDetailsComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/add',
+      component: PoeFormComponent,
+      resolve: { form: PoeResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/update/:id',
+      component: PoeFormComponent,
+      resolve: { form: PoeResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/addStagiaires/:id',
+      component: PoeAddStagiaireComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
     {
       path: 'stagiaire/add',
       component: StagaireFormComponent,
@@ -76,17 +114,54 @@ export class AppRoutingModule {
       ]
     },
     {
-      path: 'poe/add',
-      component: PoeFormComponent,
-      resolve: { form: PoeResolver },
+      path: 'surveys',
+      component: SurveyTableComponent,
       canActivate: [
         HasUserGuard
       ]
     },
     {
-      path: 'poe/update/:id',
-      component: PoeFormComponent,
-      resolve: { form: PoeResolver},
+      path: 'survey/detail/:id',
+      component: SurveyDetailsComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/add',
+      component: SurveyFormComponent,
+      resolve: { form: SurveyResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/update/:id',
+      component: SurveyFormComponent,
+      resolve: { form: SurveyResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answers',
+      component: AnswerTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answer/add',
+      component: AnswerFormComponent,
+      resolve: { form: AnswerResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answer/update/:id',
+      component: AnswerFormComponent,
+      resolve: { form: AnswerResolver},
       canActivate: [
         HasUserGuard
       ]

@@ -4,6 +4,7 @@ import { map, Observable, take } from 'rxjs';
 import { PoeDto } from 'src/app/poe/dto/poe-dto';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
+import { Stagiaire } from '../models/stagiaire';
 
 @Injectable({
   providedIn: 'root'
@@ -28,8 +29,8 @@ export class PoeService {
           const poe: Poe = new Poe();
           poe.setId(inputPoe.id);
           poe.setTitle(inputPoe.title);
-          poe.setBeginDate(inputPoe.beginDate);
-          poe.setEndDate(inputPoe.endDate);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
           poe.setType(inputPoe.type);
           poe.setTrainees(inputPoe.trainees);
           return poe;
@@ -51,7 +52,18 @@ export class PoeService {
         poe.setBeginDate(inputPoe.beginDate);
         poe.setEndDate(inputPoe.endDate);
         poe.setType(inputPoe.type);
-        poe.setTrainees(inputPoe.trainees);
+        const trainees: Array<Stagiaire> = inputPoe.trainees
+        .map((inputStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire
+        })
+        poe.setTrainees(trainees);
         return poe
       })
     );
@@ -105,5 +117,76 @@ export class PoeService {
       `${this.controllerBaseUrl}/${poe.getId()}`,
       { observe: 'response' }
       );
+  }
+
+
+  public dateFilter(mois: number): Date {
+    var currentDate = new Date();
+    currentDate.setMonth(currentDate.getMonth() - mois);
+    console.log('c est la date du filtre : ', currentDate);
+    
+    return currentDate;
+  }
+
+  public addManyStagaires(id: number,ids: Array<number>): Observable<Poe> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addTrainees`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(inputPoe.beginDate);
+        poe.setEndDate(inputPoe.endDate);
+        poe.setType(inputPoe.type);
+        const trainees: Array<Stagiaire> = inputPoe.trainees
+        .map((inputStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire
+        })
+        poe.setTrainees(trainees);
+        return poe
+      })
+    );
+  }
+
+  public removeOneStagiaire(poeId: number, stagiaireId: number) {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${poeId}/remove/${stagiaireId}`,
+      null
+    )
+    .pipe(
+      take(1),
+      map((inputPoe: any) => {
+        const poe: Poe = new Poe();
+        poe.setId(inputPoe.id);
+        poe.setTitle(inputPoe.title);
+        poe.setBeginDate(inputPoe.beginDate);
+        poe.setEndDate(inputPoe.endDate);
+        poe.setType(inputPoe.type);
+        const trainees: Array<Stagiaire> = inputPoe.trainees
+        .map((inputStagiaire: any) => {
+          const stagiaire: Stagiaire = new Stagiaire();
+          stagiaire.setId(inputStagiaire.id);
+          stagiaire.setLastName(inputStagiaire.lastName);
+          stagiaire.setFirstName(inputStagiaire.firstName);
+          stagiaire.setEmail(inputStagiaire.email);
+          stagiaire.setPhoneNumber(inputStagiaire.phoneNumber);
+          stagiaire.setBirthDate(new Date(inputStagiaire.birthDate));
+          return stagiaire
+        })
+        poe.setTrainees(trainees);
+        return poe
+      })
+    );
   }
 }

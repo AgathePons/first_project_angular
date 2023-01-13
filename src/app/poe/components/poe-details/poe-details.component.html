@@ -1,0 +1,85 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-mini-fab color="primary" [routerLink]="['/','poes']">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      {{poe.getType()}} : {{poe.getTitle()}}
+    </mat-card-title>
+    <mat-card-subtitle>
+      du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <div class="info-bloc">
+        <span class="info-bloc__key">Title: </span>
+        <span class="info-bloc__value">{{ poe.getTitle() }}</span>
+      </div>
+    <div class="info-bloc">
+        <span class="info-bloc__key">Type: </span>
+        <span class="info-bloc__value">{{ poe.getType() }}</span>
+      </div>
+    <div class="info-bloc">
+        <span class="info-bloc__key">Begin Date: </span>
+        <span class="info-bloc__value">{{ poe.getBeginDate() }}</span>
+      </div>
+    <div class="info-bloc">
+        <span class="info-bloc__key">End Date: </span>
+        <span class="info-bloc__value">{{ poe.getEndDate() }}</span>
+      </div>
+      <a
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/', 'poe', 'addStagiaires', poe.getId()]"
+      >
+        Ajouter des stagiaires dans cette POE
+      </a>
+      <table>
+        <thead>
+          <tr>
+            <th class="center-cell">
+              #
+            </th>
+            <th class="left-cell">
+              Firstname
+            </th>
+            <th class="left-cell">
+              Lastname
+            </th>
+            <th class="left-cell">
+              Birthdate
+            </th>
+            <th>
+              Actions
+            </th>
+          </tr>
+        </thead>
+        <tbody>
+          <ng-container *ngFor="let stagiaire of stagiaires">
+            <tr>
+              <td class="center-cell">{{ stagiaire.getId() }}</td>
+              <td>
+                <span
+            class="name-puce"
+            appBubble
+            (click)="onClick(stagiaire)"
+          ><!-- (click)="onClick(stagiaire)" -->
+            {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
+          </span>
+                {{ stagiaire.getFirstName() }}
+              </td>
+              <td>{{ stagiaire.getLastName() | uppercase }}</td>
+              <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY'  }}</td>
+              <td class="center-cell">
+                <button mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
+                  <mat-icon>delete</mat-icon>
+                </button>
+              </td>
+            </tr>
+          </ng-container>
+        </tbody>
+        <tfoot>
+        </tfoot>
+      </table>
+  </mat-card-content>
+</mat-card>

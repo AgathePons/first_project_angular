@@ -26,10 +26,10 @@
 
     <mat-form-field appearance="fill">
       <mat-label>Type</mat-label>
-      <select matNativeControl required formControlName="type">
-        <option value="POEI">POEI</option>
-        <option value="POEC">POEC</option>
-      </select>
+      <mat-select matNativeControl required formControlName="type">
+        <mat-option value="POEI">POEI</mat-option>
+        <mat-option value="POEC">POEC</mat-option>
+      </mat-select>
     </mat-form-field>
 
     <div class="btn-list">
@@ -41,7 +41,7 @@
       >
         {{ addMode ? 'Add 💚' : 'Update 💚'}}
       </button>
-      <button type="button" mat-raised-button color="warn" (click)="goHome()" class="btn">
+      <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
         Cancel 💀
       </button>
     </div>

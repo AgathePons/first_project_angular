@@ -13,6 +13,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
 
   public loginForm!: FormGroup;
   private _subscription!: Subscription;
+  public error! : string;
 
   constructor(
     private formBuilder: FormBuilder,
@@ -52,7 +53,7 @@ export class LoginFormComponent implements OnInit, OnDestroy {
         if (authentificated) {
           this.router.navigate(['/', 'home']);
         } else {
-          this.loginForm.reset();
+          this.error = 'Invalid Credentials';
         }
       });
   }
