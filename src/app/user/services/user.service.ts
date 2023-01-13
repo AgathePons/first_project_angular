@@ -66,14 +66,13 @@ export class UserService {
         }
 
         // Store the User object locally
-        this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user));
         if (response === false) {
           
           this.hasUser$.next(false);
           console.log('hasuser = faux', this.hasUser$.getValue());
         
         } else {
-
+          this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user));
           this.hasUser$.next(true);
           console.log('hasuser = true', this.hasUser$.getValue());
 
