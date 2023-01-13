@@ -9,14 +9,23 @@
 <table>
   <thead>
     <tr>
-      <th class="center-cell">
-        #  <span class="sort-button" (click)="sortById(stagiaires)">&darr; </span><span class="sort-button" (click)="sortByIdDesc(stagiaires)"> &uarr;</span>
+      <th class="left-cell" id="sort-button" *ngIf="!idOrder" (click)="sortById(stagiaires)">
+        # &uarr;
       </th>
-      <th class="left-cell">
-        Firstname <span class="sort-button" (click)="sortByFirstName(stagiaires)">&darr; </span><span class="sort-button" (click)="sortByFirstNameDesc(stagiaires)"> &uarr;</span>
+      <th class="left-cell" id="sort-button" *ngIf="idOrder" (click)="sortByIdDesc(stagiaires)">
+        # &darr;
       </th>
-      <th class="left-cell">
-        Lastname <span class="sort-button" (click)="sortByLastName(stagiaires)">&darr; </span><span class="sort-button" (click)="sortByLastNameDesc(stagiaires)"> &uarr;</span>
+      <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
+        Firstname &uarr;
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
+        Firstname &darr;
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="!lastNameOrder" (click)="sortByLastName(stagiaires)">
+        Last Name &uarr;
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="lastNameOrder" (click)="sortByLastNameDesc(stagiaires)">
+        Last Name &darr;
       </th>
       <th class="left-cell">
         Birthdate

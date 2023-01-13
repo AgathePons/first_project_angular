@@ -20,6 +20,9 @@ export class StagiaireTableComponent implements OnInit {
     fontWeight: 'normal',
     backgroundColor: '#580883',
   };
+  public lastNameOrder: boolean = false;
+  public firstNameOrder: boolean = false;
+  public idOrder: boolean = false;
 
   public constructor(
     private stagiaireService: StagiaireService,
@@ -37,6 +40,10 @@ export class StagiaireTableComponent implements OnInit {
     this.handleDetailService.isDetailHidden.subscribe((isDetailHidden: boolean) => {
       this.isDetailHidden = isDetailHidden;
     });
+
+    this.lastNameOrder = false;
+    this.idOrder = false;
+    this.firstNameOrder = false;
   }
 
   public getVisibleStagiaireNumber(): number {
@@ -81,27 +88,33 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   public sortByFirstName(stagiaire: Stagiaire[]): void {
+    this.firstNameOrder = true
     this.stagiaireService.sortByFirstName(stagiaire)
   }
   public sortByFirstNameDesc(stagiaire: Stagiaire[]): void {
+    this.firstNameOrder = false
     this.stagiaireService.sortByFirstNameDesc(stagiaire)
   }
   
   public sortById(stagiaire: Stagiaire[]): void {
+    this.idOrder = true
     this.stagiaireService.sortById(stagiaire)
   }
   public sortByIdDesc(stagiaire: Stagiaire[]): void {
+    this.idOrder = false
     this.stagiaireService.sortByIdDesc(stagiaire)
   }
   
   public sortByLastName(stagiaire: Stagiaire[]): void {
-    console.log('call sortByLastName() fonction');
+    console.log('call sortBylastName');
     
+    this.lastNameOrder = true
     this.stagiaireService.sortByLastName(stagiaire)
   }
   public sortByLastNameDesc(stagiaire: Stagiaire[]): void {
-    console.log('call sortByLastNameDesc() fonction');
+    console.log('call sortBylastNameDesc');
 
+    this.lastNameOrder = false
     this.stagiaireService.sortByLastNameDesc(stagiaire)
   }
 }
