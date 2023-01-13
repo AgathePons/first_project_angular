@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
@@ -136,6 +137,13 @@ export class AppRoutingModule {
       path: 'survey/update/:id',
       component: SurveyFormComponent,
       resolve: { form: SurveyResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answers',
+      component: AnswerTableComponent,
       canActivate: [
         HasUserGuard
       ]
