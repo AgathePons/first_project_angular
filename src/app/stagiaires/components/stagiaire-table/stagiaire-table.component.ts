@@ -29,6 +29,7 @@ export class StagiaireTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
+      // this.stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
       this.stagiaires = stagiaires;
       console.log(this.stagiaires);
       
@@ -77,5 +78,13 @@ export class StagiaireTableComponent implements OnInit {
   public onDetailClose(event: boolean): void {
     this.isDetailHidden = event;
 
+  }
+
+  public sortByFirstName(stagiaire: Stagiaire[]): void {
+    this.stagiaireService.sortByFirstName(stagiaire)
+  }
+  
+  public sortByLastName(stagiaire: Stagiaire[]): void {
+    this.stagiaireService.sortByLastName(stagiaire)
   }
 }

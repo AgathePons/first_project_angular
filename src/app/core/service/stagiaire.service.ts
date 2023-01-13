@@ -146,4 +146,14 @@ export class StagiaireService {
     }
   }
 
+  public sortByFirstName(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName() > b.getFirstName() ? 1 : -1);
+  }
+  
+  public sortByLastName(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
+  }
+
 }
