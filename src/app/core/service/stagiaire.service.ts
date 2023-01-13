@@ -150,6 +150,10 @@ export class StagiaireService {
 
     stagiaires = stagiaires.sort((a,b) => a.getFirstName() > b.getFirstName() ? 1 : -1);
   }
+  public sortByFirstNameDesc(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName() < b.getFirstName() ? 1 : -1);
+  }
   
   public sortByLastName(stagiaires: Stagiaire[]) {
 

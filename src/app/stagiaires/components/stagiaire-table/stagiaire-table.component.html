@@ -12,8 +12,8 @@
       <th class="center-cell">
         #
       </th>
-      <th class="left-cell" (click)="sortByFirstName(stagiaires)">
-        Firstname
+      <th class="left-cell">
+        Firstname <span class="sort-button" (click)="sortByFirstName(stagiaires)">&darr; </span><span class="sort-button" (click)="sortByFirstNameDesc(stagiaires)"> &uarr;</span>
       </th>
       <th class="left-cell" (click)="sortByLastName(stagiaires)">
         Lastname
