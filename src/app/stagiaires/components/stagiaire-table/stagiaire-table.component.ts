@@ -87,7 +87,21 @@ export class StagiaireTableComponent implements OnInit {
     this.stagiaireService.sortByFirstNameDesc(stagiaire)
   }
   
+  public sortById(stagiaire: Stagiaire[]): void {
+    this.stagiaireService.sortById(stagiaire)
+  }
+  public sortByIdDesc(stagiaire: Stagiaire[]): void {
+    this.stagiaireService.sortByIdDesc(stagiaire)
+  }
+  
   public sortByLastName(stagiaire: Stagiaire[]): void {
+    console.log('call sortByLastName() fonction');
+    
     this.stagiaireService.sortByLastName(stagiaire)
+  }
+  public sortByLastNameDesc(stagiaire: Stagiaire[]): void {
+    console.log('call sortByLastNameDesc() fonction');
+
+    this.stagiaireService.sortByLastNameDesc(stagiaire)
   }
 }
