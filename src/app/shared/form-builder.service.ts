@@ -4,6 +4,7 @@ import { AbstractControl, FormBuilder, FormControl, FormGroup, Validators } from
 import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 
 import { Stagiaire } from 'src/app/core/models/stagiaire';
+import { Answer } from '../core/models/answer';
 import { Poe } from '../core/models/poe';
 import { Survey } from '../core/models/survey';
 
@@ -16,6 +17,7 @@ export class FormBuilderService {
   private stagiaire: Stagiaire = new Stagiaire();
   private poe: Poe = new Poe();
   private survey: Survey = new Survey();
+  private answer: Answer = new Answer();
   private updateMode: boolean = false;
 
   constructor(
@@ -122,6 +124,26 @@ export class FormBuilderService {
 
     if(this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.survey.getId());
+      this.form.addControl('id', idControl);
+    }
+
+    return this;
+  }
+
+   public buildAnswer(answer: Answer): FormBuilderService {
+    this.answer = answer;
+    if (answer.getId() !== 0) {
+      this.updateMode = true;
+    }
+    this.form = this.formBuilder.group({
+      text: [
+        this.answer.getText(),
+        [Validators.required]
+      ],
+    });
+
+    if(this.updateMode) {
+      const idControl: AbstractControl = new FormControl(this.answer.getId());
       this.form.addControl('id', idControl);
     }
 
