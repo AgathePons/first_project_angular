@@ -13,6 +13,7 @@ import { HandleDetailService } from 'src/app/shared/directives/handle-detail.ser
 export class StagiaireTableComponent implements OnInit {
 
   public stagiaires: Array<Stagiaire> = [];
+  public allStagiaires: Array<Stagiaire> = [];
   public stopDate: Date | null = null;
   public isDetailHidden: boolean = true;
   public selectedStagiaire: Stagiaire | null = null;
@@ -23,6 +24,7 @@ export class StagiaireTableComponent implements OnInit {
   public lastNameOrder: boolean = false;
   public firstNameOrder: boolean = false;
   public idOrder: boolean = false;
+  searchTerm = '';
 
   public constructor(
     private stagiaireService: StagiaireService,
@@ -34,6 +36,7 @@ export class StagiaireTableComponent implements OnInit {
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       // this.stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
       this.stagiaires = stagiaires;
+      this.allStagiaires = this.stagiaires;
       console.log(this.stagiaires);
       
     })
@@ -116,5 +119,11 @@ export class StagiaireTableComponent implements OnInit {
 
     this.lastNameOrder = false
     this.stagiaireService.sortByLastNameDesc(stagiaire)
+  }
+
+  searchByLastName(value: string): void {
+    this.stagiaires = this.allStagiaires.filter((val) =>
+      val.getLastName().toLowerCase().includes(value.toLowerCase())
+    );
   }
 }

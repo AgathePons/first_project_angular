@@ -24,6 +24,9 @@ import { StagiairePoeFormComponent } from './stagiaires/components/stagiaire-poe
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { StagiaireTestComponent } from './stagiaires/components/stagiaire-test/stagiaire-test.component';
+import { SearchFilterPipe } from './shared/pipes/search-filter.pipe';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -41,7 +44,9 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
     StagiairePoeFormComponent,
     PoeAddStagiaireComponent,
     SurveyTableComponent,
-    SurveyFormComponent
+    SurveyFormComponent,
+    StagiaireTestComponent,
+    SearchFilterPipe
   ],
   imports: [
     BrowserModule,
@@ -49,6 +54,7 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
+    FormsModule
   ],
   providers: [
     userInterceptor
