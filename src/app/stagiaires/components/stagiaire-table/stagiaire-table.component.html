@@ -13,6 +13,9 @@
         (input)="searchByLastName(searchLN)" />
       <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="searchBD"
         (input)="searchByBirthDate(searchBD)" />
+        <a mat-raised-button color="accent" (click)="resetFilter( )">
+          Reset
+        </a>
     </div>
   </div>
 </div>

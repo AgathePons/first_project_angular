@@ -181,7 +181,12 @@ export class StagiaireTableComponent implements OnInit {
     else {
       this.filter = true
     }
+  }
 
-
+  resetFilter(): void {
+    this.searchBD = '';
+    this.searchFN = '';
+    this.searchLN = '';
+    this.stagiaires = this.allStagiaires
   }
 }
