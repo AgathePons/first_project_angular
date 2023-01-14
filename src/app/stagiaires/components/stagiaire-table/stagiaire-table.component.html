@@ -9,10 +9,13 @@
         (input)="searchByFirstName(searchFN)" />
       <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="searchLN"
         (input)="searchByLastName(searchLN)" />
+      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="searchBD"
+        (input)="searchByBirthDate(searchBD)" />
         <mat-form-field appearance="fill">
           <mat-label>Année de naissance</mat-label>
-          <mat-select matNativeControl required formControlName="type" >
-            <mat-option value="POEI" *ngFor="let stagiaire of stagiaires">{{ stagiaire.getBirthDate().getFullYear() }}</mat-option>
+          <mat-select>
+            <mat-option>Aucune</mat-option>
+            <mat-option value="POEI" *ngFor="let year of stagiairesBirthDateYears">{{ year }}</mat-option>
           </mat-select>
         </mat-form-field>
     </div>
