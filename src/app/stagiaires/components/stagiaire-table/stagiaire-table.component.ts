@@ -37,9 +37,14 @@ export class StagiaireTableComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+
+
+
     this.stagiaireService.findAll().subscribe((stagiaires: Stagiaire[]) => {
       // this.stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
       this.stagiaires = stagiaires;
+    console.log('date de stagiraire ', this.stagiaires[13].getBirthDate())
+
       this.stagiaires.forEach(stagiaire =>
         this.stagiairesBirthDateYears.push(stagiaire.getBirthDate().getFullYear()))
       this.stagiairesBirthDateYears.sort((a, b) => b - a)
@@ -57,6 +62,8 @@ export class StagiaireTableComponent implements OnInit {
       this.lastNameOrder = false;
       this.idOrder = false;
       this.firstNameOrder = false;
+
+
     }
 
   public getVisibleStagiaireNumber(): number {

@@ -1,8 +1,10 @@
-<a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
+<a mat-raised-button color="accent" (click)="changeBooleanState( )">
+  Filtres
+</a><a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
   Ajouter Stagiaire
 </a>
 <div>
-  <button  (click)="changeBooleanState( )">Filtres</button>
+  
   <div>
     <div *ngIf="filter" class="search">
       <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="searchFN"
@@ -11,13 +13,6 @@
         (input)="searchByLastName(searchLN)" />
       <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="searchBD"
         (input)="searchByBirthDate(searchBD)" />
-        <mat-form-field appearance="fill">
-          <mat-label>Année de naissance</mat-label>
-          <mat-select>
-            <mat-option>Aucune</mat-option>
-            <mat-option value="POEI" *ngFor="let year of stagiairesBirthDateYears">{{ year }}</mat-option>
-          </mat-select>
-        </mat-form-field>
     </div>
   </div>
 </div>
@@ -73,7 +68,7 @@
           {{ stagiaire.getFirstName() }}
         </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
-        <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>{{ stagiaire.getBirthDate()| date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
           <button mat-mini-fab color="accent" type="button" (click)="onEdit(stagiaire)">
             <mat-icon>edit</mat-icon>
