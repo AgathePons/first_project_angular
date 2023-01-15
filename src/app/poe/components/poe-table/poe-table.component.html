@@ -8,10 +8,10 @@
   Ajouter POE
 </a>
 <div *ngIf="filter" class="search">
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterTitle"
-    (input)="searchByTitle(filterTitle)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterType"
-    (input)="searchByType(filterType)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
+    (input)="doSearchBar(filterTitle, filterType)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterType"
+    (input)="doSearchBar(filterTitle, filterType)" />
   <a mat-raised-button color="accent" (click)="resetFilter( )">
     Reset
   </a>

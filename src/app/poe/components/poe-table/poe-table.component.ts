@@ -16,14 +16,15 @@ export class PoeTableComponent implements OnInit {
   public stopDate: String | null = null;
   public filterDate: Date = new Date();
   public poes: Array<Poe> = [];
+  public allPoes: Array<Poe> = [];
+
   public poeOneMonth: Date = this.poeService.dateFilter(1);
   public poeSixMonths: Date = this.poeService.dateFilter(6);
   public poeOneYear: Date = this.poeService.dateFilter(12);
-  private filterMap: Map<string, string> = new Map<string, string>()
+
   filterTitle = '';
   filterType = '';
   filter = false;
-  public allPoes: Array<Poe> = [];
 
 
   public constructor(
@@ -33,23 +34,9 @@ export class PoeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
-      this.poes = poes;
+      this.poes = poes
+      this.allPoes = this.poes
     });
-    this.filterMap.set('filterTitle', '');
-    this.filterMap.set('filterSD', '');
-    this.filterMap.set('filterED', '');
-    this.filterMap.set('filterType', '');
-
-    this.filterMap.forEach((value, key) => {
-      console.log(value);
-
-    })
-
-
-    console.log('get filtertitle = ', this.filterMap.get('filterSD'));
-
-    this.resetFilter()
-    console.log('get filtertitle = ', this.filterMap.get('filterSD'));
 
   }
 
@@ -123,32 +110,24 @@ export class PoeTableComponent implements OnInit {
 
   }
 
-  searchByTitle(value: string): void {
-    // this.filterBD = '';
-    // if (this.filterLN !== '') {
-    //   this.stagiaires = this.allStagiaires.filter((val) =>
-    //     val.getFirstName().toLowerCase().includes(value.toLowerCase())
-    //   ).filter((val) =>
-    //     val.getLastName().toLowerCase().includes(this.filterLN.toLowerCase())
-    //   )
-    // } else {
-    //   this.stagiaires = this.allStagiaires.filter((val) =>
-    //     val.getFirstName().toLowerCase().includes(value.toLowerCase())
-    //   );
-    // }
-  }
-  searchByType(value: string): void {
-    // this.filterLN = '';
-    // this.filterFN = '';
-    //   this.stagiaires = this.allStagiaires.filter((val) =>
-    //     val.getBirthDate().getFullYear().toString().includes(value))
-
-  }
-
   public onDetailsPoe(id: number) {
     this.router.navigate(['/', 'poe', id]);
 
   }
+
+  doSearchBar(valueTitle: string, valueType: string): void {
+
+    let temporaryPoes: Array<Poe>
+
+      temporaryPoes = this.allPoes.filter((val) =>
+        val.getTitle().toLowerCase().includes(valueTitle.toLowerCase())
+      )
+      this.poes = temporaryPoes.filter((val) =>
+        val.getType().toLowerCase().includes(valueType.toLowerCase())
+      );
+  }
+
+ 
 
   changeBooleanState() {
     console.log('changebutton call');
