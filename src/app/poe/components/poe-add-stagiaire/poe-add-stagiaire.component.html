@@ -24,6 +24,18 @@
       >
         Add {{stagairesIdToAdd.length}} Stagiaires 💚
       </button>
+      <a mat-raised-button color="accent" (click)="changeBooleanState( )">
+        Filtres
+      </a>
+      <div *ngIf="filter" class="search">
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterFN"
+          (input)="doSearchBar(filterFN, filterLN)" />
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterLN"
+          (input)="doSearchBar(filterFN, filterLN)" />
+        <a mat-raised-button color="accent" (click)="resetFilter( )">
+          Reset
+        </a>
+      </div>
     <mat-selection-list #stagairesSelected (selectionChange)="onListSelectionChange($event)">
       <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()">
         {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}
