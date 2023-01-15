@@ -25,9 +25,9 @@ export class StagiaireTableComponent implements OnInit {
   public lastNameOrder: boolean = false;
   public firstNameOrder: boolean = false;
   public idOrder: boolean = false;
-  searchFN = '';
-  searchLN = '';
-  searchBD = '';
+  filterFN = '';
+  filterLN = '';
+  filterBD = '';
   filter = false;
 
   public constructor(
@@ -139,12 +139,12 @@ export class StagiaireTableComponent implements OnInit {
     }
 
   searchByLastName(value: string): void {
-    this.searchBD = '';
-      if(this.searchFN !== '') {
+    this.filterBD = '';
+      if(this.filterFN !== '') {
       this.stagiaires = this.allStagiaires.filter((val) =>
         val.getLastName().toLowerCase().includes(value.toLowerCase())
       ).filter((val) =>
-        val.getFirstName().toLowerCase().includes(this.searchFN.toLowerCase())
+        val.getFirstName().toLowerCase().includes(this.filterFN.toLowerCase())
       )
     } else {
       this.stagiaires = this.allStagiaires.filter((val) =>
@@ -154,12 +154,12 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   searchByFirstName(value: string): void {
-    this.searchBD = '';
-    if (this.searchLN !== '') {
+    this.filterBD = '';
+    if (this.filterLN !== '') {
       this.stagiaires = this.allStagiaires.filter((val) =>
         val.getFirstName().toLowerCase().includes(value.toLowerCase())
       ).filter((val) =>
-        val.getLastName().toLowerCase().includes(this.searchLN.toLowerCase())
+        val.getLastName().toLowerCase().includes(this.filterLN.toLowerCase())
       )
     } else {
       this.stagiaires = this.allStagiaires.filter((val) =>
@@ -168,8 +168,8 @@ export class StagiaireTableComponent implements OnInit {
     }
   }
   searchByBirthDate(value: string): void {
-    this.searchLN = '';
-    this.searchFN = '';
+    this.filterLN = '';
+    this.filterFN = '';
       this.stagiaires = this.allStagiaires.filter((val) =>
         val.getBirthDate().getFullYear().toString().includes(value))
   
@@ -184,9 +184,9 @@ export class StagiaireTableComponent implements OnInit {
   }
 
   resetFilter(): void {
-    this.searchBD = '';
-    this.searchFN = '';
-    this.searchLN = '';
+    this.filterBD = '';
+    this.filterFN = '';
+    this.filterLN = '';
     this.stagiaires = this.allStagiaires
   }
 }

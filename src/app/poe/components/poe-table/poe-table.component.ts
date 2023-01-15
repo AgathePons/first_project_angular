@@ -19,6 +19,12 @@ export class PoeTableComponent implements OnInit {
   public poeOneMonth: Date = this.poeService.dateFilter(1);
   public poeSixMonths: Date = this.poeService.dateFilter(6);
   public poeOneYear: Date = this.poeService.dateFilter(12);
+  private filterMap: Map<string, boolean> = new Map<string, boolean>()
+  filterTitle = '';
+  filterSD = '';
+  filterED = '';
+  filter = false;
+  public allPoes: Array<Poe> = [];
 
 
   public constructor(
@@ -30,10 +36,24 @@ export class PoeTableComponent implements OnInit {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
     });
+    this.filterMap.set('filterTitle', false);
+    this.filterMap.set('filterSD', false);
+    this.filterMap.set('filterED', false);
+    this.filterMap.set('filterType', false);
 
+    this.filterMap.forEach((value, key) => {
+      console.log(value);
+      
+    })
+
+
+    console.log('get filtertitle = ',this.filterMap.get('filterTitle'));
+    console.log('filtertitle values = ',this.filterMap.values());
+    console.log('filtertitle next = ',this.filterMap.values().next());
+    console.log('filtertitle value = ',this.filterMap.values().next().value);
   }
 
-
+  
 
   public filterChanged(event: String | null): void {
     console.log(`Tut tut, change filter to ${event}`);
@@ -103,10 +123,47 @@ export class PoeTableComponent implements OnInit {
     
   }
 
+  searchByTitle(value: string): void {
+    // this.filterBD = '';
+    // if (this.filterLN !== '') {
+    //   this.stagiaires = this.allStagiaires.filter((val) =>
+    //     val.getFirstName().toLowerCase().includes(value.toLowerCase())
+    //   ).filter((val) =>
+    //     val.getLastName().toLowerCase().includes(this.filterLN.toLowerCase())
+    //   )
+    // } else {
+    //   this.stagiaires = this.allStagiaires.filter((val) =>
+    //     val.getFirstName().toLowerCase().includes(value.toLowerCase())
+    //   );
+    // }
+  }
+  searchByBirthDate(value: string): void {
+    // this.filterLN = '';
+    // this.filterFN = '';
+    //   this.stagiaires = this.allStagiaires.filter((val) =>
+    //     val.getBirthDate().getFullYear().toString().includes(value))
+  
+  }
 
   public onDetailsPoe (id: number) {
     this.router.navigate(['/', 'poe', id]);
 
+  }
+
+  changeBooleanState() {
+    console.log('changebutton call');
+
+    if (this.filter) { this.filter = false }
+    else {
+      this.filter = true
+    }
+  }
+
+  resetFilter(): void {
+    this.filterTitle = '';
+    this.filterED= '';
+    this.filterSD = '';
+    this.poes = this.allPoes
   }
 
 

@@ -3,22 +3,22 @@
 </a><a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
   Ajouter Stagiaire
 </a>
-<div>
-  
-  <div>
-    <div *ngIf="filter" class="search">
-      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="searchFN"
-        (input)="searchByFirstName(searchFN)" />
-      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="searchLN"
-        (input)="searchByLastName(searchLN)" />
-      <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="searchBD"
-        (input)="searchByBirthDate(searchBD)" />
-        <a mat-raised-button color="accent" (click)="resetFilter( )">
-          Reset
-        </a>
-    </div>
-  </div>
+
+
+
+<div *ngIf="filter" class="search">
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterFN"
+    (input)="searchByFirstName(filterFN)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="filterLN"
+    (input)="searchByLastName(filterLN)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="filterBD"
+    (input)="searchByBirthDate(filterBD)" />
+  <a mat-raised-button color="accent" (click)="resetFilter()">
+    Reset
+  </a>
 </div>
+
+
 <table>
   <thead>
     <tr>
