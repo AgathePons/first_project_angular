@@ -19,10 +19,9 @@ export class PoeTableComponent implements OnInit {
   public poeOneMonth: Date = this.poeService.dateFilter(1);
   public poeSixMonths: Date = this.poeService.dateFilter(6);
   public poeOneYear: Date = this.poeService.dateFilter(12);
-  private filterMap: Map<string, boolean> = new Map<string, boolean>()
+  private filterMap: Map<string, string> = new Map<string, string>()
   filterTitle = '';
-  filterSD = '';
-  filterED = '';
+  filterType = '';
   filter = false;
   public allPoes: Array<Poe> = [];
 
@@ -36,24 +35,25 @@ export class PoeTableComponent implements OnInit {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
       this.poes = poes;
     });
-    this.filterMap.set('filterTitle', false);
-    this.filterMap.set('filterSD', false);
-    this.filterMap.set('filterED', false);
-    this.filterMap.set('filterType', false);
+    this.filterMap.set('filterTitle', '');
+    this.filterMap.set('filterSD', '');
+    this.filterMap.set('filterED', '');
+    this.filterMap.set('filterType', '');
 
     this.filterMap.forEach((value, key) => {
       console.log(value);
-      
+
     })
 
 
-    console.log('get filtertitle = ',this.filterMap.get('filterTitle'));
-    console.log('filtertitle values = ',this.filterMap.values());
-    console.log('filtertitle next = ',this.filterMap.values().next());
-    console.log('filtertitle value = ',this.filterMap.values().next().value);
+    console.log('get filtertitle = ', this.filterMap.get('filterSD'));
+
+    this.resetFilter()
+    console.log('get filtertitle = ', this.filterMap.get('filterSD'));
+
   }
 
-  
+
 
   public filterChanged(event: String | null): void {
     console.log(`Tut tut, change filter to ${event}`);
@@ -94,8 +94,8 @@ export class PoeTableComponent implements OnInit {
     // console.log('result égalite filtre1', this.stopDate === 'oneMonth');
 
 
-    
-    
+
+
 
     if (this.stopDate === null) {
       return true;
@@ -105,22 +105,22 @@ export class PoeTableComponent implements OnInit {
     // if (this.stopDate === this.dateFilter(1)) {
     else if (this.stopDate === 'oneMonth') {
       console.log('filtre 1 mois');
-      
-    return poe.getEndDate() < this.poeOneMonth && poe.getEndDate() > this.poeSixMonths
+
+      return poe.getEndDate() < this.poeOneMonth && poe.getEndDate() > this.poeSixMonths
       // return false;
     }
     else if (this.stopDate === 'sixMonths') {
       console.log('filtre 6 mois');
       return poe.getEndDate() < this.poeSixMonths && poe.getEndDate() > this.poeOneYear
-    
+
     }
     else if (this.stopDate === 'oneYear') {
-    console.log('filtre 12 mois');
-    
+      console.log('filtre 12 mois');
+
       return poe.getEndDate() < this.poeOneYear;
     }
     return false;
-    
+
   }
 
   searchByTitle(value: string): void {
@@ -137,15 +137,15 @@ export class PoeTableComponent implements OnInit {
     //   );
     // }
   }
-  searchByBirthDate(value: string): void {
+  searchByType(value: string): void {
     // this.filterLN = '';
     // this.filterFN = '';
     //   this.stagiaires = this.allStagiaires.filter((val) =>
     //     val.getBirthDate().getFullYear().toString().includes(value))
-  
+
   }
 
-  public onDetailsPoe (id: number) {
+  public onDetailsPoe(id: number) {
     this.router.navigate(['/', 'poe', id]);
 
   }
@@ -159,10 +159,10 @@ export class PoeTableComponent implements OnInit {
     }
   }
 
+
   resetFilter(): void {
     this.filterTitle = '';
-    this.filterED= '';
-    this.filterSD = '';
+    this.filterType = '';
     this.poes = this.allPoes
   }
 

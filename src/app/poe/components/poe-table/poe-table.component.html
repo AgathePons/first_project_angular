@@ -10,10 +10,8 @@
 <div *ngIf="filter" class="search">
   <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterTitle"
     (input)="searchByTitle(filterTitle)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="filterSD"
-    (input)="searchByBirthDate(filterSD)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="filterED"
-    (input)="searchByBirthDate(filterED)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterType"
+    (input)="searchByType(filterType)" />
   <a mat-raised-button color="accent" (click)="resetFilter( )">
     Reset
   </a>
