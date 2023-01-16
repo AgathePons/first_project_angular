@@ -17,6 +17,7 @@ import { SurveyDetailsComponent } from './survey/components/survey-details/surve
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
+import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
 import { HasUserGuard } from './user/guards/has-user.guard';
 import { NoUserGuard } from './user/guards/no-user.guard';
 import { LoginFormComponent } from './user/login/login-form/login-form.component';
@@ -50,6 +51,13 @@ export class AppRoutingModule {
     {
       path: 'home',
       component: StagiaireTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'googletoken',
+      component: GoogleTokenFormComponent,
       canActivate: [
         HasUserGuard
       ]

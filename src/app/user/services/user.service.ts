@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, of, take } from 'rxjs';
+import { BehaviorSubject, catchError, map, observable, Observable, of, take } from 'rxjs';
 import { IStorageStrategy } from 'src/app/core/strategies/storage/i-storage-strategy';
 import { LocalStrategy } from 'src/app/core/strategies/storage/local-strategy';
 import { SessionStrategy } from 'src/app/core/strategies/storage/session-strategy';
@@ -33,11 +33,23 @@ export class UserService {
   private _storageStrategy!: IStorageStrategy;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-
   constructor(
     private router: Router,
     private httpClient: HttpClient,
   ) { }
+
+  public setGoogleToken(formData: any): any {
+    /* if (this._user !== null) {
+      this._user.googleToken = formData.token;
+      const observable = new Observable((observer) => {
+        const isTokenSet = true;
+
+      })
+      return observable ;
+    } else {
+      return false;
+    } */
+  }
 
   public login(formData: any): Observable<boolean> {
     console.log('user service login POUET', formData);
@@ -56,6 +68,7 @@ export class UserService {
         this._user = new User();
         this._user.login = formData.userLogin;
         this._user.token = response.token;
+        this._user.googleToken = 'ya29.a0AX9GBdUHPEl5uGrJBJzcMSAcPgA3Ld7ulnqOaML26eU9cBjcXteuKSH6xKZ9cMs-PB-wgNzWMAl5jVxGdSqv4cmFmxLnHLAR_NGdVP3oDzQ4HNuesieAB6l1zDnOcTDo6c6ssSaie7R7vQAQLB1POMBESJicyQaCgYKASgSARISFQHUCsbCfGcbf3dHiJVOFfhlB9kSwg0165';
         this._user.setRoles(response.roles);
 
         // Get the strategy to use to store
@@ -67,10 +80,10 @@ export class UserService {
 
         // Store the User object locally
         if (response === false) {
-          
+
           this.hasUser$.next(false);
           console.log('hasuser = faux', this.hasUser$.getValue());
-        
+
         } else {
           this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user))
           this.hasUser$.next(true);

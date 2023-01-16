@@ -29,4 +29,21 @@ export class GoogleService {
     );
   }
 
+  public createDriveFolder(): Observable<any> {
+    console.log('create folder');
+    const requestBody = {
+      "name": "POE forms",
+      "mimeType": "application/vnd.google-apps.folder"
+    };
+    return this.httpClient.post<any>(
+      this.apiGoogleDriveBaseUrl, requestBody
+    ).pipe(
+      take(1),
+      map((form: any) => {
+        const formObject = form;
+        return formObject;
+      })
+    );
+  }
+
 }
