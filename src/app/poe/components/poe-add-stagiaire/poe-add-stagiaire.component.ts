@@ -16,7 +16,12 @@ export class PoeAddStagiaireComponent implements OnInit {
 
   public poe: Poe = new Poe();
   public stagiaires: Array<Stagiaire> = [];
+  public allStagiaires: Array<Stagiaire> = [];
   public stagairesIdToAdd: Array<number> = [];
+
+  filter = false;
+  filterFN = '';
+  filterLN = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -41,6 +46,7 @@ export class PoeAddStagiaireComponent implements OnInit {
             return !this.poe.getTrainees().find(elem => elem.getId() === stagiaireToCheck.getId());
           });
           this.stagiaires = filteredStagiaires;
+          this.allStagiaires = this.stagiaires
         });
       });
     });
@@ -63,5 +69,33 @@ export class PoeAddStagiaireComponent implements OnInit {
 
   public onBackButton(): void {
     this.location.back();
+  }
+
+  changeBooleanState() {
+    console.log('changebutton call');
+
+    if (this.filter) { this.filter = false }
+    else {
+      this.filter = true
+    }
+  }
+
+
+  resetFilter(): void {
+    this.filterFN = '';
+    this.filterLN = '';
+    this.stagiaires = this.allStagiaires
+  }
+
+  doSearchBar(valueFirstName: string, valueLastName: string): void {
+
+    let temporaryStagiaires: Array<Stagiaire>
+
+    temporaryStagiaires = this.allStagiaires.filter((val) =>
+        val.getFirstName().toLowerCase().includes(valueFirstName.toLowerCase())
+      )
+      this.stagiaires = temporaryStagiaires.filter((val) =>
+        val.getLastName().toLowerCase().includes(valueLastName.toLowerCase())
+      );
   }
 }

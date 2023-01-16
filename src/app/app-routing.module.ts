@@ -11,6 +11,7 @@ import { PoeResolver } from './poe/resolvers/poe.resolver';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
+import { StagiaireTestComponent } from './stagiaires/components/stagiaire-test/stagiaire-test.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
@@ -52,6 +53,10 @@ export class AppRoutingModule {
       canActivate: [
         HasUserGuard
       ]
+    },
+    {
+      path: 'test',
+      component: StagiaireTestComponent
     },
     {
       path: 'poes',

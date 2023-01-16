@@ -146,4 +146,30 @@ export class StagiaireService {
     }
   }
 
+  public sortByFirstName(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName() > b.getFirstName() ? 1 : -1);
+  }
+  public sortByFirstNameDesc(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName() < b.getFirstName() ? 1 : -1);
+  }
+  public sortById(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getId() > b.getId() ? 1 : -1);
+  }
+  public sortByIdDesc(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getId() < b.getId() ? 1 : -1);
+  }
+  
+  public sortByLastName(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
+  }
+  public sortByLastNameDesc(stagiaires: Stagiaire[]) {
+
+    stagiaires = stagiaires.sort((a,b) => a.getLastName() < b.getLastName() ? 1 : -1);
+  }
+
 }

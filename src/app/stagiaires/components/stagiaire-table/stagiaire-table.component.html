@@ -1,22 +1,46 @@
-<a
-  mat-raised-button
-  color="accent"
-  [routerLink]="['/', 'stagiaire', 'add']"
->
+<a mat-raised-button color="accent" (click)="changeBooleanState( )">
+  Filtres
+</a><a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
   Ajouter Stagiaire
 </a>
-<app-stagiaire-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-stagiaire-filter>
+
+
+
+<div *ngIf="filter" class="search">
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterFN"
+    (input)="searchByFirstName(filterFN)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="filterLN"
+    (input)="searchByLastName(filterLN)" />
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="filterBD"
+    (input)="searchByBirthDate(filterBD)" />
+  <a mat-raised-button color="accent" (click)="resetFilter()">
+    Reset
+  </a>
+</div>
+
+
 <table>
   <thead>
     <tr>
-      <th class="center-cell">
-        #
+      <th class="left-cell" id="sort-button" *ngIf="!idOrder" (click)="sortById(stagiaires)">
+        # &uarr;
       </th>
-      <th class="left-cell">
-        Firstname
+      <th class="left-cell" id="sort-button" *ngIf="idOrder" (click)="sortByIdDesc(stagiaires)">
+        # &darr;
+
       </th>
-      <th class="left-cell">
-        Lastname
+      <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
+        Firstname &uarr;
+
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
+        Firstname &darr;
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="!lastNameOrder" (click)="sortByLastName(stagiaires)">
+        Last Name &uarr;
+      </th>
+      <th class="left-cell" id="sort-button" *ngIf="lastNameOrder" (click)="sortByLastNameDesc(stagiaires)">
+        Last Name &darr;
       </th>
       <th class="left-cell">
         Birthdate
@@ -28,21 +52,14 @@
   </thead>
   <tbody>
     <ng-container *ngFor="let stagiaire of stagiaires">
-        <tr
-          *ngIf="(stopDate === null) ?
+      <tr *ngIf="(stopDate === null) ?
             true : stopDate.getDate() === 31 ?
-              stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate"
-
-        >
+              stagiaire.getBirthDate() > stopDate : stagiaire.getBirthDate() < stopDate">
         <td class="center-cell">{{ stagiaire.getId() }}</td>
         <td>
           <!-- ElementRef -->
-          <span
-            class="name-puce"
-            appBubble
-            [config]="bubbleConfig"
-            (click)="onClick(stagiaire)"
-          ><!-- (click)="onClick(stagiaire)" -->
+          <span class="name-puce" appBubble [config]="bubbleConfig"
+            (click)="onClick(stagiaire)"><!-- (click)="onClick(stagiaire)" -->
             {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
           </span>
           <!-- /ElementRef -->
@@ -54,7 +71,7 @@
           {{ stagiaire.getFirstName() }}
         </td>
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
-        <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>{{ stagiaire.getBirthDate()| date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
           <button mat-mini-fab color="accent" type="button" (click)="onEdit(stagiaire)">
             <mat-icon>edit</mat-icon>
@@ -73,8 +90,3 @@
     </tr>
   </tfoot>
 </table>
-
-
-
-
-

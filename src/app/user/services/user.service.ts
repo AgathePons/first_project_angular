@@ -72,7 +72,7 @@ export class UserService {
           console.log('hasuser = faux', this.hasUser$.getValue());
         
         } else {
-          this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user));
+          this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user))
           this.hasUser$.next(true);
           console.log('hasuser = true', this.hasUser$.getValue());
 

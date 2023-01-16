@@ -24,6 +24,9 @@ import { StagiairePoeFormComponent } from './stagiaires/components/stagiaire-poe
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { StagiaireTestComponent } from './stagiaires/components/stagiaire-test/stagiaire-test.component';
+import { SearchFilterPipe } from './shared/pipes/search-filter.pipe';
+import { FormsModule } from '@angular/forms';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
@@ -45,6 +48,8 @@ import { AnswerFormComponent } from './answer/components/answer-form/answer-form
     PoeAddStagiaireComponent,
     SurveyTableComponent,
     SurveyFormComponent,
+    StagiaireTestComponent,
+    SearchFilterPipe
     SurveyDetailsComponent,
     AnswerTableComponent,
     AnswerFormComponent
@@ -55,6 +60,7 @@ import { AnswerFormComponent } from './answer/components/answer-form/answer-form
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
+    FormsModule
   ],
   providers: [
     userInterceptor
