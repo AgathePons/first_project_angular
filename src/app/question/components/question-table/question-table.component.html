@@ -29,6 +29,9 @@
         <td> {{ question.getText() }} </td>
         <td>{{ question.getAnswerType() }} </td>
         <td class="center-cell">
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
+            <mat-icon>edit</mat-icon>
+          </button>
         </td>
       </tr>
     </ng-container>

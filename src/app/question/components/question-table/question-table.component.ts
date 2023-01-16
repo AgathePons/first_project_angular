@@ -24,6 +24,11 @@ export class QuestionTableComponent implements OnInit {
     })
   }
 
+  public onEdit(question: Question): void {
+    this.router.navigate(['/', 'question', 'update', question.getId()]);
+  }
+
+
   public onDelete(question: Question): void {
     console.log('called onDelete');
     
