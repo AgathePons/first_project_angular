@@ -31,6 +31,7 @@ import { SurveyDetailsComponent } from './survey/components/survey-details/surve
 import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 import { QuestionTableComponent } from './question/components/question-table/question-table.component';
+import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { QuestionTableComponent } from './question/components/question-table/que
     SurveyDetailsComponent,
     AnswerTableComponent,
     AnswerFormComponent,
-    QuestionTableComponent
+    QuestionTableComponent,
+    QuestionFormComponent
   ],
   imports: [
     BrowserModule,

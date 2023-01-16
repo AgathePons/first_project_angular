@@ -6,6 +6,7 @@ import { DateAdapter, MAT_DATE_LOCALE } from '@angular/material/core';
 import { Stagiaire } from 'src/app/core/models/stagiaire';
 import { Answer } from '../core/models/answer';
 import { Poe } from '../core/models/poe';
+import { Question } from '../core/models/question';
 import { Survey } from '../core/models/survey';
 
 @Injectable({
@@ -18,6 +19,7 @@ export class FormBuilderService {
   private poe: Poe = new Poe();
   private survey: Survey = new Survey();
   private answer: Answer = new Answer();
+  private question: Question = new Question();
   private updateMode: boolean = false;
 
   constructor(
@@ -124,6 +126,30 @@ export class FormBuilderService {
 
     if(this.updateMode) {
       const idControl: AbstractControl = new FormControl(this.survey.getId());
+      this.form.addControl('id', idControl);
+    }
+
+    return this;
+  }
+
+  public buildQuestion(question: Question): FormBuilderService {
+    this.question = question;
+    if (question.getId() !== 0) {
+      this.updateMode = true;
+    }
+    this.form = this.formBuilder.group({
+      text: [
+        this.question.getText(),
+        [Validators.required]
+      ],
+      answerType: [
+        this.question.getAnswerType(),
+        [Validators.required]
+      ],
+    });
+
+    if(this.updateMode) {
+      const idControl: AbstractControl = new FormControl(this.question.getId());
       this.form.addControl('id', idControl);
     }
 
