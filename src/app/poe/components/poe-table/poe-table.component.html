@@ -8,9 +8,9 @@
     Reset filter
   </a>
   <div class="search">
-    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterTitle"
+    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
       (input)="doSearchBar(filterTitle, filterType)" />
-    <mat-select matNativeControl required placeholder="Filter by title" (selectionChange)="doSearchBar(filterTitle, filterType)" formControlName="type" [(value)]="filterType">
+    <mat-select matNativeControl required placeholder="Filter by type" (selectionChange)="doSearchBar(filterTitle, filterType)" formControlName="type" [(value)]="filterType">
       <mat-option value="">--</mat-option>
       <mat-option value="POEI">POEI</mat-option>
       <mat-option value="POEC">POEC</mat-option>
