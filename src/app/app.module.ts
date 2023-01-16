@@ -30,6 +30,7 @@ import { FormsModule } from '@angular/forms';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
+import { QuestionTableComponent } from './question/components/question-table/question-table.component';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { AnswerFormComponent } from './answer/components/answer-form/answer-form
     SearchFilterPipe,
     SurveyDetailsComponent,
     AnswerTableComponent,
-    AnswerFormComponent
+    AnswerFormComponent,
+    QuestionTableComponent
   ],
   imports: [
     BrowserModule,

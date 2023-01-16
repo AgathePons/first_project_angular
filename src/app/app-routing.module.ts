@@ -8,6 +8,7 @@ import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.co
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
 import { PoeResolver } from './poe/resolvers/poe.resolver';
+import { QuestionTableComponent } from './question/components/question-table/question-table.component';
 import { StagaireFormComponent } from './stagiaires/components/stagaire-form/stagaire-form.component';
 import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-detail/stagiaire-detail.component';
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
@@ -151,6 +152,13 @@ export class AppRoutingModule {
     {
       path: 'answers',
       component: AnswerTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'questions',
+      component: QuestionTableComponent,
       canActivate: [
         HasUserGuard
       ]
