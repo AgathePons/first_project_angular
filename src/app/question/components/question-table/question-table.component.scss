@@ -8,107 +8,53 @@ table {
   border-collapse: collapse;
   border: 1px solid $std-color;
   background-color: $light-color;
-
-  thead,
-  tbody,
-  tfoot {
+  thead, tbody, tfoot {
     tr {
-
-      td,
-      th {
+      td, th  {
         //border: 1px solid $std-color;
         padding: .5rem;
-
         &.center-cell {
           text-align: center;
         }
-
         &.right-cell {
           text-align: right;
         }
-
         &.left-cell {
           text-align: left;
         }
       }
     }
   }
-
-  thead,
-  tfoot {
-
-    tr th,
-    tr td {
+  thead, tfoot {
+    tr th, tr td {
       background-color: $std-color;
       color: $light-color;
     }
   }
-
   tbody {
     tr {
       &:nth-child(odd) {
         background-color: lighten($std-color, 45);
       }
-
       td {
         .name-puce {
           margin-right: .5rem;
-
           &:hover {
             cursor: pointer;
           }
         }
-
         button {
           transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
-
           &:hover {
             background-color: lighten($std-color, $amount: 20);
             color: $light-color;
             cursor: pointer;
           }
-
           &:not(:last-child) {
             margin-right: 1rem;
           }
         }
       }
     }
-  }
-
-  #sort-button:hover {
-    cursor: pointer;
-  }
-
-
-}
-
-.search {
-  width: 100%;
-  position: relative;
-  display: flex;
-}
-
-.searchTerm {
-  width: 100%;
-  border: 3px solid $std-color;
-  padding: 5px;
-  height: 20px;
-  outline: none;
-  color: #9DBFAF;
-}
-
-.searchTerm:focus {
-  color: #000;
-}
-
-p {
-  color: #383c52;
-}
-
-form {
-  input {
-    width: 50% !important;
-    margin: 2px 0 20px 20px;
   }
 }

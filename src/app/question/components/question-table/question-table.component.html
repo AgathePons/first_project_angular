@@ -1,0 +1,44 @@
+<a
+  mat-raised-button
+  color="accent"
+  [routerLink]="['/', 'question', 'add']">
+  Ajouter une question
+</a>
+
+<table>
+    <thead>
+      <tr>
+        <th class="center-cell">
+          #
+        </th>
+        <th class="left-cell">
+          Question
+        </th>
+        <th class="left-cell">
+          Type de réponse
+        </th>
+        <th>
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let question of questions">
+        <tr>
+        <td class="center-cell">{{ question.getId() }}</td>
+        <td> {{ question.getText() }} </td>
+        <td>{{ question.getAnswerType() }} </td>
+        <td class="center-cell">
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </td>
+      </tr>
+    </ng-container>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6" class="right-cell"></td>
+      </tr>
+    </tfoot>
+  </table>

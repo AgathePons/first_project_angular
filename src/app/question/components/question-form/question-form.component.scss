@@ -1,0 +1,31 @@
+$std-color: rgb(32, 2, 32);
+$light-color: rgb(255, 255, 255);
+$success-color: rgb(173, 255, 47);
+$error-color: rgb(142, 0, 0);
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  background-color: $light-color;
+  font-family: Arial, Helvetica, sans-serif;
+  border: 2px solid $error-color;
+  &.valid {
+    border: 2px solid $success-color;
+  }
+
+  .btn-list {
+    display: flex;
+    .add-btn {
+      flex-grow: 1;
+    }
+  }
+  .btn {
+    padding: .5rem;
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}

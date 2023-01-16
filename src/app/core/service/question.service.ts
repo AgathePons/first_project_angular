@@ -66,9 +66,10 @@ export class QuestionService {
     );
   }
 
-  public updateQuestion(id: number, question: QuestionDto): Observable<Question> {
+  public updateQuestion(question: QuestionDto): Observable<Question> {
     return this.httpClient.put<any>(
-      `${this.controllerBaseUrl}/${id}`,
+      `${this.controllerBaseUrl}/${question.id}`,
+
       question
       )
       .pipe(

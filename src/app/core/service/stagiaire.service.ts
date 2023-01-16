@@ -148,11 +148,11 @@ export class StagiaireService {
 
   public sortByFirstName(stagiaires: Stagiaire[]) {
 
-    stagiaires = stagiaires.sort((a,b) => a.getFirstName() > b.getFirstName() ? 1 : -1);
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName().toLowerCase() > b.getFirstName().toLowerCase() ? 1 : -1);
   }
   public sortByFirstNameDesc(stagiaires: Stagiaire[]) {
 
-    stagiaires = stagiaires.sort((a,b) => a.getFirstName() < b.getFirstName() ? 1 : -1);
+    stagiaires = stagiaires.sort((a,b) => a.getFirstName().toLowerCase() < b.getFirstName().toLowerCase() ? 1 : -1);
   }
   public sortById(stagiaires: Stagiaire[]) {
 
@@ -165,11 +165,11 @@ export class StagiaireService {
   
   public sortByLastName(stagiaires: Stagiaire[]) {
 
-    stagiaires = stagiaires.sort((a,b) => a.getLastName() > b.getLastName() ? 1 : -1);
+    stagiaires = stagiaires.sort((a,b) => a.getLastName().toLowerCase() > b.getLastName().toLowerCase() ? 1 : -1);
   }
   public sortByLastNameDesc(stagiaires: Stagiaire[]) {
 
-    stagiaires = stagiaires.sort((a,b) => a.getLastName() < b.getLastName() ? 1 : -1);
+    stagiaires = stagiaires.sort((a,b) => a.getLastName().toLowerCase() < b.getLastName().toLowerCase() ? 1 : -1);
   }
 
 }
