@@ -39,6 +39,8 @@ export class GoogleTokenFormComponent implements OnInit, OnDestroy {
   }
 
   public onSetGoogleToken(): void {
+    console.log('Set Google token:', this.googleTokenForm.value);
+
     this._subscription = this.userService.setGoogleToken(this.googleTokenForm.value)
       .subscribe((googleAuthentificated: boolean) => {
         if (googleAuthentificated) {

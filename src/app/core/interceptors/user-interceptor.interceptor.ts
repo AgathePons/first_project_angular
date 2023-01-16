@@ -47,12 +47,17 @@ export class UserInterceptorService implements HttpInterceptor {
     // if Google API request
     else if (this._isGoogleURI(req.url)) {
       console.log('google request detected');
-      request = req.clone({
-        headers: new HttpHeaders(
-          'Authorization: Bearer ' + this._userService.user?.googleToken
-        )
-      });
-      return next.handle(request);
+      if (this._userService.hasGoogleToken$.getValue()) {
+        request = req.clone({
+          headers: new HttpHeaders(
+            'Authorization: Bearer ' + this._userService.user?.googleToken
+          )
+        });
+        return next.handle(request);
+      } else {
+        return throwError(() => new Error('No Google token'));
+      }
+
     }
     else {
       request = req.clone();

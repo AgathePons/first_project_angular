@@ -9,7 +9,8 @@ export const environment = {
   apiGoogleDriveBaseUrl: "https://www.googleapis.com/drive/v3/files",
   apiGoogleFormBaseUrl: "https://forms.googleapis.com/v1/forms/",
   storageKeys: {
-    'AUTH': 'auth'
+    'AUTH': 'auth',
+    'GOOGLE': 'googleToken'
   }
 };
 

@@ -12,6 +12,7 @@ export class AppComponent {
   public title = 'Aelion suivi des stagiaire';
   public isOverlayVisible = false;
   public hasUser: boolean = false;
+  public hasGoogleToken: boolean = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
 
@@ -27,10 +28,18 @@ export class AppComponent {
       .subscribe((hasUser: boolean) => {
         this.hasUser = hasUser;
       });
+    this.userService.hasGoogleToken()
+      .subscribe((hasGoogleToken: boolean) => {
+        this.hasGoogleToken = hasGoogleToken;
+      });
   }
 
   public onLogout(): void {
     this.userService.logout();
+  }
+
+  public onDeleteGoogleToken(): void {
+    this.userService.deleteGoogleToken();
   }
 
   public toggleTitle(): void {

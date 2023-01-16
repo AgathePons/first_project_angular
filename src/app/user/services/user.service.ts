@@ -10,19 +10,6 @@ import { SignupDto } from '../dto/signup-dto';
 import { UserDto } from '../dto/user-dto';
 import { User } from '../models/user';
 
-// TODO remove after wiring to backend
-const users: UserDto[] = [
-  {
-    id: 1,
-    login: 'admin',
-    password: '000',
-  },
-  {
-    id: 2,
-    login: 'guest',
-    password: '111',
-  },
-];
 
 @Injectable({
   providedIn: 'root'
@@ -30,25 +17,36 @@ const users: UserDto[] = [
 export class UserService {
 
   private _user: User | null = null;
+  private _googleToken: string | null = null;
   private _storageStrategy!: IStorageStrategy;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  public hasGoogleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private router: Router,
     private httpClient: HttpClient,
   ) { }
 
-  public setGoogleToken(formData: any): any {
-    /* if (this._user !== null) {
-      this._user.googleToken = formData.token;
-      const observable = new Observable((observer) => {
-        const isTokenSet = true;
+  public setGoogleToken(token: string): Observable<boolean> {
+    if (this._user !== null) {
+      console.log('user connected, set google token:', token);
 
+      this._googleToken = token;
+      this._storageStrategy = new SessionStrategy();
+      this._storageStrategy.storeItem(`${environment.storageKeys.GOOGLE}`, JSON.stringify(this._googleToken));
+      this.hasGoogleToken$.next(true);
+      const observable = Observable.create((observer: { next: (arg0: boolean) => void; complete: () => void; }) => {
+        observer.next(true);
+        observer.complete();
       })
-      return observable ;
+      return observable;
     } else {
-      return false;
-    } */
+      const observable = Observable.create((observer: { next: (arg0: boolean) => void; complete: () => void; }) => {
+        observer.next(false);
+        observer.complete();
+      })
+      return observable;
+    }
   }
 
   public login(formData: any): Observable<boolean> {
@@ -68,7 +66,6 @@ export class UserService {
         this._user = new User();
         this._user.login = formData.userLogin;
         this._user.token = response.token;
-        this._user.googleToken = 'ya29.a0AX9GBdUHPEl5uGrJBJzcMSAcPgA3Ld7ulnqOaML26eU9cBjcXteuKSH6xKZ9cMs-PB-wgNzWMAl5jVxGdSqv4cmFmxLnHLAR_NGdVP3oDzQ4HNuesieAB6l1zDnOcTDo6c6ssSaie7R7vQAQLB1POMBESJicyQaCgYKASgSARISFQHUCsbCfGcbf3dHiJVOFfhlB9kSwg0165';
         this._user.setRoles(response.roles);
 
         // Get the strategy to use to store
@@ -104,10 +101,13 @@ export class UserService {
     this.hasUser$.next(false);
   };
 
-  public signup(dto: SignupDto): Observable<any> {
-    // TODO remove
-    console.log('userService > signup');
+  public deleteGoogleToken(): void {
+    this._googleToken = null;
+    this._removeGoogleToken(new SessionStrategy());
+    this.hasGoogleToken$.next(false);
+  }
 
+  public signup(dto: SignupDto): Observable<any> {
     return this.httpClient.post<any>(
       `${environment.apiBaseUrl}/user/signup`,
       dto
@@ -126,6 +126,22 @@ export class UserService {
     return this._user;
   }
 
+  public hasGoogleToken(): BehaviorSubject<boolean> {
+    if (!this._googleToken) {
+      this._readGoogleStorage(new SessionStrategy());
+    }
+    return this.hasGoogleToken$;
+  }
+
+  private _readGoogleStorage(storage: IStorageStrategy): void {
+    const storedItem: string | null = storage.getItem(`${environment.storageKeys.GOOGLE}`);
+    if (storedItem !== null) {
+      const storedGoogleToken = JSON.parse(storedItem);
+      this._googleToken = storedGoogleToken
+      this.hasGoogleToken$.next(true);
+    }
+  }
+
   private _readStorage(storage: IStorageStrategy): void {
     const storedItem: string | null = storage.getItem(`${environment.storageKeys.AUTH}`);
     if (storedItem !== null) {
@@ -141,5 +157,9 @@ export class UserService {
 
   private _removeItem(storage: IStorageStrategy): void {
     storage.removeItem(`${environment.storageKeys.AUTH}`);
+  }
+
+  private _removeGoogleToken(storage: IStorageStrategy): void {
+    storage.removeItem(`${environment.storageKeys.GOOGLE}`)
   }
 }
