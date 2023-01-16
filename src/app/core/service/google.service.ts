@@ -15,11 +15,11 @@ export class GoogleService {
     private httpClient: HttpClient,
   ) { }
 
-  public findOne(formId: number): Observable<any> {
-    console.log('find one form called');
+  public findFolder(): Observable<any> {
+    console.log('find one folder called');
 
     return this.httpClient.get<any>(
-      `${this.apiGoogleFormBaseUrl}/${formId}`
+      `${this.apiGoogleDriveBaseUrl}?pageSize=10&q=name ='test'`
     )
     .pipe(
       take(1),
@@ -30,12 +30,17 @@ export class GoogleService {
   }
 
   public createDriveFolder(): Observable<any> {
-    console.log('create folder');
+
     const requestBody = {
       "name": "POE forms",
       "mimeType": "application/vnd.google-apps.folder"
     };
-    return this.httpClient.post<any>(
+
+    console.log('create folder...');
+    console.log(`endpoint: ${this.apiGoogleDriveBaseUrl}`);
+    console.log('request body:', requestBody);
+
+    return this.httpClient.post<Object>(
       this.apiGoogleDriveBaseUrl, requestBody
     ).pipe(
       take(1),

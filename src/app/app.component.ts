@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Stagiaire } from './core/models/stagiaire';
+import { GoogleService } from './core/service/google.service';
 import { StagiaireService } from './core/service/stagiaire.service';
 import { UserService } from './user/services/user.service';
 
@@ -21,6 +22,7 @@ export class AppComponent {
   public constructor(
     private stagiairesService: StagiaireService,
     private userService: UserService,
+    private googleService: GoogleService,
   ) {}
 
   ngOnInit(): void {
@@ -36,6 +38,10 @@ export class AppComponent {
 
   public onLogout(): void {
     this.userService.logout();
+  }
+
+  public onCreateFolder(): void {
+    this.googleService.findFolder();
   }
 
   public onDeleteGoogleToken(): void {
