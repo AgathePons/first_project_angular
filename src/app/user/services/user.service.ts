@@ -66,7 +66,6 @@ export class UserService {
         }
 
         // Store the User object locally
-        ;
         if (response === false) {
           
           this.hasUser$.next(false);

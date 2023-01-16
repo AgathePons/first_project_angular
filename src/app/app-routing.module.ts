@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
+import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
+import { AnswerResolver } from './answer/resolver/answer.resolver';
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
@@ -10,6 +13,7 @@ import { StagiaireDetailComponent } from './stagiaires/components/stagiaire-deta
 import { StagiaireTableComponent } from './stagiaires/components/stagiaire-table/stagiaire-table.component';
 import { StagiaireTestComponent } from './stagiaires/components/stagiaire-test/stagiaire-test.component';
 import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
+import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
@@ -122,9 +126,47 @@ export class AppRoutingModule {
       ]
     },
     {
+      path: 'survey/detail/:id',
+      component: SurveyDetailsComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
       path: 'survey/add',
       component: SurveyFormComponent,
       resolve: { form: SurveyResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/update/:id',
+      component: SurveyFormComponent,
+      resolve: { form: SurveyResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answers',
+      component: AnswerTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answer/add',
+      component: AnswerFormComponent,
+      resolve: { form: AnswerResolver },
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'answer/update/:id',
+      component: AnswerFormComponent,
+      resolve: { form: AnswerResolver},
       canActivate: [
         HasUserGuard
       ]

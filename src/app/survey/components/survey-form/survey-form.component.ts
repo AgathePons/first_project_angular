@@ -25,11 +25,16 @@ export class SurveyFormComponent implements OnInit {
 
   ngOnInit(): void {
     const data: any = this.route.snapshot.data;
+    console.log(data.form);
     this.surveyForm = data.form;
 
+    console.log('surveyForm.value.id ==>', this.surveyForm.value.id);
+
     if (this.surveyForm.value.id !== undefined && this.surveyForm.value.id !== 0) {
+      console.log('addMode false');
       this.addMode = false;
     } else {
+      console.log('addMode true');
       this.addMode = true;
     }
   }
@@ -42,9 +47,10 @@ export class SurveyFormComponent implements OnInit {
     if(this.addMode) {
       subscription = this.surveyService.addSurvey(dto);
     } else {
-      subscription = this.surveyService.updateSurvey(this.survey.getId(), dto);
+      subscription = this.surveyService.updateSurvey(dto);
     }
     subscription.subscribe((survey: Survey) => {
+      this.survey = survey;
       this.goBack();
     })
   }

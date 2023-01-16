@@ -27,6 +27,9 @@ import { SurveyFormComponent } from './survey/components/survey-form/survey-form
 import { StagiaireTestComponent } from './stagiaires/components/stagiaire-test/stagiaire-test.component';
 import { SearchFilterPipe } from './shared/pipes/search-filter.pipe';
 import { FormsModule } from '@angular/forms';
+import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
+import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
+import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 
 @NgModule({
   declarations: [
@@ -47,6 +50,9 @@ import { FormsModule } from '@angular/forms';
     SurveyFormComponent,
     StagiaireTestComponent,
     SearchFilterPipe
+    SurveyDetailsComponent,
+    AnswerTableComponent,
+    AnswerFormComponent
   ],
   imports: [
     BrowserModule,
