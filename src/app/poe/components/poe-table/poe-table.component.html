@@ -4,14 +4,17 @@
   Ajouter POE
 </a>
 <div *ngIf="filter">
+  <a mat-raised-button color="accent" (click)="resetFilter( )">
+    Reset filter
+  </a>
   <div class="search">
-    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
+    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterTitle"
       (input)="doSearchBar(filterTitle, filterType)" />
-    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterType"
-      (input)="doSearchBar(filterTitle, filterType)" />
-    <a mat-raised-button color="accent" (click)="resetFilter( )">
-      Reset
-    </a>
+    <mat-select matNativeControl required placeholder="Filter by title" (selectionChange)="doSearchBar(filterTitle, filterType)" formControlName="type" [(value)]="filterType">
+      <mat-option value="">--</mat-option>
+      <mat-option value="POEI">POEI</mat-option>
+      <mat-option value="POEC">POEC</mat-option>
+    </mat-select>
   </div>
   <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
 </div>

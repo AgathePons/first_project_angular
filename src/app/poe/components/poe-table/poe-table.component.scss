@@ -80,3 +80,8 @@ table {
 p {
   color: #383c52;
 }
+
+mat-select {
+  background-color: $light-color;
+  border: 3px solid $std-color;
+}
