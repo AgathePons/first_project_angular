@@ -19,6 +19,11 @@ export class UserInterceptorService implements HttpInterceptor {
     `${environment.apiBaseUrl}/user/signup`,
   ];
 
+  private readonly _googleSecuredURIs : string[] = [
+    `${environment.apiGoogleDriveBaseUrl}`,
+    `${environment.apiGoogleFormBaseUrl}`,
+  ];
+
   constructor(
     private _userService: UserService,
   ) {}
@@ -26,7 +31,7 @@ export class UserInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let request: HttpRequest<any>;
-    if (!this._isNotSecured(req.url)) {
+    if (!this._isNotSecured(req.url) && !this._isGoogleURI(req.url)) {
       if (this._userService.hasUser$.getValue()) {
         request = req.clone({
           headers: new HttpHeaders(
@@ -38,7 +43,14 @@ export class UserInterceptorService implements HttpInterceptor {
         return throwError(() => new Error('No signed user'));
       }
 
-    } else {
+    }
+    // if Google API request
+    else if (this._isGoogleURI(req.url)) {
+      console.log('google request detected');
+      request = req.clone();
+      return next.handle(request);
+    }
+    else {
       request = req.clone();
       return next.handle(request);
     }
@@ -46,6 +58,10 @@ export class UserInterceptorService implements HttpInterceptor {
 
   private _isNotSecured(url: string): boolean {
     return this._noSecuredURIs.filter((uri: string) => uri === url).length > 0;
+  }
+
+  private _isGoogleURI(url: string): boolean {
+    return this._googleSecuredURIs.filter((uri: string) => uri === url).length > 0;
   }
 }
 

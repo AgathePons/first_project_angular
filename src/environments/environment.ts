@@ -6,6 +6,8 @@ export const environment = {
   production: false,
   apiBaseUrl: "http://localhost:8080/api",
   //apiBaseUrl: "http://localhost:3000",
+  apiGoogleDriveBaseUrl: "https://www.googleapis.com/drive/v3/files",
+  apiGoogleFormBaseUrl: "https://forms.googleapis.com/v1/forms/",
   storageKeys: {
     'AUTH': 'auth'
   }
