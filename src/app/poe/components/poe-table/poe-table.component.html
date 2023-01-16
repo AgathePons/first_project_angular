@@ -1,74 +1,72 @@
 <a mat-raised-button color="accent" (click)="changeBooleanState( )">
   Filtres
-</a><a
-  mat-raised-button
-  color="accent"
-  [routerLink]="['/', 'poe', 'add']"
->
+</a><a mat-raised-button color="accent" [routerLink]="['/', 'poe', 'add']">
   Ajouter POE
 </a>
-<div *ngIf="filter" class="search">
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
-    (input)="doSearchBar(filterTitle, filterType)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterType"
-    (input)="doSearchBar(filterTitle, filterType)" />
-  <a mat-raised-button color="accent" (click)="resetFilter( )">
-    Reset
-  </a>
-<app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
+<div *ngIf="filter">
+  <div class="search">
+    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
+      (input)="doSearchBar(filterTitle, filterType)" />
+    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterType"
+      (input)="doSearchBar(filterTitle, filterType)" />
+    <a mat-raised-button color="accent" (click)="resetFilter( )">
+      Reset
+    </a>
+  </div>
+  <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
 </div>
 
 
 
 <table>
-    <thead>
-      <tr>
-        <th class="center-cell">
-          #
-        </th>
-        <th class="left-cell">
-          Title
-        </th>
-        <th class="left-cell">
-          beginDate
-        </th>
-        <th class="left-cell">
-          endDate
-        </th>
-        <th class="left-cell">
-            type
-        </th>
-        <th>
-          &nbsp;
-        </th>
+  <thead>
+    <tr>
+      <th class="center-cell">
+        #
+      </th>
+      <th class="left-cell">
+        Title
+      </th>
+      <th class="left-cell">
+        beginDate
+      </th>
+      <th class="left-cell">
+        endDate
+      </th>
+      <th class="left-cell">
+        type
+      </th>
+      <th>
+        &nbsp;
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let poe of poes">
+      <tr *ngIf="changeView(poe)">
+        <td class="center-cell">{{ poe.getId() }}</td>
+        <td> {{ poe.getTitle() }} </td>
+        <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>{{ poe.getType() }} </td>
+        <td class="center-cell">
+          <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
+            <mat-icon>visibility</mat-icon>
+          </button>
+          <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
+            <mat-icon>edit</mat-icon>
+          </button>
+          <button mat-mini-fab color="warn" type="button" (click)="onDelete(poe)">
+            <mat-icon>delete</mat-icon>
+          </button>
+        </td>
       </tr>
-    </thead>
-    <tbody>
-     <ng-container *ngFor="let poe of poes">
-          <tr *ngIf="changeView(poe)">
-          <td class="center-cell">{{ poe.getId() }}</td>
-          <td> {{ poe.getTitle() }} </td>
-          <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
-          <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
-          <td>{{ poe.getType() }} </td>
-          <td class="center-cell">
-            <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-mini-fab color="warn" type="button" (click)="onDelete(poe)" >
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td>
-        </tr>
-      </ng-container>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="6" class="right-cell"></td>
+    </ng-container>
+  </tbody>
+  <tfoot>
+    <tr>
+      <td colspan="6" class="right-cell"></td>
 
-      </tr>
-    </tfoot>
-  </table>
+    </tr>
+  </tfoot>
+</table>
