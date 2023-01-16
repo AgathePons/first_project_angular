@@ -3,6 +3,7 @@ import { Location } from '@angular/common';
 import { ActivatedRoute, Params, Router } from '@angular/router';
 import { Survey } from 'src/app/core/models/survey';
 import { SurveyService } from 'src/app/core/service/survey.service';
+import { Question } from 'src/app/core/models/question';
 
 @Component({
   selector: 'app-survey-details',
@@ -12,6 +13,7 @@ import { SurveyService } from 'src/app/core/service/survey.service';
 export class SurveyDetailsComponent implements OnInit {
 
   public survey: Survey = new Survey();
+  public question: Array<Question> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -32,8 +34,17 @@ export class SurveyDetailsComponent implements OnInit {
     });
   }
 
-  public onDelete(survey: Survey) {
-    console.log('pouet');
+  public onDelete(question: Question) {
+    this.surveyService.removeOneQuestion(this.survey.getId(), question.getId())
+    .subscribe(
+      (survey: Survey) => {
+        this.survey = survey;
+        this.question.splice(
+          this.question.findIndex((s: Question) => s.getId() === question.getId()),
+          1
+        );
+      }
+    );
   }
 
   public onBackButton(): void {
