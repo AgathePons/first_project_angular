@@ -41,7 +41,7 @@
     <mat-selection-list #stagairesSelected [(ngModel)]="stagairesToAdd" (selectionChange)="onListSelectionChange($event)">
       <!-- <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()"> -->
       <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire">
-        {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}
+        {{stagiaire.getFirstName()}} {{stagiaire.getLastName() | uppercase }}
       </mat-list-option>
     </mat-selection-list>
   </mat-card-content>

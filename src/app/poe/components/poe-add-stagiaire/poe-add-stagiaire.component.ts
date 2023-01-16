@@ -47,6 +47,7 @@ export class PoeAddStagiaireComponent implements OnInit {
                 return !this.poe.getTrainees().find(elem => elem.getId() === stagiaireToCheck.getId());
               });
               this.stagiaires = filteredStagiaires;
+              this.stagiaireService.sortByLastName(this.stagiaires);
               this.allStagiaires = this.stagiaires
             });
           });
