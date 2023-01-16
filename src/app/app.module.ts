@@ -49,7 +49,7 @@ import { AnswerFormComponent } from './answer/components/answer-form/answer-form
     SurveyTableComponent,
     SurveyFormComponent,
     StagiaireTestComponent,
-    SearchFilterPipe
+    SearchFilterPipe,
     SurveyDetailsComponent,
     AnswerTableComponent,
     AnswerFormComponent
