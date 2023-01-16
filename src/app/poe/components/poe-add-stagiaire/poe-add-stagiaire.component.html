@@ -12,32 +12,35 @@
     </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <p>Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaires</p>
+    <p *ngIf="poe.getTrainees().length === 0">Il n'y a actuellement aucun stagiaire dans cette POE</p>
+    <p *ngIf="poe.getTrainees().length === 1">Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaire</p>
+    <p *ngIf="poe.getTrainees().length > 1">Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaires</p>
     <p>Dans cette liste, il y a {{stagiaires.length}} stagiaires</p>
 
     <button
         mat-raised-button
         color="primary"
         class="btn add-btn"
-        [disabled]="stagairesIdToAdd.length === 0"
+        [disabled]="stagairesToAdd.length === 0"
         (click)="onAddManyStagiaires()"
       >
-        Add {{stagairesIdToAdd.length}} Stagiaires 💚
+        Add {{stagairesToAdd.length}} Stagiaires 💚
       </button>
       <a mat-raised-button color="accent" (click)="changeBooleanState( )">
         Filtres
       </a>
       <div *ngIf="filter" class="search">
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterFN"
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by First Name" [(ngModel)]="filterFN"
           (input)="doSearchBar(filterFN, filterLN)" />
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by type" [(ngModel)]="filterLN"
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Last Name" [(ngModel)]="filterLN"
           (input)="doSearchBar(filterFN, filterLN)" />
         <a mat-raised-button color="accent" (click)="resetFilter( )">
           Reset
         </a>
       </div>
-    <mat-selection-list #stagairesSelected (selectionChange)="onListSelectionChange($event)">
-      <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()">
+    <mat-selection-list #stagairesSelected [(ngModel)]="stagairesToAdd" (selectionChange)="onListSelectionChange($event)">
+      <!-- <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire.getId()"> -->
+      <mat-list-option *ngFor="let stagiaire of stagiaires" [value]="stagiaire">
         {{stagiaire.getFirstName()}} {{stagiaire.getLastName()}}
       </mat-list-option>
     </mat-selection-list>
