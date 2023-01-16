@@ -3,7 +3,6 @@ export class User {
   private _login: string = '';
   private _token: string = '';
   private _roles: string[] = [];
-  private _googleToken: string = '';
 
   public get id(): number {
     return this._id!;
@@ -18,6 +17,7 @@ export class User {
   public set login(login: string) {
     this._login = login;
   }
+
   public set token(token: string) {
     this._token = token;
   }
@@ -34,11 +34,4 @@ export class User {
     return this._roles;
   }
 
-  public get googleToken(): string {
-    return this._googleToken;
-  }
-
-  public set googleToken(googleToken: string) {
-    this._googleToken = googleToken;
-  }
 }

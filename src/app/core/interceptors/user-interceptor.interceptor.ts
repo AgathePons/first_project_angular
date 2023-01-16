@@ -50,7 +50,7 @@ export class UserInterceptorService implements HttpInterceptor {
       if (this._userService.hasGoogleToken$.getValue()) {
         request = req.clone({
           headers: new HttpHeaders(
-            'Authorization: Bearer ' + this._userService.user?.googleToken
+            'Authorization: Bearer ' + this._userService.googleToken?.googleToken
           )
         });
         return next.handle(request);

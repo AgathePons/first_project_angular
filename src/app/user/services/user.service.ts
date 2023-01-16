@@ -8,6 +8,7 @@ import { SessionStrategy } from 'src/app/core/strategies/storage/session-strateg
 import { environment } from 'src/environments/environment';
 import { SignupDto } from '../dto/signup-dto';
 import { UserDto } from '../dto/user-dto';
+import { GoogleToken } from '../models/google-token';
 import { User } from '../models/user';
 
 
@@ -17,7 +18,7 @@ import { User } from '../models/user';
 export class UserService {
 
   private _user: User | null = null;
-  private _googleToken: string | null = null;
+  private _googleToken: GoogleToken | null = null;
   private _storageStrategy!: IStorageStrategy;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
   public hasGoogleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
@@ -31,7 +32,8 @@ export class UserService {
     if (this._user !== null) {
       console.log('user connected, set google token:', token);
 
-      this._googleToken = token;
+      this._googleToken = new GoogleToken();
+      this._googleToken.googleToken = token
       this._storageStrategy = new SessionStrategy();
       this._storageStrategy.storeItem(`${environment.storageKeys.GOOGLE}`, JSON.stringify(this._googleToken));
       this.hasGoogleToken$.next(true);
@@ -124,6 +126,10 @@ export class UserService {
 
   public get user(): User | null {
     return this._user;
+  }
+
+  public get googleToken(): GoogleToken | null {
+    return this._googleToken;
   }
 
   public hasGoogleToken(): BehaviorSubject<boolean> {
