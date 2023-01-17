@@ -16,9 +16,15 @@ export class PoeTableComponent implements OnInit {
   public stopDate: String | null = null;
   public filterDate: Date = new Date();
   public poes: Array<Poe> = [];
+  public allPoes: Array<Poe> = [];
+
   public poeOneMonth: Date = this.poeService.dateFilter(1);
   public poeSixMonths: Date = this.poeService.dateFilter(6);
   public poeOneYear: Date = this.poeService.dateFilter(12);
+
+  filterTitle = '';
+  filterType = '';
+  filter = false;
 
 
   public constructor(
@@ -28,7 +34,8 @@ export class PoeTableComponent implements OnInit {
 
   ngOnInit(): void {
     this.poeService.findAll().subscribe((poes: Poe[]) => {
-      this.poes = poes;
+      this.poes = poes
+      this.allPoes = this.poes
     });
 
   }
@@ -74,8 +81,8 @@ export class PoeTableComponent implements OnInit {
     // console.log('result égalite filtre1', this.stopDate === 'oneMonth');
 
 
-    
-    
+
+
 
     if (this.stopDate === null) {
       return true;
@@ -85,28 +92,57 @@ export class PoeTableComponent implements OnInit {
     // if (this.stopDate === this.dateFilter(1)) {
     else if (this.stopDate === 'oneMonth') {
       console.log('filtre 1 mois');
-      
-    return poe.getEndDate() < this.poeOneMonth && poe.getEndDate() > this.poeSixMonths
+
+      return poe.getEndDate() < this.poeOneMonth && poe.getEndDate() > this.poeSixMonths
       // return false;
     }
     else if (this.stopDate === 'sixMonths') {
       console.log('filtre 6 mois');
       return poe.getEndDate() < this.poeSixMonths && poe.getEndDate() > this.poeOneYear
-    
+
     }
     else if (this.stopDate === 'oneYear') {
-    console.log('filtre 12 mois');
-    
+      console.log('filtre 12 mois');
+
       return poe.getEndDate() < this.poeOneYear;
     }
     return false;
-    
+
+  }
+
+  public onDetailsPoe(id: number) {
+    this.router.navigate(['/', 'poe', id]);
+
+  }
+
+  doSearchBar(valueTitle: string, valueType: string): void {
+
+    let temporaryPoes: Array<Poe>
+
+      temporaryPoes = this.allPoes.filter((val) =>
+        val.getTitle().toLowerCase().includes(valueTitle.toLowerCase())
+      )
+      this.poes = temporaryPoes.filter((val) =>
+        val.getType().toLowerCase().includes(valueType.toLowerCase())
+      );
+  }
+
+ 
+
+  changeBooleanState() {
+    console.log('changebutton call');
+
+    if (this.filter) { this.filter = false }
+    else {
+      this.filter = true
+    }
   }
 
 
-  public onDetailsPoe (id: number) {
-    this.router.navigate(['/', 'poe', id]);
-
+  resetFilter(): void {
+    this.filterTitle = '';
+    this.filterType = '';
+    this.poes = this.allPoes
   }
 
 

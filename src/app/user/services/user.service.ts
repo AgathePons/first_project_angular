@@ -1,28 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { BehaviorSubject, catchError, map, Observable, of, take } from 'rxjs';
+import { BehaviorSubject, catchError, map, observable, Observable, of, take } from 'rxjs';
 import { IStorageStrategy } from 'src/app/core/strategies/storage/i-storage-strategy';
 import { LocalStrategy } from 'src/app/core/strategies/storage/local-strategy';
 import { SessionStrategy } from 'src/app/core/strategies/storage/session-strategy';
 import { environment } from 'src/environments/environment';
 import { SignupDto } from '../dto/signup-dto';
 import { UserDto } from '../dto/user-dto';
+import { GoogleToken } from '../models/google-token';
 import { User } from '../models/user';
 
-// TODO remove after wiring to backend
-const users: UserDto[] = [
-  {
-    id: 1,
-    login: 'admin',
-    password: '000',
-  },
-  {
-    id: 2,
-    login: 'guest',
-    password: '111',
-  },
-];
 
 @Injectable({
   providedIn: 'root'
@@ -30,14 +18,38 @@ const users: UserDto[] = [
 export class UserService {
 
   private _user: User | null = null;
+  private _googleToken: GoogleToken | null = null;
   private _storageStrategy!: IStorageStrategy;
   public hasUser$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
-
+  public hasGoogleToken$: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
   constructor(
     private router: Router,
     private httpClient: HttpClient,
   ) { }
+
+  public setGoogleToken(token: string): Observable<boolean> {
+    if (this._user !== null) {
+      console.log('user connected, set google token:', token);
+
+      this._googleToken = new GoogleToken();
+      this._googleToken.googleToken = token
+      this._storageStrategy = new SessionStrategy();
+      this._storageStrategy.storeItem(`${environment.storageKeys.GOOGLE}`, JSON.stringify(this._googleToken));
+      this.hasGoogleToken$.next(true);
+      const observable = Observable.create((observer: { next: (arg0: boolean) => void; complete: () => void; }) => {
+        observer.next(true);
+        observer.complete();
+      })
+      return observable;
+    } else {
+      const observable = Observable.create((observer: { next: (arg0: boolean) => void; complete: () => void; }) => {
+        observer.next(false);
+        observer.complete();
+      })
+      return observable;
+    }
+  }
 
   public login(formData: any): Observable<boolean> {
     console.log('user service login POUET', formData);
@@ -67,12 +79,12 @@ export class UserService {
 
         // Store the User object locally
         if (response === false) {
-          
+
           this.hasUser$.next(false);
           console.log('hasuser = faux', this.hasUser$.getValue());
-        
+
         } else {
-          this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user));
+          this._storageStrategy.storeItem(`${environment.storageKeys.AUTH}`, JSON.stringify(this._user))
           this.hasUser$.next(true);
           console.log('hasuser = true', this.hasUser$.getValue());
 
@@ -91,10 +103,13 @@ export class UserService {
     this.hasUser$.next(false);
   };
 
-  public signup(dto: SignupDto): Observable<any> {
-    // TODO remove
-    console.log('userService > signup');
+  public deleteGoogleToken(): void {
+    this._googleToken = null;
+    this._removeGoogleToken(new SessionStrategy());
+    this.hasGoogleToken$.next(false);
+  }
 
+  public signup(dto: SignupDto): Observable<any> {
     return this.httpClient.post<any>(
       `${environment.apiBaseUrl}/user/signup`,
       dto
@@ -113,6 +128,30 @@ export class UserService {
     return this._user;
   }
 
+  public get googleToken(): GoogleToken | null {
+    return this._googleToken;
+  }
+
+  public getGoogleTokenUserService(): GoogleToken | null {
+    return this._googleToken;
+  }
+
+  public hasGoogleToken(): BehaviorSubject<boolean> {
+    if (!this._googleToken) {
+      this._readGoogleStorage(new SessionStrategy());
+    }
+    return this.hasGoogleToken$;
+  }
+
+  private _readGoogleStorage(storage: IStorageStrategy): void {
+    const storedItem: string | null = storage.getItem(`${environment.storageKeys.GOOGLE}`);
+    if (storedItem !== null) {
+      const storedGoogleToken = JSON.parse(storedItem);
+      this._googleToken = storedGoogleToken
+      this.hasGoogleToken$.next(true);
+    }
+  }
+
   private _readStorage(storage: IStorageStrategy): void {
     const storedItem: string | null = storage.getItem(`${environment.storageKeys.AUTH}`);
     if (storedItem !== null) {
@@ -128,5 +167,9 @@ export class UserService {
 
   private _removeItem(storage: IStorageStrategy): void {
     storage.removeItem(`${environment.storageKeys.AUTH}`);
+  }
+
+  private _removeGoogleToken(storage: IStorageStrategy): void {
+    storage.removeItem(`${environment.storageKeys.GOOGLE}`)
   }
 }

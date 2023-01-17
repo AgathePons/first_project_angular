@@ -18,12 +18,12 @@ import {
 } from '@angular/material/core';
 
 import 'moment/locale/fr';
+import { SearchFilterPipe } from './pipes/search-filter.pipe';
 
 
 
 
 @NgModule({
-  declarations: [],
   imports: [
     CommonModule
   ],

@@ -17,6 +17,7 @@ export class User {
   public set login(login: string) {
     this._login = login;
   }
+
   public set token(token: string) {
     this._token = token;
   }
@@ -32,4 +33,5 @@ export class User {
   public getRoles(): string[] {
     return this._roles;
   }
+
 }

@@ -1,0 +1,46 @@
+<ng-container *ngIf="questionForm">
+
+    <form [formGroup]="questionForm" (ngSubmit)="onSubmit()" [ngClass]="{'valid': questionForm.valid}">
+  
+        <mat-form-field>
+          <input
+            matInput
+            id="text"
+            type="text"
+            formControlName="text"
+            [ngClass]="{'valid': true}"
+            placeholder="Question"
+          >
+  
+          <mat-error *ngIf="c['text'].errors && c['text'].touched">
+            Le texte est obligatoire
+          </mat-error>
+        </mat-form-field>
+  
+        <mat-form-field appearance="fill">
+          <mat-label>Type de question</mat-label>
+          <mat-select matNativeControl required formControlName="answerType">
+            <mat-option value="YES_NO">Oui ou non</mat-option>
+            <mat-option value="CHOOSE_ONE">Une réponse à cocher</mat-option>
+            <mat-option value="CHOOSE_MANY">Plusieurs réponses à cocher</mat-option>
+            <mat-option value="FREE">Réponse libre</mat-option>
+          </mat-select>
+        </mat-form-field>
+  
+  
+        <div class="btn-list">
+          <button
+            mat-raised-button
+            color="primary"
+            [disabled]="!questionForm.valid"
+            class="btn add-btn"
+          >
+            {{ addMode ? 'Add 💚' : 'Update 💚'}}
+          </button>
+          <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+            Cancel 💀
+          </button>
+        </div>
+    </form>
+  
+    </ng-container>

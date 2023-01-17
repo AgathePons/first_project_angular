@@ -1,0 +1,73 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      Créer des Google forms [POC]
+    </mat-card-title>
+    <mat-card-subtitle>
+      Proof of concept pour générer des formulaires Google à partir des formulaires créés
+    </mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-content>
+    <mat-list>
+      <mat-list-item *ngIf="hasUser && !hasGoogleToken">
+        <button mat-mini-fab color="accent" [routerLink]="['/', 'googletoken']" >
+          <mat-icon>vpn_key</mat-icon>
+        </button>
+        <span>Se connecter à compte Google avec un token</span>
+      </mat-list-item>
+      <mat-list-item *ngIf="hasUser && hasGoogleToken">
+        Un token Google a été enregistré
+      </mat-list-item>
+      <mat-list-item *ngIf="hasUser && hasGoogleToken">
+        <button mat-mini-fab color="accent" (click)="onDeleteGoogleToken()" *ngIf="hasUser && hasGoogleToken">
+          <mat-icon>delete</mat-icon>
+        </button>
+        <span>Supprimer le token Google</span>
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId === ''">
+        <button mat-mini-fab color="accent" (click)="onCheckFolder()" *ngIf="hasUser && hasGoogleToken">
+          <mat-icon>create_new_folder</mat-icon>
+        </button>
+        <span>Vérifier l'existence d'un dossier nommé "POE formulaires de suivi" et si besoin, le créer</span>
+      </mat-list-item>
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
+        Le folder "POE formulaires de suivi" a été trouvé
+      </mat-list-item>
+      <mat-divider></mat-divider>
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
+        Voici la liste des formulaires créés dans l'appli et prêts à être générés
+
+      </mat-list-item>
+    </mat-list>
+    <table *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
+      <thead>
+        <tr>
+          <th class="left-cell">
+            Title
+          </th>
+          <th class="left-cell">
+            Actions
+          </th>
+          <th class="left-cell">
+            Lien vers le Google form
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let survey of surveys">
+          <tr>
+            <td> {{ survey.getTitle() }} </td>
+            <td>
+              <button mat-mini-fab color="accent" type="button" (click)="onGenerate(survey)">
+                <mat-icon>autorenew</mat-icon>
+              </button>
+            </td>
+            <td>Lien</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+  </mat-card-content>
+
+</mat-card>

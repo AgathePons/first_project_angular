@@ -1,0 +1,32 @@
+<form [formGroup]="googleTokenForm" (ngSubmit)="onSetGoogleToken()" [ngClass]="{'valid': googleTokenForm.valid}">
+  <div class="field-control">
+    <mat-form-field>
+      <input matInput formControlName="googleToken" placeholder="Your token">
+      <mat-error *ngIf="googleTokenForm.get('googleToken')!.errors && googleTokenForm.get('googleToken')!.touched">
+        Token required
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+
+  <div class="btn-list">
+    <button
+      class="btn valid-btn"
+      mat-raised-button
+      color="primary"
+      [disabled]="googleTokenForm.invalid"
+    >
+      Set Token
+    </button>
+    <button
+      class="btn"
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/','googlepage']"
+    >
+    Cancel
+    </button>
+  </div>
+	<div style="color : red" *ngIf='error'>{{error}}</div>
+
+</form>
