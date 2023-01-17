@@ -59,7 +59,7 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
     AnswerFormComponent,
     QuestionTableComponent,
     QuestionFormComponent,
-    GoogleMainPageComponent
+    GoogleMainPageComponent,
     SurveyAddQuestionComponent
   ],
   imports: [
