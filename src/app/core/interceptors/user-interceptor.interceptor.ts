@@ -21,6 +21,7 @@ export class UserInterceptorService implements HttpInterceptor {
 
   private readonly _googleSecuredURIs : string[] = [
     `${environment.apiGoogleDriveBaseUrl}?pageSize=10&q=name='POE formulaires de suivi'`,
+    `${environment.apiGoogleDriveBaseUrl}`,
     `${environment.apiGoogleFormBaseUrl}`,
   ];
 

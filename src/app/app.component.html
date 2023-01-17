@@ -32,15 +32,6 @@
       </h1>
     </span>
     <span class="example-spacer"></span>
-    <button mat-mini-fab color="accent" [routerLink]="['/', 'googletoken']" *ngIf="hasUser && !hasGoogleToken">
-      <mat-icon>vpn_key</mat-icon>
-    </button>
-    <button mat-mini-fab color="accent" (click)="onCreateFolder()" *ngIf="hasUser && hasGoogleToken">
-      <mat-icon>create_new_folder</mat-icon>
-    </button>
-    <button mat-mini-fab color="accent" (click)="onDeleteGoogleToken()" *ngIf="hasUser && hasGoogleToken">
-      <mat-icon>delete</mat-icon>
-    </button>
     <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="!hasUser">
       <mat-icon>account_circle</mat-icon>
     </button>

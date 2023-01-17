@@ -34,7 +34,7 @@ export class GoogleService {
   public createDriveFolder(): Observable<any> {
 
     const requestBody = {
-      "name": "POE forms",
+      "name": "POE formulaires de suivi",
       "mimeType": "application/vnd.google-apps.folder"
     };
 

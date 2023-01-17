@@ -11,7 +11,8 @@ export class GoogleMainPageComponent implements OnInit {
 
   public hasUser: boolean = false;
   public hasGoogleToken: boolean = false;
-  public googleFolder: any = undefined;
+  public googleFolderResponse: any | null = null;
+  public googleFolderId: string | null = null;
 
   constructor(
     private userService: UserService,
@@ -29,11 +30,25 @@ export class GoogleMainPageComponent implements OnInit {
       });
   }
 
-  public onCreateFolder(): void {
+  public onCheckFolder(): void {
     console.log('AppComponent >> onCreateFolder');
     this.googleService.findFolder().subscribe((googleFolder: any) => {
-      this.googleFolder = googleFolder;
+      this.googleFolderResponse = googleFolder;
+      console.log('googleFolderResponse', this.googleFolderResponse);
+      if (this.googleFolderResponse.files.length) {
+        console.log('folder found');
+        this.googleFolderId = this.googleFolderResponse.files[0].id;
+      } else {
+        console.log('folder not found');
+        this.googleService.createDriveFolder().subscribe((googleFolder: any) => {
+          console.log('createDriveFolder response', googleFolder);
+          this.googleFolderId = googleFolder.id;
+        })
+      }
     });
+
+
+
   }
 
   public onDeleteGoogleToken(): void {
