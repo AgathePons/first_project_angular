@@ -5,6 +5,7 @@ export class Question {
   private text: string = '';
   private answerType: string = '';
   private answers: Array<Answer> = [];
+  private orderInSurvey: number = 0;
 
   public getId(): number {
     return this.id;
@@ -36,5 +37,13 @@ export class Question {
 
   public setAnswers(answers: Array<Answer>): void {
     this.answers = answers;
+  }
+
+  public getOrderInSurvey(): number {
+    return this.orderInSurvey;
+  }
+
+  public setOrderInSurvey(order: number): void {
+    this.orderInSurvey = order;
   }
 }

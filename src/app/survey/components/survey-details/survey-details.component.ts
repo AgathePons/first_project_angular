@@ -36,6 +36,11 @@ export class SurveyDetailsComponent implements OnInit {
         console.log('questions found >>', this.survey.getQuestions());
       });
     });
+    console.log('getquestion of surv = ', this.survey.getQuestions());
+    
+  this.survey.getQuestions().forEach((question: Question) => {
+    this.questionArrayToShowDetails.push(question.getId())
+  })
   }
 
   public onDelete(question: Question) {

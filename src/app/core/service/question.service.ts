@@ -29,6 +29,7 @@ export class QuestionService {
             question.setText(inputQuestion.text);
             question.setAnswerType(inputQuestion.answerType);
             question.setAnswers(inputQuestion.answers)
+            question.setOrderInSurvey(inputQuestion.orderInSurvey)
             return question;
           })
         })
@@ -46,6 +47,7 @@ export class QuestionService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          
           const answers: Array<Answer> = inputQuestion.answers
             .map((inputAnswer: any) => {
               const answer: Answer = new Answer();
