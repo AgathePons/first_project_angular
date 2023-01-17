@@ -50,9 +50,6 @@
             <td class="center-cell">{{ question.getId() }}</td>
             <td>
               <div>{{ question.getText() }}</div>
-              <div *ngIf="questionArrayToShowDetails.includes(question.getId())">
-                <div *ngFor="let answer of question.getAnswers()">{{answer.getText()}}</div>
-              </div>
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
@@ -69,14 +66,15 @@
               </button>
             </td>
           </tr>
+          <div *ngIf="questionArrayToShowDetails.includes(question.getId())">
           <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
             <div class="answer">
             <p>{{answer.getText()}}</p>
             <p>X</p>
             </div>
           </ng-container>
-          <p>Add answer</p>
-
+          <p class="add-text"> + Add answer</p>
+        </div>
         </ng-container>
       </tbody>
       <tfoot>
