@@ -20,7 +20,7 @@ export class UserInterceptorService implements HttpInterceptor {
   ];
 
   private readonly _googleSecuredURIs : string[] = [
-    `${environment.apiGoogleDriveBaseUrl}`,
+    `${environment.apiGoogleDriveBaseUrl}?pageSize=10&q=name='POE formulaires de suivi'`,
     `${environment.apiGoogleFormBaseUrl}`,
   ];
 
@@ -31,7 +31,12 @@ export class UserInterceptorService implements HttpInterceptor {
   intercept(req: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<any>> {
 
     let request: HttpRequest<any>;
+    console.log('INTERCEPTOR');
+
+    // if API survey request
     if (!this._isNotSecured(req.url) && !this._isGoogleURI(req.url)) {
+      console.log('api survey endpoint detected');
+
       if (this._userService.hasUser$.getValue()) {
         request = req.clone({
           headers: new HttpHeaders(
@@ -45,12 +50,19 @@ export class UserInterceptorService implements HttpInterceptor {
 
     }
     // if Google API request
-    else if (this._isGoogleURI(req.url)) {
+    if (this._isGoogleURI(req.url)) {
       console.log('google request detected');
+      console.log(this._userService.getGoogleTokenUserService()?.googleToken);
+
+      const tokenObject: any = this._userService.getGoogleTokenUserService()?._token;
+      const token: any = tokenObject.googleToken;
+      console.log('token:', token);
+
+
       if (this._userService.hasGoogleToken$.getValue()) {
         request = req.clone({
           headers: new HttpHeaders(
-            'Authorization: Bearer ' + this._userService.googleToken?.googleToken
+            'Authorization: Bearer ' + token
           )
         });
         return next.handle(request);
@@ -60,6 +72,7 @@ export class UserInterceptorService implements HttpInterceptor {
 
     }
     else {
+      console.log('no secured endpoint neither google endpoint detected');
       request = req.clone();
       return next.handle(request);
     }
@@ -70,6 +83,7 @@ export class UserInterceptorService implements HttpInterceptor {
   }
 
   private _isGoogleURI(url: string): boolean {
+    console.log('check if google uri asked');
     return this._googleSecuredURIs.filter((uri: string) => uri === url).length > 0;
   }
 }

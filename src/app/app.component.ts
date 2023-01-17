@@ -16,6 +16,7 @@ export class AppComponent {
   public hasGoogleToken: boolean = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
+  public googleFolder: any = undefined;
 
   public inputType: string = 'password';
 
@@ -41,7 +42,10 @@ export class AppComponent {
   }
 
   public onCreateFolder(): void {
-    this.googleService.findFolder();
+    console.log('AppComponent >> onCreateFolder');
+    this.googleService.findFolder().subscribe((googleFolder: any) => {
+      this.googleFolder = googleFolder;
+    });
   }
 
   public onDeleteGoogleToken(): void {

@@ -132,6 +132,10 @@ export class UserService {
     return this._googleToken;
   }
 
+  public getGoogleTokenUserService(): GoogleToken | null {
+    return this._googleToken;
+  }
+
   public hasGoogleToken(): BehaviorSubject<boolean> {
     if (!this._googleToken) {
       this._readGoogleStorage(new SessionStrategy());

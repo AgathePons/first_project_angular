@@ -1,7 +1,9 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, Observable, take } from 'rxjs';
+import { Observable } from 'rxjs';
+import { catchError, map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
+import { Stagiaire } from '../models/stagiaire';
 
 @Injectable({
   providedIn: 'root'
@@ -19,7 +21,7 @@ export class GoogleService {
     console.log('find one folder called');
 
     return this.httpClient.get<any>(
-      `${this.apiGoogleDriveBaseUrl}?pageSize=10&q=name ='test'`
+      `${this.apiGoogleDriveBaseUrl}?pageSize=10&q=name='POE formulaires de suivi'`
     )
     .pipe(
       take(1),
