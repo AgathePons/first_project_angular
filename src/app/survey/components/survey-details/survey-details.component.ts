@@ -15,7 +15,7 @@ export class SurveyDetailsComponent implements OnInit {
   public survey: Survey = new Survey();
   public question: Array<Question> = [];
   public questionArrayToShowDetails: Array<number> = [];
-  public showAllAnswers: boolean = false;
+  public showAllAnswers: boolean = true;
 
   constructor(
     private route: ActivatedRoute,
