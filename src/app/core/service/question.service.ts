@@ -105,4 +105,9 @@ export class QuestionService {
       { observe: 'response' }
     );
   }
+
+  public sortById(questions: Question[]) {
+
+    questions = questions.sort((a,b) => a.getId() > b.getId() ? 1 : -1);
+  }
 }

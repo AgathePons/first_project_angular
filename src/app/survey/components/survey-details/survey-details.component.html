@@ -23,9 +23,13 @@
       <span class="info-bloc__key">Level: </span>
       <span class="info-bloc__value">{{ survey.getLevel() }}</span>
     </div>
-    <a mat-raised-button color="accent">
-      Ajouter des questions dans ce questionnaire
-    </a>
+    <a
+      mat-raised-button
+      color="accent"
+      [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]"
+      >
+        Ajouter des questions dans ce questionnaire
+      </a>
     <table>
       <thead>
         <tr>

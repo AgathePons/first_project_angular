@@ -93,6 +93,33 @@ export class SurveyService {
     );
   }
 
+  public addManyQuestions(id: number,ids: Array<number>): Observable<Survey> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addQuestions`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputSurvey: any) => {
+        const survey: Survey = new Survey();
+        survey.setId(inputSurvey.id);
+        survey.setTitle(inputSurvey.title);
+        survey.setLevel(inputSurvey.level);
+        survey.setPoeType(inputSurvey.poeType);
+        const questions: Array<Question> = inputSurvey.questions
+        .map((inputQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(inputQuestion.id);
+          question.setText(inputQuestion.text);
+          question.setAnswerType(inputQuestion.answerType);
+          return question
+        })
+        survey.setQuestions(questions);
+        return survey
+      })
+    );
+  }
+
   public updateSurvey(survey: SurveyDto): Observable<Survey> {
     return this.httpClient.put<any>(
       `${this.controllerBaseUrl}/${survey.id}`, survey
@@ -144,5 +171,7 @@ export class SurveyService {
       })
     );
   }
+
+
 
 }
