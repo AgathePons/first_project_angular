@@ -32,6 +32,7 @@ import { AnswerTableComponent } from './answer/components/answer-table/answer-ta
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 import { QuestionTableComponent } from './question/components/question-table/question-table.component';
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
+import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 
 @NgModule({
   declarations: [
@@ -56,7 +57,8 @@ import { QuestionFormComponent } from './question/components/question-form/quest
     AnswerTableComponent,
     AnswerFormComponent,
     QuestionTableComponent,
-    QuestionFormComponent
+    QuestionFormComponent,
+    GoogleMainPageComponent
   ],
   imports: [
     BrowserModule,

@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { AnswerResolver } from './answer/resolver/answer.resolver';
+import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
@@ -61,6 +62,13 @@ export class AppRoutingModule {
     {
       path: 'googletoken',
       component: GoogleTokenFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'googlepage',
+      component: GoogleMainPageComponent,
       canActivate: [
         HasUserGuard
       ]
