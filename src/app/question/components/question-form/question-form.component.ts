@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/core/models/question';
@@ -17,7 +17,8 @@ export class QuestionFormComponent implements OnInit {
   public questionForm!: FormGroup;
   public addMode: boolean = true;
   public question!: Question;
-
+  @Input() public fromSurvey: boolean = false;
+  
   constructor(
     private questionService: QuestionService,
     private router: Router,
@@ -26,14 +27,23 @@ export class QuestionFormComponent implements OnInit {
 
   ngOnInit(): void {
     const data: any = this.route.snapshot.data;
-    console.log(data.form);
+
+    console.log('this data = ', data);
+    
+
     this.questionForm = data.form;
 
-    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0) {
+    console.log('this questionForm = ', this.questionForm)
+
+    
+
+    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && !this.fromSurvey ) {
       this.addMode = false;
     } else {
       this.addMode = true;
     }
+
+    
   }
 
   public onSubmit(): void {
