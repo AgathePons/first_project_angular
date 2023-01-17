@@ -14,6 +14,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   public survey: Survey = new Survey();
   public question: Array<Question> = [];
+  public questionArrayToShowDetails: Array<number> = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,6 +30,8 @@ export class SurveyDetailsComponent implements OnInit {
       this.surveyService.findOne(surveyId)
       .subscribe((survey: Survey) => {
         this.survey = survey;
+        console.log('answers of questions = ', this.survey.getQuestions());
+        
         console.log('questions found >>', this.survey.getQuestions());
       });
     });
@@ -45,6 +48,26 @@ export class SurveyDetailsComponent implements OnInit {
         );
       }
     );
+  }
+  
+  public onDetailsQuestion(id: number) {
+    this.questionArrayToShowDetails.push(id)
+    console.log('ids = ', this.questionArrayToShowDetails)
+    
+
+  }
+  public onDetailsQuestionOff(id: number) {
+
+    console.log('Je supprime l id ', id);
+    
+    this.questionArrayToShowDetails.forEach((number) => {
+      if(number === id) {
+        this.questionArrayToShowDetails.splice(this.questionArrayToShowDetails.indexOf(number),1)
+      }
+    })
+    console.log('ids = ', this.questionArrayToShowDetails);
+    
+
   }
 
   public onBackButton(): void {

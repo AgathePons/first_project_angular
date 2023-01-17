@@ -12,56 +12,73 @@
   </mat-card-header>
   <mat-card-content>
     <div class="info-bloc">
-        <span class="info-bloc__key">Title: </span>
-        <span class="info-bloc__value">{{ survey.getTitle() }}</span>
-      </div>
+      <span class="info-bloc__key">Title: </span>
+      <span class="info-bloc__value">{{ survey.getTitle() }}</span>
+    </div>
     <div class="info-bloc">
-        <span class="info-bloc__key">Type: </span>
-        <span class="info-bloc__value">{{ survey.getPoeType() }}</span>
-      </div>
+      <span class="info-bloc__key">Type: </span>
+      <span class="info-bloc__value">{{ survey.getPoeType() }}</span>
+    </div>
     <div class="info-bloc">
-        <span class="info-bloc__key">Level: </span>
-        <span class="info-bloc__value">{{ survey.getLevel() }}</span>
-      </div>
-      <a
-        mat-raised-button
-        color="accent"
-      >
-        Ajouter des questions dans ce questionnaire
-      </a>
-      <table>
-        <thead>
+      <span class="info-bloc__key">Level: </span>
+      <span class="info-bloc__value">{{ survey.getLevel() }}</span>
+    </div>
+    <a mat-raised-button color="accent">
+      Ajouter des questions dans ce questionnaire
+    </a>
+    <table>
+      <thead>
+        <tr>
+          <th class="center-cell">
+            #
+          </th>
+          <th class="left-cell">
+            Texte
+          </th>
+          <th class="left-cell">
+            Type de réponse
+          </th>
+          <!-- <th class="left-cell">
+            Réponses
+          </th> -->
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let question of survey.getQuestions()">
           <tr>
-            <th class="center-cell">
-              #
-            </th>
-            <th class="left-cell">
-              Texte
-            </th>
-            <th class="left-cell">
-              Type de réponse
-            </th>
-            <th>&nbsp;</th>
+            <td class="center-cell">{{ question.getId() }}</td>
+            <td>
+              <div>{{ question.getText() }}</div>
+            </td>
+            <td>{{ question.getAnswerType() }}</td>
+            <td class="center-cell">
+              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+                type="button" (click)="onDetailsQuestion(question.getId())">
+                <mat-icon>assignment</mat-icon>
+              </button>
+              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+                type="button" (click)="onDetailsQuestionOff(question.getId())">
+                X
+              </button>
+              <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let question of survey.getQuestions()">
-            <tr>
-              <td class="center-cell">{{ question.getId() }}</td>
-              <td>
-                {{ question.getText() }}
-              </td>
-              <td>{{ question.getAnswerType() }}</td>
-              <td class="center-cell">
-                <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </tr>
+          <div *ngIf="questionArrayToShowDetails.includes(question.getId())">
+          <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
+            <div class="answer">
+            <p>{{answer.getText()}}</p>
+            <p>X</p>
+            </div>
           </ng-container>
-        </tbody>
-        <tfoot>
-        </tfoot>
-      </table>
+          <p class="add-text"> + Add answer</p>
+        </div>
+        </ng-container>
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
   </mat-card-content>
 </mat-card>

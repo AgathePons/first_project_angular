@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { SurveyDto } from 'src/app/survey/dto/survey-dto';
 import { environment } from 'src/environments/environment';
+import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { Survey } from '../models/survey';
 
@@ -57,6 +58,15 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              return answer;
+            })
+          question.setAnswers(answers);
+
           return question;
         })
         survey.setQuestions(questions);
