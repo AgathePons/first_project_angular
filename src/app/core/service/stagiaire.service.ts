@@ -162,7 +162,7 @@ export class StagiaireService {
 
     stagiaires = stagiaires.sort((a,b) => a.getId() < b.getId() ? 1 : -1);
   }
-  
+
   public sortByLastName(stagiaires: Stagiaire[]) {
 
     stagiaires = stagiaires.sort((a,b) => a.getLastName().toLowerCase() > b.getLastName().toLowerCase() ? 1 : -1);

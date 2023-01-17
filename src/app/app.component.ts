@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Stagiaire } from './core/models/stagiaire';
+import { GoogleService } from './core/service/google.service';
 import { StagiaireService } from './core/service/stagiaire.service';
 import { UserService } from './user/services/user.service';
 
@@ -12,14 +13,17 @@ export class AppComponent {
   public title = 'Aelion suivi des stagiaire';
   public isOverlayVisible = false;
   public hasUser: boolean = false;
+  public hasGoogleToken: boolean = false;
 
   public stagiaires: Array<Stagiaire> = this.stagiairesService.getStagiaires();
+  public googleFolder: any = undefined;
 
   public inputType: string = 'password';
 
   public constructor(
     private stagiairesService: StagiaireService,
     private userService: UserService,
+    private googleService: GoogleService,
   ) {}
 
   ngOnInit(): void {
@@ -27,10 +31,25 @@ export class AppComponent {
       .subscribe((hasUser: boolean) => {
         this.hasUser = hasUser;
       });
+    this.userService.hasGoogleToken()
+      .subscribe((hasGoogleToken: boolean) => {
+        this.hasGoogleToken = hasGoogleToken;
+      });
   }
 
   public onLogout(): void {
     this.userService.logout();
+  }
+
+  public onCreateFolder(): void {
+    console.log('AppComponent >> onCreateFolder');
+    this.googleService.findFolder().subscribe((googleFolder: any) => {
+      this.googleFolder = googleFolder;
+    });
+  }
+
+  public onDeleteGoogleToken(): void {
+    this.userService.deleteGoogleToken();
   }
 
   public toggleTitle(): void {
