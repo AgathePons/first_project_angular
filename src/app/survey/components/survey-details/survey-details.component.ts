@@ -15,6 +15,7 @@ export class SurveyDetailsComponent implements OnInit {
   public survey: Survey = new Survey();
   public question: Array<Question> = [];
   public questionArrayToShowDetails: Array<number> = [];
+  public showAllAnswers: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -49,6 +50,12 @@ export class SurveyDetailsComponent implements OnInit {
       }
     );
   }
+
+  public convertPoeTypeToString(poeType: string) {
+    if(poeType = 'ONE_MONTH') {
+      
+    }
+  }
   
   public onDetailsQuestion(id: number) {
     this.questionArrayToShowDetails.push(id)
@@ -71,6 +78,24 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   public onBackButton(): void {
+    
     this.location.back();
+  }
+
+  public showAllAnswersBooleanState(input: boolean): void {
+
+    
+    if(input === true) {
+      this.survey.getQuestions().forEach((question) => {
+        this.questionArrayToShowDetails.push(question.getId())
+        console.log('add to questionasjddoj');
+        
+      })
+    } else {
+    this.questionArrayToShowDetails = []
+    console.log('this question array =', this.questionArrayToShowDetails);
+
+    }
+    this.showAllAnswers = input
   }
 }
