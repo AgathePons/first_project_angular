@@ -15,6 +15,7 @@ export class SurveyDetailsComponent implements OnInit {
   public survey: Survey = new Survey();
   public question: Array<Question> = [];
   public questionArrayToShowDetails: Array<number> = [];
+  public showAnswers: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -71,6 +72,24 @@ export class SurveyDetailsComponent implements OnInit {
   }
 
   public onBackButton(): void {
+    
     this.location.back();
+  }
+
+  public showAnswersBooleanState(input: boolean): void {
+
+    
+    if(input === true) {
+      this.survey.getQuestions().forEach((question) => {
+        this.questionArrayToShowDetails.push(question.getId())
+        console.log('add to questionasjddoj');
+        
+      })
+    } else {
+    this.questionArrayToShowDetails = []
+    console.log('this question array =', this.questionArrayToShowDetails);
+
+    }
+    this.showAnswers = input
   }
 }

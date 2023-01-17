@@ -28,7 +28,27 @@
       color="accent"
       [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]"
       >
-        Ajouter des questions dans ce questionnaire
+        Ajouter une question
+      </a>
+    <a
+      mat-raised-button
+      color="accent"
+      >
+        Changer l'ordre
+      </a>
+    <a *ngIf="!showAnswers"
+      mat-raised-button
+      color="accent"
+      (click)="showAnswersBooleanState(true)"
+      >
+        Afficher les réponses
+      </a>
+    <a *ngIf="showAnswers"
+      mat-raised-button
+      color="accent"
+      (click)="showAnswersBooleanState(false)"
+      >
+        Cacher les réponses
       </a>
     <table>
       <thead>
