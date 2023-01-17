@@ -50,6 +50,12 @@ export class SurveyDetailsComponent implements OnInit {
       }
     );
   }
+
+  public convertPoeTypeToString(poeType: string) {
+    if(poeType = 'ONE_MONTH') {
+      
+    }
+  }
   
   public onDetailsQuestion(id: number) {
     this.questionArrayToShowDetails.push(id)
