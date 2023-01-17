@@ -62,7 +62,11 @@ export class GoogleMainPageComponent implements OnInit {
     this.googleService.createFormFile(this.googleFolderId, survey).subscribe(
       (googleForm: any) => {
         this.googleFormId = googleForm.id;
-        this.googleService.deleteFirstItem(this.googleFormId).subscribe();
+        this.googleService.deleteFirstItem(this.googleFormId).subscribe(
+          (googleAPIResponse: any) => {
+            this.googleService.insertItemsInForm(this.googleFormId, survey).subscribe();
+          }
+        );
       }
     );
   }
