@@ -47,7 +47,7 @@ export class QuestionService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
-          
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
           const answers: Array<Answer> = inputQuestion.answers
             .map((inputAnswer: any) => {
               const answer: Answer = new Answer();
@@ -74,7 +74,7 @@ export class QuestionService {
           question.setId(questionDto.id!);
           question.setText(questionDto.text);
           question.setAnswerType(questionDto.answerType);
-
+          question.setOrderInSurvey(questionDto.orderInSurvey)
           return question;
         })
       );
@@ -94,7 +94,7 @@ export class QuestionService {
           question.setText(anyQuestion.text);
           question.setAnswerType(anyQuestion.answerType);
           question.setAnswers(anyQuestion.answers)
-
+          question.setOrderInSurvey(anyQuestion.orderInSurvey)
           return question;
         })
       );
@@ -111,5 +111,10 @@ export class QuestionService {
   public sortById(questions: Question[]) {
 
     questions = questions.sort((a,b) => a.getId() > b.getId() ? 1 : -1);
+  }
+
+  public sortOrderInSurvey(questions: Question[]) {
+
+    questions = questions.sort((a,b) => a.getOrderInSurvey() > b.getOrderInSurvey() ? 1 : -1);
   }
 }
