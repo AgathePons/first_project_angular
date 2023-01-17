@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Survey } from 'src/app/core/models/survey';
 import { GoogleService } from 'src/app/core/service/google.service';
+import { SurveyService } from 'src/app/core/service/survey.service';
 import { UserService } from 'src/app/user/services/user.service';
 
 @Component({
@@ -13,10 +15,12 @@ export class GoogleMainPageComponent implements OnInit {
   public hasGoogleToken: boolean = false;
   public googleFolderResponse: any | null = null;
   public googleFolderId: string | null = null;
+  public surveys: Array<Survey> = [];
 
   constructor(
     private userService: UserService,
     private googleService: GoogleService,
+    private surveyService: SurveyService,
   ) { }
 
   ngOnInit(): void {
@@ -45,9 +49,15 @@ export class GoogleMainPageComponent implements OnInit {
           this.googleFolderId = googleFolder.id;
         })
       }
+      // find surveys list
+      this.surveyService.findAll().subscribe((surveys: Survey[]) => {
+        this.surveys = surveys;
+      })
     });
+  }
 
-
+  public onGenerate(survey: Survey): void {
+    console.log('clic generate survey');
 
   }
 
