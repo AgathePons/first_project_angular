@@ -33,6 +33,7 @@ import { AnswerFormComponent } from './answer/components/answer-form/answer-form
 import { QuestionTableComponent } from './question/components/question-table/question-table.component';
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
+import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 
 @NgModule({
   declarations: [
@@ -59,6 +60,7 @@ import { GoogleMainPageComponent } from './google/components/google-main-page/go
     QuestionTableComponent,
     QuestionFormComponent,
     GoogleMainPageComponent
+    SurveyAddQuestionComponent
   ],
   imports: [
     BrowserModule,

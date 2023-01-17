@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { SurveyDto } from 'src/app/survey/dto/survey-dto';
 import { environment } from 'src/environments/environment';
+import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 import { Survey } from '../models/survey';
 
@@ -57,6 +58,15 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              return answer;
+            })
+          question.setAnswers(answers);
+
           return question;
         })
         survey.setQuestions(questions);
@@ -79,6 +89,33 @@ export class SurveyService {
         survey.setPoeType(surveyDto.poeType);
         survey.setQuestions(surveyDto.questions);
         return survey;
+      })
+    );
+  }
+
+  public addManyQuestions(id: number,ids: Array<number>): Observable<Survey> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addQuestions`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputSurvey: any) => {
+        const survey: Survey = new Survey();
+        survey.setId(inputSurvey.id);
+        survey.setTitle(inputSurvey.title);
+        survey.setLevel(inputSurvey.level);
+        survey.setPoeType(inputSurvey.poeType);
+        const questions: Array<Question> = inputSurvey.questions
+        .map((inputQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(inputQuestion.id);
+          question.setText(inputQuestion.text);
+          question.setAnswerType(inputQuestion.answerType);
+          return question
+        })
+        survey.setQuestions(questions);
+        return survey
       })
     );
   }
@@ -134,5 +171,7 @@ export class SurveyService {
       })
     );
   }
+
+
 
 }

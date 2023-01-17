@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, take, map } from 'rxjs';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { environment } from 'src/environments/environment';
+import { Answer } from '../models/answer';
 import { Question } from '../models/question';
 
 @Injectable({
@@ -19,34 +20,46 @@ export class QuestionService {
     return this.httpClient.get<any>(
       this.controllerBaseUrl
     )
-    .pipe(
-      take(1),
-      map((questions: any[]) =>{
-        return questions.map((inputQuestion: any) => {
-          const question: Question = new Question();
-          question.setId(inputQuestion.id);
-          question.setText(inputQuestion.text);
-          question.setAnswerType(inputQuestion.answerType);
-          return question;
+      .pipe(
+        take(1),
+        map((questions: any[]) => {
+          return questions.map((inputQuestion: any) => {
+            const question: Question = new Question();
+            question.setId(inputQuestion.id);
+            question.setText(inputQuestion.text);
+            question.setAnswerType(inputQuestion.answerType);
+            question.setAnswers(inputQuestion.answers)
+            question.setOrderInSurvey(inputQuestion.orderInSurvey)
+            return question;
+          })
         })
-      })
-    );
+      );
   }
 
   public findOne(id: number): Observable<Question> {
     return this.httpClient.get<any>(
       `${this.controllerBaseUrl}/${id}`
     )
-    .pipe(
-      take(1),
-      map((inputQuestion: any) => {
-        const question: Question = new Question();
-        question.setId(inputQuestion.id);
-        question.setText(inputQuestion.text);
-        question.setAnswerType(inputQuestion.answerType);
-        return question;
-      })
-    );
+      .pipe(
+        take(1),
+        map((inputQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(inputQuestion.id);
+          question.setText(inputQuestion.text);
+          question.setAnswerType(inputQuestion.answerType);
+          
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              return answer;
+            })
+          question.setAnswers(answers);
+
+          return question;
+        })
+      );
   }
 
   public addQuestion(question: QuestionDto): Observable<Question> {
@@ -54,16 +67,17 @@ export class QuestionService {
       this.controllerBaseUrl,
       question
     )
-    .pipe(
-      take(1),
-      map((questionDto: QuestionDto) => {
-        const question: Question = new Question();
-        question.setId(questionDto.id!);
-        question.setText(questionDto.text);
-        question.setAnswerType(questionDto.answerType);
-        return question;
-      })
-    );
+      .pipe(
+        take(1),
+        map((questionDto: QuestionDto) => {
+          const question: Question = new Question();
+          question.setId(questionDto.id!);
+          question.setText(questionDto.text);
+          question.setAnswerType(questionDto.answerType);
+
+          return question;
+        })
+      );
   }
 
   public updateQuestion(question: QuestionDto): Observable<Question> {
@@ -71,7 +85,7 @@ export class QuestionService {
       `${this.controllerBaseUrl}/${question.id}`,
 
       question
-      )
+    )
       .pipe(
         take(1),
         map((anyQuestion: any) => {
@@ -79,6 +93,8 @@ export class QuestionService {
           question.setId(anyQuestion.id!);
           question.setText(anyQuestion.text);
           question.setAnswerType(anyQuestion.answerType);
+          question.setAnswers(anyQuestion.answers)
+
           return question;
         })
       );
@@ -90,5 +106,10 @@ export class QuestionService {
       `${this.controllerBaseUrl}/${question.getId()}`,
       { observe: 'response' }
     );
+  }
+
+  public sortById(questions: Question[]) {
+
+    questions = questions.sort((a,b) => a.getId() > b.getId() ? 1 : -1);
   }
 }

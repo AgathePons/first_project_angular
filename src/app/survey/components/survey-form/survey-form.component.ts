@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -21,6 +22,7 @@ export class SurveyFormComponent implements OnInit {
     private surveyService: SurveyService,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -56,7 +58,7 @@ export class SurveyFormComponent implements OnInit {
   }
 
   public goBack(): void {
-    this.router.navigate(['/', 'surveys']);
+    this.location.back();
   }
 
   public get c(): {[key: string]: AbstractControl} {

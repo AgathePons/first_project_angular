@@ -5,63 +5,99 @@
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
       {{survey.getTitle()}}
+      <button mat-mini-fab color="primary" [routerLink]="['/', 'survey', 'update', survey.getId()]">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-card-title>
     <mat-card-subtitle>
       POE type : {{survey.getPoeType()}}
     </mat-card-subtitle>
+    <mat-card-subtitle>
+      Level : {{ survey.getLevel() }}
+    </mat-card-subtitle>
   </mat-card-header>
   <mat-card-content>
-    <div class="info-bloc">
-        <span class="info-bloc__key">Title: </span>
-        <span class="info-bloc__value">{{ survey.getTitle() }}</span>
-      </div>
-    <div class="info-bloc">
-        <span class="info-bloc__key">Type: </span>
-        <span class="info-bloc__value">{{ survey.getPoeType() }}</span>
-      </div>
-    <div class="info-bloc">
-        <span class="info-bloc__key">Level: </span>
-        <span class="info-bloc__value">{{ survey.getLevel() }}</span>
-      </div>
-      <a
-        mat-raised-button
-        color="accent"
-      >
-        Ajouter des questions dans ce questionnaire
-      </a>
-      <table>
-        <thead>
+    <!-- <div class="info-bloc">
+      <span class="info-bloc__key">Title: </span>
+      <span class="info-bloc__value">{{ survey.getTitle() }}</span>
+    </div> -->
+    
+    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+      Ajouter une question
+    </a>
+    <a mat-raised-button color="accent">
+      Changer l'ordre
+    </a>
+    <a *ngIf="!showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(true)">
+      Afficher les réponses
+    </a>
+    <a *ngIf="showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(false)">
+      Cacher les réponses
+    </a>
+    <table>
+      <thead>
+        <tr>
+          <th class="center-cell">
+            #
+          </th>
+          <th class="left-cell">
+            Texte
+          </th>
+          <th class="left-cell">
+            Type de réponse
+          </th>
+          <!-- <th class="left-cell">
+            Réponses
+          </th> -->
+          <th>&nbsp;</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngFor="let question of survey.getQuestions()">
           <tr>
-            <th class="center-cell">
-              #
-            </th>
-            <th class="left-cell">
-              Texte
-            </th>
-            <th class="left-cell">
-              Type de réponse
-            </th>
-            <th>&nbsp;</th>
+            <td class="center-cell">{{ question.getId() }}</td>
+            <td>
+              <div>{{ question.getText() }}</div>
+            </td>
+            <td>{{ question.getAnswerType() }}</td>
+            <td class="center-cell">
+              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+                type="button" (click)="onDetailsQuestion(question.getId())">
+                <mat-icon>assignment</mat-icon>
+              </button>
+              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+                type="button" (click)="onDetailsQuestionOff(question.getId())">
+                X
+              </button>
+              <button mat-mini-fab color="warn" type="button" >
+                <mat-icon>edit</mat-icon>
+              </button>
+              <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
+                <mat-icon>delete</mat-icon>
+              </button>
+            </td>
           </tr>
-        </thead>
-        <tbody>
-          <ng-container *ngFor="let question of survey.getQuestions()">
-            <tr>
-              <td class="center-cell">{{ question.getId() }}</td>
-              <td>
-                {{ question.getText() }}
-              </td>
-              <td>{{ question.getAnswerType() }}</td>
-              <td class="center-cell">
-                <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
-                  <mat-icon>delete</mat-icon>
-                </button>
-              </td>
-            </tr>
-          </ng-container>
-        </tbody>
-        <tfoot>
-        </tfoot>
-      </table>
+          <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
+            <td colspan="4" >
+            <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
+              <div class="answer">
+                <p>{{answer.getText()}}</p>
+                <p>X</p>
+              </div>
+            </ng-container>
+            <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " class="add-text"> + Add answer</p>
+           
+            <p *ngIf="question.getAnswerType() == 'YES_NO'">Oui</p>
+            <p *ngIf="question.getAnswerType() == 'YES_NO'">Non</p>
+            <p *ngIf="question.getAnswerType() == 'FREE'">Réponse Libre</p>
+
+          </td>
+          </tr>
+        </ng-container>
+      </tbody>
+      <tfoot>
+      </tfoot>
+    </table>
   </mat-card-content>
 </mat-card>
