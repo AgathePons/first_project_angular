@@ -20,9 +20,11 @@ export class UserInterceptorService implements HttpInterceptor {
   ];
 
   private readonly _googleSecuredURIs : string[] = [
-    `${environment.apiGoogleDriveBaseUrl}?pageSize=10&q=name='POE formulaires de suivi'`,
+    environment.apiGoogleDriveBaseUrl,
+    environment.apiGoogleFormBaseUrl,
+    /* `${environment.apiGoogleDriveBaseUrl}?pageSize=10&q=name='POE formulaires de suivi'`,
     `${environment.apiGoogleDriveBaseUrl}`,
-    `${environment.apiGoogleFormBaseUrl}`,
+    `${environment.apiGoogleFormBaseUrl}`, */
   ];
 
   constructor(
@@ -84,8 +86,7 @@ export class UserInterceptorService implements HttpInterceptor {
   }
 
   private _isGoogleURI(url: string): boolean {
-    console.log('check if google uri asked');
-    return this._googleSecuredURIs.filter((uri: string) => uri === url).length > 0;
+    return this._googleSecuredURIs.filter((uri: string) => uri.slice(0, 26) === url.slice(0, 26)).length > 0;
   }
 }
 

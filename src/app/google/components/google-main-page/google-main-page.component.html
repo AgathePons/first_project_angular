@@ -25,22 +25,22 @@
         <span>Supprimer le token Google</span>
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId === null">
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId === ''">
         <button mat-mini-fab color="accent" (click)="onCheckFolder()" *ngIf="hasUser && hasGoogleToken">
           <mat-icon>create_new_folder</mat-icon>
         </button>
         <span>Vérifier l'existence d'un dossier nommé "POE formulaires de suivi" et si besoin, le créer</span>
       </mat-list-item>
-      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== null">
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
         Le folder "POE formulaires de suivi" a été trouvé
       </mat-list-item>
       <mat-divider></mat-divider>
-      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== null">
+      <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
         Voici la liste des formulaires créés dans l'appli et prêts à être générés
 
       </mat-list-item>
     </mat-list>
-    <table *ngIf="hasUser && hasGoogleToken && googleFolderId !== null">
+    <table *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
       <thead>
         <tr>
           <th class="left-cell">

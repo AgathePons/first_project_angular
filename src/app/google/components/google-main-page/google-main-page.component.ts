@@ -14,7 +14,8 @@ export class GoogleMainPageComponent implements OnInit {
   public hasUser: boolean = false;
   public hasGoogleToken: boolean = false;
   public googleFolderResponse: any | null = null;
-  public googleFolderId: string | null = null;
+  public googleFolderId: string = '';
+  public googleFormId: string = '';
   public surveys: Array<Survey> = [];
 
   constructor(
@@ -52,13 +53,18 @@ export class GoogleMainPageComponent implements OnInit {
       // find surveys list
       this.surveyService.findAll().subscribe((surveys: Survey[]) => {
         this.surveys = surveys;
-      })
+      });
     });
   }
 
   public onGenerate(survey: Survey): void {
     console.log('clic generate survey');
-
+    this.googleService.createFormFile(this.googleFolderId, survey).subscribe(
+      (googleForm: any) => {
+        this.googleFormId = googleForm.id;
+        this.googleService.deleteFirstItem(this.googleFormId).subscribe();
+      }
+    );
   }
 
   public onDeleteGoogleToken(): void {

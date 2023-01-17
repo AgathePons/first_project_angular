@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { environment } from 'src/environments/environment';
 import { Stagiaire } from '../models/stagiaire';
+import { Survey } from '../models/survey';
 
 @Injectable({
   providedIn: 'root'
@@ -38,12 +39,49 @@ export class GoogleService {
       "mimeType": "application/vnd.google-apps.folder"
     };
 
-    console.log('create folder...');
-    console.log(`endpoint: ${this.apiGoogleDriveBaseUrl}`);
-    console.log('request body:', requestBody);
+    return this.httpClient.post<Object>(
+      this.apiGoogleDriveBaseUrl, requestBody
+    ).pipe(
+      take(1),
+      map((folder: any) => {
+        const folderObject = folder;
+        return folderObject;
+      })
+    );
+  }
+
+  public createFormFile(folderId: string, survey: Survey): Observable<any> {
+
+    const requestBody = {
+      "name": survey.getTitle(),
+      "mimeType": "application/vnd.google-apps.form",
+      "parents": [folderId]
+    };
 
     return this.httpClient.post<Object>(
       this.apiGoogleDriveBaseUrl, requestBody
+    ).pipe(
+      take(1),
+      map((form: any) => {
+        const formObject = form;
+        return formObject;
+      })
+    );
+  }
+
+  public deleteFirstItem(formId: string):  Observable<any> {
+
+    const requestBody = {
+      "requests": [{
+          "deleteItem": {
+              "location": { "index": 0 }
+          }
+      }]
+    };
+
+    return this.httpClient.post<Object>(
+      `${this.apiGoogleFormBaseUrl}/${formId}:batchUpdate`,
+      requestBody
     ).pipe(
       take(1),
       map((form: any) => {
