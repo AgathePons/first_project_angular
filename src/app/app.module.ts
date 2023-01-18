@@ -34,6 +34,8 @@ import { QuestionTableComponent } from './question/components/question-table/que
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
+import { QuestionDragableComponent } from './question/components/question-dragable/question-dragable.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   declarations: [
@@ -60,7 +62,8 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
     QuestionTableComponent,
     QuestionFormComponent,
     GoogleMainPageComponent,
-    SurveyAddQuestionComponent
+    SurveyAddQuestionComponent,
+    QuestionDragableComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +71,8 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
-    FormsModule
+    FormsModule,
+    DragDropModule
   ],
   providers: [
     userInterceptor

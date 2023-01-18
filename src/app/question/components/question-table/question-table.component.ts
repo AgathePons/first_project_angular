@@ -4,6 +4,7 @@ import { Question } from 'src/app/core/models/question';
 import { QuestionService } from 'src/app/core/service/question.service';
 import { HttpResponse } from '@angular/common/http';
 
+
 @Component({
   selector: 'app-question-table',
   templateUrl: './question-table.component.html',
