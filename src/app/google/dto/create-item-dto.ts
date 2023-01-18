@@ -1,16 +1,11 @@
-import { ItemDto } from "./item-dto";
+import { QuestionDto } from "./question-dto";
 
 export class CreateItemDto {
 
   public createItem: any = {
     item: {
       title: '',
-      questionItem: {
-        question: {
-          required: true,
-          textQuestion: { paragraph: true }
-        }
-      },
+      questionItem: null,
     },
     location: {
       index: 0,

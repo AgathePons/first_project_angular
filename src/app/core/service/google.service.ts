@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { QuestionDto } from 'src/app/google/dto/question-dto';
 import { RequestBodyDto } from 'src/app/google/dto/request-body-dto';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
@@ -97,8 +98,11 @@ export class GoogleService {
 
     survey.getQuestions().forEach((question) => {
       const createItemDto = new CreateItemDto();
+      const questionDto = new QuestionDto();
       createItemDto.createItem.location.index = question.getOrderInSurvey();
       createItemDto.createItem.item.title = question.getText();
+
+      createItemDto.createItem.item.questionItem = questionDto;
       console.log('push', createItemDto);
 
       requestBody.requests.push(createItemDto);
