@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { QuestionChooseOneDto } from 'src/app/google/dto/question-choose-one-dto';
 import { QuestionDto } from 'src/app/google/dto/question-dto';
 import { QuestionFreeDto } from 'src/app/google/dto/question-free-dto';
 import { QuestionYesNoDto } from 'src/app/google/dto/question-yes-no-dto';
@@ -100,17 +101,52 @@ export class GoogleService {
 
     survey.getQuestions().forEach((question) => {
       const createItemDto = new CreateItemDto();
-      createItemDto.createItem.location.index = question.getOrderInSurvey();
+      if (question.getOrderInSurvey()) {
+        createItemDto.createItem.location.index = question.getOrderInSurvey();
+      }
+
       createItemDto.createItem.item.title = question.getText();
 
-      let questionDto;
+      let questionDto: QuestionDto;
       if (question.getAnswerType() === 'FREE') {
         console.log('FREE question');
         questionDto = new QuestionFreeDto();
-
-      } else if (question.getAnswerType() === 'YES_NO') {
+      }
+      else if (question.getAnswerType() === 'YES_NO') {
         console.log('YES_NO question');
         questionDto = new QuestionYesNoDto();
+      }
+      else if (question.getAnswerType() === 'CHOOSE_ONE') {
+        console.log('CHOOSE_ONE question');
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseOneDto(answersToInsert);
+      }
+      else if (question.getAnswerType() === 'CHOOSE_MANY') {
+        console.log('CHOOSE_MANY question');
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseOneDto(answersToInsert);
       }
       else {
         questionDto = new QuestionFreeDto();
