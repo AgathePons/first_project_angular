@@ -23,81 +23,26 @@
     </div> -->
 
 
-
-    <a *ngIf="!showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(true)">
-      Ajouter une question MINIFORM
-    </a>
-
-    <app-question-form [fromSurvey]="survey.getId()" (surveyToSend)="questionAdded($event)"></app-question-form>
-
-    <!-- <ng-container *ngIf="showAddQuestionForm">
-
-      <form [formGroup]="questionForm" (ngSubmit)="onSubmitQuestion()" [ngClass]="{'valid': questionForm.valid}">
-    
-          <mat-form-field>
-            <input
-              matInput
-              id="text"
-              type="text"
-              formControlName="text"
-              [ngClass]="{'valid': true}"
-              placeholder="Question"
-            >
-    
-            <mat-error *ngIf="c['text'].errors && c['text'].touched">
-              Le texte est obligatoire
-            </mat-error>
-          </mat-form-field>
-    
-          <mat-form-field appearance="fill">
-            <mat-label>Type de question</mat-label>
-            <mat-select matNativeControl required formControlName="answerType">
-              <mat-option value="YES_NO">Oui ou non</mat-option>
-              <mat-option value="CHOOSE_ONE">Une réponse à cocher</mat-option>
-              <mat-option value="CHOOSE_MANY">Plusieurs réponses à cocher</mat-option>
-              <mat-option value="FREE">Réponse libre</mat-option>
-            </mat-select>
-          </mat-form-field>
-    
-    
-          <div class="btn-list">
-            <button
-              mat-raised-button
-              color="primary"
-              [disabled]="!questionForm.valid"
-              class="btn add-btn"
-            >
-            Add 💚
-            </button>
-            <button type="button" mat-raised-button color="warn" (click)="addQuestionForm(false)" class="btn">
-              Cancel 💀
-            </button>
-          </div>
-      </form>
-    
-      </ng-container>
-     -->
-    <div class="add-question-form" *ngIf="showAddQuestionForm">
-      <form (ngSubmit)="onSubmitQuestion()">
-        <input matInput (keyup)="onKey($event)" placeholder="Texte de la question" >
-        <mat-select matNativeControl required placeholder="Type de Question" [(value)]="questionAnswerTypeToAdd">
-          <mat-option value="FREE">FREE</mat-option>
-          <mat-option value="YES_NO">YES_NO</mat-option>
-          <mat-option value="CHOOSE_ONE">CHOOSE_ONE</mat-option>
-          <mat-option value="CHOOSE_MANY">CHOOSE_MANY</mat-option>
-        </mat-select>
-        <a mat-raised-button color="accent" (click)="onSubmitQuestion()" >
-          Valider
-        </a>
-        <a mat-raised-button color="accent" (click)="addQuestionForm(false)">
-          Annuler
-        </a>
-      </form>
+    <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()" (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
+    <div *ngIf="showGoToAnswerDiv">
+      <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
     </div>
-
-    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+    <div *ngIf="!showGoToAnswerDiv && questionAddedFromForm">
+      <p>La question a été ajoutée.</p>
+    </div>
+    <a *ngIf="!showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(true)">
       Ajouter une question
     </a>
+    <a *ngIf="showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(false)">
+      Annuler
+    </a>
+
+
+
+
+    <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+      Ajouter une question
+    </a> -->
     <a mat-raised-button color="accent">
       Changer l'ordre
     </a>
@@ -126,8 +71,8 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let question of survey.getQuestions()">
-          <tr>
+        <ng-container *ngFor="let question of arrayQuestionSortedById(survey.getQuestions())">
+          <tr id="question-{{question.getId()}}">
             <td class="center-cell">{{ question.getId() }}</td>
             <td>
               <div>{{ question.getText() }}</div>

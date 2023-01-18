@@ -7,6 +7,7 @@ import { Question } from 'src/app/core/models/question';
 import { AbstractControl, FormGroup } from '@angular/forms';
 import { Answer } from 'src/app/core/models/answer';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
+import { QuestionService } from 'src/app/core/service/question.service';
 
 @Component({
   selector: 'app-survey-details',
@@ -18,12 +19,14 @@ export class SurveyDetailsComponent implements OnInit {
   public survey: Survey = new Survey();
   public question: Array<Question> = [];
   public questionArrayToShowDetails: Array<number> = [];
-  public showAllAnswers: boolean = false;
+  public showAllAnswers: boolean = true;
   public showAddQuestionForm: boolean = false;
+  public showGoToAnswerDiv: boolean = false;
   public questionTextToAdd: string = '';
   public questionAnswerTypeToAdd: string = '';
   public questionDtoToAdd!: QuestionDto;
   public answersToAdd: Array<Answer> = new Array<Answer>();
+  public questionAddedFromForm: boolean = false;
 
   public questionForm!: FormGroup;
   public addMode: boolean = true;
@@ -33,6 +36,7 @@ export class SurveyDetailsComponent implements OnInit {
     private surveyService: SurveyService,
     private router: Router,
     private location: Location,
+    private questionService: QuestionService
   ) { }
 
   ngOnInit(): void {
@@ -42,16 +46,15 @@ export class SurveyDetailsComponent implements OnInit {
         this.surveyService.findOne(surveyId)
           .subscribe((survey: Survey) => {
             this.survey = survey;
-            console.log('answers of questions = ', this.survey.getQuestions());
-
             console.log('questions found >>', this.survey.getQuestions());
+            this.survey.getQuestions().forEach((question: Question) => {
+              this.questionArrayToShowDetails.push(question.getId())
+            })
           });
+          
       });
-    console.log('getquestion of surv = ', this.survey.getQuestions());
 
-    this.survey.getQuestions().forEach((question: Question) => {
-      this.questionArrayToShowDetails.push(question.getId())
-    })
+    
 
 
     const data: any = this.route.snapshot.data;
@@ -69,9 +72,16 @@ export class SurveyDetailsComponent implements OnInit {
   public questionAdded(event: Survey): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.survey = event;
-    this.showAddQuestionForm = false
-    // console.log('La stopDate est : ', this.stopDate);
+    this.showGoToAnswerDiv = true;
 
+  }
+
+  public displayGoToAnswerDiv(event: boolean): void {
+    this.showGoToAnswerDiv = event
+
+    if (event == false) {
+      this.questionAddedFromForm = true
+    }
   }
 
   public onDelete(question: Question) {
@@ -143,6 +153,8 @@ export class SurveyDetailsComponent implements OnInit {
       this.showAddQuestionForm = true;
     } else {
       this.showAddQuestionForm = false;
+      this.showGoToAnswerDiv = false;
+      this.questionAddedFromForm = false;
 
     }
   }
@@ -166,4 +178,11 @@ export class SurveyDetailsComponent implements OnInit {
   public get c(): {[key: string]: AbstractControl} {
     return this.questionForm.controls;
   }
+
+  public arrayQuestionSortedById(questions: Question[]): Question[] {
+    this.questionService.sortById(questions)
+    return questions
+  }
+
+  
 }

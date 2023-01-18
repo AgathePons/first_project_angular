@@ -22,7 +22,8 @@ export class QuestionFormComponent implements OnInit {
   public question!: Question;
   @Input() public fromSurvey: number = 0;
   @Output() public surveyToSend: EventEmitter<Survey> = new EventEmitter<Survey>();
-  
+  @Output() public questionTypeToSend: EventEmitter<boolean> = new EventEmitter<boolean>();
+
   constructor(
     private questionService: QuestionService,
     private surveyService: SurveyService,
@@ -34,28 +35,28 @@ export class QuestionFormComponent implements OnInit {
     const data: any = this.route.snapshot.data;
 
     console.log('this data = ', data);
-    
+
 
     this.questionForm = data.form;
 
     console.log('this questionForm = ', this.questionForm)
 
-    
 
-    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && this.fromSurvey !== 0 ) {
+
+    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && this.fromSurvey !== 0) {
       this.addMode = false;
     } else {
       this.addMode = true;
     }
 
-    
+
   }
 
   public onSubmit(): void {
     const dto: QuestionDto = new QuestionDto(this.questionForm.value);
     let subscription: Observable<any>;
 
-    if(this.addMode) {
+    if (this.addMode) {
       subscription = this.questionService.addQuestion(dto);
     } else {
       subscription = this.questionService.updateQuestion(dto);
@@ -66,20 +67,31 @@ export class QuestionFormComponent implements OnInit {
         console.log('Je rajoute la question à la survey ID n°', this.fromSurvey);
         this.surveyService.addManyQuestions(this.fromSurvey, [question.getId()]).subscribe((survey: Survey) => {
           this.surveyToSend.emit(survey)
+          if (question.getAnswerType() === 'CHOOSE_ONE' || question.getAnswerType() === 'CHOOSE_MANY') {
+            this.questionTypeToSend.emit(true)
+            console.log('emit CHOOSE ONE type');
+            
+
+          } else {
+            this.questionTypeToSend.emit(false)
+            console.log('emit NO type');
+
+
+          }
           this.questionForm.reset()
-          
+
           Object.keys(this.questionForm.controls).forEach(key => {
-            this.questionForm.get(key)!.setErrors(null) ;
+            this.questionForm.get(key)!.setErrors(null);
           });
 
         }
-          
+
         );
       } else {
         this.goBack();
 
       }
-      
+
     })
   }
 
@@ -87,8 +99,8 @@ export class QuestionFormComponent implements OnInit {
     this.router.navigate(['/', 'questions']);
   }
 
-  public get c(): {[key: string]: AbstractControl} {
+  public get c(): { [key: string]: AbstractControl } {
     return this.questionForm.controls;
   }
-  }
+}
 
