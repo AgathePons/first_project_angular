@@ -5,6 +5,7 @@ import { catchError, map, take } from 'rxjs/operators';
 import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
 import { QuestionDto } from 'src/app/google/dto/question-dto';
 import { QuestionFreeDto } from 'src/app/google/dto/question-free-dto';
+import { QuestionYesNoDto } from 'src/app/google/dto/question-yes-no-dto';
 import { RequestBodyDto } from 'src/app/google/dto/request-body-dto';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
@@ -107,8 +108,12 @@ export class GoogleService {
         console.log('FREE question');
         questionDto = new QuestionFreeDto();
 
-      } else {
-        questionDto = new QuestionDto();
+      } else if (question.getAnswerType() === 'YES_NO') {
+        console.log('YES_NO question');
+        questionDto = new QuestionYesNoDto();
+      }
+      else {
+        questionDto = new QuestionFreeDto();
       }
 
 
