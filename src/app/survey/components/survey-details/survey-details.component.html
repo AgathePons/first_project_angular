@@ -23,7 +23,8 @@
     </div> -->
 
 
-    <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()" (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
+    <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()"
+      (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
     <div *ngIf="showGoToAnswerDiv">
       <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
     </div>
@@ -40,9 +41,9 @@
 
 
 
-    <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
-      Ajouter une question
-    </a> -->
+    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+      Ajouter des questions
+    </a>
     <a mat-raised-button color="accent">
       Changer l'ordre
     </a>
@@ -99,12 +100,30 @@
             <td colspan="4">
               <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                 <div class="answer">
+                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                    >
+                    delete</mat-icon>
+                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                    (click)="onEditAnswer(answer)">
+                    edit</mat-icon>
                   <p>{{answer.getText()}}</p>
-                  <p>X</p>
                 </div>
+
               </ng-container>
-              <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " class="add-text"> + Add answer</p>
+
+
+              <div class="answer">
+              
+                <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+         question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                  >
+                  library_add</mat-icon>
+                  <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
+              </div>
+
 
               <p *ngIf="question.getAnswerType() == 'YES_NO'">Oui</p>
               <p *ngIf="question.getAnswerType() == 'YES_NO'">Non</p>

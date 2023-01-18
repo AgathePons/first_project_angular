@@ -74,6 +74,12 @@ export class SurveyDetailsComponent implements OnInit {
     this.survey = event;
     this.showGoToAnswerDiv = true;
 
+    if (this.showAllAnswers === true) {
+      this.survey.getQuestions().forEach((question: Question) => {
+        this.questionArrayToShowDetails.push(question.getId())
+      })
+    }
+
   }
 
   public displayGoToAnswerDiv(event: boolean): void {
@@ -182,6 +188,12 @@ export class SurveyDetailsComponent implements OnInit {
   public arrayQuestionSortedById(questions: Question[]): Question[] {
     this.questionService.sortById(questions)
     return questions
+  }
+
+  // Bouton OnEdit Answer
+
+  public onEditAnswer(answer: Answer): void {
+    this.router.navigate(['/', 'answer', 'update', answer.getId()]);
   }
 
   
