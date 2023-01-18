@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { RequestBodyDto } from 'src/app/google/dto/request-body-dto';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
 
@@ -90,9 +92,24 @@ export class GoogleService {
     );
   }
 
+  public surveyToGoogleRequestBody(survey: Survey): any {
+    const requestBody = new RequestBodyDto();
+
+    survey.getQuestions().forEach((question) => {
+      const createItemDto = new CreateItemDto();
+      createItemDto.createItem.location.index = question.getOrderInSurvey();
+      createItemDto.createItem.item.title = question.getText();
+      console.log('push', createItemDto);
+
+      requestBody.requests.push(createItemDto);
+    })
+    console.log('requestBody >>', requestBody);
+    return requestBody;
+  }
+
   public insertItemsInForm(formId: string, survey: Survey): Observable<any> {
 
-    const requestBody = {
+    const requestBodyFake = {
       "requests": [
         {
           "createItem": {
@@ -177,6 +194,10 @@ export class GoogleService {
         }
       ]
     };
+
+    const requestBody = this.surveyToGoogleRequestBody(survey);
+    console.log('insertItemsInForm >>', requestBody);
+
 
     return this.httpClient.post<Object>(
       `${this.apiGoogleFormBaseUrl}/${formId}:batchUpdate`,
