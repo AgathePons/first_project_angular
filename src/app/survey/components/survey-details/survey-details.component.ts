@@ -43,6 +43,10 @@ export class SurveyDetailsComponent implements OnInit {
   })
   }
 
+  public onEdit(question: Question): void {
+    this.router.navigate(['/', 'question', 'update', question.getId()]);
+  }
+
   public onDelete(question: Question) {
     this.surveyService.removeOneQuestion(this.survey.getId(), question.getId())
     .subscribe(
