@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
 import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { QuestionChooseManyDto } from 'src/app/google/dto/question-choose-many-dto';
 import { QuestionChooseOneDto } from 'src/app/google/dto/question-choose-one-dto';
 import { QuestionDto } from 'src/app/google/dto/question-dto';
 import { QuestionFreeDto } from 'src/app/google/dto/question-free-dto';
@@ -146,7 +147,7 @@ export class GoogleService {
           });
         }
 
-        questionDto = new QuestionChooseOneDto(answersToInsert);
+        questionDto = new QuestionChooseManyDto(answersToInsert);
       }
       else {
         questionDto = new QuestionFreeDto();
