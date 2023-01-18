@@ -66,6 +66,14 @@ export class SurveyDetailsComponent implements OnInit {
     }
   }
 
+  public questionAdded(event: Survey): void {
+    console.log(`Tut tut, change filter to ${event}`);
+    this.survey = event;
+    this.showAddQuestionForm = false
+    // console.log('La stopDate est : ', this.stopDate);
+
+  }
+
   public onDelete(question: Question) {
     this.surveyService.removeOneQuestion(this.survey.getId(), question.getId())
       .subscribe(

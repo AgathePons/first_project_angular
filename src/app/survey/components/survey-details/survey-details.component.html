@@ -28,7 +28,7 @@
       Ajouter une question MINIFORM
     </a>
 
-    <app-question-form [fromSurvey]="true"></app-question-form>
+    <app-question-form [fromSurvey]="survey.getId()" (surveyToSend)="questionAdded($event)"></app-question-form>
 
     <!-- <ng-container *ngIf="showAddQuestionForm">
 

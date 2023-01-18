@@ -1,10 +1,12 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { AbstractControl, FormGroup } from '@angular/forms';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
+import { AbstractControl, FormGroup, FormGroupDirective, NgForm } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Question } from 'src/app/core/models/question';
 import { QuestionService } from 'src/app/core/service/question.service';
 import { QuestionDto } from '../../dto/question-dto';
 import { Observable } from 'rxjs';
+import { SurveyService } from 'src/app/core/service/survey.service';
+import { Survey } from 'src/app/core/models/survey';
 
 
 @Component({
@@ -14,15 +16,18 @@ import { Observable } from 'rxjs';
 })
 export class QuestionFormComponent implements OnInit {
 
+
   public questionForm!: FormGroup;
   public addMode: boolean = true;
   public question!: Question;
-  @Input() public fromSurvey: boolean = false;
+  @Input() public fromSurvey: number = 0;
+  @Output() public surveyToSend: EventEmitter<Survey> = new EventEmitter<Survey>();
   
   constructor(
     private questionService: QuestionService,
+    private surveyService: SurveyService,
     private router: Router,
-    private route: ActivatedRoute,
+    private route: ActivatedRoute
   ) { }
 
   ngOnInit(): void {
@@ -37,7 +42,7 @@ export class QuestionFormComponent implements OnInit {
 
     
 
-    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && !this.fromSurvey ) {
+    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && this.fromSurvey !== 0 ) {
       this.addMode = false;
     } else {
       this.addMode = true;
@@ -57,7 +62,24 @@ export class QuestionFormComponent implements OnInit {
     }
     subscription.subscribe((question: Question) => {
       this.question = question;
-      this.goBack();
+      if (this.fromSurvey !== 0) {
+        console.log('Je rajoute la question à la survey ID n°', this.fromSurvey);
+        this.surveyService.addManyQuestions(this.fromSurvey, [question.getId()]).subscribe((survey: Survey) => {
+          this.surveyToSend.emit(survey)
+          this.questionForm.reset()
+          
+          Object.keys(this.questionForm.controls).forEach(key => {
+            this.questionForm.get(key)!.setErrors(null) ;
+          });
+
+        }
+          
+        );
+      } else {
+        this.goBack();
+
+      }
+      
     })
   }
 
