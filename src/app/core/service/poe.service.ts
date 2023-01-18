@@ -70,7 +70,7 @@ export class PoeService {
   }
 
   public addPoe(poe: PoeDto): Observable<Poe> {
-    console.log(`poe service addPoe`);
+    console.log(`POE DTO >>`, poe);
 
     return this.httpClient.post<PoeDto>(
       this.controllerBaseUrl, poe
@@ -124,7 +124,7 @@ export class PoeService {
     var currentDate = new Date();
     currentDate.setMonth(currentDate.getMonth() - mois);
     console.log('c est la date du filtre : ', currentDate);
-    
+
     return currentDate;
   }
 

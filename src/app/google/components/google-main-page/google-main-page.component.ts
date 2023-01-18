@@ -35,6 +35,11 @@ export class GoogleMainPageComponent implements OnInit {
       });
   }
 
+  public onTest(survey: Survey): void {
+    console.log('Survey >>', survey);
+    this.googleService.surveyToGoogleRequestBody(survey);
+  }
+
   public onCheckFolder(): void {
     console.log('AppComponent >> onCreateFolder');
     this.googleService.findFolder().subscribe((googleFolder: any) => {
@@ -52,7 +57,11 @@ export class GoogleMainPageComponent implements OnInit {
       }
       // find surveys list
       this.surveyService.findAll().subscribe((surveys: Survey[]) => {
-        this.surveys = surveys;
+        surveys.forEach((survey) => {
+          this.surveyService.findOne(survey.getId()).subscribe((survey: Survey) => {
+            this.surveys.push(survey);
+          })
+        })
       });
     });
   }

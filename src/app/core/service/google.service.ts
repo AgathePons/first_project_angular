@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { QuestionChooseManyDto } from 'src/app/google/dto/question-choose-many-dto';
+import { QuestionChooseOneDto } from 'src/app/google/dto/question-choose-one-dto';
+import { QuestionDto } from 'src/app/google/dto/question-dto';
+import { QuestionFreeDto } from 'src/app/google/dto/question-free-dto';
+import { QuestionYesNoDto } from 'src/app/google/dto/question-yes-no-dto';
+import { RequestBodyDto } from 'src/app/google/dto/request-body-dto';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
 
@@ -90,9 +97,75 @@ export class GoogleService {
     );
   }
 
+  public surveyToGoogleRequestBody(survey: Survey): any {
+    const requestBody = new RequestBodyDto();
+
+    survey.getQuestions().forEach((question) => {
+      const createItemDto = new CreateItemDto();
+      if (question.getOrderInSurvey()) {
+        createItemDto.createItem.location.index = question.getOrderInSurvey();
+      }
+
+      createItemDto.createItem.item.title = question.getText();
+
+      let questionDto: QuestionDto;
+      if (question.getAnswerType() === 'FREE') {
+        console.log('FREE question');
+        questionDto = new QuestionFreeDto();
+      }
+      else if (question.getAnswerType() === 'YES_NO') {
+        console.log('YES_NO question');
+        questionDto = new QuestionYesNoDto();
+      }
+      else if (question.getAnswerType() === 'CHOOSE_ONE') {
+        console.log('CHOOSE_ONE question');
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseOneDto(answersToInsert);
+      }
+      else if (question.getAnswerType() === 'CHOOSE_MANY') {
+        console.log('CHOOSE_MANY question');
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseManyDto(answersToInsert);
+      }
+      else {
+        questionDto = new QuestionFreeDto();
+      }
+
+
+      createItemDto.createItem.item.questionItem = questionDto;
+      console.log('push', createItemDto);
+
+      requestBody.requests.push(createItemDto);
+    })
+    console.log('requestBody >>', requestBody);
+    return requestBody;
+  }
+
   public insertItemsInForm(formId: string, survey: Survey): Observable<any> {
 
-    const requestBody = {
+    const requestBodyFake = {
       "requests": [
         {
           "createItem": {
@@ -177,6 +250,10 @@ export class GoogleService {
         }
       ]
     };
+
+    const requestBody = this.surveyToGoogleRequestBody(survey);
+    console.log('insertItemsInForm >>', requestBody);
+
 
     return this.httpClient.post<Object>(
       `${this.apiGoogleFormBaseUrl}/${formId}:batchUpdate`,
