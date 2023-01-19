@@ -34,7 +34,6 @@ import { QuestionTableComponent } from './question/components/question-table/que
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
-import { QuestionDragableComponent } from './question/components/question-dragable/question-dragable.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 
@@ -64,7 +63,6 @@ import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-
     QuestionFormComponent,
     GoogleMainPageComponent,
     SurveyAddQuestionComponent,
-    QuestionDragableComponent,
     SurveyOrderQuestionsComponent
   ],
   imports: [
