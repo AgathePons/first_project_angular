@@ -1,0 +1,3 @@
+<div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div class="example-box" *ngFor="let question of questions" cdkDrag (cdkDragEnded)="dragEnd($event)">{{question.getText()}}</div>
+  </div>
