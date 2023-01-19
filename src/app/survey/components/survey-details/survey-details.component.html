@@ -82,11 +82,11 @@
             <td class="center-cell">
               <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
                 type="button" (click)="onDetailsQuestion(question.getId())">
-                <mat-icon>assignment</mat-icon>
+                <mat-icon>visibility</mat-icon>
               </button>
               <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
                 type="button" (click)="onDetailsQuestionOff(question.getId())">
-                X
+                <mat-icon>visibility_off</mat-icon>
               </button>
               <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
                 <mat-icon>edit</mat-icon>
