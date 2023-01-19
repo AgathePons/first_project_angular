@@ -44,7 +44,7 @@
     <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
       Ajouter des questions
     </a>
-    <a mat-raised-button color="accent">
+    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'orderQuestions', survey.getId()]">
       Changer l'ordre
     </a>
     <a *ngIf="!showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(true)">
@@ -115,7 +115,7 @@
 
 
               <div class="answer">
-              
+
                 <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
          question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                   >

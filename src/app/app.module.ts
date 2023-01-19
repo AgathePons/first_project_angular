@@ -36,6 +36,7 @@ import { GoogleMainPageComponent } from './google/components/google-main-page/go
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 import { QuestionDragableComponent } from './question/components/question-dragable/question-dragable.component';
 import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     QuestionFormComponent,
     GoogleMainPageComponent,
     SurveyAddQuestionComponent,
-    QuestionDragableComponent
+    QuestionDragableComponent,
+    SurveyOrderQuestionsComponent
   ],
   imports: [
     BrowserModule,

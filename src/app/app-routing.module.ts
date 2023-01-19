@@ -20,6 +20,7 @@ import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
 import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
@@ -164,6 +165,13 @@ export class AppRoutingModule {
     {
       path: 'survey/addQuestions/:id',
       component: SurveyAddQuestionComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/orderQuestions/:id',
+      component: SurveyOrderQuestionsComponent,
       canActivate: [
         HasUserGuard
       ]
