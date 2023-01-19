@@ -201,6 +201,7 @@ export class SurveyDetailsComponent implements OnInit {
     
 
     this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
+    this.inputQuestionMap.set(id, '')
   }
 
 
