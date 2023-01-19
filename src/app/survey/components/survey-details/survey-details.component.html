@@ -21,9 +21,28 @@
       <span class="info-bloc__key">Title: </span>
       <span class="info-bloc__value">{{ survey.getTitle() }}</span>
     </div> -->
-    
-    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+
+
+    <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()"
+      (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
+    <div *ngIf="showGoToAnswerDiv">
+      <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
+    </div>
+    <div *ngIf="!showGoToAnswerDiv && questionAddedFromForm">
+      <p>La question a été ajoutée.</p>
+    </div>
+    <a *ngIf="!showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(true)">
       Ajouter une question
+    </a>
+    <a *ngIf="showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(false)">
+      Annuler
+    </a>
+
+
+
+
+    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+      Ajouter des questions
     </a>
     <a mat-raised-button color="accent">
       Changer l'ordre
@@ -53,8 +72,8 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let question of survey.getQuestions()">
-          <tr>
+        <ng-container *ngFor="let question of arrayQuestionSortedById(survey.getQuestions())">
+          <tr id="question-{{question.getId()}}">
             <td class="center-cell">{{ question.getId() }}</td>
             <td>
               <div>{{ question.getText() }}</div>
@@ -78,21 +97,39 @@
             </td>
           </tr>
           <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
-            <td colspan="4" >
-            <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
-              <div class="answer">
-                <p>{{answer.getText()}}</p>
-                <p>X</p>
-              </div>
-            </ng-container>
-            <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " class="add-text"> + Add answer</p>
-           
-            <p *ngIf="question.getAnswerType() == 'YES_NO'">Oui</p>
-            <p *ngIf="question.getAnswerType() == 'YES_NO'">Non</p>
-            <p *ngIf="question.getAnswerType() == 'FREE'">Réponse Libre</p>
+            <td colspan="4">
+              <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
+                <div class="answer">
+                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                    >
+                    delete</mat-icon>
+                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                    (click)="onEditAnswer(answer)">
+                    edit</mat-icon>
+                  <p>{{answer.getText()}}</p>
+                </div>
 
-          </td>
+              </ng-container>
+
+
+              <div class="answer">
+              
+                <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+         question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                  >
+                  library_add</mat-icon>
+                  <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
+              </div>
+
+
+              <p *ngIf="question.getAnswerType() == 'YES_NO'">Oui</p>
+              <p *ngIf="question.getAnswerType() == 'YES_NO'">Non</p>
+              <p *ngIf="question.getAnswerType() == 'FREE'">Réponse Libre</p>
+
+            </td>
           </tr>
         </ng-container>
       </tbody>

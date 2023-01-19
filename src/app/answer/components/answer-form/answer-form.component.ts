@@ -5,6 +5,7 @@ import { Answer } from 'src/app/core/models/answer';
 import { AnswerService } from 'src/app/core/service/answer.service';
 import { Observable } from 'rxjs';
 import { AnswerDto } from '../../dto/answer-dto';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-answer-form',
@@ -21,6 +22,7 @@ export class AnswerFormComponent implements OnInit {
     private answerService: AnswerService,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -54,7 +56,7 @@ export class AnswerFormComponent implements OnInit {
   }
 
   public goBack(): void {
-  this.router.navigate(['/', 'answers']);
+  this.location.back()
   }
 
   public get c(): {[key: string]: AbstractControl} {

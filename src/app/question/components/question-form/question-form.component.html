@@ -37,7 +37,7 @@
           >
             {{ addMode ? 'Add 💚' : 'Update 💚'}}
           </button>
-          <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+          <button *ngIf="fromSurvey == 0" type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
             Cancel 💀
           </button>
         </div>

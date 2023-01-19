@@ -148,6 +148,7 @@ export class AppRoutingModule {
     {
       path: 'survey/detail/:id',
       component: SurveyDetailsComponent,
+      resolve: { form: QuestionResolver },
       canActivate: [
         HasUserGuard
       ]
