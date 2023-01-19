@@ -29,7 +29,7 @@ export class QuestionService {
             question.setText(inputQuestion.text);
             question.setAnswerType(inputQuestion.answerType);
             question.setAnswers(inputQuestion.answers)
-            question.setOrderInSurvey(inputQuestion.orderInSurvey)
+            question.setOrderInSurvey(inputQuestion.order)
             return question;
           })
         })
