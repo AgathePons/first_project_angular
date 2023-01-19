@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take, map } from 'rxjs';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
+import { QuestionInputDto } from 'src/app/question/dto/question-input-dto';
 import { environment } from 'src/environments/environment';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
@@ -81,6 +82,9 @@ export class QuestionService {
   }
 
   public updateQuestion(question: QuestionDto): Observable<Question> {
+
+    console.log('updateQuestion called');
+    console.log('question = ', question);
     return this.httpClient.put<any>(
       `${this.controllerBaseUrl}/${question.id}`,
 
@@ -94,6 +98,28 @@ export class QuestionService {
           question.setText(anyQuestion.text);
           question.setAnswerType(anyQuestion.answerType);
           question.setAnswers(anyQuestion.answers)
+
+          return question;
+        })
+      );
+  }
+  public updateQuestionInput(question: QuestionInputDto): Observable<Question> {
+    console.log('updateQuestionInput called');
+    console.log('question = ', question);
+    
+    
+    return this.httpClient.put<any>(
+      `${this.controllerBaseUrl}/${question.id}`,
+
+      question
+    )
+      .pipe(
+        take(1),
+        map((anyQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(anyQuestion.id!);
+          question.setText(anyQuestion.text);
+          question.setAnswerType(anyQuestion.answerType);
 
           return question;
         })

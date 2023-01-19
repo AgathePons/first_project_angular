@@ -133,8 +133,11 @@ p.add-text {
 }
 
 
-mat-icon.answer {
-  font-size: 20px;
+.answer {
+  mat-icon {
+    font-size: 20px;
+    justify-content: center;
+  }
 }
 
 .add-question-form {

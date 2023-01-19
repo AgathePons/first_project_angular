@@ -57,7 +57,7 @@
       <thead>
         <tr>
           <th class="center-cell">
-            #
+            Order(Id pour le moment)
           </th>
           <th class="left-cell">
             Texte
@@ -78,9 +78,12 @@
             <td>
               <div>{{ question.getText() }}</div>
               <input class="searchTerm" type="text" name="searchTerm" placeholder="{{ question.getText() }}"
-              value="{{ question.getText()}}"
-           />
-           
+                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)"/>
+                <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
+                type="button" (click)="saveQuestionText(question.getId(),question.getAnswerType())">
+                <mat-icon>save</mat-icon>
+              </button>
+
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
@@ -101,31 +104,33 @@
             </td>
           </tr>
           <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
-            <td colspan="4">
+            <td></td>
+            <td colspan="3">
               <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                 <div class="answer">
-                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                    >
-                    delete</mat-icon>
+                  <p>{{answer.getText()}}</p>
                   <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                     (click)="onEditAnswer(answer)">
                     edit</mat-icon>
-                  <p>{{answer.getText()}}</p>
+                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button">
+                    delete</mat-icon>
+
+
                 </div>
 
               </ng-container>
 
 
               <div class="answer">
-              
-                <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-         question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                  >
-                  library_add</mat-icon>
-                  <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+
+
+                <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
+                <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button">
+                  library_add</mat-icon>
               </div>
 
 

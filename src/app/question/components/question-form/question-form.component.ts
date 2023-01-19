@@ -43,7 +43,7 @@ export class QuestionFormComponent implements OnInit {
 
 
 
-    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && this.fromSurvey !== 0) {
+    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0) {
       this.addMode = false;
     } else {
       this.addMode = true;
@@ -53,6 +53,9 @@ export class QuestionFormComponent implements OnInit {
   }
 
   public onSubmit(): void {
+    console.log('this question form  = ', this.questionForm);
+    console.log('this question form value = ', this.questionForm.value);
+    
     const dto: QuestionDto = new QuestionDto(this.questionForm.value);
     let subscription: Observable<any>;
 
@@ -63,10 +66,14 @@ export class QuestionFormComponent implements OnInit {
     }
     subscription.subscribe((question: Question) => {
       this.question = question;
-      if (this.fromSurvey !== 0) {
+      
+      if (this.fromSurvey !== 0) { // Rajoute la question également à la survey
         console.log('Je rajoute la question à la survey ID n°', this.fromSurvey);
         this.surveyService.addManyQuestions(this.fromSurvey, [question.getId()]).subscribe((survey: Survey) => {
+          // emet la nouvelle survey au composant survey-details
           this.surveyToSend.emit(survey)
+          // si le type est en choose one ou choose many , emet une valeur au component survey-details pour afficher ou non un certains
+          // message sur ce component
           if (question.getAnswerType() === 'CHOOSE_ONE' || question.getAnswerType() === 'CHOOSE_MANY') {
             this.questionTypeToSend.emit(true)
             console.log('emit CHOOSE ONE type');
@@ -78,6 +85,7 @@ export class QuestionFormComponent implements OnInit {
 
 
           }
+          // reinitialise correctement le formulaire pour s'adapter au component survey-details
           this.questionForm.reset()
 
           Object.keys(this.questionForm.controls).forEach(key => {
