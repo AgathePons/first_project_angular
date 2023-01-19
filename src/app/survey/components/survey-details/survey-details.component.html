@@ -75,14 +75,14 @@
         <ng-container *ngFor="let question of arrayQuestionSortedById(survey.getQuestions())">
           <tr id="question-{{question.getId()}}">
             <td class="center-cell">{{ question.getId() }}</td>
-            <td style="min-width: 80%">
-              <!-- <div>{{ question.getText() }}</div> -->
-              <input class="searchTerm" type="text" name="searchTerm" placeholder="{{ question.getText() }}"
+            <td>
+              <input  matInput class="searchTerm" type="text" name="searchTerm" placeholder="{{ question.getText() }}"
                 value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)"/>
                 <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(),question.getAnswerType())">
                 <mat-icon>save</mat-icon>
               </button>
+              <div style="visibility: hidden;">{{ question.getText() }}</div>
 
             </td>
             <td>{{ question.getAnswerType() }}</td>
@@ -95,9 +95,9 @@
                 type="button" (click)="onDetailsQuestionOff(question.getId())">
                 <mat-icon>visibility_off</mat-icon>
               </button>
-              <!-- <button mat-mini-fab color="warn" type="button">
+              <button mat-mini-fab color="warn" type="button">
                 <mat-icon>edit</mat-icon>
-              </button> -->
+              </button>
               <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
                 <mat-icon>delete</mat-icon>
               </button>
