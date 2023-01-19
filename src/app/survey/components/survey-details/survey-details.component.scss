@@ -78,6 +78,15 @@ table {
 
   tbody {
     tr {
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        font-size: 14px;
+      }
+      input::placeholder{
+        color: black;
+      }
       &:nth-child(odd) {
         background-color: lighten($std-color, 45);
       }

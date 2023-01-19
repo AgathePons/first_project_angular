@@ -77,6 +77,10 @@
             <td class="center-cell">{{ question.getId() }}</td>
             <td>
               <div>{{ question.getText() }}</div>
+              <input class="searchTerm" type="text" name="searchTerm" placeholder="{{ question.getText() }}"
+              value="{{ question.getText()}}"
+           />
+           
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
