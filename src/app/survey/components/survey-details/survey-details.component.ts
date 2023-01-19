@@ -72,6 +72,8 @@ export class SurveyDetailsComponent implements OnInit {
   public questionAdded(event: Survey): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.survey = event;
+    console.log('THIS SURVEY = ', this.survey);
+    
     this.showGoToAnswerDiv = true;
 
     if (this.showAllAnswers === true) {

@@ -112,6 +112,14 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              return answer;
+            })
+          question.setAnswers(answers);
           return question
         })
         survey.setQuestions(questions);
