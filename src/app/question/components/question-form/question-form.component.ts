@@ -45,7 +45,7 @@ export class QuestionFormComponent implements OnInit {
 
 
 
-    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0 && this.fromSurvey !== 0) {
+    if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0) {
       this.addMode = false;
     } else {
       this.addMode = true;
