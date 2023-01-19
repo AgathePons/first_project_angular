@@ -57,7 +57,7 @@
       <thead>
         <tr>
           <th class="center-cell">
-            Order(Id pour le moment)
+            Order(Id)
           </th>
           <th class="left-cell">
             Texte
@@ -76,14 +76,14 @@
           <tr id="question-{{question.getId()}}">
             <td class="center-cell">{{ question.getId() }}</td>
             <td>
-              <input  matInput class="searchTerm" type="text" name="searchTerm" placeholder="{{ question.getText() }}"
+              <mat-form-field [style.width.%]="100">
+                <input  matInput class="searchTerm" type="text" name="searchTerm"
                 value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)"/>
-                <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
+              </mat-form-field>
+              <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(),question.getAnswerType())">
                 <mat-icon>save</mat-icon>
               </button>
-              <div style="visibility: hidden;">{{ question.getText() }}</div>
-
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
