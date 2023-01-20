@@ -193,19 +193,19 @@ export class SurveyDetailsComponent implements OnInit {
 
   // Fonction appellée quand on change l'input de texte des questions
 
-  public onKey(id:number, event: any) {
+  public onKey(id: number, event: any) {
     this.inputQuestionMap.set(id, event.target.value);
     console.log('inputQuestion = ', this.inputQuestionMap);
   }
 
   // Fonction qui save le texte des questions avec le input
 
-  public saveQuestionText(id:number, type: string) {
-    let questionDtoToAdd: QuestionInputDto = 
-    new QuestionInputDto(id,this.inputQuestionMap.get(id)!,type)
+  public saveQuestionText(id: number, type: string) {
+    let questionDtoToAdd: QuestionInputDto =
+      new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type)
 
     console.log('this questionDTO', questionDtoToAdd);
-    
+
 
     this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
     this.inputQuestionMap.set(id, '')
@@ -240,23 +240,25 @@ export class SurveyDetailsComponent implements OnInit {
     this.router.navigate(['/', 'answer', 'update', answer.getId()]);
   }
 
-  // public addAnswerToQuestion(questionId: number, answerText: string) {
-  public addAnswerToQuestion() {
+  public addAnswerToQuestion(questionId: number, answerText: string) {
+    // public addAnswerToQuestion() {
 
-    const answerInputDto: AnswerInputDto = new AnswerInputDto('Reponse TEST')
+    const answerInputDto: AnswerInputDto = new AnswerInputDto(answerText)
 
     this.answerService.addAnswerInput(answerInputDto).subscribe(
-      
+
       (response: any) => {
         console.log('Lance le addManyAnswer');
-        
-    this.questionService.addManyAnswers(8, [response.id]).subscribe()
 
-      }
-    )
-
-
+        this.questionService.addManyAnswers(questionId, [response.id]).subscribe((questionResponse: Question) => {
+          const questionIndex = this.survey.getQuestions().findIndex(question => question.getId() === questionId)
+          let newQuestionArray: Array<Question> = this.survey.getQuestions()
+          newQuestionArray[questionIndex] = questionResponse
+          this.survey.setQuestions(newQuestionArray)
+        })
+      })
   }
+
 
 
 }

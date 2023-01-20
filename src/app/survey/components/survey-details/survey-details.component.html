@@ -41,9 +41,7 @@
 
 
 
-    <a mat-raised-button color="accent" (click)="addAnswerToQuestion()">
-      Ajouter réponse test à question 8
-    </a>
+    
     <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
       Ajouter des questions
     </a>
@@ -131,8 +129,9 @@
                 <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
                 <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-                  question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button">
-                  library_add</mat-icon>
+                  question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+                  (click)="addAnswerToQuestion(question.getId(),'Question testv2')">
+                  save</mat-icon>
               </div>
 
 
