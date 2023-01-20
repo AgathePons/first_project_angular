@@ -82,7 +82,7 @@
                 value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)" placeholder="Question"/>
               </mat-form-field>
               <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
-                type="button" (click)="saveQuestionText(question.getId(),question.getAnswerType())">
+                type="button" (click)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
                 <mat-icon>save</mat-icon>
               </button>
             </td>
