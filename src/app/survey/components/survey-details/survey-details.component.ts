@@ -197,12 +197,12 @@ export class SurveyDetailsComponent implements OnInit {
 
   // Fonction qui save le texte des questions avec le input
 
-  public saveQuestionText(id:number, type: string) {
-    let questionDtoToAdd: QuestionInputDto = 
-    new QuestionInputDto(id,this.inputQuestionMap.get(id)!,type)
+  public saveQuestionText(id:number, type: string, orderInSurvey: number) {
+    let questionDtoToAdd: QuestionInputDto =
+    new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type, orderInSurvey)
 
     console.log('this questionDTO', questionDtoToAdd);
-    
+
 
     this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
     this.inputQuestionMap.set(id, '')
