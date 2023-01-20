@@ -147,6 +147,8 @@ export class SurveyDetailsComponent implements OnInit {
         }
       );
 
+    this.answerService.removeOneId(answerId).subscribe();
+
 
   }
 

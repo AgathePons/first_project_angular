@@ -41,7 +41,7 @@
 
 
 
-    
+
     <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
       Ajouter des questions
     </a> -->
@@ -78,9 +78,9 @@
             <td class="center-cell">{{ question.getOrderInSurvey() + 1 }}</td>
             <td>
               <mat-form-field [style.width.%]="100">
-                <input  matInput class="searchTerm" type="text" name="searchTerm"
-                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)" placeholder="Question"
-                (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())"/>
+                <input matInput class="searchTerm" type="text" name="searchTerm" value="{{ question.getText()}}"
+                  (keyup)="onKey(question.getId(),$event)" placeholder="Question"
+                  (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())" />
               </mat-form-field>
               <!-- <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
@@ -108,55 +108,53 @@
           <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
             <td></td>
             <td colspan="3">
-              <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
-                <div class="answer">
+              <ul>
+                <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
+                  <li>
+                    <div class="answer">
 
-                  <mat-form-field [style.width.%]="100">
-                    <input  matInput class="searchTerm" type="text" name="searchTerm"
-                    (keyup)="onKeyAnswer(answer.getId(),$event)"
-                    value="{{ answer.getText()}}" placeholder="Réponse"
-                    (focusout)="saveAnswerText(answer.getId())"/>
-                  </mat-form-field>
+                      <mat-form-field [style.width.%]="100">
+                        <input matInput class="searchTerm" type="text" name="searchTerm"
+                          (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
+                          placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
+                      </mat-form-field>
 
-                  <!-- <p>{{answer.getText()}}</p> -->
-                  <!-- <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                      <!-- <p>{{answer.getText()}}</p> -->
+                      <!-- <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                     (click)="onEditAnswer(answer)">
                     edit</mat-icon> -->
-                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                      <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-           (click)="onDeleteAnswer(question.getId(),answer.getId())">
-                    delete</mat-icon>
+                        (click)="onDeleteAnswer(question.getId(),answer.getId())">
+                        delete</mat-icon>
 
 
-                </div>
+                    </div>
+                  </li>
+                </ng-container>
 
-              </ng-container>
 
-
-              <div class="answer" *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                <div class="answer" *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
               question.getAnswerType() == 'CHOOSE_ONE' ">
-                <mat-form-field [style.width.%]="100" >
+                  <mat-form-field [style.width.%]="100">
 
-                  <input  
-                 
-                  matInput class="searchTerm" type="text" name="searchTerm"
-                  placeholder="Ajouter une réponse"
-                  [(ngModel)]="inputNewAnswer" 
-                  (focusout)="addAnswerToQuestion(question.getId())"/>
-                </mat-form-field>
+                    <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Ajouter une réponse"
+                      [(ngModel)]="inputNewAnswer" (focusout)="addAnswerToQuestion(question.getId())" />
+                  </mat-form-field>
 
-                <!-- <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  <!-- <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
                 <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                   (click)="addAnswerToQuestion(question.getId())">
                   save</mat-icon> -->
-              </div>
+                </div>
 
 
-              <p *ngIf="question.getAnswerType() == 'YES_NO'">Oui</p>
-              <p *ngIf="question.getAnswerType() == 'YES_NO'">Non</p>
+                <li *ngIf="question.getAnswerType() == 'YES_NO'">Oui</li>
+                <li *ngIf="question.getAnswerType() == 'YES_NO'">Non</li>
+              </ul>
               <p *ngIf="question.getAnswerType() == 'FREE'">Réponse Libre</p>
 
             </td>

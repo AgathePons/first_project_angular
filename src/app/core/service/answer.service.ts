@@ -119,6 +119,12 @@ export class AnswerService {
         { observe: 'response' }
       );
     }
+    public removeOneId(answerId: number): Observable<HttpResponse<any>> {
+      return this.httpClient.delete<any>(
+        `${this.controllerBaseUrl}/${answerId}`,
+        { observe: 'response' }
+      );
+    }
 
 
 }
