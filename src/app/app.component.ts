@@ -23,7 +23,6 @@ export class AppComponent {
   public constructor(
     private stagiairesService: StagiaireService,
     private userService: UserService,
-    private googleService: GoogleService,
   ) {}
 
   ngOnInit(): void {
@@ -39,17 +38,6 @@ export class AppComponent {
 
   public onLogout(): void {
     this.userService.logout();
-  }
-
-  public onCreateFolder(): void {
-    console.log('AppComponent >> onCreateFolder');
-    this.googleService.findFolder().subscribe((googleFolder: any) => {
-      this.googleFolder = googleFolder;
-    });
-  }
-
-  public onDeleteGoogleToken(): void {
-    this.userService.deleteGoogleToken();
   }
 
   public toggleTitle(): void {

@@ -5,6 +5,7 @@ import { Question } from 'src/app/core/models/question';
 import { QuestionService } from 'src/app/core/service/question.service';
 import { QuestionDto } from '../../dto/question-dto';
 import { Observable } from 'rxjs';
+import { Location } from '@angular/common';
 import { SurveyService } from 'src/app/core/service/survey.service';
 import { Survey } from 'src/app/core/models/survey';
 
@@ -28,7 +29,8 @@ export class QuestionFormComponent implements OnInit {
     private questionService: QuestionService,
     private surveyService: SurveyService,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private location: Location,
   ) { }
 
   ngOnInit(): void {
@@ -104,7 +106,7 @@ export class QuestionFormComponent implements OnInit {
   }
 
   public goBack(): void {
-    this.router.navigate(['/', 'questions']);
+    this.location.back();
   }
 
   public get c(): { [key: string]: AbstractControl } {

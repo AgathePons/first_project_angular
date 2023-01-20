@@ -58,6 +58,7 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
           const answers: Array<Answer> = inputQuestion.answers
             .map((inputAnswer: any) => {
               const answer: Answer = new Answer();
@@ -112,6 +113,7 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
           const answers: Array<Answer> = inputQuestion.answers
             .map((inputAnswer: any) => {
               const answer: Answer = new Answer();
@@ -172,6 +174,7 @@ export class SurveyService {
           question.setId(inputQuestion.id);
           question.setText(inputQuestion.text);
           question.setAnswerType(inputQuestion.answerType);
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
           return question
         })
         survey.setQuestions(questions);

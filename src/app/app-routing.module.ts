@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AnswerFormComponent } from './answer/components/answer-form/answer-form.component';
 import { AnswerTableComponent } from './answer/components/answer-table/answer-table.component';
 import { AnswerResolver } from './answer/resolver/answer.resolver';
+import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe-add-stagiaire.component';
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
@@ -19,6 +20,7 @@ import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
 import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
@@ -62,6 +64,13 @@ export class AppRoutingModule {
     {
       path: 'googletoken',
       component: GoogleTokenFormComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'googlepage',
+      component: GoogleMainPageComponent,
       canActivate: [
         HasUserGuard
       ]
@@ -156,6 +165,13 @@ export class AppRoutingModule {
     {
       path: 'survey/addQuestions/:id',
       component: SurveyAddQuestionComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/orderQuestions/:id',
+      component: SurveyOrderQuestionsComponent,
       canActivate: [
         HasUserGuard
       ]

@@ -44,7 +44,7 @@ export class GoogleTokenFormComponent implements OnInit, OnDestroy {
     this._subscription = this.userService.setGoogleToken(this.googleTokenForm.value)
       .subscribe((googleAuthentificated: boolean) => {
         if (googleAuthentificated) {
-          this.router.navigate(['/', 'home']);
+          this.router.navigate(['/', 'googlepage']);
         } else {
           this.error = 'invalid token'
         }
