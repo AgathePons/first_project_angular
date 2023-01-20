@@ -269,21 +269,23 @@ export class SurveyDetailsComponent implements OnInit {
 
   public addAnswerToQuestion(questionId: number) {
     // public addAnswerToQuestion() {
+    if (this.inputNewAnswer !== '') {
 
-    const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputNewAnswer)
-    this.inputNewAnswer = ''
-    this.answerService.addAnswerInput(answerInputDto).subscribe(
+      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputNewAnswer)
+      this.inputNewAnswer = ''
+      this.answerService.addAnswerInput(answerInputDto).subscribe(
 
-      (response: any) => {
-        console.log('Lance le addManyAnswer');
+        (response: any) => {
+          console.log('Lance le addManyAnswer');
 
-        this.questionService.addManyAnswers(questionId, [response.id]).subscribe((questionResponse: Question) => {
-          const questionIndex = this.survey.getQuestions().findIndex(question => question.getId() === questionId)
-          let newQuestionArray: Array<Question> = this.survey.getQuestions()
-          newQuestionArray[questionIndex] = questionResponse
-          this.survey.setQuestions(newQuestionArray)
+          this.questionService.addManyAnswers(questionId, [response.id]).subscribe((questionResponse: Question) => {
+            const questionIndex = this.survey.getQuestions().findIndex(question => question.getId() === questionId)
+            let newQuestionArray: Array<Question> = this.survey.getQuestions()
+            newQuestionArray[questionIndex] = questionResponse
+            this.survey.setQuestions(newQuestionArray)
+          })
         })
-      })
+    }
   }
 
   // Fonction qui update l'input des réponses
