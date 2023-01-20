@@ -78,18 +78,20 @@ table {
 
   tbody {
     tr {
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        font-size: 14px;
+      }
+      input::placeholder{
+        color: black;
+      }
       &:nth-child(odd) {
         background-color: lighten($std-color, 45);
       }
 
       td {
-        .name-puce {
-          margin-right: .5rem;
-
-          &:hover {
-            cursor: pointer;
-          }
-        }
 
         button {
           transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
@@ -124,8 +126,11 @@ p.add-text {
 }
 
 
-mat-icon.answer {
-  font-size: 20px;
+.answer {
+  mat-icon {
+    font-size: 20px;
+    justify-content: center;
+  }
 }
 
 .add-question-form {

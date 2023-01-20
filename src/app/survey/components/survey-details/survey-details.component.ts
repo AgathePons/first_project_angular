@@ -8,6 +8,7 @@ import { AbstractControl, FormGroup } from '@angular/forms';
 import { Answer } from 'src/app/core/models/answer';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { QuestionService } from 'src/app/core/service/question.service';
+import { QuestionInputDto } from 'src/app/question/dto/question-input-dto';
 
 @Component({
   selector: 'app-survey-details',
@@ -31,6 +32,9 @@ export class SurveyDetailsComponent implements OnInit {
   public questionForm!: FormGroup;
   public addMode: boolean = true;
 
+  public inputQuestion: string = ''; // attribut qui recoit la valeur de l'input d'edit du texte d'une question
+  public inputQuestionMap: Map<number, string> = new Map<number, string>();
+
   constructor(
     private route: ActivatedRoute,
     private surveyService: SurveyService,
@@ -50,30 +54,43 @@ export class SurveyDetailsComponent implements OnInit {
             this.survey.getQuestions().forEach((question: Question) => {
               this.questionArrayToShowDetails.push(question.getId())
             })
+            // reinitialise la map avec les ID des questions et un string vide ''
+
+            this.survey.getQuestions().forEach((question: Question) => {
+              this.inputQuestionMap.set(question.getId(), '');
+            }
+            )
+
+            console.log('Map = ', this.inputQuestionMap);
           });
-          
+
       });
 
-    
+
 
 
     const data: any = this.route.snapshot.data;
 
     this.questionForm = data.form;
-    
+
 
     if (this.questionForm.value.id !== undefined && this.questionForm.value.id !== 0) {
       this.addMode = false;
     } else {
       this.addMode = true;
     }
+
+
+
+
+
   }
 
   public questionAdded(event: Survey): void {
     console.log(`Tut tut, change filter to ${event}`);
     this.survey = event;
     console.log('THIS SURVEY = ', this.survey);
-    
+
     this.showGoToAnswerDiv = true;
 
     if (this.showAllAnswers === true) {
@@ -160,7 +177,7 @@ export class SurveyDetailsComponent implements OnInit {
 
   public addQuestionForm(boolean: boolean) {
 
-    
+
     if (boolean == true) {
       this.showAddQuestionForm = true;
     } else {
@@ -171,23 +188,41 @@ export class SurveyDetailsComponent implements OnInit {
     }
   }
 
-  public onKey(event: any) {this.questionTextToAdd = event.target.value;}
+  // Fonction appellée quand on change l'input de texte des questions
 
-
-  public onSubmitQuestion() {
-    // this.questionToAdd.setText(this.questionTextToAdd)
-    // this.questionToAdd.setAnswerType(this.questionAnswerTypeToAdd)
-
-
-    console.log(this.questionAnswerTypeToAdd);
-    console.log(this.questionTextToAdd);
-    this.questionDtoToAdd.answerType = this.questionAnswerTypeToAdd
-    this.questionDtoToAdd.text = this.questionTextToAdd
-    console.log('this questionDtoToAdd = ', this.questionDtoToAdd);
-    
+  public onKey(id:number, event: any) {
+    this.inputQuestionMap.set(id, event.target.value);
+    console.log('inputQuestion = ', this.inputQuestionMap);
   }
 
-  public get c(): {[key: string]: AbstractControl} {
+  // Fonction qui save le texte des questions avec le input
+
+  public saveQuestionText(id:number, type: string) {
+    let questionDtoToAdd: QuestionInputDto = 
+    new QuestionInputDto(id,this.inputQuestionMap.get(id)!,type)
+
+    console.log('this questionDTO', questionDtoToAdd);
+    
+
+    this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
+    this.inputQuestionMap.set(id, '')
+  }
+
+
+  // public onSubmitQuestion() {
+  //   // this.questionToAdd.setText(this.questionTextToAdd)
+  //   // this.questionToAdd.setAnswerType(this.questionAnswerTypeToAdd)
+
+
+  //   console.log(this.questionAnswerTypeToAdd);
+  //   console.log(this.questionTextToAdd);
+  //   this.questionDtoToAdd.answerType = this.questionAnswerTypeToAdd
+  //   this.questionDtoToAdd.text = this.questionTextToAdd
+  //   console.log('this questionDtoToAdd = ', this.questionDtoToAdd);
+
+  // }
+
+  public get c(): { [key: string]: AbstractControl } {
     return this.questionForm.controls;
   }
 
@@ -202,5 +237,5 @@ export class SurveyDetailsComponent implements OnInit {
     this.router.navigate(['/', 'answer', 'update', answer.getId()]);
   }
 
-  
+
 }
