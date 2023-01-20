@@ -11,6 +11,8 @@ import { QuestionService } from 'src/app/core/service/question.service';
 import { QuestionInputDto } from 'src/app/question/dto/question-input-dto';
 import { AnswerService } from 'src/app/core/service/answer.service';
 import { AnswerInputDto } from 'src/app/answer/dto/answer-input-dto';
+import { AnswerDto } from 'src/app/answer/dto/answer-dto';
+import { AnswerUpdateDto } from 'src/app/answer/dto/answer-update-dto';
 
 @Component({
   selector: 'app-survey-details',
@@ -36,8 +38,10 @@ export class SurveyDetailsComponent implements OnInit {
 
   public inputQuestion: string = ''; // attribut qui recoit la valeur de l'input d'edit du texte d'une question
   public inputQuestionMap: Map<number, string> = new Map<number, string>();
+  public inputAnswerMap: Map<number, string> = new Map<number, string>();
 
   public inputNewAnswer: string = '';
+  public inputUpdateAnswer: string = '';
 
   constructor(
     private route: ActivatedRoute,
@@ -63,10 +67,14 @@ export class SurveyDetailsComponent implements OnInit {
 
             this.survey.getQuestions().forEach((question: Question) => {
               this.inputQuestionMap.set(question.getId(), '');
+
+              question.getAnswers().forEach((answer: Answer) => 
+              this.inputAnswerMap.set(answer.getId(), ''))
             }
             )
 
             console.log('Map = ', this.inputQuestionMap);
+            console.log('Map Answer = ', this.inputAnswerMap);
           });
 
       });
@@ -199,6 +207,11 @@ export class SurveyDetailsComponent implements OnInit {
     this.inputQuestionMap.set(id, event.target.value);
     console.log('inputQuestion = ', this.inputQuestionMap);
   }
+  public onKeyAnswer(id: number, event: any) {
+    // this.inputAnswerMap.set(id, event.target.value);
+    this.inputUpdateAnswer = event.target.value
+    console.log('inputUpdateAnswer = ', this.inputUpdateAnswer);
+  }
 
   // Fonction qui save le texte des questions avec le input
 
@@ -262,6 +275,15 @@ export class SurveyDetailsComponent implements OnInit {
       })
   }
 
+ // Fonction qui update l'input des réponses
+
+  public saveAnswerText(id: number) {
+    let answerDto = new AnswerUpdateDto(id, this.inputUpdateAnswer)
+
+    this.answerService.updateAnswerInput(answerDto).subscribe()
+    this.inputUpdateAnswer='';
+  
+  }
 
 
 }

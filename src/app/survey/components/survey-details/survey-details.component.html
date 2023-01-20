@@ -42,9 +42,9 @@
 
 
     
-    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+    <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
       Ajouter des questions
-    </a>
+    </a> -->
     <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'orderQuestions', survey.getId()]">
       Changer l'ordre
     </a>
@@ -110,7 +110,15 @@
             <td colspan="3">
               <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                 <div class="answer">
-                  <p>{{answer.getText()}}</p>
+
+                  <mat-form-field [style.width.%]="100">
+                    <input  matInput class="searchTerm" type="text" name="searchTerm"
+                    (keyup)="onKeyAnswer(answer.getId(),$event)"
+                    value="{{ answer.getText()}}" placeholder="Réponse"
+                    (focusout)="saveAnswerText(answer.getId())"/>
+                  </mat-form-field>
+
+                  <!-- <p>{{answer.getText()}}</p> -->
                   <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                     (click)="onEditAnswer(answer)">
@@ -125,10 +133,13 @@
               </ng-container>
 
 
-              <div class="answer">
-                <mat-form-field [style.width.%]="100">
+              <div class="answer" *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+              question.getAnswerType() == 'CHOOSE_ONE' ">
+                <mat-form-field [style.width.%]="100" >
 
-                  <input  matInput class="searchTerm" type="text" name="searchTerm"
+                  <input  
+                 
+                  matInput class="searchTerm" type="text" name="searchTerm"
                   placeholder="Ajouter une réponse"
                   [(ngModel)]="inputNewAnswer" 
                   (focusout)="addAnswerToQuestion(question.getId())"/>

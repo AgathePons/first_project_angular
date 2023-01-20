@@ -96,6 +96,22 @@ export class AnswerService {
         );
     }
 
+    public updateAnswerInput(answer: AnswerInputDto): Observable<Answer> {
+      return this.httpClient.put<any>(
+        `${this.controllerBaseUrl}/${answer.id}`,
+        answer
+        )
+        .pipe(
+          take(1),
+          map((anyAnswer: any) => {
+            const answer: Answer = new Answer();
+            answer.setId(anyAnswer.id!);
+            answer.setText(anyAnswer.text);
+            return answer;
+          })
+        );
+    }
+
     public removeOne(answer: Answer): Observable<HttpResponse<any>> {
       console.log(`Service: remove id: ${answer.getId()}`);
       return this.httpClient.delete<any>(
