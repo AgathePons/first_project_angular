@@ -37,6 +37,8 @@ export class SurveyDetailsComponent implements OnInit {
   public inputQuestion: string = ''; // attribut qui recoit la valeur de l'input d'edit du texte d'une question
   public inputQuestionMap: Map<number, string> = new Map<number, string>();
 
+  public inputNewAnswer: string = '';
+
   constructor(
     private route: ActivatedRoute,
     private surveyService: SurveyService,
@@ -240,11 +242,12 @@ export class SurveyDetailsComponent implements OnInit {
     this.router.navigate(['/', 'answer', 'update', answer.getId()]);
   }
 
-  public addAnswerToQuestion(questionId: number, answerText: string) {
+
+  public addAnswerToQuestion(questionId: number) {
     // public addAnswerToQuestion() {
 
-    const answerInputDto: AnswerInputDto = new AnswerInputDto(answerText)
-
+    const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputNewAnswer)
+    this.inputNewAnswer = ''
     this.answerService.addAnswerInput(answerInputDto).subscribe(
 
       (response: any) => {

@@ -79,12 +79,13 @@
             <td>
               <mat-form-field [style.width.%]="100">
                 <input  matInput class="searchTerm" type="text" name="searchTerm"
-                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)" placeholder="Question"/>
+                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)" placeholder="Question"
+                (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())"/>
               </mat-form-field>
-              <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
+              <!-- <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
                 <mat-icon>save</mat-icon>
-              </button>
+              </button> -->
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
@@ -125,13 +126,20 @@
 
 
               <div class="answer">
+                <mat-form-field [style.width.%]="100">
 
-                <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  <input  matInput class="searchTerm" type="text" name="searchTerm"
+                  placeholder="Ajouter une réponse"
+                  [(ngModel)]="inputNewAnswer" 
+                  (focusout)="addAnswerToQuestion(question.getId())"/>
+                </mat-form-field>
+
+                <!-- <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
                 <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                  (click)="addAnswerToQuestion(question.getId(),'Question testv2')">
-                  save</mat-icon>
+                  (click)="addAnswerToQuestion(question.getId())">
+                  save</mat-icon> -->
               </div>
 
 
