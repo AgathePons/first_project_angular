@@ -9,6 +9,8 @@ import { Answer } from 'src/app/core/models/answer';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
 import { QuestionService } from 'src/app/core/service/question.service';
 import { QuestionInputDto } from 'src/app/question/dto/question-input-dto';
+import { AnswerService } from 'src/app/core/service/answer.service';
+import { AnswerInputDto } from 'src/app/answer/dto/answer-input-dto';
 
 @Component({
   selector: 'app-survey-details',
@@ -40,7 +42,8 @@ export class SurveyDetailsComponent implements OnInit {
     private surveyService: SurveyService,
     private router: Router,
     private location: Location,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private answerService: AnswerService
   ) { }
 
   ngOnInit(): void {
@@ -235,6 +238,24 @@ export class SurveyDetailsComponent implements OnInit {
 
   public onEditAnswer(answer: Answer): void {
     this.router.navigate(['/', 'answer', 'update', answer.getId()]);
+  }
+
+  // public addAnswerToQuestion(questionId: number, answerText: string) {
+  public addAnswerToQuestion() {
+
+    const answerInputDto: AnswerInputDto = new AnswerInputDto('Reponse TEST')
+
+    this.answerService.addAnswerInput(answerInputDto).subscribe(
+      
+      (response: any) => {
+        console.log('Lance le addManyAnswer');
+        
+    this.questionService.addManyAnswers(8, [response.id]).subscribe()
+
+      }
+    )
+
+
   }
 
 

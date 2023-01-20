@@ -41,6 +41,9 @@
 
 
 
+    <a mat-raised-button color="accent" (click)="addAnswerToQuestion()">
+      Ajouter réponse test à question 8
+    </a>
     <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
       Ajouter des questions
     </a>
@@ -78,7 +81,7 @@
             <td>
               <mat-form-field [style.width.%]="100">
                 <input  matInput class="searchTerm" type="text" name="searchTerm"
-                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)"/>
+                value="{{ question.getText()}}" (keyup)="onKey(question.getId(),$event)" placeholder="Question"/>
               </mat-form-field>
               <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(),question.getAnswerType())">

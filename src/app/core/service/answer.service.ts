@@ -4,6 +4,7 @@ import { Answer } from '../models/answer';
 import { environment } from 'src/environments/environment';
 import { Observable, take, map } from 'rxjs';
 import { AnswerDto } from 'src/app/answer/dto/answer-dto';
+import { AnswerInputDto } from 'src/app/answer/dto/answer-input-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -56,6 +57,21 @@ export class AnswerService {
       .pipe(
         take(1),
         map((answerDto: AnswerDto) => {
+          const answer: Answer = new Answer();
+          answer.setId(answerDto.id!);
+          answer.setText(answerDto.text);
+          return answer;
+        })
+      );
+    }
+    public addAnswerInput(answer: AnswerInputDto): Observable<Answer> {
+      return this.httpClient.post<AnswerDto>(
+        this.controllerBaseUrl,
+        answer
+      )
+      .pipe(
+        take(1),
+        map((answerDto: AnswerInputDto) => {
           const answer: Answer = new Answer();
           answer.setId(answerDto.id!);
           answer.setText(answerDto.text);
