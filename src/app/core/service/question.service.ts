@@ -143,4 +143,32 @@ export class QuestionService {
 
     questions = questions.sort((a,b) => a.getOrderInSurvey() > b.getOrderInSurvey() ? 1 : -1);
   }
+
+
+  public addManyAnswers(id: number,ids: Array<number>): Observable<Question> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addAnswers`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(inputQuestion.id);
+          question.setText(inputQuestion.text);
+          question.setAnswerType(inputQuestion.answerType);
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              return answer;
+            })
+          question.setAnswers(answers);
+          return question
+        })
+    );
+  }
+
 }
