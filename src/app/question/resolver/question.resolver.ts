@@ -25,8 +25,6 @@ export class QuestionResolver implements Resolve<FormGroup> {
     .pathFromRoot
         .map(v => v.url.map(segment => segment.toString()).join('/'))
         .join('/')
-    console.log('Resolver >> +route', url);
-    console.log('Resolver >> got id:', id);
     let question: Question;
     let form: FormGroup;
     if (id === 0 || url.startsWith('/survey/detail/')) {

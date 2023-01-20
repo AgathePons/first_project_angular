@@ -83,8 +83,6 @@ export class QuestionService {
 
   public updateQuestion(question: QuestionDto): Observable<Question> {
 
-    console.log('updateQuestion called');
-    console.log('question = ', question);
     return this.httpClient.put<any>(
       `${this.controllerBaseUrl}/${question.id}`,
 

@@ -257,8 +257,8 @@ export class SurveyDetailsComponent implements OnInit {
     return this.questionForm.controls;
   }
 
-  public arrayQuestionSortedById(questions: Question[]): Question[] {
-    this.questionService.sortById(questions)
+  public arrayQuestionSortedByOrder(questions: Question[]): Question[] {
+    this.questionService.sortOrderInSurvey(questions)
     return questions
   }
 

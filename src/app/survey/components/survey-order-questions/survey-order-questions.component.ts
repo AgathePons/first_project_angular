@@ -52,10 +52,19 @@ export class SurveyOrderQuestionsComponent implements OnInit {
   public onSubmit(): void {
     this.currentListOrdered.forEach((question: Question) => {
       const dto: QuestionDto = new QuestionDto(question);
-      console.log('dto', dto);
-      this.questionService.updateQuestion(dto).subscribe();
+      // console.log('dto', dto);
+
+      if (this.currentListOrdered.indexOf(question) !== (this.currentListOrdered.length - 1)) {
+        this.questionService.updateQuestion(dto).subscribe();
+
+      } else {
+      this.questionService.updateQuestion(dto).subscribe( question =>
+        this.goBack()
+      );
+
+      }
+
     });
-    this.goBack();
   }
 
   public goBack(): void {
