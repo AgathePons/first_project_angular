@@ -171,4 +171,30 @@ export class QuestionService {
     );
   }
 
+  public removeOneAnswer(questionId: number, answerId: number) {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${questionId}/remove/${answerId}`,
+      null
+    )
+    .pipe(
+      take(1),
+      map((inputQuestion: any) => {
+        const question: Question = new Question();
+        question.setId(inputQuestion.id);
+        question.setText(inputQuestion.text);
+        question.setAnswerType(inputQuestion.answerType);
+        question.setOrderInSurvey(inputQuestion.orderInSurvey)
+        const answers: Array<Answer> = inputQuestion.answers
+        .map((inputAnswer: any) => {
+          const answer: Answer = new Answer();
+          answer.setId(inputAnswer.id);
+          answer.setText(inputAnswer.text);
+          return answer
+        })
+        question.setAnswers(answers);
+        return question
+      })
+    );
+  }
+
 }

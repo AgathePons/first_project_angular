@@ -75,7 +75,7 @@
       <tbody>
         <ng-container *ngFor="let question of survey.getQuestions()">
           <tr>
-            <td class="center-cell">{{ question.getOrderInSurvey() }}</td>
+            <td class="center-cell">{{ question.getOrderInSurvey() + 1 }}</td>
             <td>
               <mat-form-field [style.width.%]="100">
                 <input  matInput class="searchTerm" type="text" name="searchTerm"
@@ -97,9 +97,9 @@
                 type="button" (click)="onDetailsQuestionOff(question.getId())">
                 <mat-icon>visibility_off</mat-icon>
               </button>
-              <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
+              <!-- <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
                 <mat-icon>edit</mat-icon>
-              </button>
+              </button> -->
               <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
                 <mat-icon>delete</mat-icon>
               </button>
@@ -119,12 +119,13 @@
                   </mat-form-field>
 
                   <!-- <p>{{answer.getText()}}</p> -->
-                  <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
+                  <!-- <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
                     (click)="onEditAnswer(answer)">
-                    edit</mat-icon>
+                    edit</mat-icon> -->
                   <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button">
+           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
+           (click)="onDeleteAnswer(question.getId(),answer.getId())">
                     delete</mat-icon>
 
 

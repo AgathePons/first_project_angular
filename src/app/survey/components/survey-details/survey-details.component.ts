@@ -68,8 +68,8 @@ export class SurveyDetailsComponent implements OnInit {
             this.survey.getQuestions().forEach((question: Question) => {
               this.inputQuestionMap.set(question.getId(), '');
 
-              question.getAnswers().forEach((answer: Answer) => 
-              this.inputAnswerMap.set(answer.getId(), ''))
+              question.getAnswers().forEach((answer: Answer) =>
+                this.inputAnswerMap.set(answer.getId(), ''))
             }
             )
 
@@ -131,12 +131,23 @@ export class SurveyDetailsComponent implements OnInit {
       .subscribe(
         (survey: Survey) => {
           this.survey = survey;
-          this.question.splice(
-            this.question.findIndex((s: Question) => s.getId() === question.getId()),
-            1
-          );
+          // this.question.splice(
+          //   this.question.findIndex((s: Question) => s.getId() === question.getId()),
+          //   1
+          // );
         }
       );
+  }
+  public onDeleteAnswer(questionId: number, answerId: number) {
+    this.questionService.removeOneAnswer(questionId, answerId)
+      .subscribe(
+        (question: Question) => {
+          const questionIndex = this.survey.getQuestions().findIndex(question2 => question2.getId() === questionId)
+          this.survey.getQuestions()[questionIndex] = question
+        }
+      );
+
+
   }
 
   public convertPoeTypeToString(poeType: string) {
@@ -215,9 +226,9 @@ export class SurveyDetailsComponent implements OnInit {
 
   // Fonction qui save le texte des questions avec le input
 
-  public saveQuestionText(id:number, type: string, orderInSurvey: number) {
+  public saveQuestionText(id: number, type: string, orderInSurvey: number) {
     let questionDtoToAdd: QuestionInputDto =
-    new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type, orderInSurvey)
+      new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type, orderInSurvey)
 
     console.log('this questionDTO', questionDtoToAdd);
 
@@ -275,14 +286,14 @@ export class SurveyDetailsComponent implements OnInit {
       })
   }
 
- // Fonction qui update l'input des réponses
+  // Fonction qui update l'input des réponses
 
   public saveAnswerText(id: number) {
     let answerDto = new AnswerUpdateDto(id, this.inputUpdateAnswer)
 
     this.answerService.updateAnswerInput(answerDto).subscribe()
-    this.inputUpdateAnswer='';
-  
+    this.inputUpdateAnswer = '';
+
   }
 
 
