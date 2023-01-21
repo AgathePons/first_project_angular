@@ -77,11 +77,14 @@
           <tr>
             <td class="center-cell">{{ question.getOrderInSurvey() + 1 }}</td>
             <td>
-              <mat-form-field [style.width.%]="100">
-                <input matInput class="searchTerm" type="text" name="searchTerm" value="{{ question.getText()}}"
-                  (keyup)="onKey(question.getId(),$event)" placeholder="Question"
-                  (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())" />
-              </mat-form-field>
+              <form
+                (ngSubmit)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
+                <mat-form-field [style.width.%]="100">
+                  <input matInput class="searchTerm" type="text" name="searchTerm" value="{{ question.getText()}}"
+                    (keyup)="onKey(question.getId(),$event)" placeholder="Question"
+                    (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())" />
+                </mat-form-field>
+              </form>
               <!-- <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
                 type="button" (click)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
                 <mat-icon>save</mat-icon>
@@ -137,12 +140,13 @@
 
                 <div class="answer" *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
               question.getAnswerType() == 'CHOOSE_ONE' ">
-                  <mat-form-field [style.width.%]="100">
+                  <form (ngSubmit)="addAnswerToQuestion(question.getId())">
+                    <mat-form-field [style.width.%]="100">
 
-                    <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Ajouter une réponse"
-                      [(ngModel)]="inputNewAnswer" (focusout)="addAnswerToQuestion(question.getId())" />
-                  </mat-form-field>
-
+                      <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Ajouter une réponse"
+                        [(ngModel)]="inputNewAnswer" (focusout)="addAnswerToQuestion(question.getId())" />
+                    </mat-form-field>
+                  </form>
                   <!-- <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
                   question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
                 <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
