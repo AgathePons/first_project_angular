@@ -1,0 +1,54 @@
+<p>Liste des tâches à venir</p>
+  
+  <table>
+    <thead>
+      <tr>
+        <th class="center-cell">
+          #
+        </th>
+        <th class="left-cell">
+          Title
+        </th>
+        <th class="left-cell">
+          beginDate
+        </th>
+        <th class="left-cell">
+          endDate
+        </th>
+        <th class="left-cell">
+          type
+        </th>
+        <th>
+          &nbsp;
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngFor="let poe of poes">
+        <tr >
+          <td class="center-cell">{{ poe.getId() }}</td>
+          <td> {{ poe.getTitle() }} </td>
+          <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+          <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
+          <td>{{ poe.getType() }} </td>
+          <!-- <td class="center-cell">
+            <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
+              <mat-icon>visibility</mat-icon>
+            </button>
+            <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
+              <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-mini-fab color="warn" type="button" (click)="onDelete(poe)">
+              <mat-icon>delete</mat-icon>
+            </button>
+          </td> -->
+        </tr>
+      </ng-container>
+    </tbody>
+    <tfoot>
+      <tr>
+        <td colspan="6" class="right-cell"></td>
+  
+      </tr>
+    </tfoot>
+  </table>

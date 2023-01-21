@@ -8,6 +8,7 @@ import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
+import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau-de-bord.component';
 import { PoeResolver } from './poe/resolvers/poe.resolver';
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { QuestionTableComponent } from './question/components/question-table/question-table.component';
@@ -56,7 +57,7 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: StagiaireTableComponent,
+      component: TableauDeBordComponent,
       canActivate: [
         HasUserGuard
       ]
