@@ -20,7 +20,7 @@ export class TableauDeBordComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.poeService.findAll().subscribe((poes: Poe[]) => {
+    this.poeService.findAllWithSurveyStatus().subscribe((poes: Poe[]) => {
       this.poes = poes
     });
 

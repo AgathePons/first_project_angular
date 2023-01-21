@@ -38,6 +38,32 @@ export class PoeService {
       })
     );
   }
+  
+  public findAllWithSurveyStatus(): Observable<Poe[]> {
+    return this.httpClient.get<any>(
+      `${this.controllerBaseUrl}/withSurvey`
+    )
+    .pipe(
+      take(1),
+      map((poes: any[]) => {
+        return poes.map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+          poe.setId(inputPoe.id);
+          poe.setTitle(inputPoe.title);
+          poe.setBeginDate(new Date(inputPoe.beginDate));
+          poe.setEndDate(new Date(inputPoe.endDate));
+          poe.setType(inputPoe.type);
+          poe.setStatus1(inputPoe.status1);
+          poe.setSentDate1(inputPoe.sentDate1)
+          poe.setStatus6(inputPoe.status6);
+          poe.setSentDate6(inputPoe.sentDate6)
+          poe.setStatus12(inputPoe.status12);
+          poe.setSentDate12(inputPoe.sentDate12)
+          return poe;
+        })
+      })
+    );
+  }
 
   public findOne(id: number): Observable<Poe> {
     return this.httpClient.get<any>(
