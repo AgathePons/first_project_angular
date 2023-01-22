@@ -16,6 +16,7 @@ export class Poe {
   private status12: boolean = false;
   private sentDate12: Date = new Date();
   private link12: string = '';
+  private nextTaskDate: Date = new Date()
 
   /* public constructor(id: number,title: string,bd: Date,ed: Date,type: string) {
     this.id = id;
@@ -145,4 +146,11 @@ export class Poe {
     this.link12 = url
   }
 
+  public getNextTaskDate(): Date {
+    return this.nextTaskDate
+  }
+
+  public setNextTaskDate(date: Date): void {
+    this.nextTaskDate = date
+  }
 }

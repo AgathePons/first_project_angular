@@ -14,6 +14,7 @@ export class PoeSurveyDto {
     public status12: boolean = false;
     public sentDate12: Date = new Date();
     public link12: string = '';
+    public nextTaskDate: Date = new Date();
 
     public constructor(formValues: any) {
         Object.assign(this, formValues);

@@ -18,8 +18,14 @@
         <th class="left-cell">
           type
         </th>
-        <th class="center-cell">
+        <!-- <th class="center-cell">
           status 1 month
+        </th> -->
+        <th class="center-cell">
+          Prochaine tâche
+        </th>
+        <th class="center-cell">
+          A faire le
         </th>
         <!-- <th>
           &nbsp;
@@ -34,11 +40,14 @@
           <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
           <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
           <td>{{ poe.getType() }} </td>
-          <td class="center-cell" *ngIf="!poe.getStatus1()">
+          <!-- <td class="center-cell" *ngIf="!poe.getStatus1()">
             <mat-icon>highlight_off</mat-icon> </td>
           <td class="center-cell" *ngIf="poe.getStatus1()">
             <mat-icon>check_circle_outline</mat-icon>
-         </td>
+         </td> -->
+         <td> {{ nextPoeTask(poe) }}</td>
+         <td> {{ nextPoeTaskDate(poe) | date: 'dd-MM-YYYY' }}</td>
+         <td> {{ poe.getNextTaskDate() | date: 'dd-MM-YYYY' }}</td>
           <!-- <td class="center-cell">
             <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
               <mat-icon>visibility</mat-icon>
