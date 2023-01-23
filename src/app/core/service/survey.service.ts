@@ -64,6 +64,7 @@ export class SurveyService {
               const answer: Answer = new Answer();
               answer.setId(inputAnswer.id);
               answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion)
               return answer;
             })
           question.setAnswers(answers);
@@ -119,6 +120,7 @@ export class SurveyService {
               const answer: Answer = new Answer();
               answer.setId(inputAnswer.id);
               answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion)
               return answer;
             })
           question.setAnswers(answers);
