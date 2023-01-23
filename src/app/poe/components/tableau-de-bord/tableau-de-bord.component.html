@@ -1,5 +1,6 @@
-<p>Liste des tâches à venir</p>
-  
+<div style="background-color: white;">
+  <p>Questionnaires à envoyer cette semaine</p>
+</div>
   <table>
     <thead>
       <tr>
@@ -34,7 +35,7 @@
     </thead>
     <tbody>
       <ng-container *ngFor="let poe of poes">
-        <tr >
+        <tr>
           <td class="center-cell">{{ poe.getId() }}</td>
           <td> {{ poe.getTitle() }} </td>
           <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
@@ -47,7 +48,6 @@
          </td> -->
          <td> {{ nextPoeTask(poe) }}</td>
          <td> {{ nextPoeTaskDate(poe) | date: 'dd-MM-YYYY' }}</td>
-         <td> {{ poe.getNextTaskDate() | date: 'dd-MM-YYYY' }}</td>
           <!-- <td class="center-cell">
             <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
               <mat-icon>visibility</mat-icon>

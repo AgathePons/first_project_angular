@@ -55,11 +55,11 @@ export class PoeService {
             poe.setEndDate(new Date(inputPoe.endDate));
             poe.setType(inputPoe.type);
             poe.setStatus1(inputPoe.status1);
-            poe.setSentDate1(inputPoe.sentDate1)
+            poe.setSentDate1(new Date(inputPoe.sentDate1))
             poe.setStatus6(inputPoe.status6);
-            poe.setSentDate6(inputPoe.sentDate6)
+            poe.setSentDate6(new Date(inputPoe.sentDate6))
             poe.setStatus12(inputPoe.status12);
-            poe.setSentDate12(inputPoe.sentDate12)
+            poe.setSentDate12(new Date(inputPoe.sentDate12))
             // poe.setNextTaskDate(this.nextPoeTaskDate(poe))
             return poe;
           })
@@ -247,6 +247,10 @@ export class PoeService {
     let newDate: Date = poe.getEndDate()
     newDate.setMonth(newDate.getMonth() + 12)
     return newDate
+  }
+
+  public date1Month(date: Date): Date {
+    return new Date(new Date().setMonth(new Date().getMonth() + 1))
   }
 
 

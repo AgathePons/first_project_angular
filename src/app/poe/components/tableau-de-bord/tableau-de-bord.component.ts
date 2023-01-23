@@ -11,6 +11,7 @@ export class TableauDeBordComponent implements OnInit {
 
   public poes: Array<Poe> = [];
   public currentDate: Date = new Date()
+  public currentDatePlus7: Date = new Date(new Date().setDate(new Date().getDate() + 7 ))
   public dateOneMonthAgo: Date = new Date(new Date().setMonth(new Date().getMonth() - 1))
   public dateSixMonthsAgo: Date = new Date(new Date().setMonth(new Date().getMonth() - 6))
   public dateOneYearAgo: Date = new Date(new Date().setMonth(new Date().getMonth() - 12))
@@ -28,21 +29,6 @@ export class TableauDeBordComponent implements OnInit {
     this.poeService.findAllWithSurveyStatus().subscribe((poes: Poe[]) => {
       this.poes = poes
       
-      console.log('poes1', this.poes);
-      
-      // this.poes.sort((a,b) =>
-      //   // Turn your strings into dates, and then subtract them
-      //   // to get a value that is either negative, positive, or zero.
-      //    b.getNextTaskDate().valueOf() - a.getNextTaskDate().valueOf())
-
-
-
-      this.poes.forEach(poe => {
-        console.log(poe.getId(),'endDate = ', poe.getEndDate());
-      }) 
-      this.poes.forEach(poe => {
-        console.log(poe.getId(),'next task date = ', this.poeService.nextPoeTaskDate(poe));
-      }) 
     });
 
     
