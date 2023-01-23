@@ -47,7 +47,7 @@
             <mat-icon>check_circle_outline</mat-icon>
          </td> -->
          <td> {{ nextPoeTask(poe) }}</td>
-         <td> {{ nextPoeTaskDate(poe) | date: 'dd-MM-YYYY' }}</td>
+         <td> {{ poe.getNextTaskDate()| date: 'dd-MM-YYYY' }}</td>
           <!-- <td class="center-cell">
             <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
               <mat-icon>visibility</mat-icon>

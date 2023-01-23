@@ -29,6 +29,7 @@ export class TableauDeBordComponent implements OnInit {
     this.poeService.findAllWithSurveyStatus().subscribe((poes: Poe[]) => {
       this.poes = poes
       
+      this.poes = this.poes.sort((a,b) => a.getNextTaskDate() > b.getNextTaskDate() ? 1 : -1);
     });
 
     

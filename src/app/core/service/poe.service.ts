@@ -61,6 +61,16 @@ export class PoeService {
             poe.setStatus12(inputPoe.status12);
             poe.setSentDate12(new Date(inputPoe.sentDate12))
             // poe.setNextTaskDate(this.nextPoeTaskDate(poe))
+            if(inputPoe.status1 === false) {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+1)))
+            } else if (inputPoe.status6 === false ) {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+6)))
+            } else {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+12)))
+            }
             return poe;
           })
         })
