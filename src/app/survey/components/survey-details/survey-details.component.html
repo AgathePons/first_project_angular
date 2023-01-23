@@ -28,6 +28,7 @@
 
 
     <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()"
+     [lastOrderFromSurvey]="lastOrderInSurvey()"
       (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
     <div *ngIf="showGoToAnswerDiv">
       <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
@@ -118,7 +119,7 @@
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                   <li class="answer-item">
                     <div class="answer">
-                      <form>
+                      <form (ngSubmit)="saveAnswerText(answer.getId())">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
