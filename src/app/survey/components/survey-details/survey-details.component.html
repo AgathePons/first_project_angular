@@ -116,7 +116,7 @@
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                   <li>
                     <div class="answer">
-                      <form>
+                      <form (ngSubmit)="saveAnswerText(answer.getId())">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
