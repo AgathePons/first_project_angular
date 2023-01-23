@@ -81,9 +81,9 @@
           <tr class="tr-question">
             <td class="center-cell">{{ question.getOrderInSurvey() + 1 }}</td>
             <td>
-              <form
+              <form class="update-question-form"
                 (ngSubmit)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
-                <mat-form-field [style.width.%]="100" class="update-question-form">
+                <mat-form-field [style.width.%]="100" >
                   <input matInput class="searchTerm" type="text" name="searchTerm" value="{{ question.getText()}}"
                     (keyup)="onKey(question.getId(),$event)" placeholder="Question"
                     (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())" />
