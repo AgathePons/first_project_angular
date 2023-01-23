@@ -54,6 +54,7 @@ export class QuestionService {
               const answer: Answer = new Answer();
               answer.setId(inputAnswer.id);
               answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion)
               return answer;
             })
           question.setAnswers(answers);
@@ -161,6 +162,7 @@ export class QuestionService {
               const answer: Answer = new Answer();
               answer.setId(inputAnswer.id);
               answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion);
               return answer;
             })
           question.setAnswers(answers);
@@ -187,6 +189,7 @@ export class QuestionService {
           const answer: Answer = new Answer();
           answer.setId(inputAnswer.id);
           answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion);
           return answer
         })
         question.setAnswers(answers);

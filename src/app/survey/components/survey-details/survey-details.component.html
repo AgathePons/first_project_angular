@@ -119,11 +119,11 @@
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                   <li class="answer-item">
                     <div class="answer">
-                      <form (ngSubmit)="saveAnswerText(answer.getId())" [style.width.%]="100" [style.maxWidth.px]="300">
+                      <form (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="300">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
-                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
+                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId(),answer.getOrderInQuestion())" />
                         </mat-form-field>
                       </form>
                       <!-- <p>{{answer.getText()}}</p> -->
