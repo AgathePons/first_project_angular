@@ -7,11 +7,11 @@
 
 
 <div *ngIf="filter" class="search">
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterFN"
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Prénom" [(ngModel)]="filterFN"
     (input)="searchByFirstName(filterFN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="filterLN"
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Nom" [(ngModel)]="filterLN"
     (input)="searchByLastName(filterLN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="filterBD"
+  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Date de naissance" [(ngModel)]="filterBD"
     (input)="searchByBirthDate(filterBD)" />
   <a mat-raised-button color="accent" (click)="resetFilter()">
     Reset
@@ -30,20 +30,20 @@
 
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
-        Firstname &uarr;
+        Prénom &uarr;
 
       </th>
       <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
-        Firstname &darr;
+        Prénom &darr;
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!lastNameOrder" (click)="sortByLastName(stagiaires)">
-        Last Name &uarr;
+        Nom &uarr;
       </th>
       <th class="left-cell" id="sort-button" *ngIf="lastNameOrder" (click)="sortByLastNameDesc(stagiaires)">
-        Last Name &darr;
+        Nom &darr;
       </th>
       <th class="left-cell">
-        Birthdate
+        Date de naissance
       </th>
       <th>
         Actions

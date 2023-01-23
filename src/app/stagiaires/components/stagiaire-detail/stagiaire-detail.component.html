@@ -8,15 +8,15 @@
         {{ stagiaire.getFirstName() }} {{ stagiaire.getLastName() }}
       </h2>
       <div class="info-bloc">
-        <span class="info-bloc__key">Firstname:</span>
+        <span class="info-bloc__key">Prénom:</span>
         <span class="info-bloc__value">{{ stagiaire.getFirstName() }}</span>
       </div>
       <div class="info-bloc">
-        <span class="info-bloc__key">Lastname:</span>
+        <span class="info-bloc__key">Nom:</span>
         <span class="info-bloc__value">{{ stagiaire.getLastName() }}</span>
       </div>
       <div class="info-bloc">
-        <span class="info-bloc__key">Birthdate:</span>
+        <span class="info-bloc__key">Date de naissance:</span>
         <span class="info-bloc__value">{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY' }}</span>
       </div>
       <div class="info-bloc">
@@ -24,7 +24,7 @@
         <span class="info-bloc__value">{{ stagiaire.getEmail() }}</span>
       </div>
       <div class="info-bloc">
-        <span class="info-bloc__key">Phone number</span>
+        <span class="info-bloc__key">Numéro de téléphone</span>
         <span class="info-bloc__value">{{ stagiaire.getPhoneNumber() }}</span>
       </div>
       <button class="close-btn" type="button" (click)="onClick()">

@@ -24,15 +24,15 @@
         [disabled]="stagairesToAdd.length === 0"
         (click)="onAddManyStagiaires()"
       >
-        Add {{stagairesToAdd.length}} Stagiaires 💚
+        Ajouter {{stagairesToAdd.length}} Stagiaires 💚
       </button>
       <a mat-raised-button color="accent" (click)="changeBooleanState( )">
         Filtres
       </a>
       <div *ngIf="filter" class="search">
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by First Name" [(ngModel)]="filterFN"
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Prénom" [(ngModel)]="filterFN"
           (input)="doSearchBar(filterFN, filterLN)" />
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Last Name" [(ngModel)]="filterLN"
+        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Nom" [(ngModel)]="filterLN"
           (input)="doSearchBar(filterFN, filterLN)" />
         <a mat-raised-button color="accent" (click)="resetFilter( )">
           Reset
