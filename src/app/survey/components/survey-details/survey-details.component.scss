@@ -168,6 +168,10 @@ table {
       display: flex;
       align-items: center;
       justify-content: start;
+      .answer-form {
+        margin-bottom: 1rem;
+        padding: 0;
+      }
       .delete-answer-btn {
         margin-left: 1rem;
       }

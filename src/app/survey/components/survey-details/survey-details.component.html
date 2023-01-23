@@ -50,10 +50,10 @@
       <a class="btn" mat-raised-button color="accent" [routerLink]="['/', 'survey', 'orderQuestions', survey.getId()]">
         Changer l'ordre
       </a>
-      <a class="btn" *ngIf="!showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(true)">
+      <a class="btn" *ngIf="!showAllAnswers" mat-raised-button color="primary" (click)="showAllAnswersBooleanState(true)">
         Afficher les réponses
       </a>
-      <a class="btn" *ngIf="showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(false)">
+      <a class="btn" *ngIf="showAllAnswers" mat-raised-button color="primary" (click)="showAllAnswersBooleanState(false)">
         Cacher les réponses
       </a>
     </div>
@@ -96,11 +96,11 @@
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
-              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="accent"
+              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="primary"
                 type="button" (click)="onDetailsQuestion(question.getId())">
                 <mat-icon>visibility</mat-icon>
               </button>
-              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="primary"
                 type="button" (click)="onDetailsQuestionOff(question.getId())">
                 <mat-icon>visibility_off</mat-icon>
               </button>
@@ -119,7 +119,7 @@
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                   <li class="answer-item">
                     <div class="answer">
-                      <form (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="300">
+                      <form class="answer-form" (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="300">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
