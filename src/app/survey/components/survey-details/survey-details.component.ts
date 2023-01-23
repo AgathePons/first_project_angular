@@ -266,7 +266,7 @@ export class SurveyDetailsComponent implements OnInit {
     // public addAnswerToQuestion() {
     if (this.inputAnswerMap.get(questionId) !== '') {
 
-      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputAnswerMap.get(questionId)!)
+      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputAnswerMap.get(questionId)!, 0)
       this.inputAnswerMap.set(questionId, '')
       this.answerService.addAnswerInput(answerInputDto).subscribe(
 
@@ -285,9 +285,9 @@ export class SurveyDetailsComponent implements OnInit {
 
   // Fonction qui update l'input des réponses
 
-  public saveAnswerText(id: number) {
+  public saveAnswerText(id: number, order: number) {
     if (this.inputUpdateAnswer !== '') {
-      let answerDto = new AnswerUpdateDto(id, this.inputUpdateAnswer)
+      let answerDto = new AnswerUpdateDto(id, this.inputUpdateAnswer, order)
 
       this.answerService.updateAnswerInput(answerDto).subscribe()
       this.inputUpdateAnswer = '';

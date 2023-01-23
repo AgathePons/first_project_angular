@@ -119,7 +119,7 @@
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
-                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
+                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId(),answer.getOrderInQuestion())" />
                         </mat-form-field>
                       </form>
                       <!-- <p>{{answer.getText()}}</p> -->
