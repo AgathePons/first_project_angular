@@ -1,73 +1,62 @@
 <div style="background-color: white;">
   <p>Questionnaires à envoyer cette semaine</p>
 </div>
-  <table>
-    <thead>
-      <tr>
-        <th class="center-cell">
-          #
-        </th>
-        <th class="left-cell">
-          Title
-        </th>
-        <th class="left-cell">
-          beginDate
-        </th>
-        <th class="left-cell">
-          endDate
-        </th>
-        <th class="left-cell">
-          type
-        </th>
-        <!-- <th class="center-cell">
+<table>
+  <thead>
+    <tr>
+      <th class="left-cell">
+        type
+      </th>
+      <th class="left-cell">
+        Title
+      </th>
+      <th class="left-cell">
+        beginDate
+      </th>
+      <th class="left-cell">
+        endDate
+      </th>
+      
+      <!-- <th class="center-cell">
           status 1 month
         </th> -->
-        <th class="center-cell">
-          Prochaine tâche
-        </th>
-        <th class="center-cell">
-          A faire le
-        </th>
-        <!-- <th>
-          &nbsp;
-        </th> -->
-      </tr>
-    </thead>
-    <tbody>
-      <ng-container *ngFor="let poe of poes">
-        <tr>
-          <td class="center-cell">{{ poe.getId() }}</td>
-          <td> {{ poe.getTitle() }} </td>
-          <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
-          <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
-          <td>{{ poe.getType() }} </td>
-          <!-- <td class="center-cell" *ngIf="!poe.getStatus1()">
+      <th class="center-cell">
+        Prochaine tâche
+      </th>
+      <th class="center-cell">
+        A faire le
+      </th>
+      <th>
+        Marquer résolue
+      </th>
+    </tr>
+  </thead>
+  <tbody>
+    <ng-container *ngFor="let poe of poes">
+      <tr>
+        <td>{{ poe.getType() }} </td>
+        <td> {{ poe.getTitle() }} </td>
+        <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+        <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
+        <!-- <td class="center-cell" *ngIf="!poe.getStatus1()">
             <mat-icon>highlight_off</mat-icon> </td>
           <td class="center-cell" *ngIf="poe.getStatus1()">
             <mat-icon>check_circle_outline</mat-icon>
          </td> -->
-         <td> {{ nextPoeTask(poe) }}</td>
-         <td [ngClass]="{'red-class' : poe.getNextTaskDate() < currentDate, 'orange-class' : currentDate < poe.getNextTaskDate() && poe.getNextTaskDate() < currentDatePlus7}">
-         
-         {{ poe.getNextTaskDate()| date: 'dd-MM-YYYY' }}</td>
-          <!-- <td class="center-cell">
-            <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
-              <mat-icon>visibility</mat-icon>
-            </button>
-            <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
-              <mat-icon>edit</mat-icon>
-            </button>
-            <button mat-mini-fab color="warn" type="button" (click)="onDelete(poe)">
-              <mat-icon>delete</mat-icon>
-            </button>
-          </td> -->
-        </tr>
-      </ng-container>
-    </tbody>
-    <tfoot>
-      <tr>
-        <td colspan="6" class="right-cell"></td>
-  
+        <td class="center-cell"> {{ nextPoeTask(poe) }}</td>
+        <td class="center-cell"
+          [ngClass]="{'red-class' : poe.getNextTaskDate() < currentDate, 'orange-class' : currentDate < poe.getNextTaskDate() && poe.getNextTaskDate() < currentDatePlus7}">
+
+          {{ poe.getNextTaskDate()| date: 'dd-MM-YYYY' }}</td>
+        <td class="center-cell">
+
+          <button mat-mini-fab color="accent" type="button">
+            <mat-icon>check_circle_outline</mat-icon>
+          </button>
+
+        </td>
       </tr>
-    </tfoot>
-  </table>
+    </ng-container>
+  </tbody>
+
+</table>
