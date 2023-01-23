@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Poe } from 'src/app/core/models/poe';
 import { PoeService } from 'src/app/core/service/poe.service';
+import { PoeSurveyDto } from '../../dto/poe-survey-dto';
 
 @Component({
   selector: 'app-tableau-de-bord',
@@ -10,6 +11,7 @@ import { PoeService } from 'src/app/core/service/poe.service';
 export class TableauDeBordComponent implements OnInit {
 
   public poes: Array<Poe> = [];
+  public poesPastTasks: Array<Poe> = [];
   public currentDate: Date = new Date()
   public currentDatePlus7: Date = new Date(new Date().setDate(new Date().getDate() + 7 ))
   public dateOneMonthAgo: Date = new Date(new Date().setMonth(new Date().getMonth() - 1))
@@ -30,6 +32,17 @@ export class TableauDeBordComponent implements OnInit {
       this.poes = poes
       
       this.poes = this.poes.sort((a,b) => a.getNextTaskDate() > b.getNextTaskDate() ? 1 : -1);
+
+      this.poesPastTasks = []
+      this.poes.forEach(poe => {
+        if (this.pastPoeTask(poe) !== 'Aucune') {
+          this.poesPastTasks.push(poe)
+        }
+      })
+
+      console.log('poesPastTasks', this.poesPastTasks);
+      
+
     });
 
     
@@ -66,5 +79,57 @@ export class TableauDeBordComponent implements OnInit {
       
     })  
     // return poes.sort((a,b) => this.nextPoeTaskDate(a).getTime() > this.nextPoeTaskDate(b).getTime() ? 1 : -1);
+  }
+
+  public updateStatus(poe: Poe): void {
+    console.log('poe status1', poe.getStatus1());
+    console.log('poe status6', poe.getStatus6());
+    console.log('poe status12', poe.getStatus12());
+    if (poe.getStatus1() === false) {
+
+      console.log('call maj staatus 1');
+      
+      let obj: PoeSurveyDto = new PoeSurveyDto();
+      obj.id = poe.getId();
+      obj.status1 = true;
+      obj.sentDate1 = new Date();
+      console.log('obj dto = ', obj);
+      
+      this.poeService.updatePoeStatus(obj).subscribe(response => {
+        this.ngOnInit()
+
+      })
+    } else if (poe.getStatus6() === false) {
+      let obj: PoeSurveyDto = new PoeSurveyDto();
+      obj.id = poe.getId();
+      obj.status6 = true;
+      obj.sentDate6 = new Date();
+      console.log('obj dto = ', obj);
+
+      this.poeService.updatePoeStatus(obj).subscribe(response => {
+        this.ngOnInit()
+
+      })
+    } else if (poe.getStatus12() === false) {
+      let obj: PoeSurveyDto = new PoeSurveyDto();
+      obj.id = poe.getId();
+      obj.status12 = true;
+      obj.sentDate12 = new Date();
+      console.log('obj dto = ', obj);
+
+      this.poeService.updatePoeStatus(obj).subscribe(response => {
+        this.ngOnInit()
+
+      })
+    }
+    
+  }
+
+  public pastPoeTaskDate(poe: Poe): Date {
+    return this.poeService.pastPoeTaskDate(poe)
+  }
+  
+  public pastPoeTask(poe: Poe): string {
+    return this.poeService.pastPoeTask(poe)
   }
 }

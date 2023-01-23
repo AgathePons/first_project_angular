@@ -17,6 +17,7 @@ export class Poe {
   private sentDate12: Date = new Date();
   private link12: string = '';
   private nextTaskDate: Date = new Date()
+  private pastTaskDate: Date = new Date()
 
   /* public constructor(id: number,title: string,bd: Date,ed: Date,type: string) {
     this.id = id;
@@ -152,5 +153,13 @@ export class Poe {
 
   public setNextTaskDate(date: Date): void {
     this.nextTaskDate = date
+  }
+  
+  public getPastTaskDate(): Date {
+    return this.pastTaskDate
+  }
+
+  public setPastTaskDate(date: Date): void {
+    this.pastTaskDate = date
   }
 }

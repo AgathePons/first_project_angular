@@ -87,8 +87,18 @@ mat-select {
 }
 
 .red-class {
-  color: red;
+  background-color: #fda2a2
 }
 .orange-class {
-  color: orange;
+  background-color: #ffb275
+}
+
+button.mat-focus-indicator.mat-mini-fab.mat-button-base.mat-accent {
+  background-color: #8dbd9f;
+}
+
+.subtitle p {
+  font-size: 22px;
+  color: white;
+  font-weight: 500;
 }

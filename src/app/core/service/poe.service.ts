@@ -61,16 +61,22 @@ export class PoeService {
             poe.setStatus12(inputPoe.status12);
             poe.setSentDate12(new Date(inputPoe.sentDate12))
             // poe.setNextTaskDate(this.nextPoeTaskDate(poe))
-            if(inputPoe.status1 === false) {
+            if (inputPoe.status1 === false) {
               let endDate: Date = new Date(inputPoe.endDate)
-              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+1)))
-            } else if (inputPoe.status6 === false ) {
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 1)))
+            } else if (inputPoe.status6 === false) {
               let endDate: Date = new Date(inputPoe.endDate)
-              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+6)))
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 6)))
+              poe.setPastTaskDate(poe.getSentDate1())
+            } else if (inputPoe.status12 === false)  {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 12)))
+              poe.setPastTaskDate(poe.getSentDate6())
+              
             } else {
-              let endDate: Date = new Date(inputPoe.endDate)
-              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth()+12)))
+              poe.setPastTaskDate(poe.getSentDate12())
             }
+            
             return poe;
           })
         })
@@ -240,9 +246,12 @@ export class PoeService {
       return 'Questionnaire 1 mois'
     } else if (poe.getStatus6() === false) {
       return 'Questionnaire 6 mois'
-    }
-    return 'Questionnaire 12 mois'
+    } else if (poe.getStatus12() === false) {
+      return 'Questionnaire 12 mois'
+    } return 'Les 3 Questionnaires sont envoyés'
   }
+
+  
 
   public nextPoeTaskDate(poe: Poe): Date {
     if (this.nextPoeTask(poe) === 'Questionnaire 1 mois') {
@@ -259,10 +268,39 @@ export class PoeService {
     return newDate
   }
 
+  public pastPoeTask(poe: Poe): string {
+    if (poe.getStatus1() === false) {
+      return 'Aucune'
+    } else if (poe.getStatus6() === false) {
+      return 'Questionnaire 1 mois'
+    } else if (poe.getStatus12() === false) {
+      return 'Questionnaire 6 mois'
+    } return 'Questionnaire 12 mois'
+  }
+
+  public pastPoeTaskDate(poe: Poe): Date {
+    if (this.pastPoeTask(poe) === 'Questionnaire 1 mois') {
+      return poe.getSentDate1()
+    } else if (this.pastPoeTask(poe) === 'Questionnaire 6 mois') {
+      return poe.getSentDate6()
+    } else
+      return poe.getSentDate12()
+  }
+  
   public date1Month(date: Date): Date {
     return new Date(new Date().setMonth(new Date().getMonth() + 1))
   }
 
+  public updatePoeStatus(poeSurveyDto: PoeSurveyDto): Observable<Poe> {
+    console.log('call updatePoeStatus');
+    console.log('Json object', poeSurveyDto);
 
-  
+    return this.httpClient.patch<any>(
+      this.controllerBaseUrl,
+      poeSurveyDto
+    )
+  }
+
+
+
 }
