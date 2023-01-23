@@ -13,6 +13,7 @@ import { AnswerService } from 'src/app/core/service/answer.service';
 import { AnswerInputDto } from 'src/app/answer/dto/answer-input-dto';
 import { AnswerDto } from 'src/app/answer/dto/answer-dto';
 import { AnswerUpdateDto } from 'src/app/answer/dto/answer-update-dto';
+import { CdkDragDrop, CdkDragEnd, moveItemInArray } from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-survey-details',
@@ -42,6 +43,9 @@ export class SurveyDetailsComponent implements OnInit {
 
   public inputNewAnswer: string = '';
   public inputUpdateAnswer: string = '';
+
+  public questionDrag!: Question;
+  public currentListOrdered!: Array<Answer>;
 
   constructor(
     private route: ActivatedRoute,
@@ -75,13 +79,26 @@ export class SurveyDetailsComponent implements OnInit {
 
             console.log('Map = ', this.inputQuestionMap);
             console.log('Map Answer = ', this.inputAnswerMap);
-          });
+          })
+          
 
-      });
+      }
+      );
 
 
 
-
+;
+this.route.params.subscribe(
+  (routeParams: Params) => {
+    const questionId: number = routeParams['id'];
+    this.questionService.findOne(questionId).subscribe(
+      ((question: Question) => {
+        this.questionDrag = question;
+        this.currentListOrdered = question.getAnswers();
+      })
+    );
+  }
+);
     const data: any = this.route.snapshot.data;
 
     this.questionForm = data.form;
@@ -325,5 +342,21 @@ public lastOrderInSurvey(): number {
   }
   return 0
 }
+
+
+
+
+drop(event: CdkDragDrop<Answer[]>) {
+  console.log('coucou je drop');
+  
+  moveItemInArray(this.currentListOrdered, event.previousIndex, event.currentIndex);
+  this.currentListOrdered.forEach((answer: Answer, index) => {
+    answer.setOrderInQuestion(index);
+  });
+}
+
+dragEnd($event: CdkDragEnd) {
+}
+
 
 }
