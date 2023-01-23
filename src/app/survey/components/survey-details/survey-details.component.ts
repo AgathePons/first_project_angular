@@ -313,5 +313,14 @@ public saveQuestionText(id: number, type: string, orderInSurvey: number) {
   }
 
 }
+public lastOrderInSurvey(): number {
+  let orderQuestionArray: number[] = [];
+
+  this.survey.getQuestions().forEach( question => {
+    orderQuestionArray.push(question.getOrderInSurvey())
+  })
+
+  return Math.max(...orderQuestionArray!) + 1 
+}
 
 }

@@ -24,6 +24,7 @@
 
 
     <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()"
+     [lastOrderFromSurvey]="lastOrderInSurvey()"
       (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
     <div *ngIf="showGoToAnswerDiv">
       <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
