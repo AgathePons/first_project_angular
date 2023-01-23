@@ -115,13 +115,13 @@
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
                   <li>
                     <div class="answer">
-
-                      <mat-form-field [style.width.%]="100">
-                        <input matInput class="searchTerm" type="text" name="searchTerm"
-                          (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
-                          placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
-                      </mat-form-field>
-
+                      <form>
+                        <mat-form-field [style.width.%]="100">
+                          <input matInput class="searchTerm" type="text" name="searchTerm"
+                            (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
+                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
+                        </mat-form-field>
+                      </form>
                       <!-- <p>{{answer.getText()}}</p> -->
                       <!-- <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
            question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"

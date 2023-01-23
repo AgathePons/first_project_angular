@@ -88,6 +88,13 @@ export class AppRoutingModule {
       ]
     },
     {
+      path: 'stagiaires',
+      component: StagiaireTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
       path: 'poe/detail/:id',
       component: PoeDetailsComponent,
       canActivate: [

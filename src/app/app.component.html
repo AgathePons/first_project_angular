@@ -6,21 +6,24 @@
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/', 'home']">
-        Liste des stagiaires
+      <button mat-menu-item [routerLink]="['/']">
+        Tableau de bord
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
         Liste des POE
       </button>
+      <button mat-menu-item [routerLink]="['/', 'stagiaires']">
+        Liste des stagiaires
+      </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
         Liste des questionnaires
       </button>
-      <button mat-menu-item [routerLink]="['/', 'questions']">
+      <!-- <button mat-menu-item [routerLink]="['/', 'questions']">
         Liste des questions
       </button>
       <button mat-menu-item [routerLink]="['/', 'answers']">
         Liste des réponses
-      </button>
+      </button> -->
       <button mat-menu-item [routerLink]="['/', 'googlepage']">
         Créer des Google forms
       </button>
