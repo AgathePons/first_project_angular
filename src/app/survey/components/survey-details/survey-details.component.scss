@@ -175,6 +175,16 @@ table {
   }
 }
 
+.add-answer-div {
+  display: flex;
+  align-items: center;
+  .add-answer-form {
+    flex-grow: 1;
+    max-width: 300px;
+    margin-bottom: 0;
+  }
+}
+
 
 .add-question-form {
   margin: 10px;
