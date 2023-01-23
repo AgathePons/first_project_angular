@@ -67,9 +67,9 @@ export class SurveyDetailsComponent implements OnInit {
 
             this.survey.getQuestions().forEach((question: Question) => {
               this.inputQuestionMap.set(question.getId(), '');
+              this.inputAnswerMap.set(question.getId(), '');
 
-              question.getAnswers().forEach((answer: Answer) =>
-                this.inputAnswerMap.set(answer.getId(), ''))
+             
             }
             )
 
@@ -220,29 +220,17 @@ export class SurveyDetailsComponent implements OnInit {
     this.inputQuestionMap.set(id, event.target.value);
     console.log('inputQuestion = ', this.inputQuestionMap);
   }
+  public onKeyAnswerMap(id: number, event: any) {
+    this.inputAnswerMap.set(id, event.target.value);
+    console.log('inputAnswerMap = ', this.inputAnswerMap);
+  }
   public onKeyAnswer(id: number, event: any) {
     // this.inputAnswerMap.set(id, event.target.value);
     this.inputUpdateAnswer = event.target.value
     console.log('inputUpdateAnswer = ', this.inputUpdateAnswer);
   }
 
-  // Fonction qui save le texte des questions avec le input
-
-  public saveQuestionText(id: number, type: string, orderInSurvey: number) {
-
-    if (this.inputQuestionMap.get(id) !== '') {
-      let questionDtoToAdd: QuestionInputDto =
-        new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type, orderInSurvey)
-
-      console.log('this questionDTO', questionDtoToAdd);
-
-
-      this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
-      this.inputQuestionMap.set(id, '')
-
-    }
-
-  }
+  
 
 
   // public onSubmitQuestion() {
@@ -276,10 +264,10 @@ export class SurveyDetailsComponent implements OnInit {
 
   public addAnswerToQuestion(questionId: number) {
     // public addAnswerToQuestion() {
-    if (this.inputNewAnswer !== '') {
+    if (this.inputAnswerMap.get(questionId) !== '') {
 
-      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputNewAnswer)
-      this.inputNewAnswer = ''
+      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputAnswerMap.get(questionId)!)
+      this.inputAnswerMap.set(questionId, '')
       this.answerService.addAnswerInput(answerInputDto).subscribe(
 
         (response: any) => {
@@ -308,6 +296,22 @@ export class SurveyDetailsComponent implements OnInit {
     }
 
   }
+// Fonction qui save le texte des questions avec le input
 
+public saveQuestionText(id: number, type: string, orderInSurvey: number) {
+
+  if (this.inputQuestionMap.get(id) !== '') {
+    let questionDtoToAdd: QuestionInputDto =
+      new QuestionInputDto(id, this.inputQuestionMap.get(id)!, type, orderInSurvey)
+
+    console.log('this questionDTO', questionDtoToAdd);
+
+
+    this.questionService.updateQuestionInput(questionDtoToAdd).subscribe()
+    this.inputQuestionMap.set(id, '')
+
+  }
+
+}
 
 }
