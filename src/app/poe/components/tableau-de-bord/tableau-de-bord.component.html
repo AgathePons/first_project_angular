@@ -1,4 +1,5 @@
 <div class="subtitle">
+  <p style="text-decoration: underline">TABLEAU DE BORD</p>
   <p>Questionnaires à envoyer</p>
 </div>
 <table>
@@ -79,11 +80,9 @@
           status 1 month
         </th> -->
       <th class="center-cell">
-        Questionnaire envoyé
+        Questionnaire
       </th>
-      <th class="center-cell">
-        Le
-      </th>
+      
     </tr>
   </thead>
   <tbody>
@@ -98,14 +97,10 @@
           <td class="center-cell" *ngIf="poe.getStatus1()">
             <mat-icon>check_circle_outline</mat-icon>
          </td> -->
-        <td class="center-cell"> {{ pastPoeTask(poe) }}</td>
-        <td class="center-cell">
-
-          {{ pastPoeTaskDate(poe)| date: 'dd-MM-YYYY' }}</td>
-        <td class="center-cell">
+        <td class="center-cell"> {{ pastPoeTask(poe) }}, envoyé le {{ pastPoeTaskDate(poe)| date: 'dd-MM-YYYY' }}</td>
+        
 
 
-        </td>
       </tr>
     </ng-container>
   </tbody>
