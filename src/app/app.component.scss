@@ -2,6 +2,10 @@ $title-background-color: linear-gradient(to bottom left, rgb(108, 245, 198), rgb
 $std-color: rgb(32, 2, 32);
 $light-color: rgb(255, 255, 255);
 
+h1 {
+  text-transform: uppercase;
+}
+
 .password-btn {
   font-size: 2.5rem;
 }
@@ -11,7 +15,7 @@ $light-color: rgb(255, 255, 255);
 }
 
 .nav {
-  margin-bottom: 1rem;
+  margin-bottom: 2rem;
 }
 
 .mat-accent {
@@ -34,10 +38,13 @@ $light-color: rgb(255, 255, 255);
   h1 {
     font-size: 13rem;
     padding: 3rem;
+    color: black;
   }
   &.visible {
     transform: scale(1);
   }
+
+
 }
 
 @keyframes rotate_hue {
@@ -48,4 +55,6 @@ $light-color: rgb(255, 255, 255);
   100% {
     filter: hue-rotate(-360deg);
   }
+
+
  }

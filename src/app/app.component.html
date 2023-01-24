@@ -2,31 +2,38 @@
 
 
   <mat-toolbar color="primary" class="nav">
-    <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
       <mat-icon>menu</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
-      <button mat-menu-item [routerLink]="['/']">
-        Tableau de bord
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <span (mouseleave)="menuTrigger.closeMenu()">
+      <button mat-menu-item [routerLink]="['/', 'home']">
+        <mat-icon>people_outline</mat-icon>
+        <span>Stagiaires</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
-        Liste des POE
+        <mat-icon>school</mat-icon>
+        <span>POE</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'stagiaires']">
         Liste des stagiaires
       </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
-        Liste des questionnaires
+        <mat-icon>description</mat-icon>
+        <span>Questionnaires</span>
       </button>
-      <!-- <button mat-menu-item [routerLink]="['/', 'questions']">
+      <!--<button mat-menu-item [routerLink]="['/', 'questions']">
         Liste des questions
       </button>
       <button mat-menu-item [routerLink]="['/', 'answers']">
         Liste des réponses
-      </button> -->
+      </button> !-->
       <button mat-menu-item [routerLink]="['/', 'googlepage']">
-        Créer des Google forms
+        <mat-icon>mail</mat-icon>
+        <span>Google Forms</span>
       </button>
+      </span>
     </mat-menu>
     <span class="example-spacer"></span>
     <span>
