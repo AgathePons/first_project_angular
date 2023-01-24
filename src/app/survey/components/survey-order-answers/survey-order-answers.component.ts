@@ -5,6 +5,9 @@ import { Answer } from 'src/app/core/models/answer';
 import { Question } from 'src/app/core/models/question';
 import { AnswerService } from 'src/app/core/service/answer.service';
 import { QuestionService } from 'src/app/core/service/question.service';
+import { CdkDragDrop, CdkDragEnd, moveItemInArray } from '@angular/cdk/drag-drop';
+import { QuestionDto } from 'src/app/question/dto/question-dto';
+import { AnswerDto } from 'src/app/answer/dto/answer-dto';
 
 @Component({
   selector: 'app-survey-order-answers',
@@ -36,7 +39,35 @@ export class SurveyOrderAnswersComponent implements OnInit {
           }
         );
       }
-    )
+    );
+  }
+
+  drop(event: CdkDragDrop<Answer[]>) {
+    moveItemInArray(this.currentListOrdered, event.previousIndex, event.currentIndex);
+    this.currentListOrdered.forEach((answer: Answer, index) => {
+      answer.setOrderInQuestion(index);
+    });
+  }
+
+  dragEnd($event: CdkDragEnd) {
+
+  }
+
+  public onSubmit(): void {
+    this.currentListOrdered.forEach((answer: Answer) => {
+      const dto: AnswerDto = new AnswerDto(answer);
+      if (this.currentListOrdered.indexOf(answer) !== (this.currentListOrdered.length - 1)) {
+        this.answerService.updateAnswer(dto).subscribe();
+      } else {
+        this.answerService.updateAnswer(dto).subscribe(
+          answer => this.goBack()
+        );
+      }
+    });
+  }
+
+  public goBack(): void {
+    this.location.back()
   }
 
 }
