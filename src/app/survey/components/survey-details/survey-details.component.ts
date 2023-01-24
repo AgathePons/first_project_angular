@@ -68,8 +68,8 @@ export class SurveyDetailsComponent implements OnInit {
               this.inputQuestionMap.set(question.getId(), '');
               this.inputAnswerMap.set(question.getId(), '');
             });
-            console.log('Map = ', this.inputQuestionMap);
-            console.log('Map Answer = ', this.inputAnswerMap);
+            //console.log('Map = ', this.inputQuestionMap);
+            //console.log('Map Answer = ', this.inputAnswerMap);
           });
       });
 

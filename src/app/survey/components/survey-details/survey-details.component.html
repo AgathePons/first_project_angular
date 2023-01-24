@@ -130,6 +130,15 @@
           <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
             <td></td>
             <td colspan="3">
+              <a
+                *ngIf="question.getAnswerType() == 'CHOOSE_MANY' || question.getAnswerType() == 'CHOOSE_ONE'"
+                class="btn"
+                mat-raised-button
+                color="accent"
+                [routerLink]="['/', 'survey', 'orderAnswers', question.getId()]"
+              >
+                Changer l'ordre des réponses
+              </a>
               <!-- answer list -->
               <ul class="answer-list">
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
