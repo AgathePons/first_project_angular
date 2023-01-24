@@ -37,6 +37,7 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau-de-bord.component';
+import { SurveySendEmailComponent } from './survey/components/survey-send-email/survey-send-email.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau
     GoogleMainPageComponent,
     SurveyAddQuestionComponent,
     SurveyOrderQuestionsComponent,
-    TableauDeBordComponent
+    TableauDeBordComponent,
+    SurveySendEmailComponent
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,35 @@
+<div>Générer le fichier Google Form</div>
+<app-google-main-page></app-google-main-page>
+<div>Envoyer le mail</div>
+
+<div class="search">
+    
+    <input class="searchTerm" type="text" name="searchTerm" 
+    placeholder="Objet :" [(ngModel)]="subject"
+ />
+    <textarea class="searchTerm" type="text" name="searchTerm" 
+    placeholder="Texte avant l'url :" [(ngModel)]="beforeUrl"
+    rows="20" cols="50"
+ ></textarea>
+ <div>
+    <p>Url du formulaire : {{ urlGoogleForm }}</p>
+  </div>
+    <textarea class="searchTerm" type="text" name="searchTerm" 
+    placeholder="Texte après l'url :" [(ngModel)]="afterUrl"
+    rows="20" cols="25"
+ ></textarea>
+
+ 
+
+ <button mat-mini-fab color="accent" type="button" (click)="sendEmail()">
+    <mat-icon>email</mat-icon>
+  </button>
+  
+</div>
+
+<div>
+    <p>Aperçu du mail généré:</p>
+    <p>{{ beforeUrl }}</p>
+    <p>{{ urlGoogleForm }}</p>
+    <p>{{ afterUrl }}</p>
+</div>

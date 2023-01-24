@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable, take } from 'rxjs';
 import { PoeDto } from 'src/app/poe/dto/poe-dto';
 import { PoeSurveyDto } from 'src/app/poe/dto/poe-survey-dto';
+import { SurveyEmailDto } from 'src/app/survey/dto/survey-email-dto';
 import { environment } from 'src/environments/environment';
 import { Poe } from '../models/poe';
 import { Stagiaire } from '../models/stagiaire';
@@ -201,6 +202,16 @@ export class PoeService {
           return poe
         })
       );
+  }
+
+  public sendEmail(poeId: number, subject: string, body: string) {
+    let emailDto: SurveyEmailDto = new SurveyEmailDto(subject, body)
+    console.log('emailDto', emailDto);
+    
+    return this.httpClient.put<any>(
+      `${this.controllerBaseUrl}/${poeId}/sendMail`,
+      emailDto
+    )
   }
 
   public removeOneStagiaire(poeId: number, stagiaireId: number) {

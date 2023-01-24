@@ -7,6 +7,7 @@ import { StagiaireService } from 'src/app/core/service/stagiaire.service';
 import { StagiaireDto } from '../../dto/stagiaire-dto';
 
 import { FormBuilderService } from '../../../shared/form-builder.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-stagaire-form',
@@ -24,6 +25,7 @@ export class StagaireFormComponent implements OnInit {
     private formBuilderService: FormBuilderService,
     private router: Router,
     private route: ActivatedRoute,
+    private location: Location
 
   ) { }
 
@@ -70,6 +72,6 @@ export class StagaireFormComponent implements OnInit {
   }
 
   public goBack(): void {
-    this.router.navigate(['/', 'home']);
+    this.location.back()
   }
 }
