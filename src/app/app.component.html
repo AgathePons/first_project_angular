@@ -9,7 +9,7 @@
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
       <span (mouseleave)="menuTrigger.closeMenu()">
       <button mat-menu-item [routerLink]="['/', 'home']">
-        <mat-icon>home</mat-icon>
+        <mat-icon color="primary">home</mat-icon>
         <span>Tableau de bord</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
@@ -17,7 +17,7 @@
         <span>POE</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'stagiaires']">
-        <mat-icon>people_outline</mat-icon>
+        <mat-icon color="primary">people_outline</mat-icon>
         <span>Stagiaires</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
