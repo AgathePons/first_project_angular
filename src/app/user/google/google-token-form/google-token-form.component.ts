@@ -1,3 +1,4 @@
+import { Location } from '@angular/common';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -19,6 +20,7 @@ export class GoogleTokenFormComponent implements OnInit, OnDestroy {
     private formBuilder: FormBuilder,
     private userService: UserService,
     private router: Router,
+    private location: Location
   ) { }
 
   ngOnInit(): void {
@@ -49,6 +51,10 @@ export class GoogleTokenFormComponent implements OnInit, OnDestroy {
           this.error = 'invalid token'
         }
       });
+  }
+
+  public goBack(): void {
+    this.location.back()
   }
 
 }

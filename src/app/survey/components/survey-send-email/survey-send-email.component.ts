@@ -21,7 +21,7 @@ export class SurveySendEmailComponent implements OnInit {
   public body: string = 'Corps du mail'
   public beforeUrl: string = 'Bonjour, lien du formulaire Google : '
   public afterUrl: string = 'Cordialement'
-  public urlGoogleForm: string = 'http://localhost:4200/poe/sendMail/1'
+  public urlGoogleForm: string = `#Veuillez effectuer l'étape 1 pour générer l'url.#`
 
   ngOnInit(): void {
 

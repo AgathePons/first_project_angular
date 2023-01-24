@@ -22,7 +22,8 @@
       class="btn"
       mat-raised-button
       color="accent"
-      [routerLink]="['/','googlepage']"
+      (click)="goBack()"
+      type="button"
     >
     Cancel
     </button>
