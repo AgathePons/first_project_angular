@@ -39,6 +39,8 @@ import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-
 import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau-de-bord.component';
 import { SurveySendEmailComponent } from './survey/components/survey-send-email/survey-send-email.component';
 import { SurveyOrderAnswersComponent } from './survey/components/survey-order-answers/survey-order-answers.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+
 
 @NgModule({
   declarations: [
@@ -78,7 +80,8 @@ import { SurveyOrderAnswersComponent } from './survey/components/survey-order-an
     SharedModule,
     UserModule,
     FormsModule,
-    DragDropModule
+    DragDropModule,
+    MatTooltipModule
   ],
   providers: [
     userInterceptor

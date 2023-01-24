@@ -47,10 +47,15 @@
           {{ poe.getNextTaskDate()| date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
 
-          <button mat-mini-fab color="accent" type="button" [routerLink]="['/','poe','sendMail', poe.getId()]">
+          <button  matTooltip="Envoyer"
+          matTooltipPosition="left"
+          mat-mini-fab color="accent" type="button" [routerLink]="['/','poe','sendMail', poe.getId()]">
             <mat-icon>email</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" type="button" (click)="updateStatus(poe)">
+          
+          <button matTooltip="Marquer comme 'Fait'"
+          matTooltipPosition="above"
+          mat-mini-fab color="accent" type="button" (click)="updateStatus(poe)">
             <mat-icon>check_circle_outline</mat-icon>
           </button>
 
