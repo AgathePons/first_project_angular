@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { Poe } from 'src/app/core/models/poe';
 import { PoeService } from 'src/app/core/service/poe.service';
+import { PoeSurveyDto } from 'src/app/poe/dto/poe-survey-dto';
 import { SurveyEmailDto } from '../../dto/survey-email-dto';
 
 @Component({
@@ -40,10 +42,51 @@ export class SurveySendEmailComponent implements OnInit {
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {
       console.log('Message envoyé');
+      this.updateStatus()
       this.mailSent = true;
     })
   }
 
+  public updateStatus(): void {
+
+    let poe: Poe = new Poe();
+
+    this.poeService.findOneWithStatus(this.poeId).subscribe(poeResp => {
+      poe = poeResp
+
+      if (poe.getStatus1() === false) {
+
+      
+        let obj: PoeSurveyDto = new PoeSurveyDto();
+        obj.id = this.poeId;
+        obj.status1 = true;
+        obj.sentDate1 = new Date();
+        console.log('obj dto = ', obj);
+        
+        this.poeService.updatePoeStatus(obj).subscribe()
+      } else if (poe.getStatus6() === false) {
+        let obj: PoeSurveyDto = new PoeSurveyDto();
+        obj.id = this.poeId;
+        obj.status6 = true;
+        obj.sentDate6 = new Date();
+        console.log('obj dto = ', obj);
+  
+        this.poeService.updatePoeStatus(obj).subscribe()
+      } else if (poe.getStatus12() === false) {
+        let obj: PoeSurveyDto = new PoeSurveyDto();
+        obj.id = this.poeId;
+        obj.status12 = true;
+        obj.sentDate12 = new Date();
+        console.log('obj dto = ', obj);
+  
+        this.poeService.updatePoeStatus(obj).subscribe()
+      }
+
+    })
+    
+    
+    
+  }
 
 
 }

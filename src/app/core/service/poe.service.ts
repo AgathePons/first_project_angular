@@ -84,6 +84,47 @@ export class PoeService {
       );
   }
 
+  public findOneWithStatus(id: number): Observable<Poe> {
+    return this.httpClient.get<any>(
+      `${this.controllerBaseUrl}/${id}/WithStatus`
+    )
+      .pipe(
+        take(1),
+        map((inputPoe: any) => {
+          const poe: Poe = new Poe();
+            poe.setId(inputPoe.id);
+            poe.setTitle(inputPoe.title);
+            poe.setBeginDate(new Date(inputPoe.beginDate));
+            poe.setEndDate(new Date(inputPoe.endDate));
+            poe.setType(inputPoe.type);
+            poe.setStatus1(inputPoe.status1);
+            poe.setSentDate1(new Date(inputPoe.sentDate1))
+            poe.setStatus6(inputPoe.status6);
+            poe.setSentDate6(new Date(inputPoe.sentDate6))
+            poe.setStatus12(inputPoe.status12);
+            poe.setSentDate12(new Date(inputPoe.sentDate12))
+            // poe.setNextTaskDate(this.nextPoeTaskDate(poe))
+            if (inputPoe.status1 === false) {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 1)))
+            } else if (inputPoe.status6 === false) {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 6)))
+              poe.setPastTaskDate(poe.getSentDate1())
+            } else if (inputPoe.status12 === false)  {
+              let endDate: Date = new Date(inputPoe.endDate)
+              poe.setNextTaskDate(new Date(endDate.setMonth(endDate.getMonth() + 12)))
+              poe.setPastTaskDate(poe.getSentDate6())
+              
+            } else {
+              poe.setPastTaskDate(poe.getSentDate12())
+            }
+            
+            return poe;
+        })
+      );
+  }
+
   public findOne(id: number): Observable<Poe> {
     return this.httpClient.get<any>(
       `${this.controllerBaseUrl}/${id}`
