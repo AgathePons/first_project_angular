@@ -1,21 +1,51 @@
-<a mat-raised-button color="accent" (click)="changeBooleanState( )">
-  Filtres
-</a><a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
-  Ajouter Stagiaire
+<div class="btn-list">
+<a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
+    Ajouter Stagiaire
 </a>
+<a mat-raised-button color="primary" (click)="changeBooleanState( )">
+  Filtres
+</a>
+</div>
 
 
 
-<div *ngIf="filter" class="search">
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Prénom" [(ngModel)]="filterFN"
+<div *ngIf="filter">
+  <div class="search">
+  <mat-form-field>
+  <input 
+  matInput
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Prénom" 
+  [(ngModel)]="filterFN"
     (input)="searchByFirstName(filterFN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Nom" [(ngModel)]="filterLN"
+  </mat-form-field>
+  <mat-form-field>
+  <input 
+  matInput 
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Nom" 
+  [(ngModel)]="filterLN"
     (input)="searchByLastName(filterLN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Date de naissance" [(ngModel)]="filterBD"
+  </mat-form-field>
+  <mat-form-field>
+  <input 
+  matInput
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Date de naissance" 
+  [(ngModel)]="filterBD"
     (input)="searchByBirthDate(filterBD)" />
+  </mat-form-field>
+
   <a mat-raised-button color="accent" (click)="resetFilter()">
-    Reset
+    Supprimer les filtres
   </a>
+</div>
 </div>
 
 

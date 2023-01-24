@@ -1,15 +1,20 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <button mat-mini-fab color="primary" [routerLink]="['/','poes']">
+  <div class="detail-page-header">
+    <mat-card-title class="detail-page-header_title">
+        <button mat-mini-fab color="primary" [routerLink]="['/','poes']">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      {{poe.getType()}} : {{poe.getTitle()}}
+      <span class="title">{{poe.getType()}} : {{poe.getTitle()}}</span>
+      <button mat-mini-fab color="primary" [routerLink]="['/', 'poe', 'update', poe.getId()]">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-card-title>
+
     <mat-card-subtitle>
       du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
     </mat-card-subtitle>
-  </mat-card-header>
+  </div>
+  
   <mat-card-content>
     <div class="info-bloc">
         <span class="info-bloc__key">Titre : </span>
@@ -27,13 +32,19 @@
         <span class="info-bloc__key">Date de fin : </span>
         <span class="info-bloc__value">{{ poe.getEndDate() }}</span>
       </div>
+    
+      <div class="btn-list">
       <a
+        class="btn"
         mat-raised-button
         color="accent"
         [routerLink]="['/', 'poe', 'addStagiaires', poe.getId()]"
       >
         Ajouter des stagiaires dans cette POE
       </a>
+      </div>
+
+
       <table>
         <thead>
           <tr>
