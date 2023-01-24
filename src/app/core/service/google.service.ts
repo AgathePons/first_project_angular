@@ -75,6 +75,18 @@ export class GoogleService {
     );
   }
 
+  public getGoogleFormById(formId: string): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiGoogleFormBaseUrl}/${formId}`
+    )
+    .pipe(
+      take(1),
+      map((formObject: any) => {
+        return formObject;
+      })
+    );
+  }
+
   public deleteFirstItem(formId: string):  Observable<any> {
 
     const requestBody = {
@@ -110,15 +122,12 @@ export class GoogleService {
 
       let questionDto: QuestionDto;
       if (question.getAnswerType() === 'FREE') {
-        console.log('FREE question');
         questionDto = new QuestionFreeDto();
       }
       else if (question.getAnswerType() === 'YES_NO') {
-        console.log('YES_NO question');
         questionDto = new QuestionYesNoDto();
       }
       else if (question.getAnswerType() === 'CHOOSE_ONE') {
-        console.log('CHOOSE_ONE question');
         let answersToInsert: Array<any> = [
           { value: 'Insert at least one possible answer'}
         ];
@@ -153,10 +162,7 @@ export class GoogleService {
         questionDto = new QuestionFreeDto();
       }
 
-
       createItemDto.createItem.item.questionItem = questionDto;
-      console.log('push', createItemDto);
-
       requestBody.requests.push(createItemDto);
     })
     console.log('requestBody >>', requestBody);
@@ -164,92 +170,6 @@ export class GoogleService {
   }
 
   public insertItemsInForm(formId: string, survey: Survey): Observable<any> {
-
-    const requestBodyFake = {
-      "requests": [
-        {
-          "createItem": {
-              "item": {
-                "title": "Racontez-nous un truc sympa",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "textQuestion": { "paragraph": true }
-                  }
-                }
-              },
-              "location": { "index": 0 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Oui ou non ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "DROP_DOWN",
-                      "options": [
-                        {"value": "OUI"},
-                        {"value": "NON"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 1 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Qu'est-ce qui est jaune et qui attend ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "RADIO",
-                      "options": [
-                        {"value": "Orangathan"},
-                        {"value": "Johnatan"},
-                        {"value": "Jaune Attend"},
-                        {"value": "Rosathan"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 2 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Quels fruits aimez-vous ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "CHECKBOX",
-                      "options": [
-                        {"value": "Orange"},
-                        {"value": "Citron"},
-                        {"value": "Kiwi"},
-                        {"value": "Fruit de la passion"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 3 }
-          }
-        }
-      ]
-    };
 
     const requestBody = this.surveyToGoogleRequestBody(survey);
     console.log('insertItemsInForm >>', requestBody);
