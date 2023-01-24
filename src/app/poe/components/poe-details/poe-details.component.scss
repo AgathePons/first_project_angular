@@ -11,7 +11,7 @@ $error-color: rgb(142, 0, 0);
     margin-bottom: 2rem;
     .title {
       display: inline-block;
-      
+      width: calc(100% - 80px);
       text-align: center;
       font-size: 2rem;
     }
