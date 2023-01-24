@@ -88,17 +88,6 @@ export class SurveyDetailsComponent implements OnInit {
 
 
 ;
-this.route.params.subscribe(
-  (routeParams: Params) => {
-    const questionId: number = routeParams['id'];
-    this.questionService.findOne(questionId).subscribe(
-      ((question: Question) => {
-        this.questionDrag = question;
-        this.currentListOrdered = question.getAnswers();
-      })
-    );
-  }
-);
     const data: any = this.route.snapshot.data;
 
     this.questionForm = data.form;
