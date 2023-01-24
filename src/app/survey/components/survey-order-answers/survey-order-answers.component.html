@@ -4,16 +4,18 @@
       <button mat-mini-fab color="primary" (click)="goBack()">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      Modifier l'ordre des questions
+      {{question.getText()}}
     </mat-card-title>
-
+    <mat-card-subtitle>
+      Modifier l'ordre des réponses
+    </mat-card-subtitle>
   </mat-card-header>
   <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
     <div
       class="example-box"
-      *ngFor="let question of survey.getQuestions()" cdkDrag (cdkDragEnded)="dragEnd($event)"
+      *ngFor="let answer of currentListOrdered" cdkDrag (cdkDragEnded)="dragEnd($event)"
     >
-      {{question.getText()}}
+      {{answer.getText()}}
     </div>
   </div>
   <button

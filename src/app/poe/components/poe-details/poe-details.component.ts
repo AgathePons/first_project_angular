@@ -15,6 +15,10 @@ export class PoeDetailsComponent implements OnInit {
 
   public poe: Poe = new Poe();
   public stagiaires: Array<Stagiaire> = [];
+  public bubbleConfig: any = {
+    fontWeight: 'normal',
+    backgroundColor: '#580883',
+  };
 
   constructor(
     private route: ActivatedRoute,

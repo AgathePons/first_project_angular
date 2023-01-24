@@ -146,6 +146,10 @@ export class FormBuilderService {
         this.question.getAnswerType(),
         [Validators.required]
       ],
+      orderInSurvey: [
+        this.question.getOrderInSurvey(),
+        [Validators.required]
+      ],
     });
 
     if(this.updateMode) {

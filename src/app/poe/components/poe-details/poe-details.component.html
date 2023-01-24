@@ -1,39 +1,51 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
-      <button mat-mini-fab color="primary" [routerLink]="['/','poes']">
+  <div class="detail-page-header">
+    <mat-card-title class="detail-page-header_title">
+        <button mat-mini-fab color="primary" [routerLink]="['/','poes']">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      {{poe.getType()}} : {{poe.getTitle()}}
+      <span class="title">{{poe.getType()}} : {{poe.getTitle()}}</span>
+      <button mat-mini-fab color="primary" [routerLink]="['/', 'poe', 'update', poe.getId()]">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-card-title>
+
     <mat-card-subtitle>
       du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
     </mat-card-subtitle>
-  </mat-card-header>
+    
+  </div>
+  
   <mat-card-content>
     <div class="info-bloc">
-        <span class="info-bloc__key">Title: </span>
+        <span class="info-bloc__key">Titre : </span>
         <span class="info-bloc__value">{{ poe.getTitle() }}</span>
       </div>
     <div class="info-bloc">
-        <span class="info-bloc__key">Type: </span>
+        <span class="info-bloc__key">Type : </span>
         <span class="info-bloc__value">{{ poe.getType() }}</span>
       </div>
     <div class="info-bloc">
-        <span class="info-bloc__key">Begin Date: </span>
+        <span class="info-bloc__key">Date de début : </span>
         <span class="info-bloc__value">{{ poe.getBeginDate() }}</span>
       </div>
     <div class="info-bloc">
-        <span class="info-bloc__key">End Date: </span>
+        <span class="info-bloc__key">Date de fin : </span>
         <span class="info-bloc__value">{{ poe.getEndDate() }}</span>
       </div>
+    
+      <div class="btn-list">
       <a
+        class="btn"
         mat-raised-button
         color="accent"
         [routerLink]="['/', 'poe', 'addStagiaires', poe.getId()]"
       >
         Ajouter des stagiaires dans cette POE
       </a>
+      </div>
+
+
       <table>
         <thead>
           <tr>
@@ -41,13 +53,13 @@
               #
             </th>
             <th class="left-cell">
-              Firstname
+              Prénom
             </th>
             <th class="left-cell">
-              Lastname
+              Nom
             </th>
             <th class="left-cell">
-              Birthdate
+              Date de naissance
             </th>
             <th>
               Actions
@@ -59,11 +71,8 @@
             <tr>
               <td class="center-cell">{{ stagiaire.getId() }}</td>
               <td>
-                <span
-            class="name-puce"
-            appBubble
-            (click)="onClick(stagiaire)"
-          ><!-- (click)="onClick(stagiaire)" -->
+                <span class="name-puce" appBubble [config]="bubbleConfig"
+            (click)="onClick(stagiaire)"><!-- (click)="onClick(stagiaire)" -->
             {{ stagiaire | initials : { firstNameFirst: false, full: true } }}
           </span>
                 {{ stagiaire.getFirstName() }}

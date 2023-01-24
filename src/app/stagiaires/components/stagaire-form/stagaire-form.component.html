@@ -10,7 +10,7 @@
         type="text"
         formControlName="firstName"
         [ngClass]="{'valid': true}"
-        placeholder="Firstname"
+        placeholder="Prénom"
       >
 
       <mat-error *ngIf="c['firstName'].errors && c['firstName'].touched">
@@ -19,7 +19,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Lastname" id="lastName" type="text" formControlName="lastName">
+      <input matInput placeholder="Nom" id="lastName" type="text" formControlName="lastName">
       <mat-error *ngIf="c['lastName'].errors && c['lastName'].touched">
         Le nom du stagiaire est obligatoire
       </mat-error>
@@ -38,7 +38,7 @@
     </mat-form-field>
 
     <mat-form-field>
-      <input matInput placeholder="Phone number" id="phoneNumber" type="text" formControlName="phoneNumber">
+      <input matInput placeholder="Numéro de téléphone" id="phoneNumber" type="text" formControlName="phoneNumber">
       <mat-error *ngIf="c['phoneNumber'].errors && c['phoneNumber'].touched">
         <span *ngIf="c['email'].hasError('pattern')">
           Le numéro saisi n'est pas valide
@@ -60,10 +60,10 @@
         [disabled]="!stagiaireForm.valid"
         class="btn add-btn"
       >
-        {{ addMode ? 'Add 💚' : 'Update 💚'}}
+        {{ addMode ? 'Ajouter 💚' : 'Mettre à jour 💚'}}
       </button>
       <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
-        Cancel 💀
+        Annuler 💀
       </button>
     </div>
 </form>

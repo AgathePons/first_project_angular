@@ -1,22 +1,54 @@
-<a mat-raised-button color="accent" (click)="changeBooleanState( )">
-  Filtres
-</a><a mat-raised-button color="accent" [routerLink]="['/', 'poe', 'add']">
-  Ajouter POE
-</a>
-<div *ngIf="filter">
-  <a mat-raised-button color="accent" (click)="resetFilter( )">
-    Reset filter
+<div class="btn-list">
+  <a
+    mat-raised-button color="accent"
+    [routerLink]="['/', 'poe', 'add']"
+  >
+    Ajouter POE
   </a>
+  <a
+  *ngIf="!filter"
+    mat-raised-button color="primary"
+    (click)="changeBooleanState()"
+  >
+    Afficher les filtres
+  </a>
+  <a
+    *ngIf="filter"
+    mat-raised-button color="primary"
+    (click)="changeBooleanState()"
+  >
+    Cacher les filtres
+  </a>
+</div>
+
+<div *ngIf="filter">
+
   <div class="search">
-    <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by title" [(ngModel)]="filterTitle"
+    <mat-form-field>
+      <input
+        matInput
+        class="searchTerm"
+        type="text"
+        name="searchTerm"
+        placeholder="Filtrer par Titre"
+        [(ngModel)]="filterTitle"
       (input)="doSearchBar(filterTitle, filterType)" />
-    <mat-select matNativeControl required placeholder="Filter by type" (selectionChange)="doSearchBar(filterTitle, filterType)" formControlName="type" [(value)]="filterType">
-      <mat-option value="">--</mat-option>
-      <mat-option value="POEI">POEI</mat-option>
-      <mat-option value="POEC">POEC</mat-option>
-    </mat-select>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-select matNativeControl required placeholder="Filtrer par Type de POE" (selectionChange)="doSearchBar(filterTitle, filterType)" formControlName="type" [(value)]="filterType">
+        <mat-option value="">--</mat-option>
+        <mat-option value="POEI">POEI</mat-option>
+        <mat-option value="POEC">POEC</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <a mat-raised-button color="accent" (click)="resetFilter( )">
+      Supprimer les filtres
+    </a>
   </div>
+
   <app-poe-filter [filterDate]="stopDate" (onChangeFilter)="filterChanged($event)"></app-poe-filter>
+
 </div>
 
 
@@ -28,16 +60,16 @@
         #
       </th>
       <th class="left-cell">
-        Title
+        Titre
       </th>
       <th class="left-cell">
-        beginDate
+        Date de début
       </th>
       <th class="left-cell">
-        endDate
+        Date de fin
       </th>
       <th class="left-cell">
-        type
+        Type de POE
       </th>
       <th>
         &nbsp;

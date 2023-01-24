@@ -1,41 +1,54 @@
 
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
+  <div class="detail-page-header">
+
+    <mat-card-title class="detail-page-header_title">
       <button mat-mini-fab color="primary" (click)="onBackButton()">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      {{poe.getType()}} : {{poe.getTitle()}}
+      <span class="title">{{poe.getType()}} : {{poe.getTitle()}}</span>
+      <button mat-mini-fab color="primary" [routerLink]="['/', 'poe', 'update', poe.getId()]">
+        <mat-icon>edit</mat-icon>
+      </button>
     </mat-card-title>
     <mat-card-subtitle>
       du {{poe.getBeginDate()}} au {{poe.getEndDate()}}
     </mat-card-subtitle>
-  </mat-card-header>
+
+  </div>
   <mat-card-content>
     <p *ngIf="poe.getTrainees().length === 0">Il n'y a actuellement aucun stagiaire dans cette POE</p>
     <p *ngIf="poe.getTrainees().length === 1">Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaire</p>
     <p *ngIf="poe.getTrainees().length > 1">Dans cette POE, il y a déjà {{poe.getTrainees().length}} stagiaires</p>
     <p>Dans cette liste, il y a {{stagiaires.length}} stagiaires</p>
+  
 
+    <div class="btn-list">
     <button
         mat-raised-button
-        color="primary"
+        color="accent"
         class="btn add-btn"
         [disabled]="stagairesToAdd.length === 0"
         (click)="onAddManyStagiaires()"
       >
-        Add {{stagairesToAdd.length}} Stagiaires 💚
+        Ajouter {{stagairesToAdd.length}} Stagiaires &#11088;
       </button>
-      <a mat-raised-button color="accent" (click)="changeBooleanState( )">
+      <a mat-raised-button color="primary" (click)="changeBooleanState( )">
         Filtres
       </a>
+     </div>
+
       <div *ngIf="filter" class="search">
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by First Name" [(ngModel)]="filterFN"
+        <mat-form-field>
+        <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Prénom" [(ngModel)]="filterFN"
           (input)="doSearchBar(filterFN, filterLN)" />
-        <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Last Name" [(ngModel)]="filterLN"
+        </mat-form-field>
+        <mat-form-field>
+        <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Filtrer par Nom" [(ngModel)]="filterLN"
           (input)="doSearchBar(filterFN, filterLN)" />
+        </mat-form-field>
         <a mat-raised-button color="accent" (click)="resetFilter( )">
-          Reset
+          Supprimer les filtres
         </a>
       </div>
     <mat-selection-list #stagairesSelected [(ngModel)]="stagairesToAdd" (selectionChange)="onListSelectionChange($event)">

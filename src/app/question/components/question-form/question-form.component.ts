@@ -22,6 +22,7 @@ export class QuestionFormComponent implements OnInit {
   public addMode: boolean = true;
   public question!: Question;
   @Input() public fromSurvey: number = 0;
+  @Input() public lastOrderFromSurvey: number = 0;
   @Output() public surveyToSend: EventEmitter<Survey> = new EventEmitter<Survey>();
   @Output() public questionTypeToSend: EventEmitter<boolean> = new EventEmitter<boolean>();
 
@@ -42,6 +43,7 @@ export class QuestionFormComponent implements OnInit {
     this.questionForm = data.form;
 
     console.log('this questionForm = ', this.questionForm)
+    console.log('this questionForm value = ', this.questionForm.value)
 
 
 
@@ -57,7 +59,9 @@ export class QuestionFormComponent implements OnInit {
   public onSubmit(): void {
     console.log('this question form  = ', this.questionForm);
     console.log('this question form value = ', this.questionForm.value);
-    
+    this.questionForm.controls['orderInSurvey'].setValue(this.lastOrderFromSurvey)
+    console.log('this question form value = ', this.questionForm.value);
+
     const dto: QuestionDto = new QuestionDto(this.questionForm.value);
     let subscription: Observable<any>;
 

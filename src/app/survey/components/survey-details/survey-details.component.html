@@ -1,64 +1,91 @@
 <mat-card>
-  <mat-card-header>
-    <mat-card-title>
+  <div class="detail-page-header">
+    <mat-card-title class="detail-page-header_title">
       <button mat-mini-fab color="primary" [routerLink]="['/','surveys']">
         <mat-icon>keyboard_arrow_left</mat-icon>
       </button>
-      {{survey.getTitle()}}
+      <span class="title">{{survey.getTitle()}}</span>
       <button mat-mini-fab color="primary" [routerLink]="['/', 'survey', 'update', survey.getId()]">
         <mat-icon>edit</mat-icon>
       </button>
     </mat-card-title>
     <mat-card-subtitle>
-      POE type : {{survey.getPoeType()}}
+      <div class="info-bloc">
+        <span class="info-bloc__key">Type de POE : </span>
+        <span class="info-bloc__value">{{survey.getPoeType()}}</span>
+      </div>
+      <div class="info-bloc">
+        <span class="info-bloc__key">Niveau de questionnaire : </span>
+        <span class="info-bloc__value"> {{ survey.getLevel() }}</span>
+      </div>
     </mat-card-subtitle>
-    <mat-card-subtitle>
-      Level : {{ survey.getLevel() }}
-    </mat-card-subtitle>
-  </mat-card-header>
+  </div>
   <mat-card-content>
-    <!-- <div class="info-bloc">
-      <span class="info-bloc__key">Title: </span>
-      <span class="info-bloc__value">{{ survey.getTitle() }}</span>
-    </div> -->
 
+    <app-question-form *ngIf="showAddQuestionForm"
+      [fromSurvey]="survey.getId()"
+      [lastOrderFromSurvey]="lastOrderInSurvey()"
+      (questionTypeToSend)="displayGoToAnswerDiv($event)"
+      (surveyToSend)="questionAdded($event)"
+    ></app-question-form>
 
-    <app-question-form *ngIf="showAddQuestionForm" [fromSurvey]="survey.getId()"
-      (questionTypeToSend)="displayGoToAnswerDiv($event)" (surveyToSend)="questionAdded($event)"></app-question-form>
     <div *ngIf="showGoToAnswerDiv">
       <p>La question a été ajoutée. Pensez à y ajouter des réponses.</p>
     </div>
     <div *ngIf="!showGoToAnswerDiv && questionAddedFromForm">
       <p>La question a été ajoutée.</p>
     </div>
-    <a *ngIf="!showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(true)">
-      Ajouter une question
-    </a>
-    <a *ngIf="showAddQuestionForm" mat-raised-button color="accent" (click)="addQuestionForm(false)">
-      Annuler
-    </a>
 
+    <div class="btn-list">
+      <a  *ngIf="!showAddQuestionForm"
+        class="btn"
+        mat-raised-button
+        color="accent"
+        (click)="addQuestionForm(true)"
+      >
+        Ajouter une question
+      </a>
+      <a  *ngIf="showAddQuestionForm"
+        class="btn"
+        mat-raised-button color="accent"
+        (click)="addQuestionForm(false)"
+      >
+        Annuler
+      </a>
+      <a
+        class="btn"
+        mat-raised-button
+        color="accent"
+        [routerLink]="['/', 'survey', 'orderQuestions', survey.getId()]"
+      >
+        Changer l'ordre
+      </a>
+      <a *ngIf="!showAllAnswers"
+        class="btn"
+        mat-raised-button
+        color="primary"
+        (click)="showAllAnswersBooleanState(true)"
+      >
+        Afficher les réponses
+      </a>
+      <a  *ngIf="showAllAnswers"
+        class="btn"
+        mat-raised-button
+        color="primary"
+        (click)="showAllAnswersBooleanState(false)"
+      >
+        Cacher les réponses
+      </a>
+      <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
+        Ajouter des questions
+      </a> -->
+    </div>
 
-
-
-
-    <!-- <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'addQuestions', survey.getId()]">
-      Ajouter des questions
-    </a> -->
-    <a mat-raised-button color="accent" [routerLink]="['/', 'survey', 'orderQuestions', survey.getId()]">
-      Changer l'ordre
-    </a>
-    <a *ngIf="!showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(true)">
-      Afficher les réponses
-    </a>
-    <a *ngIf="showAllAnswers" mat-raised-button color="accent" (click)="showAllAnswersBooleanState(false)">
-      Cacher les réponses
-    </a>
     <table>
       <thead>
         <tr>
           <th class="center-cell">
-            Order
+            Ordre
           </th>
           <th class="left-cell">
             Texte
@@ -66,103 +93,100 @@
           <th class="left-cell">
             Type de réponse
           </th>
-          <!-- <th class="left-cell">
-            Réponses
-          </th> -->
           <th>&nbsp;</th>
         </tr>
       </thead>
       <tbody>
         <ng-container *ngFor="let question of arrayQuestionSortedByOrder(survey.getQuestions())">
-          <tr>
+          <!-- question TR -->
+          <tr class="tr-question">
             <td class="center-cell">{{ question.getOrderInSurvey() + 1 }}</td>
             <td>
-              <form
+              <form class="update-question-form"
                 (ngSubmit)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
-                <mat-form-field [style.width.%]="100">
+                <mat-form-field [style.width.%]="100" >
                   <input matInput class="searchTerm" type="text" name="searchTerm" value="{{ question.getText()}}"
                     (keyup)="onKey(question.getId(),$event)" placeholder="Question"
                     (focusout)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())" />
                 </mat-form-field>
               </form>
-              <!-- <button *ngIf="inputQuestionMap.get(question.getId()) !== '' " mat-mini-fab color="warn"
-                type="button" (click)="saveQuestionText(question.getId(), question.getAnswerType(), question.getOrderInSurvey())">
-                <mat-icon>save</mat-icon>
-              </button> -->
             </td>
             <td>{{ question.getAnswerType() }}</td>
             <td class="center-cell">
-              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+              <button *ngIf="!questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="primary"
                 type="button" (click)="onDetailsQuestion(question.getId())">
                 <mat-icon>visibility</mat-icon>
               </button>
-              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="warn"
+              <button *ngIf="questionArrayToShowDetails.includes(question.getId())" mat-mini-fab color="primary"
                 type="button" (click)="onDetailsQuestionOff(question.getId())">
                 <mat-icon>visibility_off</mat-icon>
               </button>
-              <!-- <button mat-mini-fab color="accent" type="button" (click)="onEdit(question)">
-                <mat-icon>edit</mat-icon>
-              </button> -->
               <button mat-mini-fab color="warn" type="button" (click)="onDelete(question)">
                 <mat-icon>delete</mat-icon>
               </button>
             </td>
           </tr>
+          <!-- answer TR -->
           <tr *ngIf="questionArrayToShowDetails.includes(question.getId())">
             <td></td>
             <td colspan="3">
-              <ul>
+              <a
+                *ngIf="question.getAnswerType() == 'CHOOSE_MANY' || question.getAnswerType() == 'CHOOSE_ONE'"
+                class="btn"
+                mat-raised-button
+                color="accent"
+                [routerLink]="['/', 'survey', 'orderAnswers', question.getId()]"
+              >
+                Changer l'ordre des réponses
+              </a>
+              <!-- answer list -->
+              <ul class="answer-list">
                 <ng-container class="question-details" *ngFor="let answer of question.getAnswers()">
-                  <li>
+                  <li class="answer-item">
                     <div class="answer">
-                      <form>
+
+                      <form class="answer-form" (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="300">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
-                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId())" />
+                            placeholder="Réponse" (focusout)="saveAnswerText(answer.getId(),answer.getOrderInQuestion())" />
                         </mat-form-field>
                       </form>
-                      <!-- <p>{{answer.getText()}}</p> -->
-                      <!-- <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                    (click)="onEditAnswer(answer)">
-                    edit</mat-icon> -->
-                      <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-           question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                        (click)="onDeleteAnswer(question.getId(),answer.getId())">
-                        delete</mat-icon>
-
-
+                      <mat-icon
+                        *ngIf="question.getAnswerType() == 'CHOOSE_MANY' || question.getAnswerType() == 'CHOOSE_ONE'"
+                        class="delete-answer-btn"
+                        mat-mini-fab
+                        color="warn"
+                        type="button"
+                        (click)="onDeleteAnswer(question.getId(),answer.getId())"
+                      >
+                        delete
+                      </mat-icon>
                     </div>
                   </li>
                 </ng-container>
 
-
-                <div class="answer" *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-              question.getAnswerType() == 'CHOOSE_ONE' ">
-                  <form (ngSubmit)="addAnswerToQuestion(question.getId())">
+                <!-- add answer -->
+                <div
+                  *ngIf="question.getAnswerType() == 'CHOOSE_MANY' || question.getAnswerType() == 'CHOOSE_ONE'"
+                  class="add-answer-div"
+                >
+                  <mat-icon color="primary">add_circle</mat-icon>
+                  <form class="add-answer-form" (ngSubmit)="addAnswerToQuestion(question.getId())">
                     <mat-form-field [style.width.%]="100">
-
                       <input matInput class="searchTerm" type="text" name="searchTerm" placeholder="Ajouter une réponse"
-                        [(ngModel)]="inputNewAnswer" (focusout)="addAnswerToQuestion(question.getId())" />
+                      (keyup)="onKeyAnswerMap(question.getId(),$event)" (focusout)="addAnswerToQuestion(question.getId())" />
                     </mat-form-field>
                   </form>
-                  <!-- <p *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-                  question.getAnswerType() == 'CHOOSE_ONE' ">Ajouter une réponse</p>
-                <mat-icon *ngIf="question.getAnswerType() == 'CHOOSE_MANY' ||
-                  question.getAnswerType() == 'CHOOSE_ONE' " mat-mini-fab color="warn" type="button"
-                  (click)="addAnswerToQuestion(question.getId())">
-                  save</mat-icon> -->
                 </div>
-
 
                 <li *ngIf="question.getAnswerType() == 'YES_NO'">Oui</li>
                 <li *ngIf="question.getAnswerType() == 'YES_NO'">Non</li>
               </ul>
               <p *ngIf="question.getAnswerType() == 'FREE'">Réponse Libre</p>
-
             </td>
           </tr>
+          <!-- /answer TR -->
         </ng-container>
       </tbody>
       <tfoot>

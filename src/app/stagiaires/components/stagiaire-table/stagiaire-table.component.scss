@@ -83,24 +83,22 @@ table {
 
 }
 
-.search {
-  width: 100%;
-  position: relative;
+.btn-list {
   display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
 }
 
-.searchTerm {
-  width: 100%;
-  border: 3px solid $std-color;
-  padding: 5px;
-  height: 20px;
-  outline: none;
-  color: #9DBFAF;
+.search {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background-color: $light-color;
+  border: 1px solid $std-color;
+  border-bottom: none;
 }
 
-.searchTerm:focus {
-  color: #000;
-}
 
 p {
   color: #383c52;

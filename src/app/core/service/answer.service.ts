@@ -27,6 +27,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(inputAnswer.id);
           answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion)
           return answer;
 
         })
@@ -44,6 +45,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(inputAnswer.id);
           answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion)
           return answer;
         })
       );
@@ -60,6 +62,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(answerDto.id!);
           answer.setText(answerDto.text);
+          answer.setOrderInQuestion(answerDto.orderInQuestion)
           return answer;
         })
       );
@@ -75,6 +78,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(answerDto.id!);
           answer.setText(answerDto.text);
+          answer.setOrderInQuestion(answerDto.orderInQuestion)
           return answer;
         })
       );
@@ -91,6 +95,7 @@ export class AnswerService {
             const answer: Answer = new Answer();
             answer.setId(anyAnswer.id!);
             answer.setText(anyAnswer.text);
+            answer.setOrderInQuestion(anyAnswer.orderInQuestion)
             return answer;
           })
         );
@@ -107,6 +112,7 @@ export class AnswerService {
             const answer: Answer = new Answer();
             answer.setId(anyAnswer.id!);
             answer.setText(anyAnswer.text);
+            answer.setOrderInQuestion(anyAnswer.orderInQuestion)
             return answer;
           })
         );

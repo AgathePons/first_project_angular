@@ -9,7 +9,7 @@
           type="text"
           formControlName="title"
           [ngClass]="{'valid': true}"
-          placeholder="Title"
+          placeholder="Titre"
         >
 
         <mat-error *ngIf="c['title'].errors && c['title'].touched">
@@ -18,7 +18,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Level</mat-label>
+        <mat-label>Niveau</mat-label>
         <mat-select matNativeControl required formControlName="level">
           <mat-option value="ONE_MONTH">1 mois</mat-option>
           <mat-option value="SIX_MONTHS">6 mois</mat-option>
@@ -27,7 +27,7 @@
       </mat-form-field>
 
       <mat-form-field appearance="fill">
-        <mat-label>Type</mat-label>
+        <mat-label>Type de POE</mat-label>
         <mat-select matNativeControl required formControlName="poeType">
           <mat-option value="POEI">POEI</mat-option>
           <mat-option value="POEC">POEC</mat-option>
@@ -42,10 +42,10 @@
           [disabled]="!surveyForm.valid"
           class="btn add-btn"
         >
-          {{ addMode ? 'Add 💚' : 'Update 💚'}}
+          {{ addMode ? 'Ajouter 💚' : 'Mettre à jour 💚'}}
         </button>
         <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
-          Cancel 💀
+          Annuler 💀
         </button>
       </div>
   </form>
