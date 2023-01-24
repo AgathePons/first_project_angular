@@ -22,6 +22,7 @@ export class SurveySendEmailComponent implements OnInit {
   public beforeUrl: string = 'Bonjour, lien du formulaire Google : '
   public afterUrl: string = 'Cordialement'
   public urlGoogleForm: string = `#Veuillez effectuer l'étape 1 pour générer l'url.#`
+  public mailSent: boolean = false
 
   ngOnInit(): void {
 
@@ -39,7 +40,7 @@ export class SurveySendEmailComponent implements OnInit {
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {
       console.log('Message envoyé');
-      
+      this.mailSent = true;
     })
   }
 
