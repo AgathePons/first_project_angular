@@ -1,23 +1,71 @@
-$std-color: rgb(32, 2, 32);
+$std-color: rgb(103, 99, 103);
 $light-color: rgb(255, 255, 255);
 $success-color: rgb(173, 255, 47);
 $error-color: rgb(142, 0, 0);
 
 .search {
   position: relative;
-  display: inline-grid;
-  margin: 5px;
+  display: grid;
+  padding: 15px;
+  background-color: $light-color;
+  border-radius: 4px;
+
+  p {
+    margin-bottom: 3px;
+  }
+  textarea, input {
+    margin-bottom: 10px;
+  }
+
+  i {
+    font-size: 12px;
+  }
 }
 
 .searchTerm {
-  border: 3px solid $std-color;
+  border: 1px solid $std-color;
   padding: 5px;
   height: 20px;
   outline: none;
-  color: #9DBFAF;
 }
 
 .searchTerm:focus {
   color: #000;
 }
 
+.subtitle {
+  margin-top: 15px;
+
+  p {
+    font-size: 22px;
+    color: white;
+    font-weight: 500;
+  }
+
+}
+
+.comment {
+  height: 100px;
+  padding: 10px;
+  outline: 0;
+  border: 1px solid #3b3b3b;
+  line-height: 20px;
+}
+
+.apercu {
+  background-color: #ececec;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #3b3b3b;
+  border-radius: 5px;
+
+  p {
+    font-style: italic;
+  }
+}
+
+.send-button {
+  padding-right: 15px;
+  display: grid;
+  justify-content: center;
+}

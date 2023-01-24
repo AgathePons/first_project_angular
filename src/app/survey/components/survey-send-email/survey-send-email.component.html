@@ -1,35 +1,36 @@
-<div>Générer le fichier Google Form</div>
+<div class="subtitle">
+   <p>Etape 1 : Générer le lien Google Form</p>
+</div>
 <app-google-main-page></app-google-main-page>
-<div>Envoyer le mail</div>
-
-<div class="search">
-    
-    <input class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Objet :" [(ngModel)]="subject"
- />
-    <textarea class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Texte avant l'url :" [(ngModel)]="beforeUrl"
-    rows="20" cols="50"
- ></textarea>
- <div>
-    <p>Url du formulaire : {{ urlGoogleForm }}</p>
-  </div>
-    <textarea class="searchTerm" type="text" name="searchTerm" 
-    placeholder="Texte après l'url :" [(ngModel)]="afterUrl"
-    rows="20" cols="25"
- ></textarea>
-
- 
-
- <button mat-mini-fab color="accent" type="button" (click)="sendEmail()">
-    <mat-icon>email</mat-icon>
-  </button>
-  
+<div class="subtitle">
+   <p>Etape 2 : Générer et envoyer l'email aux stagiaires</p>
 </div>
 
-<div>
-    <p>Aperçu du mail généré:</p>
-    <p>{{ beforeUrl }}</p>
-    <p>{{ urlGoogleForm }}</p>
-    <p>{{ afterUrl }}</p>
+<div class="search">
+   <i>Objet du mail :</i>
+   <input class="searchTerm" type="text" name="searchTerm" placeholder="Objet :" [(ngModel)]="subject" />
+   <i>Corps du mail avant url :</i>
+   <textarea class="comment" type="text" name="searchTerm" placeholder="Texte avant l'url :"
+      [(ngModel)]="beforeUrl"></textarea>
+   <div>
+      <p>Url du formulaire généré : {{ urlGoogleForm }}</p>
+   </div>
+   <i>Corps du mail après url :</i>
+   <textarea class="comment" type="text" name="searchTerm" placeholder="Texte après l'url :"
+      [(ngModel)]="afterUrl"></textarea>
+
+
+   <p style="text-decoration: underline ">Aperçu du mail généré:</p>
+   <div class="apercu">
+      <p>{{ beforeUrl }}</p>
+      <p>{{ urlGoogleForm }}</p>
+      <p>{{ afterUrl }}</p>
+   </div>
+   <div class="send-button">
+      <button mat-mini-fab color="accent" type="button" (click)="sendEmail()">
+         <mat-icon>email</mat-icon>
+      </button>
+      <p>Envoyer</p>
+
+   </div>
 </div>

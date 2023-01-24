@@ -17,10 +17,10 @@ export class SurveySendEmailComponent implements OnInit {
 
   public poeId: number = 0;
   public emailDto?: SurveyEmailDto
-  public subject: string = "Objet du mail"
+  public subject: string = "Questionnaire de suivi de formation POE"
   public body: string = 'Corps du mail'
-  public beforeUrl: string = 'Bonjour, lien du formulaire Google'
-  public afterUrl: string = 'A bientôt'
+  public beforeUrl: string = 'Bonjour, lien du formulaire Google : '
+  public afterUrl: string = 'Cordialement'
   public urlGoogleForm: string = 'http://localhost:4200/poe/sendMail/1'
 
   ngOnInit(): void {
