@@ -1,4 +1,4 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
 import { Survey } from 'src/app/core/models/survey';
 import { GoogleService } from 'src/app/core/service/google.service';
 import { SurveyService } from 'src/app/core/service/survey.service';
@@ -17,6 +17,8 @@ export class GoogleMainPageComponent implements OnInit {
   public googleFolderId: string = '';
   public googleFormId: string = '';
   public googleForm: any = null;
+
+  @Output() public formUrlEvent: EventEmitter<string> = new EventEmitter<string>();
 
   private googleFolderResponse: any | null = null;
   //private surveys: Array<Survey> = [];
@@ -83,6 +85,7 @@ export class GoogleMainPageComponent implements OnInit {
           (googleFormResponse: any) => {
             this.googleForm = googleFormResponse;
             console.log('url:', this.googleForm.responderUri);
+            this.formUrlEvent.emit(this.googleForm.responderUri)
             // Set the link into the cell
             const surveyId = survey.getId();
             const surveywithLink = this.surveysWithLink.filter(survey => survey.id === surveyId)[0];

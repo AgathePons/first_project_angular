@@ -38,6 +38,10 @@ export class SurveySendEmailComponent implements OnInit {
 
   }
 
+  public addFormUrl(event: string): void {
+    this.urlGoogleForm = event
+  }
+
   public sendEmail(): void {
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {
