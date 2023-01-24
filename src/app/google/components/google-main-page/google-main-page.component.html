@@ -40,6 +40,7 @@
 
       </mat-list-item>
     </mat-list>
+
     <table *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
       <thead>
         <tr>
@@ -55,7 +56,7 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let survey of surveys">
+        <ng-container *ngFor="let survey of surveysWithLink">
           <tr>
             <td> {{ survey.getTitle() }} </td>
             <td>
@@ -63,7 +64,28 @@
                 <mat-icon>autorenew</mat-icon>
               </button>
             </td>
-            <td #linkCell></td>
+            <td>
+              <ng-container *ngIf="survey.link">
+                <button
+
+                  mat-mini-fab
+                  color="primary"
+                  type="button"
+                  (click)="goToForm(survey.link)"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button
+
+                  mat-mini-fab
+                  color="accent"
+                  type="button"
+                  (click)="copyToClipboard(survey.link)"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </ng-container>
+            </td>
           </tr>
         </ng-container>
       </tbody>
