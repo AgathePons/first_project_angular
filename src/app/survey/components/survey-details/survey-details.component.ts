@@ -200,8 +200,14 @@ export class SurveyDetailsComponent implements OnInit {
 
   public addAnswerToQuestion(questionId: number) {
     if (this.inputAnswerMap.get(questionId) !== '') {
-      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputAnswerMap.get(questionId)!, 0)
-      this.inputAnswerMap.set(questionId, '')
+      const question = this.survey.getQuestions().filter(question => question.getId() === questionId)[0];
+      const answers = question.getAnswers();
+      console.log('order to set:', answers);
+      console.log('nombre de réponses', answers.length);
+
+
+      const answerInputDto: AnswerInputDto = new AnswerInputDto(this.inputAnswerMap.get(questionId)!, answers.length + 1);
+      this.inputAnswerMap.set(questionId, '');
       this.answerService.addAnswerInput(answerInputDto).subscribe(
         (response: any) => {
           this.questionService.addManyAnswers(questionId, [response.id]).subscribe((questionResponse: Question) => {
