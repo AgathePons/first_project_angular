@@ -39,7 +39,7 @@ export class TableauDeBordComponent implements OnInit {
           this.poesPastTasks.push(poe)
         }
       })
-
+      this.poesPastTasks = this.poesPastTasks.sort((a,b) => a.getPastTaskDate() < b.getPastTaskDate() ? 1 : -1);
       console.log('poesPastTasks', this.poesPastTasks);
       
 
