@@ -12,15 +12,15 @@
    <i>Corps du mail avant url :</i>
    <textarea class="comment" type="text" name="searchTerm" placeholder="Texte avant l'url :"
       [(ngModel)]="beforeUrl"></textarea>
-   <div>
-      <p>Url du formulaire généré : {{ urlGoogleForm }}</p>
-   </div>
+   <!-- <div>
+      <p>Url du formulaire : {{ urlGoogleForm }}</p>
+   </div> -->
    <i>Corps du mail après url :</i>
    <textarea class="comment" type="text" name="searchTerm" placeholder="Texte après l'url :"
       [(ngModel)]="afterUrl"></textarea>
 
 
-   <p style="text-decoration: underline ">Aperçu du mail généré:</p>
+   <p style="text-decoration: underline ">Aperçu du mail :</p>
    <div class="apercu">
       <p>{{ beforeUrl }}</p>
       <p>{{ urlGoogleForm }}</p>

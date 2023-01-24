@@ -9,19 +9,20 @@
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
       <span (mouseleave)="menuTrigger.closeMenu()">
       <button mat-menu-item [routerLink]="['/', 'home']">
-        <mat-icon>people_outline</mat-icon>
-        <span>Stagiaires</span>
+        <mat-icon>home</mat-icon>
+        <span>Tableau de bord</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
         <mat-icon>school</mat-icon>
         <span>POE</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'stagiaires']">
-        Liste des stagiaires
+        <mat-icon>people_outline</mat-icon>
+        <span>Stagiaires</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
         <mat-icon>description</mat-icon>
-        <span>Questionnaires</span>
+        <span>Questionnaires</span>git 
       </button>
       <!--<button mat-menu-item [routerLink]="['/', 'questions']">
         Liste des questions
