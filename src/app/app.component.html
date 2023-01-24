@@ -9,15 +9,15 @@
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
       <span (mouseleave)="menuTrigger.closeMenu()">
       <button mat-menu-item [routerLink]="['/', 'home']">
-        <mat-icon>people_outline</mat-icon>
+        <mat-icon color="primary">people_outline</mat-icon>
         <span>Stagiaires</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
-        <mat-icon>school</mat-icon>
+        <mat-icon color="primary">school</mat-icon>
         <span>POE</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
-        <mat-icon>description</mat-icon>
+        <mat-icon color="primary">description</mat-icon>
         <span>Questionnaires</span>
       </button>
       <!--<button mat-menu-item [routerLink]="['/', 'questions']">
@@ -27,7 +27,7 @@
         Liste des réponses
       </button> !-->
       <button mat-menu-item [routerLink]="['/', 'googlepage']">
-        <mat-icon>mail</mat-icon>
+        <mat-icon color="primary">mail</mat-icon>
         <span>Google Forms</span>
       </button>
       </span>
