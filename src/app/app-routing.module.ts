@@ -20,6 +20,7 @@ import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { SurveyOrderAnswersComponent } from './survey/components/survey-order-answers/survey-order-answers.component';
 import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
@@ -172,6 +173,13 @@ export class AppRoutingModule {
     {
       path: 'survey/orderQuestions/:id',
       component: SurveyOrderQuestionsComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/orderAnswers/:id',
+      component: SurveyOrderAnswersComponent,
       canActivate: [
         HasUserGuard
       ]
