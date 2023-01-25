@@ -1,7 +1,7 @@
 <div class="subtitle">
    <p>Etape 1 : Générer le lien Google Form</p>
 </div>
-<app-google-token-form *ngIf="!hasGoogleToken" (tokkenGoogleActivated)="activateHasTokken($event)"></app-google-token-form>
+<app-google-token-form *ngIf="!hasGoogleToken" [fromMailPage]="true" (tokkenGoogleActivated)="activateHasTokken($event)"></app-google-token-form>
 <app-google-main-page *ngIf="hasGoogleToken" (formUrlEvent)="addFormUrl($event)"></app-google-main-page>
 <div class="subtitle">
    <p>Etape 2 : Générer et envoyer l'email aux stagiaires</p>
