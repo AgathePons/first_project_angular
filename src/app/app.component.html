@@ -3,7 +3,7 @@
 
   <mat-toolbar color="primary" class="nav">
     <span class="fill-remaining-space"></span>
-    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
