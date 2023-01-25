@@ -2,8 +2,13 @@ $title-background-color: linear-gradient(to bottom left, rgb(108, 245, 198), rgb
 $std-color: rgb(32, 2, 32);
 $light-color: rgb(255, 255, 255);
 
+img {
+  max-height: 3rem;
+}
+
 h1 {
   text-transform: uppercase;
+  display: none;
 }
 
 .password-btn {
