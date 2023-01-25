@@ -254,6 +254,15 @@ export class PoeService {
       emailDto
     )
   }
+  public sendHtmlEmail(poeId: number, subject: string, body: string) {
+    let emailDto: SurveyEmailDto = new SurveyEmailDto(subject, body)
+    console.log('emailDto', emailDto);
+    
+    return this.httpClient.put<any>(
+      `${this.controllerBaseUrl}/${poeId}/sendHtmlMail`,
+      emailDto
+    )
+  }
 
   public removeOneStagiaire(poeId: number, stagiaireId: number) {
     return this.httpClient.patch<any>(

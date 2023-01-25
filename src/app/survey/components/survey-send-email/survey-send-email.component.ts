@@ -23,8 +23,8 @@ export class SurveySendEmailComponent implements OnInit {
   public emailDto?: SurveyEmailDto
   public subject: string = "Questionnaire de suivi de formation POE"
   public body: string = 'Corps du mail'
-  public beforeUrl: string = 'Bonjour, lien du formulaire Google : '
-  public afterUrl: string = 'Cordialement'
+  public beforeUrl: string = 'Tu trouveras ci-dessous le lien du formulaire Google : '
+  public afterUrl: string = `Cordialement, Ton professeur préféré.`
   public urlGoogleForm: string = `#`
   public mailSent: boolean = false
   public mailGenerating: boolean = false
@@ -59,6 +59,17 @@ export class SurveySendEmailComponent implements OnInit {
     this.mailGenerating = true;
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {
+      this.mailGenerating = false;
+      console.log('Message envoyé');
+      this.updateStatus()
+      this.mailSent = true;
+    })
+  }
+  
+  public sendHtmlEmail(): void {
+    this.mailGenerating = true;
+    this.body = `<br>${this.beforeUrl} <br><br> ${this.urlGoogleForm} <br><br> ${this.afterUrl}`
+    this.poeService.sendHtmlEmail(this.poeId, this.subject, this.body).subscribe(resp => {
       this.mailGenerating = false;
       console.log('Message envoyé');
       this.updateStatus()
