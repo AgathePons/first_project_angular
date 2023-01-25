@@ -65,7 +65,9 @@
               </button>
             </td>
             <td>
+              <i *ngIf="survey.spinner">Google Form en création. Veuillez patienter...</i>
               <ng-container *ngIf="survey.link">
+                <i *ngIf="survey.spinner">En création</i>
                 <button
 
                   mat-mini-fab
