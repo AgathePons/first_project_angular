@@ -78,8 +78,14 @@ export class GoogleMainPageComponent implements OnInit {
 
   public onGenerate(survey: Survey): void {
     console.log('clic generate survey');
+    const surveyId = survey.getId();
+    const surveywithLink = this.surveysWithLink.filter(survey => survey.id === surveyId)[0];
+    surveywithLink.spinner = true;
+    console.log(' surveywithLink.spinner', surveywithLink.spinner);
     this.googleService.createFormFile(this.googleFolderId, survey).subscribe(
       (googleForm: any) => {
+       
+            
         this.googleFormId = googleForm.id;
         this.googleService.getGoogleFormById(this.googleFormId).subscribe(
           (googleFormResponse: any) => {
@@ -90,6 +96,7 @@ export class GoogleMainPageComponent implements OnInit {
             const surveyId = survey.getId();
             const surveywithLink = this.surveysWithLink.filter(survey => survey.id === surveyId)[0];
             surveywithLink.link = this.googleForm.responderUri;
+            surveywithLink.spinner = false;
           }
         );
         this.googleService.deleteFirstItem(this.googleFormId).subscribe(
