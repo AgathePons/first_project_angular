@@ -24,6 +24,7 @@
 
    <p style="text-decoration: underline ">Aperçu du mail :</p>
    <div class="apercu">
+      <p>Bonjour (Prénom),</p>
       <p>{{ beforeUrl }}</p>
       <p>{{ urlGoogleForm }}</p>
       <p>{{ afterUrl }}</p>
@@ -32,7 +33,7 @@
       Veuillez générer un Google Form avant d'envoyer le mail
    </div>
    <div *ngIf="!mailSent && urlGoogleForm !== '#' && !mailGenerating" class="send-button">
-      <button mat-mini-fab color="accent" type="button" (click)="sendEmail()">
+      <button mat-mini-fab color="accent" type="button" (click)="sendHtmlEmail()">
          <mat-icon>email</mat-icon>
       </button>
 
