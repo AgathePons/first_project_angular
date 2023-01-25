@@ -27,6 +27,7 @@ export class SurveySendEmailComponent implements OnInit {
   public afterUrl: string = 'Cordialement'
   public urlGoogleForm: string = `#`
   public mailSent: boolean = false
+  public mailGenerating: boolean = false
   public hasGoogleToken: boolean = false;
 
 
@@ -55,8 +56,10 @@ export class SurveySendEmailComponent implements OnInit {
     this.hasGoogleToken = event
   }
   public sendEmail(): void {
+    this.mailGenerating = true;
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {
+      this.mailGenerating = false;
       console.log('Message envoyé');
       this.updateStatus()
       this.mailSent = true;
