@@ -3,6 +3,7 @@ import { ActivatedRoute, Params } from '@angular/router';
 import { Poe } from 'src/app/core/models/poe';
 import { PoeService } from 'src/app/core/service/poe.service';
 import { PoeSurveyDto } from 'src/app/poe/dto/poe-survey-dto';
+import { UserService } from 'src/app/user/services/user.service';
 import { SurveyEmailDto } from '../../dto/survey-email-dto';
 
 @Component({
@@ -14,7 +15,8 @@ export class SurveySendEmailComponent implements OnInit {
 
   constructor(
     private  route: ActivatedRoute,
-    private poeService: PoeService
+    private poeService: PoeService,
+    private userService: UserService
   ) { }
 
   public poeId: number = 0;
@@ -25,6 +27,8 @@ export class SurveySendEmailComponent implements OnInit {
   public afterUrl: string = 'Cordialement'
   public urlGoogleForm: string = `#Veuillez effectuer l'étape 1 pour générer l'url.#`
   public mailSent: boolean = false
+  public hasGoogleToken: boolean = false;
+
 
   ngOnInit(): void {
 
@@ -36,12 +40,20 @@ export class SurveySendEmailComponent implements OnInit {
       
     });
 
+    this.userService.hasGoogleToken()
+      .subscribe((hasGoogleToken: boolean) => {
+        this.hasGoogleToken = hasGoogleToken;
+      });
+
   }
 
   public addFormUrl(event: string): void {
     this.urlGoogleForm = event
   }
 
+  public activateHasTokken(event: boolean): void {
+    this.hasGoogleToken = event
+  }
   public sendEmail(): void {
     this.body = `${this.beforeUrl} ${this.urlGoogleForm} ${this.afterUrl}`
     this.poeService.sendEmail(this.poeId, this.subject, this.body).subscribe(resp => {

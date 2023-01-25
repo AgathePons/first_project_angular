@@ -40,6 +40,7 @@ import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau
 import { SurveySendEmailComponent } from './survey/components/survey-send-email/survey-send-email.component';
 import { SurveyOrderAnswersComponent } from './survey/components/survey-order-answers/survey-order-answers.component';
 import {MatTooltipModule} from '@angular/material/tooltip';
+import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
 
 
 @NgModule({
@@ -71,7 +72,8 @@ import {MatTooltipModule} from '@angular/material/tooltip';
     SurveyOrderQuestionsComponent,
     TableauDeBordComponent,
     SurveySendEmailComponent,
-    SurveyOrderAnswersComponent
+    SurveyOrderAnswersComponent,
+    GoogleTokenFormComponent
   ],
   imports: [
     BrowserModule,
