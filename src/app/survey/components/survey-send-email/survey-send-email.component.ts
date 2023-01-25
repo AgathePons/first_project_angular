@@ -25,7 +25,7 @@ export class SurveySendEmailComponent implements OnInit {
   public body: string = 'Corps du mail'
   public beforeUrl: string = 'Bonjour, lien du formulaire Google : '
   public afterUrl: string = 'Cordialement'
-  public urlGoogleForm: string = `#Veuillez effectuer l'étape 1 pour générer l'url.#`
+  public urlGoogleForm: string = `#`
   public mailSent: boolean = false
   public hasGoogleToken: boolean = false;
 

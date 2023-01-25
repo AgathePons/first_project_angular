@@ -27,7 +27,10 @@
       <p>{{ urlGoogleForm }}</p>
       <p>{{ afterUrl }}</p>
    </div>
-   <div *ngIf="!mailSent"  class="send-button">
+   <div *ngIf="!mailSent && urlGoogleForm == '#'" class="send-button">
+      Veuillez générer un Google Form avant d'envoyer le mail
+   </div>
+   <div *ngIf="!mailSent && urlGoogleForm !== '#'"  class="send-button">
       <button mat-mini-fab color="accent" type="button" (click)="sendEmail()">
          <mat-icon>email</mat-icon>
       </button>
