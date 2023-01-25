@@ -58,16 +58,24 @@
           <tr>
             <td> {{ survey.getTitle() }} </td>
             <td>
-              <button mat-mini-fab color="accent" type="button" (click)="onGenerate(survey)">
+              <button
+                mat-mini-fab
+                matTooltip="Générer"
+                matTooltipPosition="left"
+                color="accent"
+                type="button"
+                (click)="onGenerate(survey)"
+              >
                 <mat-icon>autorenew</mat-icon>
               </button>
             </td>
             <td>
-              <i *ngIf="survey.spinner">Google Form en création. Veuillez patienter...</i>
+              <i *ngIf="survey.spinner">En création...</i>
               <ng-container *ngIf="survey.link">
                 <i *ngIf="survey.spinner">En création</i>
                 <button
-
+                  matTooltip="Visualiser"
+                  matTooltipPosition="above"
                   mat-mini-fab
                   color="primary"
                   type="button"
@@ -76,7 +84,8 @@
                   <mat-icon>visibility</mat-icon>
                 </button>
                 <button
-
+                  matTooltip="Copier"
+                  matTooltipPosition="above"
                   mat-mini-fab
                   color="accent"
                   type="button"
