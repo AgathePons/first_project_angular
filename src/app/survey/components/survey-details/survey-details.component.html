@@ -145,7 +145,7 @@
                   <li class="answer-item">
                     <div class="answer">
 
-                      <form class="answer-form" (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="300">
+                      <form class="answer-form" (ngSubmit)="saveAnswerText(answer.getId(), answer.getOrderInQuestion())" [style.width.%]="100" [style.maxWidth.px]="450">
                         <mat-form-field [style.width.%]="100">
                           <input matInput class="searchTerm" type="text" name="searchTerm"
                             (keyup)="onKeyAnswer(answer.getId(),$event)" value="{{ answer.getText()}}"
