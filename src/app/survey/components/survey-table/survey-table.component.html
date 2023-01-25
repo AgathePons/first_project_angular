@@ -36,13 +36,35 @@
         <td>{{ survey.getLevel() }}</td>
         <td>{{ survey.getPoeType() }}</td>
         <td class="center-cell">
-          <button mat-mini-fab color="primary" type="button" [routerLink]="['/','survey', 'detail', survey.getId()]">
+          <button
+            matTooltip="Voir détail"
+            matTooltipPosition="above"
+            mat-mini-fab
+            color="primary"
+            type="button"
+            [routerLink]="['/','survey', 'detail', survey.getId()]"
+
+            >
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" type="button" (click)="onEdit(survey)">
+          <button
+            mat-mini-fab
+            matTooltip="Modifier"
+            matTooltipPosition="above"
+            color="accent"
+            type="button"
+            (click)="onEdit(survey)"
+          >
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" type="button" (click)="onDelete(survey)" >
+          <button
+            mat-mini-fab
+            matTooltip="Supprimer"
+            matTooltipPosition="above"
+            color="warn"
+            type="button"
+            (click)="onDelete(survey)"
+          >
             <mat-icon>delete</mat-icon>
           </button>
         </td>
