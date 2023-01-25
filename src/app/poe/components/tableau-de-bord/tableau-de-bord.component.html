@@ -45,7 +45,7 @@
           {{ poe.getNextTaskDate()| date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
 
-          <button  matTooltip="Envoyer"
+          <button matTooltip="Envoyer"
           matTooltipPosition="left"
           mat-mini-fab color="accent" type="button" [routerLink]="['/','poe','sendMail', poe.getId()]">
             <mat-icon>email</mat-icon>

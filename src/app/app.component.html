@@ -3,7 +3,7 @@
 
   <mat-toolbar color="primary" class="nav">
     <span class="fill-remaining-space"></span>
-    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (mouseover)="menuTrigger.openMenu()">
+    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()">
       <mat-icon>menu</mat-icon>
     </button>
     <mat-menu #menu="matMenu" [overlapTrigger]="false">
@@ -44,10 +44,22 @@
       </h1>
     </span>
     <span class="example-spacer"></span>
-    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="!hasUser">
+    <button
+      matTooltip="Se connecter"
+      matTooltipPosition="left"
+      mat-mini-fab color="accent"
+      (click)="onLogout()"
+      *ngIf="!hasUser"
+    >
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="hasUser">
+    <button
+      matTooltip="Se déconnecter"
+      matTooltipPosition="left"
+      mat-mini-fab color="accent"
+      (click)="onLogout()"
+      *ngIf="hasUser"
+    >
       <mat-icon>no_accounts</mat-icon>
     </button>
   </mat-toolbar>
