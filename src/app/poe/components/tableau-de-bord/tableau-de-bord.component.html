@@ -6,22 +6,19 @@
 <table>
   <thead>
     <tr>
-      <th class="left-cell">
+      <th class="center-cell">
         Type de POE
       </th>
       <th class="left-cell">
         Titre
       </th>
-      <th class="left-cell">
+      <th class="center-cell">
         Date de début
       </th>
-      <th class="left-cell">
+      <th class="center-cell">
         Date de fin
       </th>
 
-      <!-- <th class="center-cell">
-          status 1 month
-        </th> -->
       <th class="center-cell">
         Prochaine tâche
       </th>
@@ -29,17 +26,17 @@
         A envoyer le
       </th>
       <th>
-        Actions
+        Action
       </th>
     </tr>
   </thead>
   <tbody>
     <ng-container *ngFor="let poe of poes">
       <tr *ngIf="nextPoeTask(poe) !== 'Les 3 Questionnaires sont envoyés'">
-        <td>{{ poe.getType() }} </td>
+        <td class="center-cell">{{ poe.getType() }} </td>
         <td> {{ poe.getTitle() }} </td>
-        <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
-        <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
+        <td class="center-cell">{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+        <td class="center-cell">{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell"> {{ nextPoeTask(poe) }}</td>
 
         <td class="center-cell"
@@ -54,11 +51,11 @@
             <mat-icon>email</mat-icon>
           </button>
 
-          <button matTooltip="Marquer comme 'Fait'"
+          <!-- <button matTooltip="Marquer comme 'Fait'"
           matTooltipPosition="above"
           mat-mini-fab color="accent" type="button" (click)="updateStatus(poe)">
             <mat-icon>check_circle_outline</mat-icon>
-          </button>
+          </button> -->
 
         </td>
       </tr>
@@ -72,22 +69,19 @@
 <table>
   <thead>
     <tr>
-      <th class="left-cell">
+      <th class="center-cell">
         Type de POE
       </th>
       <th class="left-cell">
         Titre
       </th>
-      <th class="left-cell">
+      <th class="center-cell">
         Date de début
       </th>
-      <th class="left-cell">
+      <th class="center-cell">
         Date de fin
       </th>
 
-      <!-- <th class="center-cell">
-          status 1 month
-        </th> -->
       <th class="center-cell">
         Questionnaire
       </th>
@@ -97,15 +91,10 @@
   <tbody>
     <ng-container *ngFor="let poe of poesPastTasks">
       <tr>
-        <td>{{ poe.getType() }} </td>
+        <td class="center-cell">{{ poe.getType() }} </td>
         <td> {{ poe.getTitle() }} </td>
-        <td>{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
-        <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
-        <!-- <td class="center-cell" *ngIf="!poe.getStatus1()">
-            <mat-icon>highlight_off</mat-icon> </td>
-          <td class="center-cell" *ngIf="poe.getStatus1()">
-            <mat-icon>check_circle_outline</mat-icon>
-         </td> -->
+        <td class="center-cell">{{ poe.getBeginDate() | date: 'dd-MM-YYYY' }}</td>
+        <td class="center-cell">{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell"> {{ pastPoeTask(poe) }}, envoyé le {{ pastPoeTaskDate(poe)| date: 'dd-MM-YYYY' }}</td>
 
 
