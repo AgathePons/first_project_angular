@@ -53,7 +53,8 @@ export class SurveyFormComponent implements OnInit {
     }
     subscription.subscribe((survey: Survey) => {
       this.survey = survey;
-      this.router.navigate(['/', 'survey', 'detail', this.survey.getId()]);
+      // this.router.navigate(['/', 'survey', 'detail', this.survey.getId()]);
+      this.goBack();
     })
   }
 
