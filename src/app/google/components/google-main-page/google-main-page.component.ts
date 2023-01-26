@@ -1,9 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild, Output, EventEmitter } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, Output, Input, EventEmitter } from '@angular/core';
 import { Survey } from 'src/app/core/models/survey';
 import { GoogleService } from 'src/app/core/service/google.service';
 import { SurveyService } from 'src/app/core/service/survey.service';
 import { UserService } from 'src/app/user/services/user.service';
 import {Clipboard} from '@angular/cdk/clipboard';
+import { Poe } from 'src/app/core/models/poe';
+import { PoeService } from 'src/app/core/service/poe.service';
 
 @Component({
   selector: 'app-google-main-page',
@@ -18,6 +20,8 @@ export class GoogleMainPageComponent implements OnInit {
   public googleFormId: string = '';
   public googleForm: any = null;
 
+  @Input() public fromSendEmailPoe!: Poe;
+
   @Output() public formUrlEvent: EventEmitter<string> = new EventEmitter<string>();
 
   private googleFolderResponse: any | null = null;
@@ -27,6 +31,7 @@ export class GoogleMainPageComponent implements OnInit {
 
   constructor(
     private userService: UserService,
+    private poeService: PoeService,
     private googleService: GoogleService,
     private surveyService: SurveyService,
     private clipboard: Clipboard,
@@ -68,6 +73,9 @@ export class GoogleMainPageComponent implements OnInit {
         surveys.forEach((survey, index) => {
           this.surveyService.findOne(survey.getId()).subscribe((survey: Survey) => {
             //this.surveys.push(survey);
+            if (this.fromSendEmailPoe !== null) {
+              survey.setTitle(`${survey.getTitle()} - ${this.fromSendEmailPoe.getType()} ${this.fromSendEmailPoe.getTitle()} (du ${this.fromSendEmailPoe.getBeginDate().toLocaleDateString("fr")} au ${this.fromSendEmailPoe.getEndDate().toLocaleDateString("fr")}) `)
+            }
             this.surveysWithLink.push(survey);
             this.surveysWithLink[index].link = '';
           })
@@ -75,6 +83,11 @@ export class GoogleMainPageComponent implements OnInit {
       });
     });
   }
+
+  public nextPoeTask(poe: Poe): string {
+    return this.poeService.nextPoeTask(poe)
+  }
+
 
   public onGenerate(survey: Survey): void {
     console.log('clic generate survey');
