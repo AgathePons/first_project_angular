@@ -1,4 +1,7 @@
 <div class="subtitle">
+   <p>{{poe.getType ()}} - {{poe.getTitle()}} - {{nextPoeTask(poe)}}</p>
+</div>
+<div class="subtitle">
    <p>Etape 1 : Générer le lien Google Form</p>
 </div>
 <app-google-token-form class="token" *ngIf="!hasGoogleToken" [fromMailPage]="true"

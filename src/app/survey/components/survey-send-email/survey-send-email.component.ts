@@ -29,6 +29,7 @@ export class SurveySendEmailComponent implements OnInit {
   public mailSent: boolean = false
   public mailGenerating: boolean = false
   public hasGoogleToken: boolean = false;
+  public poe: Poe = new Poe()
 
 
   ngOnInit(): void {
@@ -45,6 +46,10 @@ export class SurveySendEmailComponent implements OnInit {
       .subscribe((hasGoogleToken: boolean) => {
         this.hasGoogleToken = hasGoogleToken;
       });
+
+    this.poeService.findOneWithStatus(this.poeId).subscribe( resp => {
+      this.poe = resp
+    })
 
   }
 
@@ -116,6 +121,10 @@ export class SurveySendEmailComponent implements OnInit {
     
     
     
+  }
+
+  public nextPoeTask(poe: Poe): string {
+    return this.poeService.nextPoeTask(poe)
   }
 
 
