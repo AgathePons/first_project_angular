@@ -80,6 +80,9 @@
               <td>{{ stagiaire.getLastName() | uppercase }}</td>
               <td>{{ stagiaire.getBirthDate() | date: 'dd-MM-YYYY'  }}</td>
               <td class="center-cell">
+                <button mat-mini-fab color="warn" type="button" (click)="onEditStagiaire(stagiaire)">
+                  <mat-icon>edit</mat-icon>
+                </button>
                 <button mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
                   <mat-icon>delete</mat-icon>
                 </button>

@@ -63,4 +63,11 @@ export class PoeDetailsComponent implements OnInit {
   public onBackButton(): void {
     this.location.back();
   }
+
+  public onEditStagiaire(stagiaire: Stagiaire): void {
+    console.log('Ding dong update :', stagiaire.getFirstName(), stagiaire.getLastName());
+    this.router.navigate(['/', 'stagiaire', 'update', stagiaire.getId()]);
+  }
 }
+
+
