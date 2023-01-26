@@ -85,13 +85,16 @@
         <td>{{ poe.getEndDate() | date: 'dd-MM-YYYY' }}</td>
         <td>{{ poe.getType() }} </td>
         <td class="center-cell">
-          <button mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
+          <button matTooltip="Voir les détails de la POE" matTooltipPosition="left"
+          mat-mini-fab color="primary" type="button" [routerLink]="['/','poe', 'detail', poe.getId()]">
             <mat-icon>visibility</mat-icon>
           </button>
-          <button mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
+          <button matTooltip="Modifier la POE" matTooltipPosition="above"
+          mat-mini-fab color="accent" type="button" (click)="onEdit(poe)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" type="button" (click)="onDelete(poe)">
+          <button matTooltip="Supprimer la POE" matTooltipPosition="right"
+          mat-mini-fab color="warn" type="button" (click)="onDelete(poe)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
