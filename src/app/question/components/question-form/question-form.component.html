@@ -35,10 +35,10 @@
             [disabled]="!questionForm.valid"
             class="btn add-btn"
           >
-            {{ addMode ? 'Add 💚' : 'Update 💚'}}
+            {{ addMode ? 'Ajouter &#11088;' : 'Mettre à jour &#11088;'}}
           </button>
-          <button type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
-            Cancel 💀
+          <button *ngIf="fromSurvey == 0" type="button" mat-raised-button color="warn" (click)="goBack()" class="btn">
+            Annuler
           </button>
         </div>
     </form>

@@ -11,8 +11,7 @@ import { GoogleTokenFormComponent } from './google/google-token-form/google-toke
 @NgModule({
   declarations: [
     LoginFormComponent,
-    SignupComponent,
-    GoogleTokenFormComponent
+    SignupComponent
   ],
   imports: [
     CommonModule,

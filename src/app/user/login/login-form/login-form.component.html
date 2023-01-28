@@ -1,24 +1,24 @@
 <form [formGroup]="loginForm" (ngSubmit)="onLogin()" [ngClass]="{'valid': loginForm.valid}">
   <div class="field-control">
     <mat-form-field>
-      <input matInput formControlName="userLogin" placeholder="Your login">
+      <input matInput formControlName="userLogin" placeholder="Identifiant">
       <mat-error *ngIf="loginForm.get('userLogin')!.errors && loginForm.get('userLogin')!.touched">
-        Login required
+        Identifiant requis
       </mat-error>
     </mat-form-field>
   </div>
 
   <div class="field-control">
     <mat-form-field>
-      <input matInput formControlName="userPassword" placeholder="Your login" type="password">
+      <input matInput formControlName="userPassword" placeholder="Mot de passe" type="password">
       <mat-error *ngIf="loginForm.get('userPassword')!.errors && loginForm.get('userPassword')!.touched">
-        Password required
+        Mot de passe requis
       </mat-error>
     </mat-form-field>
   </div>
 
   <div class="field-control toggle">
-    <mat-label>Stay connected</mat-label>
+    <mat-label>Rester connecté</mat-label>
     <mat-slide-toggle formControlName="stayConnected"></mat-slide-toggle>
   </div>
   
@@ -29,7 +29,7 @@
       color="primary"
       [disabled]="loginForm.invalid"
     >
-      Login
+      Se connecter
     </button>
     <button
       class="btn"
@@ -37,7 +37,7 @@
       color="accent"
       [routerLink]="['/','signup']"
     >
-    No account ? Create one
+    Créer un compte
     </button>
   </div>
 	<div style="color : red" *ngIf='error'>{{error}}</div>

@@ -7,6 +7,17 @@ export class Poe {
   private endDate: Date = new Date();
   private type: string = '';
   private trainees: Array<Stagiaire> = [];
+  private status1: boolean = false;
+  private sentDate1: Date = new Date();
+  private link1: string = '';
+  private status6: boolean = false;
+  private sentDate6: Date = new Date();
+  private link6: string = '';
+  private status12: boolean = false;
+  private sentDate12: Date = new Date();
+  private link12: string = '';
+  private nextTaskDate: Date = new Date()
+  private pastTaskDate: Date = new Date()
 
   /* public constructor(id: number,title: string,bd: Date,ed: Date,type: string) {
     this.id = id;
@@ -62,5 +73,93 @@ export class Poe {
 
   public setTrainees(trainees: Array<Stagiaire>): void {
     this.trainees = trainees;
+  }
+
+  public getStatus1(): boolean {
+    return this.status1
+  }
+
+  public setStatus1(boolean: boolean): void {
+    this.status1 = boolean
+  }
+
+  public getSentDate1(): Date {
+    return this.sentDate1
+  }
+
+  public setSentDate1(date: Date): void {
+    this.sentDate1 = date
+  }
+  
+  public getLink1(): string {
+    return this.link1
+  }
+
+  public setLink1(url: string): void {
+    this.link1 = url
+  }
+  
+  public getStatus6(): boolean {
+    return this.status6
+  }
+
+  public setStatus6(boolean: boolean): void {
+    this.status6 = boolean
+  }
+
+  public getSentDate6(): Date {
+    return this.sentDate6
+  }
+
+  public setSentDate6(date: Date): void {
+    this.sentDate6 = date
+  }
+  
+  public getLink6(): string {
+    return this.link6
+  }
+
+  public setLink6(url: string): void {
+    this.link6 = url
+  }
+  
+  public getStatus12(): boolean {
+    return this.status12
+  }
+
+  public setStatus12(boolean: boolean): void {
+    this.status12 = boolean
+  }
+
+  public getSentDate12(): Date {
+    return this.sentDate12
+  }
+
+  public setSentDate12(date: Date): void {
+    this.sentDate12 = date
+  }
+  
+  public getLink12(): string {
+    return this.link12
+  }
+
+  public setLink12(url: string): void {
+    this.link12 = url
+  }
+
+  public getNextTaskDate(): Date {
+    return this.nextTaskDate
+  }
+
+  public setNextTaskDate(date: Date): void {
+    this.nextTaskDate = date
+  }
+  
+  public getPastTaskDate(): Date {
+    return this.pastTaskDate
+  }
+
+  public setPastTaskDate(date: Date): void {
+    this.pastTaskDate = date
   }
 }

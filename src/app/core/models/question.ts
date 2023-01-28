@@ -30,7 +30,7 @@ export class Question {
   public setAnswerType(answerType: string): void {
     this.answerType = answerType;
   }
-  
+
   public getAnswers(): Array<Answer> {
     return this.answers;
   }

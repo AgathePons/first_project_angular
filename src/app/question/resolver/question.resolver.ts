@@ -21,10 +21,13 @@ export class QuestionResolver implements Resolve<FormGroup> {
   ) {}
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<FormGroup> {
     const id: number = +route.paramMap.get('id')!;
-    console.log('Resolver >> got id:', id);
+    const url: string = route
+    .pathFromRoot
+        .map(v => v.url.map(segment => segment.toString()).join('/'))
+        .join('/')
     let question: Question;
     let form: FormGroup;
-    if (id === 0) {
+    if (id === 0 || url.startsWith('/survey/detail/')) {
       question = new Question();
       form = this.formBuilderService.buildQuestion(question).getForm();
       return of(form);

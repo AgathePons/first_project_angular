@@ -2,6 +2,13 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { catchError, map, take } from 'rxjs/operators';
+import { CreateItemDto } from 'src/app/google/dto/create-item-dto';
+import { QuestionChooseManyDto } from 'src/app/google/dto/question-choose-many-dto';
+import { QuestionChooseOneDto } from 'src/app/google/dto/question-choose-one-dto';
+import { QuestionDto } from 'src/app/google/dto/question-dto';
+import { QuestionFreeDto } from 'src/app/google/dto/question-free-dto';
+import { QuestionYesNoDto } from 'src/app/google/dto/question-yes-no-dto';
+import { RequestBodyDto } from 'src/app/google/dto/request-body-dto';
 import { environment } from 'src/environments/environment';
 import { Survey } from '../models/survey';
 
@@ -68,6 +75,18 @@ export class GoogleService {
     );
   }
 
+  public getGoogleFormById(formId: string): Observable<any> {
+    return this.httpClient.get<any>(
+      `${this.apiGoogleFormBaseUrl}/${formId}`
+    )
+    .pipe(
+      take(1),
+      map((formObject: any) => {
+        return formObject;
+      })
+    );
+  }
+
   public deleteFirstItem(formId: string):  Observable<any> {
 
     const requestBody = {
@@ -90,93 +109,71 @@ export class GoogleService {
     );
   }
 
+  public surveyToGoogleRequestBody(survey: Survey): any {
+    const requestBody = new RequestBodyDto();
+
+    survey.getQuestions().forEach((question) => {
+      const createItemDto = new CreateItemDto();
+      if (question.getOrderInSurvey()) {
+        createItemDto.createItem.location.index = question.getOrderInSurvey();
+      }
+
+      createItemDto.createItem.item.title = question.getText();
+
+      let questionDto: QuestionDto;
+      if (question.getAnswerType() === 'FREE') {
+        questionDto = new QuestionFreeDto();
+      }
+      else if (question.getAnswerType() === 'YES_NO') {
+        questionDto = new QuestionYesNoDto();
+      }
+      else if (question.getAnswerType() === 'CHOOSE_ONE') {
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseOneDto(answersToInsert);
+      }
+      else if (question.getAnswerType() === 'CHOOSE_MANY') {
+        console.log('CHOOSE_MANY question');
+        let answersToInsert: Array<any> = [
+          { value: 'Insert at least one possible answer'}
+        ];
+        if (question.getAnswers().length) {
+          answersToInsert.shift();
+          question.getAnswers().forEach((answer) => {
+            answersToInsert.push(
+              { value: answer.getText() }
+            )
+          });
+        }
+
+        questionDto = new QuestionChooseManyDto(answersToInsert);
+      }
+      else {
+        questionDto = new QuestionFreeDto();
+      }
+
+      createItemDto.createItem.item.questionItem = questionDto;
+      requestBody.requests.push(createItemDto);
+    })
+    console.log('requestBody >>', requestBody);
+    return requestBody;
+  }
+
   public insertItemsInForm(formId: string, survey: Survey): Observable<any> {
 
-    const requestBody = {
-      "requests": [
-        {
-          "createItem": {
-              "item": {
-                "title": "Racontez-nous un truc sympa",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "textQuestion": { "paragraph": true }
-                  }
-                }
-              },
-              "location": { "index": 0 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Oui ou non ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "DROP_DOWN",
-                      "options": [
-                        {"value": "OUI"},
-                        {"value": "NON"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 1 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Qu'est-ce qui est jaune et qui attend ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "RADIO",
-                      "options": [
-                        {"value": "Orangathan"},
-                        {"value": "Johnatan"},
-                        {"value": "Jaune Attend"},
-                        {"value": "Rosathan"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 2 }
-          }
-        },
-        {
-          "createItem": {
-              "item": {
-                "title": "Quels fruits aimez-vous ?",
-                "questionItem": {
-                  "question": {
-                    "required": true,
-                    "choiceQuestion": {
-                      "type": "CHECKBOX",
-                      "options": [
-                        {"value": "Orange"},
-                        {"value": "Citron"},
-                        {"value": "Kiwi"},
-                        {"value": "Fruit de la passion"}
-                      ],
-                      "shuffle": false
-                    }
-                  }
-                }
-              },
-              "location": { "index": 3 }
-          }
-        }
-      ]
-    };
+    const requestBody = this.surveyToGoogleRequestBody(survey);
+    console.log('insertItemsInForm >>', requestBody);
+
 
     return this.httpClient.post<Object>(
       `${this.apiGoogleFormBaseUrl}/${formId}:batchUpdate`,

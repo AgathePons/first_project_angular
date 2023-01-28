@@ -134,9 +134,9 @@ export class FormBuilderService {
 
   public buildQuestion(question: Question): FormBuilderService {
     this.question = question;
-    if (question.getId() !== 0) {
-      this.updateMode = true;
-    }
+    // if (question.getId() !== 0) {
+    //   this.updateMode = true;
+    // }
     this.form = this.formBuilder.group({
       text: [
         this.question.getText(),
@@ -146,12 +146,16 @@ export class FormBuilderService {
         this.question.getAnswerType(),
         [Validators.required]
       ],
+      orderInSurvey: [
+        this.question.getOrderInSurvey(),
+        [Validators.required]
+      ],
     });
 
-    if(this.updateMode) {
-      const idControl: AbstractControl = new FormControl(this.question.getId());
-      this.form.addControl('id', idControl);
-    }
+    // if(this.updateMode) {
+    //   const idControl: AbstractControl = new FormControl(this.question.getId());
+    //   this.form.addControl('id', idControl);
+    // }
 
     return this;
   }

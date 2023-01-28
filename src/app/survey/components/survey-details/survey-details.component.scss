@@ -1,5 +1,81 @@
 $std-color: rgb(63, 81, 181);
 $light-color: rgb(255, 255, 255);
+$success-color: rgb(173, 255, 47);
+$error-color: rgb(142, 0, 0);
+
+.detail-page-header {
+  width: 100%;
+  margin-bottom: 2.5rem;
+  .detail-page-header_title {
+    width: 100%;
+    margin-bottom: 2rem;
+    .title {
+      display: inline-block;
+      width: calc(100% - 80px);
+      text-align: center;
+      font-size: 2rem;
+    }
+  }
+}
+
+.info-bloc {
+
+  border-bottom: 1px solid lighten($std-color, 90);
+  padding: 1rem 0;
+  &__key {
+    margin-right: 1rem;
+    font-weight: bold;
+  }
+  &__value {
+    background-color: $std-color;
+    color: $light-color;
+    border-radius: 3px;
+    padding: .5rem;
+  }
+  &:not(:last-child) {
+    margin-bottom: .5rem;
+  }
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 3px;
+  // background-color: $light-color;
+  font-family: Arial, Helvetica, sans-serif;
+
+  &.valid {
+    border: 2px solid $success-color;
+  }
+
+  .btn-list {
+    display: flex;
+
+    .add-btn {
+      flex-grow: 1;
+    }
+  }
+
+  .btn {
+    padding: .5rem;
+
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
+
+.btn-list {
+  display: flex;
+  margin-bottom: 1rem;
+  .btn {
+    &:not(:last-child) {
+      margin-right: 1rem;
+    }
+  }
+}
 
 table {
   width: 100%;
@@ -8,48 +84,74 @@ table {
   border-collapse: collapse;
   border: 1px solid $std-color;
   background-color: $light-color;
-  thead, tbody, tfoot {
+
+  thead,
+  tbody,
+  tfoot {
     tr {
-      td, th  {
+
+      td,
+      th {
         //border: 1px solid $std-color;
         padding: .5rem;
+
         &.center-cell {
           text-align: center;
         }
+
         &.right-cell {
           text-align: right;
         }
+
         &.left-cell {
           text-align: left;
         }
       }
     }
   }
-  thead, tfoot {
-    tr th, tr td {
+
+  thead,
+  tfoot {
+
+    tr th,
+    tr td {
       background-color: $std-color;
       color: $light-color;
     }
   }
+
   tbody {
     tr {
-      &:nth-child(odd) {
+      input {
+        width: 100%;
+        background-color: transparent;
+        border: 0;
+        font-size: 14px;
+      }
+      input::placeholder{
+        color: black;
+      }
+      &.tr-question {
         background-color: lighten($std-color, 45);
       }
-      td {
-        .name-puce {
-          margin-right: .5rem;
-          &:hover {
-            cursor: pointer;
-          }
+
+      &:not(:first-child) {
+        &.tr-question {
+          border-top: 1px solid $std-color;
         }
+      }
+
+      td {
+
         button {
           transition: all .3s cubic-bezier(0.17, 0.84, 0.44, 1);
+
           &:hover {
             background-color: lighten($std-color, $amount: 20);
             color: $light-color;
             cursor: pointer;
           }
+
           &:not(:last-child) {
             margin-right: 1rem;
           }
@@ -59,14 +161,44 @@ table {
   }
 }
 
-.answer {
-  display: flex;
-}
-.answer p {
-  margin-right: 5px;
+.answer-list {
+  list-style: none;
+  .answer-item {
+    .answer {
+      display: flex;
+      align-items: center;
+      justify-content: start;
+      .answer-form {
+        margin-bottom: 1rem;
+        padding: 0;
+      }
+      .delete-answer-btn {
+        margin-left: 1rem;
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
 }
 
-.add-text {
-  font-size: 12px;
-  font-style: italic;
+.add-answer-div {
+  display: flex;
+  align-items: center;
+  .add-answer-form {
+    flex-grow: 1;
+    max-width: 450px;
+    margin-bottom: 0;
+  }
+}
+
+.update-question-form {
+  margin-bottom: 0;
+}
+
+
+.add-question-form {
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid $std-color;
 }

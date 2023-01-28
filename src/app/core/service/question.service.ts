@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, take, map } from 'rxjs';
 import { QuestionDto } from 'src/app/question/dto/question-dto';
+import { QuestionInputDto } from 'src/app/question/dto/question-input-dto';
 import { environment } from 'src/environments/environment';
 import { Answer } from '../models/answer';
 import { Question } from '../models/question';
@@ -29,7 +30,7 @@ export class QuestionService {
             question.setText(inputQuestion.text);
             question.setAnswerType(inputQuestion.answerType);
             question.setAnswers(inputQuestion.answers)
-            question.setOrderInSurvey(inputQuestion.orderInSurvey)
+            question.setOrderInSurvey(inputQuestion.order)
             return question;
           })
         })
@@ -53,6 +54,7 @@ export class QuestionService {
               const answer: Answer = new Answer();
               answer.setId(inputAnswer.id);
               answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion)
               return answer;
             })
           question.setAnswers(answers);
@@ -81,6 +83,7 @@ export class QuestionService {
   }
 
   public updateQuestion(question: QuestionDto): Observable<Question> {
+
     return this.httpClient.put<any>(
       `${this.controllerBaseUrl}/${question.id}`,
 
@@ -95,6 +98,28 @@ export class QuestionService {
           question.setAnswerType(anyQuestion.answerType);
           question.setAnswers(anyQuestion.answers)
           question.setOrderInSurvey(anyQuestion.orderInSurvey)
+          return question;
+        })
+      );
+  }
+  public updateQuestionInput(question: QuestionInputDto): Observable<Question> {
+    console.log('updateQuestionInput called');
+    console.log('question = ', question);
+    
+    
+    return this.httpClient.put<any>(
+      `${this.controllerBaseUrl}/${question.id}`,
+
+      question
+    )
+      .pipe(
+        take(1),
+        map((anyQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(anyQuestion.id!);
+          question.setText(anyQuestion.text);
+          question.setAnswerType(anyQuestion.answerType);
+
           return question;
         })
       );
@@ -117,4 +142,60 @@ export class QuestionService {
 
     questions = questions.sort((a,b) => a.getOrderInSurvey() > b.getOrderInSurvey() ? 1 : -1);
   }
+
+
+  public addManyAnswers(id: number,ids: Array<number>): Observable<Question> {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${id}/addAnswers`,
+      ids
+    )
+    .pipe(
+      take(1),
+      map((inputQuestion: any) => {
+          const question: Question = new Question();
+          question.setId(inputQuestion.id);
+          question.setText(inputQuestion.text);
+          question.setAnswerType(inputQuestion.answerType);
+          question.setOrderInSurvey(inputQuestion.orderInSurvey)
+          const answers: Array<Answer> = inputQuestion.answers
+            .map((inputAnswer: any) => {
+              const answer: Answer = new Answer();
+              answer.setId(inputAnswer.id);
+              answer.setText(inputAnswer.text);
+              answer.setOrderInQuestion(inputAnswer.orderInQuestion);
+              return answer;
+            })
+          question.setAnswers(answers);
+          return question
+        })
+    );
+  }
+
+  public removeOneAnswer(questionId: number, answerId: number) {
+    return this.httpClient.patch<any>(
+      `${this.controllerBaseUrl}/${questionId}/remove/${answerId}`,
+      null
+    )
+    .pipe(
+      take(1),
+      map((inputQuestion: any) => {
+        const question: Question = new Question();
+        question.setId(inputQuestion.id);
+        question.setText(inputQuestion.text);
+        question.setAnswerType(inputQuestion.answerType);
+        question.setOrderInSurvey(inputQuestion.orderInSurvey)
+        const answers: Array<Answer> = inputQuestion.answers
+        .map((inputAnswer: any) => {
+          const answer: Answer = new Answer();
+          answer.setId(inputAnswer.id);
+          answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion);
+          return answer
+        })
+        question.setAnswers(answers);
+        return question
+      })
+    );
+  }
+
 }

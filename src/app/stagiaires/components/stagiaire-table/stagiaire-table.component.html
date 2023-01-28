@@ -1,21 +1,51 @@
-<a mat-raised-button color="accent" (click)="changeBooleanState( )">
-  Filtres
-</a><a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
-  Ajouter Stagiaire
+<div class="btn-list">
+<a mat-raised-button color="accent" [routerLink]="['/', 'stagiaire', 'add']">
+    Ajouter Stagiaire
 </a>
+<a mat-raised-button color="primary" (click)="changeBooleanState( )">
+  Filtres
+</a>
+</div>
 
 
 
-<div *ngIf="filter" class="search">
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by first name" [(ngModel)]="filterFN"
+<div *ngIf="filter">
+  <div class="search">
+  <mat-form-field>
+  <input 
+  matInput
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Prénom" 
+  [(ngModel)]="filterFN"
     (input)="searchByFirstName(filterFN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by last name" [(ngModel)]="filterLN"
+  </mat-form-field>
+  <mat-form-field>
+  <input 
+  matInput 
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Nom" 
+  [(ngModel)]="filterLN"
     (input)="searchByLastName(filterLN)" />
-  <input class="searchTerm" type="text" name="searchTerm" placeholder="Filter by Birthdate" [(ngModel)]="filterBD"
+  </mat-form-field>
+  <mat-form-field>
+  <input 
+  matInput
+  class="searchTerm" 
+  type="text" 
+  name="searchTerm" 
+  placeholder="Filtrer par Date de naissance" 
+  [(ngModel)]="filterBD"
     (input)="searchByBirthDate(filterBD)" />
+  </mat-form-field>
+
   <a mat-raised-button color="accent" (click)="resetFilter()">
-    Reset
+    Supprimer les filtres
   </a>
+</div>
 </div>
 
 
@@ -30,20 +60,20 @@
 
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!firstNameOrder" (click)="sortByFirstName(stagiaires)">
-        Firstname &uarr;
+        Prénom &uarr;
 
       </th>
       <th class="left-cell" id="sort-button" *ngIf="firstNameOrder" (click)="sortByFirstNameDesc(stagiaires)">
-        Firstname &darr;
+        Prénom &darr;
       </th>
       <th class="left-cell" id="sort-button" *ngIf="!lastNameOrder" (click)="sortByLastName(stagiaires)">
-        Last Name &uarr;
+        Nom &uarr;
       </th>
       <th class="left-cell" id="sort-button" *ngIf="lastNameOrder" (click)="sortByLastNameDesc(stagiaires)">
-        Last Name &darr;
+        Nom &darr;
       </th>
       <th class="left-cell">
-        Birthdate
+        Date de naissance
       </th>
       <th>
         Actions
@@ -73,10 +103,12 @@
         <td>{{ stagiaire.getLastName() | uppercase }}</td>
         <td>{{ stagiaire.getBirthDate()| date: 'dd-MM-YYYY' }}</td>
         <td class="center-cell">
-          <button mat-mini-fab color="accent" type="button" (click)="onEdit(stagiaire)">
+          <button matTooltip="Modifier le stagiaire" matTooltipPosition="left"
+          mat-mini-fab color="accent" type="button" (click)="onEdit(stagiaire)">
             <mat-icon>edit</mat-icon>
           </button>
-          <button mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
+          <button matTooltip="Supprimer le stagiaire" matTooltipPosition="above"
+          mat-mini-fab color="warn" type="button" (click)="onDelete(stagiaire)">
             <mat-icon>delete</mat-icon>
           </button>
         </td>
@@ -85,8 +117,7 @@
   </tbody>
   <tfoot>
     <tr>
-      <td colspan="4" class="right-cell">Nb. items</td>
-      <td class="center-cell">{{ getVisibleStagiaireNumber() }}</td>
+      <td colspan="5" class="right-cell"></td>
     </tr>
   </tfoot>
 </table>

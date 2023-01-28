@@ -8,6 +8,7 @@ import { PoeAddStagiaireComponent } from './poe/components/poe-add-stagiaire/poe
 import { PoeDetailsComponent } from './poe/components/poe-details/poe-details.component';
 import { PoeFormComponent } from './poe/components/poe-form/poe-form.component';
 import { PoeTableComponent } from './poe/components/poe-table/poe-table.component';
+import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau-de-bord.component';
 import { PoeResolver } from './poe/resolvers/poe.resolver';
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { QuestionTableComponent } from './question/components/question-table/question-table.component';
@@ -20,6 +21,9 @@ import { StagiaireResolver } from './stagiaires/resolvers/stagiaire.resolver';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
 import { SurveyDetailsComponent } from './survey/components/survey-details/survey-details.component';
 import { SurveyFormComponent } from './survey/components/survey-form/survey-form.component';
+import { SurveyOrderAnswersComponent } from './survey/components/survey-order-answers/survey-order-answers.component';
+import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
+import { SurveySendEmailComponent } from './survey/components/survey-send-email/survey-send-email.component';
 import { SurveyTableComponent } from './survey/components/survey-table/survey-table.component';
 import { SurveyResolver } from './survey/resolvers/survey.resolver';
 import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
@@ -55,7 +59,7 @@ export class AppRoutingModule {
     },
     {
       path: 'home',
-      component: StagiaireTableComponent,
+      component: TableauDeBordComponent,
       canActivate: [
         HasUserGuard
       ]
@@ -86,6 +90,13 @@ export class AppRoutingModule {
       ]
     },
     {
+      path: 'stagiaires',
+      component: StagiaireTableComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
       path: 'poe/detail/:id',
       component: PoeDetailsComponent,
       canActivate: [
@@ -104,6 +115,13 @@ export class AppRoutingModule {
       path: 'poe/update/:id',
       component: PoeFormComponent,
       resolve: { form: PoeResolver},
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'poe/sendMail/:id',
+      component: SurveySendEmailComponent,
       canActivate: [
         HasUserGuard
       ]
@@ -148,6 +166,7 @@ export class AppRoutingModule {
     {
       path: 'survey/detail/:id',
       component: SurveyDetailsComponent,
+      resolve: { form: QuestionResolver },
       canActivate: [
         HasUserGuard
       ]
@@ -163,6 +182,20 @@ export class AppRoutingModule {
     {
       path: 'survey/addQuestions/:id',
       component: SurveyAddQuestionComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/orderQuestions/:id',
+      component: SurveyOrderQuestionsComponent,
+      canActivate: [
+        HasUserGuard
+      ]
+    },
+    {
+      path: 'survey/orderAnswers/:id',
+      component: SurveyOrderAnswersComponent,
       canActivate: [
         HasUserGuard
       ]

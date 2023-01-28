@@ -2,40 +2,64 @@
 
 
   <mat-toolbar color="primary" class="nav">
-    <button mat-mini-fab color="accent" [matMenuTriggerFor]="menu">
+    <span class="fill-remaining-space"></span>
+    <button mat-icon-button color="white" [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger" (click)="menuTrigger.openMenu()">
       <mat-icon>menu</mat-icon>
     </button>
-    <mat-menu #menu="matMenu">
+    <mat-menu #menu="matMenu" [overlapTrigger]="false">
+      <span (mouseleave)="menuTrigger.closeMenu()">
       <button mat-menu-item [routerLink]="['/', 'home']">
-        Liste des stagiaires
+        <mat-icon color="primary">home</mat-icon>
+        <span>Tableau de bord</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'poes']">
-        Liste des POE
+        <mat-icon color="primary">school</mat-icon>
+        <span>POE</span>
+      </button>
+      <button mat-menu-item [routerLink]="['/', 'stagiaires']">
+        <mat-icon color="primary">people</mat-icon>
+        <span>Stagiaires</span>
       </button>
       <button mat-menu-item [routerLink]="['/', 'surveys']">
-        Liste des questionnaires
+        <mat-icon color="primary">description</mat-icon>
+        <span>Questionnaires</span>
       </button>
-      <button mat-menu-item [routerLink]="['/', 'questions']">
+      <!--<button mat-menu-item [routerLink]="['/', 'questions']">
         Liste des questions
       </button>
       <button mat-menu-item [routerLink]="['/', 'answers']">
         Liste des réponses
-      </button>
+      </button> !-->
       <button mat-menu-item [routerLink]="['/', 'googlepage']">
-        Créer des Google forms
+        <mat-icon color="primary">mail</mat-icon>
+        <span>Google Forms</span>
       </button>
+      </span>
     </mat-menu>
     <span class="example-spacer"></span>
     <span>
+      <img src="../assets/survey-logo.png" alt="Logo de l'API Survey Aelion">
       <h1 (click)="toggleTitle()">
         {{ title }}
       </h1>
     </span>
     <span class="example-spacer"></span>
-    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="!hasUser">
+    <button
+      matTooltip="Se connecter"
+      matTooltipPosition="left"
+      mat-mini-fab color="accent"
+      (click)="onLogout()"
+      *ngIf="!hasUser"
+    >
       <mat-icon>account_circle</mat-icon>
     </button>
-    <button mat-mini-fab color="accent" (click)="onLogout()" *ngIf="hasUser">
+    <button
+      matTooltip="Se déconnecter"
+      matTooltipPosition="left"
+      mat-mini-fab color="accent"
+      (click)="onLogout()"
+      *ngIf="hasUser"
+    >
       <mat-icon>no_accounts</mat-icon>
     </button>
   </mat-toolbar>

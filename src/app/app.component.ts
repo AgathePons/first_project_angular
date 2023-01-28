@@ -10,7 +10,7 @@ import { UserService } from './user/services/user.service';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  public title = 'Aelion suivi des stagiaire';
+  public title = 'Aelion Survey';
   public isOverlayVisible = false;
   public hasUser: boolean = false;
   public hasGoogleToken: boolean = false;

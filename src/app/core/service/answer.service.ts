@@ -4,6 +4,7 @@ import { Answer } from '../models/answer';
 import { environment } from 'src/environments/environment';
 import { Observable, take, map } from 'rxjs';
 import { AnswerDto } from 'src/app/answer/dto/answer-dto';
+import { AnswerInputDto } from 'src/app/answer/dto/answer-input-dto';
 
 @Injectable({
   providedIn: 'root'
@@ -26,6 +27,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(inputAnswer.id);
           answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion)
           return answer;
 
         })
@@ -43,6 +45,7 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(inputAnswer.id);
           answer.setText(inputAnswer.text);
+          answer.setOrderInQuestion(inputAnswer.orderInQuestion)
           return answer;
         })
       );
@@ -59,6 +62,23 @@ export class AnswerService {
           const answer: Answer = new Answer();
           answer.setId(answerDto.id!);
           answer.setText(answerDto.text);
+          answer.setOrderInQuestion(answerDto.orderInQuestion)
+          return answer;
+        })
+      );
+    }
+    public addAnswerInput(answer: AnswerInputDto): Observable<Answer> {
+      return this.httpClient.post<AnswerDto>(
+        this.controllerBaseUrl,
+        answer
+      )
+      .pipe(
+        take(1),
+        map((answerDto: AnswerInputDto) => {
+          const answer: Answer = new Answer();
+          answer.setId(answerDto.id!);
+          answer.setText(answerDto.text);
+          answer.setOrderInQuestion(answerDto.orderInQuestion)
           return answer;
         })
       );
@@ -75,6 +95,24 @@ export class AnswerService {
             const answer: Answer = new Answer();
             answer.setId(anyAnswer.id!);
             answer.setText(anyAnswer.text);
+            answer.setOrderInQuestion(anyAnswer.orderInQuestion)
+            return answer;
+          })
+        );
+    }
+
+    public updateAnswerInput(answer: AnswerInputDto): Observable<Answer> {
+      return this.httpClient.put<any>(
+        `${this.controllerBaseUrl}/${answer.id}`,
+        answer
+        )
+        .pipe(
+          take(1),
+          map((anyAnswer: any) => {
+            const answer: Answer = new Answer();
+            answer.setId(anyAnswer.id!);
+            answer.setText(anyAnswer.text);
+            answer.setOrderInQuestion(anyAnswer.orderInQuestion)
             return answer;
           })
         );
@@ -84,6 +122,12 @@ export class AnswerService {
       console.log(`Service: remove id: ${answer.getId()}`);
       return this.httpClient.delete<any>(
         `${this.controllerBaseUrl}/${answer.getId()}`,
+        { observe: 'response' }
+      );
+    }
+    public removeOneId(answerId: number): Observable<HttpResponse<any>> {
+      return this.httpClient.delete<any>(
+        `${this.controllerBaseUrl}/${answerId}`,
         { observe: 'response' }
       );
     }

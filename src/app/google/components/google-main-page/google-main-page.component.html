@@ -10,7 +10,7 @@
   <mat-card-content>
     <mat-list>
       <mat-list-item *ngIf="hasUser && !hasGoogleToken">
-        <button mat-mini-fab color="accent" [routerLink]="['/', 'googletoken']" >
+        <button class="bouton" mat-mini-fab color="accent" [routerLink]="['/', 'googletoken']" >
           <mat-icon>vpn_key</mat-icon>
         </button>
         <span>Se connecter à compte Google avec un token</span>
@@ -19,14 +19,13 @@
         Un token Google a été enregistré
       </mat-list-item>
       <mat-list-item *ngIf="hasUser && hasGoogleToken">
-        <button mat-mini-fab color="accent" (click)="onDeleteGoogleToken()" *ngIf="hasUser && hasGoogleToken">
+        <button class="bouton" mat-mini-fab color="accent" (click)="onDeleteGoogleToken()" *ngIf="hasUser && hasGoogleToken">
           <mat-icon>delete</mat-icon>
         </button>
         <span>Supprimer le token Google</span>
       </mat-list-item>
-      <mat-divider></mat-divider>
       <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId === ''">
-        <button mat-mini-fab color="accent" (click)="onCheckFolder()" *ngIf="hasUser && hasGoogleToken">
+        <button class="bouton" mat-mini-fab color="accent" (click)="onCheckFolder()" *ngIf="hasUser && hasGoogleToken">
           <mat-icon>create_new_folder</mat-icon>
         </button>
         <span>Vérifier l'existence d'un dossier nommé "POE formulaires de suivi" et si besoin, le créer</span>
@@ -34,12 +33,12 @@
       <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
         Le folder "POE formulaires de suivi" a été trouvé
       </mat-list-item>
-      <mat-divider></mat-divider>
       <mat-list-item *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
         Voici la liste des formulaires créés dans l'appli et prêts à être générés
 
       </mat-list-item>
     </mat-list>
+
     <table *ngIf="hasUser && hasGoogleToken && googleFolderId !== ''">
       <thead>
         <tr>
@@ -55,15 +54,47 @@
         </tr>
       </thead>
       <tbody>
-        <ng-container *ngFor="let survey of surveys">
+        <ng-container *ngFor="let survey of surveysWithLink">
           <tr>
             <td> {{ survey.getTitle() }} </td>
             <td>
-              <button mat-mini-fab color="accent" type="button" (click)="onGenerate(survey)">
+              <button
+                mat-mini-fab
+                matTooltip="Générer"
+                matTooltipPosition="left"
+                color="accent"
+                type="button"
+                (click)="onGenerate(survey)"
+              >
                 <mat-icon>autorenew</mat-icon>
               </button>
             </td>
-            <td>Lien</td>
+            <td>
+              <i *ngIf="survey.spinner">En création...</i>
+              <ng-container *ngIf="survey.link">
+                <i *ngIf="survey.spinner">En création</i>
+                <button
+                  matTooltip="Visualiser"
+                  matTooltipPosition="above"
+                  mat-mini-fab
+                  color="primary"
+                  type="button"
+                  (click)="goToForm(survey.link)"
+                >
+                  <mat-icon>visibility</mat-icon>
+                </button>
+                <button
+                  matTooltip="Copier"
+                  matTooltipPosition="above"
+                  mat-mini-fab
+                  color="accent"
+                  type="button"
+                  (click)="copyToClipboard(survey.link)"
+                >
+                  <mat-icon>content_copy</mat-icon>
+                </button>
+              </ng-container>
+            </td>
           </tr>
         </ng-container>
       </tbody>

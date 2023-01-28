@@ -1,0 +1,52 @@
+<div class="subtitle">
+   <p>{{poe.getType ()}} - {{poe.getTitle()}} - {{nextPoeTask(poe)}}</p>
+</div>
+<div class="subtitle">
+   <p>Etape 1 : Générer le lien Google Form</p>
+</div>
+<app-google-token-form class="token" *ngIf="!hasGoogleToken" [fromMailPage]="true"
+   (tokkenGoogleActivated)="activateHasTokken($event)"></app-google-token-form>
+<app-google-main-page class="token" *ngIf="hasGoogleToken" [fromSendEmailPoe]="poe" (formUrlEvent)="addFormUrl($event)"></app-google-main-page>
+<div class="subtitle">
+   <p>Etape 2 : Générer et envoyer l'email aux stagiaires</p>
+</div>
+
+<div class="search">
+   <p class="margin">Objet du mail</p>
+   <input class="searchTerm" type="text" name="searchTerm" placeholder="Objet :" [(ngModel)]="subject" />
+   <p>Corps du mail avant url</p>
+   <textarea class="comment" type="text" name="searchTerm" placeholder="Texte avant l'url :"
+      [(ngModel)]="beforeUrl"></textarea>
+   <!-- <div>
+      <p>Url du formulaire : {{ urlGoogleForm }}</p>
+   </div> -->
+   <p>Corps du mail après url</p>
+   <textarea class="comment" type="text" name="searchTerm" placeholder="Texte après l'url :"
+      [(ngModel)]="afterUrl"></textarea>
+
+
+   <p>Aperçu du mail</p>
+   <div class="apercu">
+      <p>Bonjour (Prénom),</p>
+      <p>{{ beforeUrl }}</p>
+      <p>{{ urlGoogleForm }}</p>
+      <p>{{ afterUrl }}</p>
+   </div>
+   <div *ngIf="!mailSent && urlGoogleForm == '#'" class="send-button">
+      Veuillez générer un Google Form avant d'envoyer le mail
+   </div>
+   <div *ngIf="!mailSent && urlGoogleForm !== '#' && !mailGenerating" class="send-button">
+      <button mat-mini-fab color="accent" type="button" (click)="sendHtmlEmail()">
+         <mat-icon>email</mat-icon>
+      </button>
+
+      <p>Envoyer</p>
+
+   </div>
+   <div *ngIf="!mailSent && mailGenerating" class="center-div">
+      Mail en cours d'envoi.
+   </div>
+   <div *ngIf="mailSent && !mailGenerating" class="center-div">
+      Mail envoyé ✅ <a href="/home"> Retour au tableau de bord.</a>
+   </div>
+</div>

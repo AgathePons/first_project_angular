@@ -34,6 +34,14 @@ import { QuestionTableComponent } from './question/components/question-table/que
 import { QuestionFormComponent } from './question/components/question-form/question-form.component';
 import { GoogleMainPageComponent } from './google/components/google-main-page/google-main-page.component';
 import { SurveyAddQuestionComponent } from './survey/components/survey-add-question/survey-add-question.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { SurveyOrderQuestionsComponent } from './survey/components/survey-order-questions/survey-order-questions.component';
+import { TableauDeBordComponent } from './poe/components/tableau-de-bord/tableau-de-bord.component';
+import { SurveySendEmailComponent } from './survey/components/survey-send-email/survey-send-email.component';
+import { SurveyOrderAnswersComponent } from './survey/components/survey-order-answers/survey-order-answers.component';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { GoogleTokenFormComponent } from './user/google/google-token-form/google-token-form.component';
+
 
 @NgModule({
   declarations: [
@@ -60,7 +68,12 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
     QuestionTableComponent,
     QuestionFormComponent,
     GoogleMainPageComponent,
-    SurveyAddQuestionComponent
+    SurveyAddQuestionComponent,
+    SurveyOrderQuestionsComponent,
+    TableauDeBordComponent,
+    SurveySendEmailComponent,
+    SurveyOrderAnswersComponent,
+    GoogleTokenFormComponent
   ],
   imports: [
     BrowserModule,
@@ -68,7 +81,9 @@ import { SurveyAddQuestionComponent } from './survey/components/survey-add-quest
     BrowserAnimationsModule,
     SharedModule,
     UserModule,
-    FormsModule
+    FormsModule,
+    DragDropModule,
+    MatTooltipModule
   ],
   providers: [
     userInterceptor

@@ -1,0 +1,31 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>
+      <button mat-mini-fab color="primary" (click)="goBack()">
+        <mat-icon>keyboard_arrow_left</mat-icon>
+      </button>
+      Modifier l'ordre des questions
+    </mat-card-title>
+
+  </mat-card-header>
+  <div cdkDropList class="example-list" (cdkDropListDropped)="drop($event)">
+    <div
+      class="example-box"
+      *ngFor="let question of survey.getQuestions()" cdkDrag (cdkDragEnded)="dragEnd($event)"
+    >
+      {{question.getText()}}
+    </div>
+  </div>
+  <button
+    (click)="onSubmit()"
+    mat-raised-button
+    color="primary"
+    class="btn"
+  >
+    Valider &#11088;
+  </button>
+  <button type="button" mat-raised-button color="warn" class="btn" (click)="goBack()">
+    Annuler
+  </button>
+</mat-card>
+
